@@ -11,10 +11,10 @@ const P={x:0,y:0,dir:0,moving:false,path:null,then:null};
 const save=()=>{S.x=P.x;S.y=P.y;S.dir=P.dir;store.set(S)};
 const has=c=>S.clues.includes(c);
 /* ---------- 소리 ---------- */
-const SND={on:store.get('uh-snd')!=='off',vol:+(store.get('uh-vol')??.6),bgm:null,cur:'',cache:{},last:{}},SV={S1:.7,S2:.6,S3:.35,S4:.7,S5:.6,S9:.6,S11:.8};
+const SND={on:store.get('uh-snd')!=='off',vol:+(store.get('uh-vol2')??.8),bgm:null,cur:'',cache:{},last:{}},SV={S2:.9,S5:.8,S9:.9};
 function sfx(n){if(!SND.on)return null;const now=Date.now();if(now-(SND.last[n]||0)<140)return null;SND.last[n]=now;
   try{const a=(SND.cache[n]=SND.cache[n]||new Audio('assets/snd/'+n+'.mp3')).cloneNode();a.volume=Math.min(1,SND.vol*(SV[n]||1));a.play().catch(()=>{});return a}catch(e){return null}}
-function bgm(n){const g=SND.vol*.38;if(n===SND.cur&&SND.bgm){SND.bgm.volume=SND.on?g:0;if(SND.on)SND.bgm.play().catch(()=>{});else SND.bgm.pause();return}
+function bgm(n){const g=SND.vol*.7;if(n===SND.cur&&SND.bgm){SND.bgm.volume=SND.on?g:0;if(SND.on)SND.bgm.play().catch(()=>{});else SND.bgm.pause();return}
   const old=SND.bgm;SND.cur=n;SND.bgm=null;if(old){let v=old.volume;const t=setInterval(()=>{v-=.04;if(v<=0){clearInterval(t);old.pause()}else old.volume=v},60)}
   if(!n)return;let a;try{a=new Audio('assets/snd/'+n+'.mp3')}catch(e){return}a.loop=true;a.volume=0;SND.bgm=a;if(!SND.on)return;a.play().catch(()=>{});
   let v=0;const t=setInterval(()=>{if(SND.bgm!==a){clearInterval(t);return}v+=.02;if(v>=g){a.volume=g;clearInterval(t)}else a.volume=v},60)}
@@ -587,7 +587,7 @@ function applyFs(){document.documentElement.style.setProperty('--fs',store.get('
 function settings(){const big=store.get('uh-fs')==='big',b=modal(`<h2>설정</h2><h3>글자 크기</h3><div class="row"><button class="btn ${big?'sub':''}" id="fs0">보통</button><button class="btn ${big?'':'sub'}" id="fs1">크게</button></div>
   <h3>소리</h3><div class="row"><button class="btn ${SND.on?'':'sub'}" id="sn1">켜기</button><button class="btn ${SND.on?'sub':''}" id="sn0">끄기</button></div><p style="margin:10px 0 2px;font-weight:700">음량</p><input type="range" id="svol" min="0" max="100" value="${Math.round(SND.vol*100)}" style="width:100%;accent-color:#2c8c80"><h3>조작 방법</h3>${KEYS}<button class="btn" id="sClose">닫기</button><button class="btn warn" id="sReset">처음부터 다시 시작</button>`);
   b.querySelector('#fs0').onclick=()=>{store.set('std','uh-fs');applyFs();settings()};b.querySelector('#fs1').onclick=()=>{store.set('big','uh-fs');applyFs();settings()};
-  b.querySelector('#sClose').onclick=()=>{sndBtn();closeModal()};b.querySelector('#sn1').onclick=()=>{SND.on=true;store.set('on','uh-snd');sndApply();settings()};b.querySelector('#sn0').onclick=()=>{SND.on=false;store.set('off','uh-snd');sndApply();settings()};b.querySelector('#svol').oninput=e=>{SND.vol=e.target.value/100;store.set(SND.vol,'uh-vol');sndApply()};
+  b.querySelector('#sClose').onclick=()=>{sndBtn();closeModal()};b.querySelector('#sn1').onclick=()=>{SND.on=true;store.set('on','uh-snd');sndApply();settings()};b.querySelector('#sn0').onclick=()=>{SND.on=false;store.set('off','uh-snd');sndApply();settings()};b.querySelector('#svol').oninput=e=>{SND.vol=e.target.value/100;store.set(SND.vol,'uh-vol2');sndApply()};
   b.querySelector('#sReset').onclick=e=>{if(e.target.dataset.c){store.del();location.reload()}else{e.target.dataset.c=1;e.target.textContent='저장된 진행이 지워집니다. 한 번 더 누르면 다시 시작합니다.'}}}
 const STORY=['당신은 1학년 3반 반장입니다.','내일은 기다리던 단합대회.','그런데 반티 주문이 갑자기 취소됐습니다.','주문을 맡았던 부반장 윤슬은 연락이 닿지 않습니다.','단톡방에는 윤슬을 탓하는 말이 올라오기 시작했습니다.','윤슬에게 무슨 일이 있었던 걸까요?','사람들을 만나 이야기를 듣고, 읽지 못한 마음을 찾아가 봅시다.'];
 function newGame(i=0){const b=modal(`<div class="step"><p>${STORY[i]}</p></div><div class="dots">${STORY.map((_,j)=>`<i class="${j<=i?'on':''}"></i>`).join('')}</div><button class="btn" id="nx">다음</button>`);
