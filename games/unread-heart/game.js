@@ -249,7 +249,7 @@ function goal(){const f=S.f;
     if(!f.officeOpen)return['잠긴 교무실 열기 (담임 선생님의 톡 확인)','olock'];if(!has('C6'))return['교무실 프린터 옆 행사 서류함 확인하기','c6'];if(!f.pc)return['교무실의 학급 행사용 노트북 살펴보기','pc'];if(!f.vendor)return['[전화] 앱으로 서류에 적힌 업체 번호에 전화해 확인하기',null];if(!hypDone())return['휴대전화의 [행사 자료]에서 가설 두 개 확정하기',null];
     if(!f.jimin)return['교실의 지민과 이야기하기','jimin'];if(!f.teacher)return['상담실의 담임 선생님과 이야기하기','teacher'];return['현관으로 나가 도서관으로 가기','exit']}
   if(!f.staff)return['안내데스크에서 만나도 되는지 확인하기','staff'];if(!f.shelf)return['윤슬의 쪽지가 가리키는 서가 찾기 (윤슬과의 톡 기록 확인)',null];return['창가 쉼터의 윤슬과 이야기하기','yunseul']}
-function hud(){const play=S.stage==='play';$('#hud').hidden=$('#mini').hidden=!play;if(!play)miniT(false);$('#pad').hidden=$('#act').hidden=!(play&&touch);
+function hud(){$('#fsBtn').hidden=S.stage==='play';const play=S.stage==='play';$('#hud').hidden=$('#mini').hidden=!play;if(!play)miniT(false);$('#pad').hidden=$('#act').hidden=!(play&&touch);
   if(!play){$('#hint').hidden=true;return}const g=goal(),o=$('#obj');if(o.dataset.g!==g[0]){o.dataset.g=g[0];o.innerHTML=`<small>목표</small><span>${esc(g[0])}</span>`;o.classList.remove('pop');void o.offsetWidth;o.classList.add('pop')}$('#cc').textContent=S.clues.length;
   const u=totU();$('#bdP').hidden=!u;$('#bdP').textContent=u}
 
@@ -540,7 +540,14 @@ for(const b of document.querySelectorAll('#pad button')){const k=b.dataset.k,on=
   b.addEventListener('pointerdown',on);for(const ev of['pointerup','pointercancel','pointerleave'])b.addEventListener(ev,off)}
 $('#act').addEventListener('pointerdown',e=>{e.preventDefault();interact()});
 $('#bPhone').onclick=()=>openPhone('home');$('#bClue').onclick=()=>openPhone('data');$('#bSet').onclick=()=>settings();const sndBtn=()=>{$('#bSnd').classList.toggle('off',!SND.on);$('#bSnd span').textContent=SND.on?'소리':'꺼짐'};$('#bSnd').onclick=()=>{SND.on=!SND.on;store.set(SND.on?'on':'off','uh-snd');sndApply();sndBtn()};sndBtn();
-$('#bFull').onclick=()=>{const a=$('#app');try{if(document.fullscreenElement)document.exitFullscreen();else if(a.requestFullscreen)a.requestFullscreen().catch(()=>toast('이 화면에서는 전체화면을 쓸 수 없어요. 창을 넓혀 주세요.'));else toast('이 기기는 전체화면을 지원하지 않아요. 그대로 진행할 수 있어요.')}catch(x){toast('전체화면을 쓸 수 없어요.')}};
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+function toggleFull(){const a=document.documentElement,no='이 기기에서는 전체화면 버튼을 쓸 수 없어요. 아이폰은 공유 버튼에서 "홈 화면에 추가"로 열면 크게 볼 수 있어요.';
+  try{if(fsEl()){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return}
+    const rq=a.requestFullscreen||a.webkitRequestFullscreen;if(!rq||document.fullscreenEnabled===false||document.webkitFullscreenEnabled===false){toast(document.fullscreenEnabled===false&&window.top!==window?'이 화면 안에서는 전체화면이 막혀 있어요. 게임을 새 창에서 열어 주세요.':no);return}
+    const pr=rq.call(a);pr&&pr.catch&&pr.catch(()=>toast(no))}catch(x){toast(no)}}
+const fsSync=()=>{const on=!!fsEl();$('#fsBtn span').textContent=on?'나가기':'전체화면';$('#fsBtn').classList.toggle('on',on)};
+document.addEventListener('fullscreenchange',fsSync);document.addEventListener('webkitfullscreenchange',fsSync);
+$('#bFull').onclick=toggleFull;$('#fsBtn').onclick=toggleFull;
 const miniT=v=>{$('#mini').classList.toggle('big',v);$('#miniOv').hidden=!v};$('#mini').onclick=()=>miniT(!$('#mini').classList.contains('big'));$('#miniOv').onclick=()=>miniT(false);
 $('#phone').addEventListener('pointerdown',e=>{if(e.target===$('#phone'))closePhone()});
 if(matchMedia('(pointer:coarse)').matches){touch=true;$('#app').classList.add('touch')}

@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>읽지 못한 마음</title>
 <style>
@@ -254,6 +256,8 @@ textarea{min-height:92px;resize:vertical}
 #tLoad{color:#fff;text-shadow:0 1px 4px #000}
 @media (max-height:520px) and (min-aspect-ratio:1/1){#tBox{width:min(62vw,560px);display:flex;flex-wrap:wrap;gap:8px;bottom:5%}#tBox .btn{flex:1;margin-top:0;white-space:nowrap}#tLoad{flex-basis:100%}}
 @media (max-aspect-ratio:1/1){#title{background-size:100% auto;background-position:center 14%}#title::before{display:none}#tBox{left:50%;transform:translateX(-50%);bottom:9%;width:min(84vw,420px);text-align:center}}
+#fsBtn{position:absolute;right:calc(10px + env(safe-area-inset-right));top:calc(10px + env(safe-area-inset-top));z-index:27;display:flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border-radius:22px;background:#1b2233d9;color:#fff;border:2px solid #fffdf8aa;font-weight:800;font-size:.82em;box-shadow:0 3px 10px #0007}
+#fsBtn svg{width:20px;height:20px}#fsBtn.on{background:#fffdf8;color:var(--navy);border-color:var(--navy)}
 </style>
 </head>
 <body>
@@ -302,6 +306,7 @@ textarea{min-height:92px;resize:vertical}
     </div>
   </div>
   <div id="zoom" hidden><img id="zImg" alt="크게 본 자료"><button aria-label="닫기">✕</button></div>
+  <button id="fsBtn" aria-label="전체화면 켜기 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>전체화면</span></button>
   <div id="toast"></div>
 </div>
 <script src="maps.js"></script>
