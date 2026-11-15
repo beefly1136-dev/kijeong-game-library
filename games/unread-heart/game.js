@@ -609,22 +609,27 @@ function ending(j=0){hud();const i=S.end;$('#mBox').classList.add('wide');
   if(i<0){const b=modal(`<div class="epi0"><small>후일담</small><h2>읽어 준 마음</h2><p>그날 밤부터, 단합대회 날까지의 이야기</p></div><button class="btn" id="nx">이어서 보기</button>`);b.querySelector('#nx').onclick=()=>{S.end=0;store.set(S);ending()};return}
   const c=END[i],ps=c[1].split('\n\n'),last=j>=ps.length-1,b=modal(`<img class="epi" src="assets/end_${i+1}.webp" alt=""><p style="color:#2c8c80;font-weight:800;margin:10px 0 0">후일담 ${i+1} / ${END.length} · ${c[0]}</p><div class="step sm"><p>${esc(ps[j])}</p></div><div class="dots">${ps.map((_,x)=>`<i class="${x<=j?'on':''}"></i>`).join('')}</div><button class="btn" id="nx">${!last||i<END.length-1?'다음':'학습 보고서 쓰기'}</button>`);
   b.querySelector('#nx').onclick=()=>{if(!last)ending(j+1);else if(i<END.length-1){S.end++;store.set(S);ending()}else{S.stage='report';store.set(S);$('#mBox').classList.remove('wide');report()}}}
-const RQ=[{h:'가. 세대 갈등',q:'1. 할아버지가 "밥 먹을 때는 휴대전화를 보는 게 아니다"라며 민서의 휴대전화를 말없이 가져가셨고, 민서는 화가 나 방으로 들어갔습니다. 이런 세대 갈등이 생기는 가장 큰 까닭은 무엇일까요?',o:['어른은 원래 청소년을 이해하지 못해서','자라 온 환경이 달라 당연하게 여기는 것이 서로 다른데, 그 차이를 이야기하지 않아서','청소년이 예의가 없어서','가족은 원래 자주 다투는 사이여서'],a:1,ex:'세대 갈등은 어느 한쪽이 나빠서 생기는 것이 아닙니다. 자라 온 환경과 경험이 달라 생각과 생활 방식이 다르고, 그 차이를 서로 묻지 않을 때 커집니다.'},
- {q:'2. 부모님이 상의 없이 내 주말 일정을 정하셨습니다. 이 갈등을 풀기에 가장 알맞은 말은 무엇일까요?',o:['엄마는 맨날 엄마 마음대로야!','(아무 말 없이 방문을 닫는다)','제 생각을 묻지 않고 정하셔서 속상했어요. 다음에는 저와 같이 정하면 좋겠어요.','알았어요, 그냥 시키는 대로 할게요.'],a:2,ex:'상황 → 내 감정 → 바라는 점을 차분히 말하는 나 전달법입니다. 비난하거나 입을 닫거나 참기만 하면 서로의 생각을 알 수 없습니다. 어른의 걱정을 끝까지 들어 보는 공감적 경청도 함께 필요합니다.'},
- {h:'나. 또래 갈등',q:'3. 모둠 발표 준비를 한 친구가 거의 다 맡았는데, 발표 날 자료가 빠지자 단톡방에 그 친구를 탓하는 말이 올라왔습니다. 이 또래 갈등을 키운 원인을 가장 잘 설명한 것은 무엇일까요?',o:['그 친구의 성격이 원래 꼼꼼하지 못해서','역할을 고르게 나누지 않았고, 사정을 확인하지 않은 채 짐작으로 말해서','단톡방이 있어서','발표 과제가 너무 어려워서'],a:1,ex:'또래 갈등은 역할이 한 사람에게 몰리거나 확인하지 않은 말이 퍼질 때 커집니다. 얼굴을 보지 않는 온라인 대화에서는 오해가 더 빨리 번집니다.'},
- {q:'4. 3번 상황에서 갈등을 협력적으로 해결하는 행동은 무엇일까요?',o:['누가 잘못했는지 투표로 정한다','그 친구가 사과할 때까지 말을 걸지 않는다','선생님께 그 친구를 혼내 달라고 한다','사실을 먼저 확인하고 그 친구의 이야기를 들은 뒤, 역할과 대안을 함께 다시 정한다'],a:3,ex:'협력적 해결은 사람을 탓하지 않습니다. 사실을 확인하고, 서로의 이야기를 듣고, 모두가 받아들일 수 있는 대안과 역할을 함께 정합니다.'}];
-const RT=[['g','5. 세대 갈등은 왜 생기고, 어떻게 풀 수 있을까요? 내 말로 적어 보세요. (필수)','예: 부모님이나 조부모님과 생각이 다를 때 나는…',1],['p','6. 또래 갈등은 왜 생기고, 어떻게 풀 수 있을까요? 내 말로 적어 보세요. (필수)','예: 친구와 오해가 생겼을 때 나는…',1],['txt','7. 가족이나 친구에게 실제로 해 보고 싶은 말이나 행동을 적어 보세요. (선택)','예: 이번 주에 엄마에게 "…"라고 말해 보고 싶다.',0]];
-function report(){hud();$('#mBox').classList.remove('wide');S.rep=S.rep||{a:[null,null,null,null],g:'',p:'',txt:'',chk:0};const R=S.rep;
-  const b=modal(`<h2>학습 보고서</h2><p>주제: <b>세대 갈등과 또래 갈등, 그리고 해결</b></p><p>게임 속 이야기가 아니라 새로운 상황에 대한 질문입니다. 배운 것을 떠올려 답해 보세요.</p>`+RQ.map((q,i)=>`${q.h?`<h3>${q.h}</h3>`:''}<div class="q" id="q${i}"><b>${esc(q.q)}</b>${q.o.map((o,j)=>`<label><input type="radio" name="r${i}" value="${j}" ${R.a[i]===j?'checked':''}><span>${esc(o)}</span></label>`).join('')}<div class="ex" hidden></div></div>`).join('')+
-   `<h3>다. 내 말로 정리하기</h3>`+RT.map(t=>`<p style="font-weight:700;margin:12px 0 4px">${t[1]}</p><textarea id="r_${t[0]}" maxlength="300" placeholder="${t[2]}">${esc(R[t[0]]||'')}</textarea>`).join('')+
-   `<p id="rErr" style="color:#a2461f;font-weight:700;margin:6px 0 0"></p><button class="btn" id="rc">답 확인하기</button><div id="rOut"></div>`);
-  RT.forEach(t=>{const e=b.querySelector('#r_'+t[0]);e.oninput=()=>{R[t[0]]=e.value;store.set(S)}});
-  b.querySelectorAll('input[type=radio]').forEach(r=>r.onchange=()=>{R.a[+r.name[1]]=+r.value;store.set(S)});
-  const check=()=>{let ok=true;RQ.forEach((q,i)=>{const d=b.querySelector('#q'+i),ex=d.querySelector('.ex'),good=R.a[i]===q.a;ok=ok&&good;d.className='q '+(good?'good':'bad');ex.hidden=false;
-      ex.textContent=R.a[i]==null?'답을 골라 주세요.':good?'맞았어요. '+q.ex:'다시 생각해 봐요. 답을 고쳐서 다시 확인해 보세요.'});
-    const out=b.querySelector('#rOut'),er=b.querySelector('#rErr');out.innerHTML='';er.textContent='';if(!ok){er.textContent='틀린 문항이 있어요. 위로 올라가 다시 골라 보세요.';return}
-    for(const t of RT)if(t[3]&&(R[t[0]]||'').trim().length<15){er.textContent=t[1].slice(0,2)+' 문항을 15자 이상 적어 주세요.';b.querySelector('#r_'+t[0]).focus();return}R.chk=1;store.set(S);
-    out.innerHTML=`<div class="row"><button class="btn" id="sp">PNG로 저장</button><button class="btn sub" id="sj">JPG로 저장</button></div><img id="repImg" alt="학습 보고서 이미지"><p style="font-size:.84em;color:#6b7385">저장 버튼이 동작하지 않으면 위 이미지를 길게 누르거나 마우스 오른쪽 버튼으로 저장하세요.</p><button class="btn sub" id="tt">타이틀로 돌아가기</button>`;
+const RK={family:'가족 (세대 갈등)',friend:'친구 (또래 갈등)'};
+const RT=[['a','2. 내가 경험한 갈등: 어떤 일이 있었나요?','예: 엄마가 내 휴대전화 사용 시간을 정해서 다투었다.',300,1,''],
+ ['b','3. 구체적인 상황: 언제, 어디서, 서로 어떤 말과 행동을 했나요?','예: 지난주 저녁 거실에서, 엄마는 "…"라고 하셨고 나는 "…"라고 했다.',400,1,''],
+ ['c','4. 갈등이 일어난 이유: 왜 그런 일이 생겼다고 생각하나요?','내 생각과 상대의 생각을 모두 떠올려 적어 보세요.',300,1,'도움말: 서로 당연하게 여기는 것이 달랐나요? 확인하지 않고 짐작한 말이 있었나요? 한 사람에게 일이 몰렸나요?'],
+ ['d','5. 갈등을 해결할 수 있는 방법: 그때로 돌아간다면, 또는 앞으로 어떻게 하고 싶나요?','내가 할 수 있는 말과 행동을 구체적으로 적어 보세요.',300,1,'도움말: 끝까지 듣기(공감적 경청), 나 전달법으로 말하기, 대안과 역할을 함께 정하기 가운데 무엇을 쓸 수 있을까요?'],
+ ['e','6. 상대에게 해 보고 싶은 말을 나 전달법으로 적어 보세요. (선택)','예: 네가 …해서(상황), 나는 …했어(내 감정). 다음에는 …하면 좋겠어(바라는 점).',200,0,'']];
+function report(){hud();$('#mBox').classList.remove('wide');if(!S.rep||!('kind' in S.rep))S.rep={kind:null,who:'',a:'',b:'',c:'',d:'',e:'',chk:0};const R=S.rep;
+  const b=modal(`<h2>학습 보고서 · 나의 갈등 돌아보기</h2><p>게임에서 본 것처럼, 내가 직접 겪은 갈등 한 가지를 돌아보며 적어 봅시다.</p>
+   <div class="rnote"><b>쓰기 전에</b>다른 사람의 실명은 쓰지 않아도 됩니다. 쓰기 어려운 일은 적지 않아도 괜찮아요. 이 보고서는 선생님께 제출됩니다.<br>떠오르는 갈등이 없다면 주변에서 본 갈등이나 게임 속 갈등 가운데 하나를 골라 써도 됩니다.</div>
+   <p class="rq">1. 누구와의 갈등인가요? 하나를 골라 주세요.</p><div class="kind">${Object.entries(RK).map(([k,v])=>`<button data-k="${k}" class="${R.kind===k?'on':''}">${v}</button>`).join('')}</div>
+   <input type="text" id="r_who" maxlength="20" placeholder="상대는 누구인가요? 이름 대신 관계로 적어 주세요. (예: 엄마, 할머니, 같은 반 친구)" value="${esc(R.who||'')}" autocomplete="off" style="margin-top:8px">`+
+   RT.map(t=>`<p class="rq">${t[1]}</p>${t[5]?`<p class="rh">${t[5]}</p>`:''}<textarea id="r_${t[0]}" maxlength="${t[3]}" placeholder="${esc(t[2])}">${esc(R[t[0]]||'')}</textarea><div class="rc" id="c_${t[0]}"></div>`).join('')+
+   `<p id="rErr" style="color:#a2461f;font-weight:700;margin:6px 0 0"></p><button class="btn" id="rc">보고서 만들기</button><div id="rOut"></div>`);
+  b.querySelectorAll('.kind button').forEach(x=>x.onclick=()=>{R.kind=x.dataset.k;store.set(S);b.querySelectorAll('.kind button').forEach(y=>y.classList.toggle('on',y===x))});
+  const w=b.querySelector('#r_who');w.oninput=()=>{R.who=w.value;store.set(S)};
+  RT.forEach(t=>{const e=b.querySelector('#r_'+t[0]),c=b.querySelector('#c_'+t[0]),cnt=()=>{c.textContent=e.value.length+' / '+t[3]};e.oninput=()=>{R[t[0]]=e.value;cnt();store.set(S)};cnt()});
+  const check=()=>{const out=b.querySelector('#rOut'),er=b.querySelector('#rErr');out.innerHTML='';er.textContent='';
+    if(!R.kind){er.textContent='1번에서 가족과 친구 중 하나를 골라 주세요.';b.querySelector('.kind').scrollIntoView({block:'center'});return}
+    if(!(R.who||'').trim()){er.textContent='1번에 상대가 누구인지 적어 주세요.';w.focus();return}
+    for(const t of RT)if(t[4]&&(R[t[0]]||'').trim().length<20){er.textContent=t[1].slice(0,2)+' 문항을 20자 이상 적어 주세요.';b.querySelector('#r_'+t[0]).focus();return}R.chk=1;store.set(S);
+    out.innerHTML=`<div class="row"><button class="btn" id="sp">PNG로 저장</button><button class="btn sub" id="sj">JPG로 저장</button></div><img id="repImg" alt="학습 보고서 이미지"><p style="font-size:.84em;color:#6b7385">저장 버튼이 동작하지 않으면 위 이미지를 길게 누르거나 마우스 오른쪽 버튼으로 저장하세요. 글을 고치면 [보고서 만들기]를 다시 눌러 주세요.</p><button class="btn sub" id="tt">타이틀로 돌아가기</button>`;
     const c=reportCanvas();out.querySelector('#repImg').src=c.toDataURL('image/png');
     const fn='읽지못한마음_'+(S.sid||'')+'_'+(S.name||'보고서');out.querySelector('#sp').onclick=()=>c.toBlob(bl=>saveBlob(bl,fn+'.png'),'image/png');
     out.querySelector('#sj').onclick=()=>c.toBlob(bl=>saveBlob(bl,fn+'.jpg'),'image/jpeg',.92);
@@ -641,9 +646,9 @@ function reportCanvas(){const W=1600,PAD=90,F='"Pretendard","Apple SD Gothic Neo
   const rule=()=>{ops.push(['rule',y]);y+=36};
   text('읽지 못한 마음 · 학습 보고서',58,'#1b2233',true);y+=6;const d=new Date();
   text(`학번 ${S.sid||'-'}   이름 ${S.name||'-'}`,38,'#1b2233',true);text(`작성일 ${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}.`,28,'#6b7385');y+=14;rule();
-  text('주제 · 세대 갈등과 또래 갈등, 그리고 해결',38,'#2c8c80',true);y+=14;rule();
-  RQ.forEach((q,i)=>{if(q.h){text(q.h,34,'#2c8c80',true);y+=6}text(q.q,31,'#1b2233',true);text('내 답: '+q.o[R.a[i]],30,'#1c6a5f',true,24);y+=22});rule();
-  RT.forEach(t=>{text(t[1].replace(/ \((필수|선택)\)/,''),31,'#1b2233',true);text((R[t[0]]||'').trim()||'(적지 않음)',32,'#232a3b',false,24);y+=24});rule();text('중학교 기술·가정 · 청소년기의 소통',26,'#6b7385');
+  text('나의 갈등 돌아보기',40,'#2c8c80',true);y+=10;rule();
+  text('1. 누구와의 갈등인가요?',31,'#1b2233',true);text(RK[R.kind]+' · '+(R.who||'').trim(),32,'#1c6a5f',true,24);y+=24;
+  RT.forEach(t=>{const v=(R[t[0]]||'').trim();if(!v&&!t[4])return;text(t[1].replace(' (선택)',''),31,'#1b2233',true);text(v||'(적지 않음)',32,'#232a3b',false,24);y+=24});rule();text('중학교 기술·가정 · 청소년기의 소통 · 세대 갈등과 또래 갈등',26,'#6b7385');
   const c=document.createElement('canvas');c.width=W;c.height=Math.ceil(y+PAD-30);const x=c.getContext('2d');x.fillStyle='#f7f2e8';x.fillRect(0,0,W,c.height);x.fillStyle='#fffdf8';x.fillRect(36,36,W-72,c.height-72);
   x.strokeStyle='#1b2233';x.lineWidth=4;x.strokeRect(36,36,W-72,c.height-72);x.textBaseline='top';
   for(const o of ops){if(o[0]==='rule'){x.fillStyle='#d9d2c3';x.fillRect(PAD,o[1],W-PAD*2,3)}else{x.font=o[3];x.fillStyle=o[4];x.fillText(o[0],o[1],o[2])}}return c}
