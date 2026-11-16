@@ -4,6 +4,12 @@
 
 GitHub Pages와 GitHub Actions만으로 사이트·게임·이미지·음악을 제공합니다. Cloudflare 서버, D1, KV와 연결하지 않습니다.
 
+## 홈 화면
+
+- 홈은 게임 카드가 원형 진열대 위에서 도는 3D 화면입니다(three.js). 드래그·마우스 휠·←/→로 돌리고, 정면 카드를 누르거나 Enter로 상세 정보를 엽니다.
+- 화면 폭 768px 이하이거나 3D를 쓸 수 없는 기기에서는 옆으로 넘기는 카드 화면으로 자동 전환됩니다.
+- 격자형 목록은 `게임 목록`(games.html)에 그대로 있습니다. 홈 화면 코드는 `github-pages-build.mjs` 안의 `site/public/index.html`, `assets/ring.js`, `assets/ring.css`입니다.
+
 ## 게임 관리
 
 - 게임 목록: `site-catalog.json`. 번호, 제목, 설명, 분류, 실행 경로, 썸네일, 공개 여부를 관리합니다. 기존 번호를 변경하지 마세요.
