@@ -2,7 +2,7 @@ name: GitHub Pages 게임센터 배포
 on:
   push:
     branches: [main]
-    paths: ['site-catalog.json', 'github-pages-build.mjs', 'g/**', 'games/**', 'covers/**', '.github/workflows/deploy-pages.yml']
+    paths: ['site-catalog.json', 'github-pages-build.mjs', 'g/**', 'games/**', 'covers/**', 'audio/**', '.github/workflows/deploy-pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
