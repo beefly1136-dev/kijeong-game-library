@@ -1,6 +1,6 @@
 # 기정T의 기술가정 게임센터
 
-학생용 주소: https://beefly1136-dev.github.io/gijeong-game-library/
+학생용 주소: https://beefly1136-dev.github.io/kijeong-game-library/
 
 GitHub Pages와 GitHub Actions만으로 사이트·게임·이미지·음악을 제공합니다. Cloudflare 서버, D1, KV와 연결하지 않습니다.
 
@@ -14,7 +14,7 @@ GitHub Pages와 GitHub Actions만으로 사이트·게임·이미지·음악을 
 - `sort_order`가 작을수록 최신순 목록 앞에 표시됩니다.
 - 인기순은 이전 당시 누적 플레이 횟수 기준입니다. 새 플레이 횟수는 수집하지 않습니다.
 
-저장하면 `.github/workflows/deploy-pages.yml`이 자동으로 검증하고 배포합니다. [배포 상태](https://github.com/beefly1136-dev/gijeong-game-library/actions/workflows/deploy-pages.yml)에서 성공 여부를 확인하세요. 검증이 실패하면 직전 정상 배포가 유지됩니다.
+저장하면 `.github/workflows/deploy-pages.yml`이 자동으로 검증하고 배포합니다. [배포 상태](https://github.com/beefly1136-dev/kijeong-game-library/actions/workflows/deploy-pages.yml)에서 성공 여부를 확인하세요. 검증이 실패하면 직전 정상 배포가 유지됩니다.
 
 `github-pages-build.mjs`에는 사이트 템플릿·스타일·작은 로고 폰트와 빌드 코드가 포함되어 있습니다. 실행 시 임시 `site/` 소스와 `.pages-dist/` 배포본을 만듭니다. 기존 게임 원본은 수정하지 않고 배포본에서 GitHub Pages 주소로 경로를 바꿉니다. 비밀번호·개인정보·토큰을 공개 저장소에 올리지 마세요.
 
