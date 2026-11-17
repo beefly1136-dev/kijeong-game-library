@@ -1,4 +1,4 @@
-# 기정T의 기술가정 게임센터
+# 기정T의 기술가정 놀이터
 
 학생용 주소: https://beefly1136-dev.github.io/kijeong-game-library/
 
