@@ -1,6 +1,13 @@
 {
-  "updated": "2026-11-13",
+  "updated": "2026-11-18",
   "games": [
+    {
+      "number": 25,
+      "title": "야생 생존 건축 3D",
+      "entry": "games/wild-survival-build-3d/index.html",
+      "previousEntry": "games/wild-survival-build-3d/index.html",
+      "gameUrl": "https://game-center-site.beefly1136.workers.dev/play?n=25"
+    },
     {
       "number": 24,
       "title": "읽지 못한 마음",

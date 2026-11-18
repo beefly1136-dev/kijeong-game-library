@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-16T00:15:41.846Z",
+  "updated_at": "2026-11-18T06:26:16.402Z",
   "site_name": "기정T의 기술가정 놀이터",
   "popularity_note": "이전 당시 누적 플레이 횟수 기준",
   "categories": [
@@ -59,6 +59,24 @@
   ],
   "games": [
     {
+      "number": 25,
+      "title": "야생 생존 건축 3D",
+      "description": "섬에서 재료를 모아 도구를 만들고, 펫과 함께 살아남으며 나만의 집을 짓는 3D 생존 건축 게임",
+      "how_to": "WASD(태블릿은 조이스틱)로 이동하고 마우스로 둘러봐요. 왼쪽 클릭으로 줍기·베기·캐기·블록 놓기, 오른쪽 클릭으로 먹기·문 여닫기. E 제작, K 도감, P 펫, G 내 집. 나뭇가지·돌멩이·풀로 끈과 돌도끼를 만들고, 나무를 베어 판자로 가공해 벽·문·지붕으로 집을 완성해요. 밤에는 집이나 불빛 곁에서 늑대를 피하세요.",
+      "tags": "건설,건축,집짓기,제조,도구,재료 가공,생존,3D",
+      "category_id": 6,
+      "category_name": "건설 기술",
+      "game_type": "시뮬레이션",
+      "duration": "long",
+      "people": "solo",
+      "play_count": 0,
+      "thumbnail_url": "covers/wild-survival-build-3d-25d52ade7015232f7d5a4c9c.webp",
+      "play_url": "games/wild-survival-build-3d/index.html",
+      "is_published": 0,
+      "is_featured": 0,
+      "sort_order": 0
+    },
+    {
       "number": 24,
       "title": "읽지 못한 마음",
       "description": "답이 없어진 친구의 사정을 따라가며 세대·또래 갈등과 소통을 배우는 이야기 탐험 게임",
@@ -74,7 +92,7 @@
       "play_url": "games/unread-heart/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 0
+      "sort_order": 1
     },
     {
       "number": 23,
@@ -92,7 +110,7 @@
       "play_url": "g/aae0e880-4d68-4017-b810-455f8ed3aa3e/1/index.html?rev=fea7378",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 1
+      "sort_order": 2
     },
     {
       "number": 22,
@@ -110,7 +128,7 @@
       "play_url": "games/bio-puzzle-family/index.html",
       "is_published": 1,
       "is_featured": 1,
-      "sort_order": 2
+      "sort_order": 3
     },
     {
       "number": 21,
@@ -128,7 +146,7 @@
       "play_url": "g/320c3995-7c53-4bcf-8c71-c96c21f84ead/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 3
+      "sort_order": 4
     },
     {
       "number": 1,
@@ -146,7 +164,7 @@
       "play_url": "g/5a430918-4e60-4d78-b960-5c66f4a4e553/2/index.html",
       "is_published": 1,
       "is_featured": 1,
-      "sort_order": 4
+      "sort_order": 5
     },
     {
       "number": 20,
@@ -164,7 +182,7 @@
       "play_url": "g/30714452-66b9-4109-903d-db7f46998a7c/2/index.html",
       "is_published": 1,
       "is_featured": 1,
-      "sort_order": 5
+      "sort_order": 6
     },
     {
       "number": 19,
@@ -182,7 +200,7 @@
       "play_url": "g/4315df1c-4341-494c-814e-5d687d53a555/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 6
+      "sort_order": 7
     },
     {
       "number": 18,
@@ -200,7 +218,7 @@
       "play_url": "g/b62340fc-dae6-4e0d-8715-d69832674e49/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 7
+      "sort_order": 8
     },
     {
       "number": 17,
@@ -218,7 +236,7 @@
       "play_url": "g/72e4be77-e0ae-4827-a1b1-bd38097c24b5/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 8
+      "sort_order": 9
     },
     {
       "number": 16,
@@ -236,7 +254,7 @@
       "play_url": "g/a1957033-1aa7-454d-87cf-864d513d06c1/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 9
+      "sort_order": 10
     },
     {
       "number": 15,
@@ -254,7 +272,7 @@
       "play_url": "g/6572d986-47df-4676-8752-bf33e6a73503/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 10
+      "sort_order": 11
     },
     {
       "number": 14,
@@ -272,7 +290,7 @@
       "play_url": "g/9f22da9a-c3b0-4fb0-a33a-57d65641c638/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 11
+      "sort_order": 12
     },
     {
       "number": 13,
@@ -290,7 +308,7 @@
       "play_url": "g/c2e00a21-001c-4ec2-863c-f96ffcc3e705/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 12
+      "sort_order": 13
     },
     {
       "number": 12,
@@ -308,7 +326,7 @@
       "play_url": "g/8784cb01-f8e6-4948-ab64-339b0a49c373/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 13
+      "sort_order": 14
     },
     {
       "number": 11,
@@ -326,7 +344,7 @@
       "play_url": "g/713a8f79-f61e-4777-91e6-5fbd6c5b9d3a/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 14
+      "sort_order": 15
     },
     {
       "number": 10,
@@ -344,7 +362,7 @@
       "play_url": "g/6a69833a-81cf-4732-ae92-01b82cfeae35/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 15
+      "sort_order": 16
     },
     {
       "number": 9,
@@ -362,7 +380,7 @@
       "play_url": "g/450b097e-8e37-433e-8704-9acc539a522b/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 16
+      "sort_order": 17
     },
     {
       "number": 8,
@@ -380,7 +398,7 @@
       "play_url": "g/c8de580a-6aef-420c-899a-68d9b254a4d2/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 17
+      "sort_order": 18
     },
     {
       "number": 7,
@@ -398,7 +416,7 @@
       "play_url": "g/ee1e7593-c46a-4134-b25f-66f75d4de309/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 18
+      "sort_order": 19
     },
     {
       "number": 6,
@@ -416,7 +434,7 @@
       "play_url": "g/611a46fc-6721-49ce-a9cd-1a37e06ed286/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 19
+      "sort_order": 20
     },
     {
       "number": 5,
@@ -434,7 +452,7 @@
       "play_url": "g/45cf5518-31fe-478c-86d6-4cbd1959e5df/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 20
+      "sort_order": 21
     },
     {
       "number": 4,
@@ -452,7 +470,7 @@
       "play_url": "g/ab9f564f-06b2-4a20-93da-d65f4b5c12e3/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 21
+      "sort_order": 22
     },
     {
       "number": 3,
@@ -470,7 +488,7 @@
       "play_url": "g/56a33a1b-847e-40cf-adb0-db0f69762073/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 22
+      "sort_order": 23
     },
     {
       "number": 2,
@@ -488,7 +506,7 @@
       "play_url": "g/60926547-504d-464b-a4a7-ec982307ab35/1/index.html",
       "is_published": 1,
       "is_featured": 0,
-      "sort_order": 23
+      "sort_order": 24
     }
   ]
 }
