@@ -67,6 +67,8 @@
   .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:middle}
   .tablewrap{overflow-x:auto}
   ol{line-height:1.9;padding-left:22px;font-size:16px}
+  .embedded .top{display:none}
+  .embedded .wrap{padding-top:16px}
   .player:fullscreen{display:flex;flex-direction:column;justify-content:center;border-radius:0;border:0;width:100vw;height:100vh}
   .player:fullscreen .stage{width:min(100vw,calc((100vh - 72px)*16/9));margin:0 auto}
   @media (max-width:900px){ .chapters{grid-template-columns:repeat(4,1fr)} }
@@ -132,6 +134,7 @@
 
 <script>
 (()=>{
+try{if(window.self!==window.top)document.body.classList.add('embedded');}catch(e){document.body.classList.add('embedded');}
 /* ============================================================
    기본 도구
    ============================================================ */
