@@ -464,7 +464,7 @@ function buildAI(){
   const devs=DEV.map(ch=>{const g=new T.Group();root.add(g);
     add(g,new T.CylinderGeometry(.5,.55,.18,6),M(0x241d48,{m:.4,r:.35}),0,0,0);
     add(g,new T.TorusGeometry(.5,.03,6,6),M(A,{e:A,ei:1.4}),0,.1,0,{cast:false}).rotation.x=PI/2;
-    const s=emojiSprite(ch,.75);s.position.y=.6;g.add(s);
+    const s=emojiSprite(ch,1.15);s.position.y=.8;g.add(s);
     const ln=new T.Line(new T.BufferGeometry().setFromPoints([V3(0,0,0),V3(1,0,0)]),new T.LineBasicMaterial({color:A,transparent:true,opacity:.5}));root.add(ln);
     const pin=add(root,new T.SphereGeometry(.08,10,8),M(0x7fe0ff,{e:0x7fe0ff,ei:2.5}),0,0,0,{cast:false,recv:false});
     const pout=add(root,new T.SphereGeometry(.08,10,8),M(0xffd36b,{e:0xffd36b,ei:2.5}),0,0,0,{cast:false,recv:false});
@@ -505,7 +505,7 @@ function buildAI(){
     ppl.forEach((p,i)=>{p.head.rotation.y=lt>13.1?(i?.5:-.5)*eo(seg(lt,13.1,13.6)):0;});
   }
   function cam(lt,mode){
-    if(mode==='banner')return camPose([.6,1.8,1],11,Math.sin(lt*.15)*.14-.05,.2);
+    if(mode==='banner')return camPose([.6,1.3,1.8],9.3,-.3+Math.sin(lt*.15)*.08,.18);
     return {...camPose([.9,1.25,1.3],12.6,-.18+.28*eio(clamp(lt/17)),.26),sx:0,sy:-.02};
   }
   const an={robot:()=>bot.localToWorld(V3(0,2.65,0))};DEV.forEach((_,i)=>an['dev'+i]=()=>devs[i].g.localToWorld(V3(0,-.35,0)));
@@ -516,9 +516,14 @@ function buildAI(){
 const BUILD={agri:buildAgri,steam:buildSteam,conveyor:buildConveyor,info:buildInfo,ai:buildAI};
 const S={},camera=new T.PerspectiveCamera(35,16/9,.1,200);
 function get(k){if(!S[k]&&BUILD[k]){S[k]=BUILD[k]();S[k].camera=camera.clone();}return S[k];}
+// 느린 컴퓨터: 프레임 간격이 계속 길면 그리는 해상도를 단계적으로 낮춘다(다시 올리지는 않음).
+const CAPS=[1600,1200,900,700];let level=0,lastCall=0,samples=[];
+function watch(){const now=performance.now(),dt=now-lastCall;lastCall=now;if(dt>8&&dt<250)samples.push(dt);
+  if(samples.length>=45){const avg=samples.reduce((a,b)=>a+b,0)/samples.length;samples=[];if(avg>42&&level<CAPS.length-1){level++;if(level>=2&&renderer.shadowMap.enabled){renderer.shadowMap.enabled=false;
+    Object.values(S).forEach(s=>s.scene.traverse(o=>{if(o.material)[].concat(o.material).forEach(m=>m.needsUpdate=true);}));}}}}
 function render(key,lt,w,h,mode='main'){
-  const s=get(key);if(!s)return null;
-  const cap=Math.min(1,1600/Math.max(1,w)),rw=Math.max(2,Math.round(w*cap)),rh=Math.max(2,Math.round(h*cap));
+  const s=get(key);if(!s)return null;watch();
+  const cap=Math.min(1,CAPS[level]/Math.max(1,w)),rw=Math.max(2,Math.round(w*cap)),rh=Math.max(2,Math.round(h*cap));
   const el=renderer.domElement;if(el.width!==rw||el.height!==rh)renderer.setSize(rw,rh,false);
   s.update(lt,mode);const c=s.cam(lt,mode),cam=s.camera;
   cam.fov=35;cam.aspect=rw/rh;cam.position.copy(c.pos);cam.lookAt(c.tg);
@@ -527,5 +532,5 @@ function render(key,lt,w,h,mode='main'){
   renderer.render(s.scene,cam);s.ready=true;return el;
 }
 function project(key,name){const s=S[key];if(!s||!s.ready||!s.anchors[name])return null;const v=s.anchors[name]().project(s.camera);return {x:(v.x+1)/2,y:(1-v.y)/2,vis:v.z<1};}
-window.S3={ok:true,render,project,carTimes:CAR_T};
+window.S3={ok:true,render,project,carTimes:CAR_T,get quality(){return level;}};
 })();
