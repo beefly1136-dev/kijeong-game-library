@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기술이 바꾼 사회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0d11; --panel:#15171d; --panel2:#1c1f27; --ink:#f4f1ea; --muted:#9a9aa6; --line:#2a2d37;
+    --gold:#f4c98a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+  body{background:radial-gradient(1200px 600px at 20% -10%,#2a2216 0%,transparent 60%),radial-gradient(900px 500px at 100% 0%,#1b1838 0%,transparent 60%),var(--bg)}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 16px 72px}
+  .top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin:6px 0 20px}
+  .kicker{color:var(--gold);font-weight:700;font-size:15px;letter-spacing:.06em;margin-bottom:6px}
+  .top h1{font-family:"Noto Serif KR",serif;font-weight:900;font-size:clamp(30px,4.6vw,48px);margin:0;letter-spacing:-.02em}
+  .meta{color:var(--muted);font-size:15px}
+  .meta b{color:var(--ink)}
+  .player{background:#000;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.55)}
+  .stage{position:relative;width:100%;aspect-ratio:16/9;background:#000;cursor:pointer}
+  .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .poster{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 8%;
+    background:linear-gradient(90deg,rgba(8,8,12,.92) 0%,rgba(8,8,12,.65) 55%,rgba(8,8,12,.25) 100%);
+    background-size:cover;background-position:center;transition:opacity .5s;cursor:default}
+  .poster.hide{opacity:0;pointer-events:none}
+  .poster .eyebrow{color:var(--gold);font-weight:700;letter-spacing:.08em;font-size:clamp(13px,1.6vw,18px);margin-bottom:12px}
+  .poster h2{font-family:"Noto Serif KR",serif;font-weight:900;font-size:clamp(34px,7vw,84px);line-height:1.1;margin:0 0 16px;letter-spacing:-.02em}
+  .poster h2 span{background:linear-gradient(90deg,#ffe2ad,#eaa64c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .poster p{max-width:600px;color:rgba(255,255,255,.82);font-size:clamp(14px,1.9vw,20px);line-height:1.7;margin:0 0 26px}
+  .bigbtn{align-self:flex-start;border:0;border-radius:999px;background:linear-gradient(90deg,#ffe0a6,#f0b35c);color:#2a1b06;
+    font:800 clamp(15px,1.9vw,20px) "Noto Sans KR",sans-serif;padding:15px 28px;cursor:pointer;display:flex;gap:10px;align-items:center;
+    box-shadow:0 10px 30px rgba(240,179,92,.35)}
+  .bigbtn:hover{filter:brightness(1.06)}
+  .controls{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--panel);border-top:1px solid var(--line)}
+  .cbtn{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:12px;height:42px;min-width:42px;padding:0 12px;
+    font:700 15px "Noto Sans KR",sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+  .cbtn:hover{border-color:#4a4e5c}
+  .cbtn.off{opacity:.45}
+  .play{background:var(--gold);color:#1d1406;border:0;min-width:96px}
+  .bar{position:relative;flex:1;height:30px;cursor:pointer;touch-action:none;display:flex;align-items:center;gap:3px}
+  .segm{position:relative;height:8px;border-radius:4px;overflow:hidden;background:rgba(255,255,255,.1)}
+  .segm i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:4px}
+  .bar:hover .segm{height:10px}
+  .time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:15px;white-space:nowrap;min-width:92px;text-align:center}
+  .chapters{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:16px}
+  .chap{position:relative;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px 12px 12px;text-align:left;cursor:pointer;
+    font-family:inherit;color:var(--ink);overflow:hidden;transition:transform .15s,border-color .15s}
+  .chap:hover{transform:translateY(-2px)}
+  .chap::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--c)}
+  .chap .ic{font-size:24px;line-height:1}
+  .chap small{display:block;color:var(--muted);font-size:13px;margin:8px 0 3px}
+  .chap b{font-size:15px;font-weight:700;line-height:1.35;display:block}
+  .chap.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--panel))}
+  .hint{color:var(--muted);font-size:14px;margin:14px 2px 0;line-height:1.9}
+  .hint kbd{font-family:inherit;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:1px 7px;color:var(--ink);font-size:13px}
+  details{margin-top:24px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:4px 22px}
+  summary{cursor:pointer;font-weight:700;padding:14px 0;font-size:17px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0 16px}
+  th,td{border-bottom:1px solid var(--line);padding:11px 8px;text-align:left;vertical-align:top;line-height:1.55}
+  th{color:var(--muted);font-weight:600;font-size:14px}
+  .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .tablewrap{overflow-x:auto}
+  ol{line-height:1.9;padding-left:22px;font-size:16px}
+  .player:fullscreen{display:flex;flex-direction:column;justify-content:center;border-radius:0;border:0;width:100vw;height:100vh}
+  .player:fullscreen .stage{width:min(100vw,calc((100vh - 72px)*16/9));margin:0 auto}
+  @media (max-width:900px){ .chapters{grid-template-columns:repeat(4,1fr)} }
+  @media (max-width:640px){ .controls{flex-wrap:wrap} .bar{order:9;flex-basis:100%} .chapters{grid-template-columns:repeat(2,1fr)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="kicker">기술·가정 · Ⅳ. 기술 혁신과 발명</div>
+      <h1>기술이 바꾼 사회</h1>
+    </div>
+    <div class="meta">모션 그래픽 · <b id="durLabel">2:00</b></div>
+  </header>
+
+  <div class="player" id="player">
+    <div class="stage" id="stage">
+      <canvas id="cv"></canvas>
+      <div class="poster" id="poster">
+        <div class="eyebrow">기술의 발달에 따른 사회의 변화</div>
+        <h2>기술이 바뀌면<br><span>사회가 바뀐다</span></h2>
+        <p id="posterText">농사짓던 마을에서 증기 기관의 공장으로, 컨베이어 벨트에서 인터넷과 인공지능까지. 기술이 사회를 어떻게 바꾸어 왔는지 함께 따라가 봅시다.</p>
+        <button class="bigbtn" id="startBtn">▶ <span id="startLabel">재생 · 소리 켜기</span></button>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="cbtn play" id="playBtn">▶ 재생</button>
+      <div class="bar" id="bar"></div>
+      <span class="time" id="timeLabel">0:00 / 2:00</span>
+      <button class="cbtn" id="speedBtn" title="재생 속도">1×</button>
+      <button class="cbtn" id="musicBtn" title="배경 음악 (B)">🎵 음악</button>
+      <button class="cbtn" id="sfxBtn" title="효과음 (M)">🔊 효과음</button>
+      <button class="cbtn" id="fsBtn" title="전체 화면 (F)" aria-label="전체 화면">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 5V1h4M11 1h4v4M15 11v4h-4M5 15H1v-4"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="chapters" id="chapters"></div>
+  <p class="hint"><kbd>Space</kbd> 재생·멈춤 &nbsp; <kbd>←</kbd><kbd>→</kbd> 5초 이동 &nbsp; <kbd>1</kbd>~<kbd>7</kbd> 장면 이동 &nbsp; <kbd>F</kbd> 전체 화면 &nbsp; <kbd>B</kbd> 배경 음악 &nbsp; <kbd>M</kbd> 효과음 &nbsp;· 화면을 누르면 멈춥니다. 속도 버튼으로 천천히 볼 수 있어요.</p>
+
+  <details>
+    <summary>수업 노트 펼치기</summary>
+    <div class="tablewrap">
+    <table>
+      <tr><th>사회</th><th>계기</th><th>핵심 기술</th><th>사회의 변화</th></tr>
+      <tr><td><span class="dot" style="background:#e9b949"></span>농업 사회</td><td>농업 혁명<br>(기원전 1만 년~)</td><td>농사 방법, 농기구</td><td>식량을 직접 생산, 정착 생활, 가내 수공업 → 공장제 수공업</td></tr>
+      <tr><td><span class="dot" style="background:#9bd34a"></span>산업 사회</td><td>1차 산업 혁명<br>(18세기 중후반~)</td><td>증기 기관</td><td>공장제 기계 공업, 인구의 도시 집중, 공업 중심 사회</td></tr>
+      <tr><td></td><td>2차 산업 혁명<br>(19세기 중후반~)</td><td>석유·전기, 컨베이어 시스템</td><td>산업 전반의 생산성 급증, 대량 생산 시대</td></tr>
+      <tr><td><span class="dot" style="background:#5bc8e6"></span>정보 사회</td><td>3차 산업 혁명<br>(20세기 중후반~)</td><td>컴퓨터, 인터넷, 로봇, 스마트 기기</td><td>정보가 사회·경제의 중심, 공장 자동화, 생활 방식과 직업 세계의 변화</td></tr>
+      <tr><td><span class="dot" style="background:#a99cf0"></span>지능 정보 사회</td><td>4차 산업 혁명</td><td>인공지능, 사물 인터넷, 빅데이터, 초고속 통신망, 로봇</td><td>초지능·초연결 시대, 모든 분야에서 새로운 가치 창출</td></tr>
+    </table>
+    </div>
+    <b>생각해 볼 질문</b>
+    <ol>
+      <li>증기 기관에서 피스톤의 <b>왕복 운동</b>이 <b>회전 운동</b>으로 바뀌는 부분은 어디인가요?</li>
+      <li>컨베이어 시스템에서 “사람은 제자리, 제품이 이동한다”는 방식이 생산성을 높이는 까닭은 무엇일까요?</li>
+      <li>지능 정보 사회에서 사라질 것 같은 직업과 새로 생길 것 같은 직업을 하나씩 떠올려 봅시다.</li>
+    </ol>
+  </details>
+</div>
+
+<script>
+(()=>{
+/* ============================================================
+   기본 도구
+   ============================================================ */
+const W=1280,H=720;
+const cv=document.getElementById('cv'),mainCtx=cv.getContext('2d');
+const buf=document.createElement('canvas'),bufCtx=buf.getContext('2d');
+let ctx=mainCtx;
+const RRpoly=function(x,y,w,h,r){r=Math.min(r,w/2,h/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();};
+[mainCtx,bufCtx].forEach(c=>{if(!c.roundRect)c.roundRect=RRpoly;});
+const SANS='"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+const SERIF='"Noto Serif KR","Batang",serif';
+const EMOJI='"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';
+const PI=Math.PI,TAU=PI*2;
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const lerp=(a,b,k)=>a+(b-a)*k;
+const eo=x=>1-Math.pow(1-x,3);
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eback=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+const rnd=i=>{const s=Math.sin(i*12.9898+78.233)*43758.5453;return s-Math.floor(s);};
+const ACC=['#f4c98a','#e9b949','#9bd34a','#9bd34a','#5bc8e6','#a99cf0','#f4c98a'];
+
+function rr(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);}
+function circle(x,y,r){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);}
+function line(x1,y1,x2,y2,c,w){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=c;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke();}
+function txt(s,x,y,o={}){ctx.save();ctx.globalAlpha*=(o.a??1);ctx.font=`${o.w||500} ${o.s||24}px ${o.f||SANS}`;
+  ctx.fillStyle=o.c||'#fff';ctx.textAlign=o.al||'left';ctx.textBaseline=o.bl||'alphabetic';
+  if(o.sh){ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=o.sh;ctx.shadowOffsetY=2;}
+  ctx.fillText(s,x,y);ctx.restore();}
+function emoji(s,x,y,size,a=1){txt(s,x,y,{s:size,f:EMOJI,al:'center',bl:'middle',a});}
+function para(s,x,y,maxW,lh,o={}){
+  ctx.save();ctx.font=`${o.w||400} ${o.s||20}px ${o.f||SANS}`;
+  const lines=[];let cur='';
+  for(const w of s.split(' ')){const t=cur?cur+' '+w:w;if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=w;}else cur=t;}
+  if(cur)lines.push(cur);
+  if(o.draw!==false){ctx.globalAlpha*=(o.a??1);ctx.fillStyle=o.c||'#fff';ctx.textAlign=o.al||'left';
+    if(o.sh){ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=o.sh;}
+    lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lh));}
+  ctx.restore();return lines.length;
+}
+function glass(x,y,w,h,o={}){
+  ctx.save();ctx.globalAlpha*=(o.a??1);
+  rr(x,y,w,h,o.r??20);ctx.fillStyle=o.fill||'rgba(12,14,22,.66)';ctx.shadowColor='rgba(0,0,0,.4)';ctx.shadowBlur=30;ctx.shadowOffsetY=8;ctx.fill();
+  ctx.shadowColor='transparent';ctx.strokeStyle=o.stroke||'rgba(255,255,255,.13)';ctx.lineWidth=1.5;ctx.stroke();
+  if(o.accent){ctx.save();rr(x,y,w,h,o.r??20);ctx.clip();ctx.fillStyle=o.accent;ctx.fillRect(x,y,w,5);ctx.restore();}
+  ctx.restore();
+}
+function chip(x,y,label,accent,o={}){
+  ctx.save();ctx.globalAlpha*=(o.a??1);ctx.font=`${o.w||700} ${o.s||20}px ${SANS}`;
+  const tw=ctx.measureText(label).width,w=tw+(o.px??28),h=o.h||40,lx=o.al==='left'?x:x-w/2;
+  rr(lx,y-h/2,w,h,h/2);ctx.fillStyle=o.fill||'rgba(10,12,18,.78)';ctx.fill();ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.stroke();
+  txt(label,lx+w/2,y+(o.s||20)*.36,{s:o.s||20,w:o.w||700,al:'center',c:o.c||'#fff',f:SANS+','+EMOJI});ctx.restore();return w;
+}
+function header(lt,num,tag,era,title,accent){
+  const k=eo(seg(lt,.15,1)); if(k<=0)return;
+  ctx.save();ctx.globalAlpha*=k;ctx.translate((1-k)*-30,0);
+  ctx.font=`800 20px ${SANS}`;const lab=`${num}  ${tag}`;const tw=ctx.measureText(lab).width;
+  rr(56,42,tw+32,40,20);ctx.fillStyle=accent;ctx.fill();
+  txt(lab,72,69,{s:20,w:800,c:'#15120c'});
+  if(era)txt(era,56+tw+48,69,{s:20,w:600,c:'rgba(255,255,255,.88)',sh:8});
+  txt(title,54,146,{s:56,w:900,f:SERIF,sh:16});
+  ctx.restore();
+}
+function bulletList(lt,items,x,y,maxW,accent,o={}){
+  const s=o.s||24,lh=o.lh||35,gap=o.gap??22;
+  let active=-1;items.forEach((it,i)=>{if(lt>=it[0])active=i;});
+  let cy=y;
+  items.forEach((it,i)=>{
+    const n=para(it[1],x+48,cy,maxW-48,lh,{s,w:700,draw:false});
+    const k=eo(seg(lt,it[0],it[0]+.7));
+    if(k>0){
+      ctx.save();ctx.globalAlpha*=k;ctx.translate((1-k)*26,0);
+      const on=i===active;
+      circle(x+17,cy-s*.36,17);ctx.fillStyle=on?accent:'rgba(255,255,255,.18)';ctx.fill();
+      txt(String(i+1),x+17,cy-s*.36+6.5,{s:18,w:800,c:on?'#15120c':'#fff',al:'center'});
+      para(it[1],x+48,cy,maxW-48,lh,{s,w:on?700:500,c:on?'#fff':'rgba(255,255,255,.65)',sh:o.sh});
+      ctx.restore();
+    }
+    cy+=n*lh+gap;
+  });
+  return active;
+}
+function partialPath(pts,p){
+  let total=0;const L=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);L.push(d);total+=d;}
+  let rem=total*p;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length&&rem>0;i++){const d=L[i-1],k=Math.min(1,rem/d);ctx.lineTo(lerp(pts[i-1][0],pts[i][0],k),lerp(pts[i-1][1],pts[i][1],k));rem-=d;}
+}
+function shadowEllipse(x,y,rx,ry,a=.35){ctx.save();ctx.fillStyle=`rgba(0,0,0,${a})`;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,TAU);ctx.fill();ctx.restore();}
+
+/* ---------- 이미지 에셋 (assets 폴더에 있으면 사용, 없으면 직접 그린 배경) ---------- */
+const IMG={};
+const IMG_FILES={
+  'cover':'assets/cover-925d5d39d279910f8839eb36.webp',
+  'bg-agri':'assets/bg-agri-b5694d23f25509ebcbd468be.webp',
+  'bg-steam':'assets/bg-steam-1b53efe5b53c09a8394469dd.webp',
+  'bg-conveyor':'assets/bg-conveyor-bd17c7105b697b99b4558a56.webp',
+  'bg-info':'assets/bg-info-e4856df2e2fc51d803c66649.webp',
+  'bg-ai':'assets/bg-ai-8c0d424a80125dfa5f3a980a.webp',
+};
+Object.entries(IMG_FILES).forEach(([k,src])=>{
+  const im=new Image();
+  im.onload=()=>{IMG[k]=im;if(k==='cover'){const p=document.getElementById('poster');
+    p.style.backgroundImage=`linear-gradient(90deg,rgba(8,8,12,.92) 0%,rgba(8,8,12,.6) 55%,rgba(8,8,12,.2) 100%),url("${im.src}")`;}};
+  im.src=src;
+});
+function drawImgBg(k,lt,dur,dark){
+  const im=IMG[k];if(!im)return false;
+  const z=1.1-.1*clamp(lt/dur),s=Math.max(W/im.width,H/im.height)*z,w=im.width*s,h=im.height*s;
+  ctx.drawImage(im,(W-w)/2,(H-h)/2,w,h);
+  if(dark>0){ctx.fillStyle=`rgba(6,7,12,${dark})`;ctx.fillRect(0,0,W,H);}
+  return true;
+}
+
+/* ============================================================
+   장면 0 : 여는 장면
+   ============================================================ */
+const SOC=[['🌾','농업 사회','#e9b949'],['⚙️','산업 사회','#9bd34a'],['💻','정보 사회','#5bc8e6'],['🤖','지능 정보 사회','#a99cf0']];
+function constellation(lt,color,n=70,alpha=1){
+  const P=[];for(let i=0;i<n;i++){P.push([rnd(i)*W+Math.sin(lt*.2+i)*30,rnd(i+40)*H+Math.cos(lt*.17+i*1.3)*24]);}
+  for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){const d=Math.hypot(P[i][0]-P[j][0],P[i][1]-P[j][1]);if(d<130){ctx.strokeStyle=`rgba(${color},${(1-d/130)*.16*alpha})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P[i][0],P[i][1]);ctx.lineTo(P[j][0],P[j][1]);ctx.stroke();}}
+  P.forEach((p,i)=>{circle(p[0],p[1],1.2+rnd(i+9)*2.2);ctx.fillStyle=`rgba(${color},${(.3+rnd(i+3)*.5)*alpha})`;ctx.fill();});
+}
+function drawIntro(lt,dur){
+  const g=ctx.createRadialGradient(640,330,40,640,360,900);g.addColorStop(0,'#26201a');g.addColorStop(1,'#060608');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  if(IMG.cover){ctx.save();ctx.globalAlpha*=seg(lt,0,1.5);drawImgBg('cover',lt,dur,.62);ctx.restore();}
+  constellation(lt,'255,222,170',70,seg(lt,0,1.5));
+  const k1=eo(seg(lt,.4,1.5)),k2=eo(seg(lt,1.2,2.3));
+  txt('기술이 바뀌면',W/2,280+(1-k1)*40,{s:96,w:900,f:SERIF,al:'center',a:k1,sh:20});
+  ctx.save();ctx.globalAlpha*=k2;ctx.font=`900 96px ${SERIF}`;ctx.textAlign='center';
+  const gg=ctx.createLinearGradient(380,0,900,0);gg.addColorStop(0,'#ffe6b8');gg.addColorStop(1,'#eaa54a');ctx.fillStyle=gg;
+  ctx.shadowColor='rgba(234,165,74,.45)';ctx.shadowBlur=30;ctx.fillText('사회가 바뀐다',W/2,395+(1-k2)*40);ctx.restore();
+  const sw=seg(lt,2.3,3.6);if(sw>0&&sw<1){ctx.save();ctx.globalCompositeOperation='lighter';const x=lerp(250,1030,sw);
+    const lg=ctx.createLinearGradient(x-80,0,x+80,0);lg.addColorStop(0,'rgba(255,255,255,0)');lg.addColorStop(.5,'rgba(255,240,210,.22)');lg.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=lg;ctx.fillRect(x-80,180,160,240);ctx.restore();}
+  txt('기술의 발달에 따른 사회의 변화',W/2,462,{s:30,w:500,al:'center',c:'rgba(255,255,255,.8)',a:seg(lt,2.4,3.2)});
+  ctx.font=`800 24px ${SANS}`;
+  const ws=SOC.map(s=>ctx.measureText(s[1]).width+80),gap=50;
+  let x=W/2-(ws.reduce((a,b)=>a+b,0)+gap*3)/2;
+  SOC.forEach((s,i)=>{const k=eback(seg(lt,3.6+i*.5,4.2+i*.5));
+    if(k>0){ctx.save();ctx.globalAlpha*=clamp(k);ctx.translate(x+ws[i]/2,576);ctx.scale(.6+.4*k,.6+.4*k);ctx.translate(-(x+ws[i]/2),-576);
+      rr(x,548,ws[i],56,28);ctx.fillStyle=s[2];ctx.shadowColor=s[2];ctx.shadowBlur=24;ctx.fill();ctx.shadowBlur=0;
+      emoji(s[0],x+30,577,26);txt(s[1],x+52,585,{s:24,w:800,c:'#15120c'});
+      ctx.restore();
+      if(i<3)txt('→',x+ws[i]+gap/2,586,{s:30,w:700,al:'center',c:'rgba(255,255,255,.6)',a:clamp(k)});}
+    x+=ws[i]+gap;});
+}
+
+/* ============================================================
+   장면 1 : 농업 사회
+   ============================================================ */
+function hut(x,y,k){if(k<=0)return;ctx.save();ctx.translate(x,y);ctx.scale(k,k);
+  shadowEllipse(4,2,36,6,.25);
+  const wg=ctx.createLinearGradient(-22,0,22,0);wg.addColorStop(0,'#c99f62');wg.addColorStop(1,'#e8c88f');ctx.fillStyle=wg;ctx.fillRect(-22,-26,44,26);
+  ctx.fillStyle='#5b3d1e';rr(-6,-17,12,17,3);ctx.fill();
+  ctx.beginPath();ctx.moveTo(-32,-23);ctx.lineTo(0,-56);ctx.lineTo(32,-23);ctx.closePath();
+  const rg=ctx.createLinearGradient(0,-56,0,-23);rg.addColorStop(0,'#c88f3c');rg.addColorStop(1,'#8f5f24');ctx.fillStyle=rg;ctx.fill();
+  for(let i=-2;i<=2;i++)line(i*9,-50+Math.abs(i)*5,i*13,-25,'rgba(80,50,15,.35)',1.5);
+  ctx.restore();}
+function cloud(x,y,s,a){ctx.save();ctx.globalAlpha*=a;ctx.fillStyle='#fff';ctx.beginPath();
+  [[0,0,26],[30,-14,34],[64,0,26],[34,6,28]].forEach(([dx,dy,r])=>{ctx.moveTo(x+dx*s+r*s,y+dy*s);ctx.arc(x+dx*s,y+dy*s,r*s,0,TAU);});ctx.fill();ctx.restore();}
+function tree(x,y,s){shadowEllipse(x+6*s,y,22*s,5*s,.2);line(x,y,x,y-24*s,'#5a3d22',6*s);
+  circle(x,y-38*s,22*s);ctx.fillStyle='#356c2e';ctx.fill();circle(x-8*s,y-45*s,13*s);ctx.fillStyle='#4a8d3d';ctx.fill();circle(x+9*s,y-34*s,11*s);ctx.fillStyle='#3f7d35';ctx.fill();}
+function bird(x,y,s,ph,c){ctx.beginPath();const f=Math.sin(ph)*7*s;ctx.moveTo(x-11*s,y-f);ctx.quadraticCurveTo(x-4*s,y-5*s,x,y);ctx.quadraticCurveTo(x+4*s,y-5*s,x+11*s,y-f);ctx.strokeStyle=c;ctx.lineWidth=2.2;ctx.lineCap='round';ctx.stroke();}
+function drawAgri(lt,dur){
+  const A=ACC[1],day=eo(seg(lt,0,7));
+  const hasImg=drawImgBg('bg-agri',lt,dur,0);
+  if(!hasImg){
+    let g=ctx.createLinearGradient(0,0,0,470);g.addColorStop(0,'#1d2647');g.addColorStop(1,'#e08a5c');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.save();ctx.globalAlpha=day;g=ctx.createLinearGradient(0,0,0,470);g.addColorStop(0,'#3f8fcf');g.addColorStop(.7,'#a9d6ee');g.addColorStop(1,'#e8f3ea');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();
+    const sx=560,sy=lerp(480,180,day);
+    ctx.save();ctx.translate(sx,sy);ctx.rotate(lt*.08);for(let k=0;k<14;k++){ctx.rotate(TAU/14);ctx.fillStyle=`rgba(255,236,170,${.13*day})`;ctx.beginPath();ctx.moveTo(60,-7);ctx.lineTo(190,-20);ctx.lineTo(190,20);ctx.lineTo(60,7);ctx.fill();}ctx.restore();
+    const sg=ctx.createRadialGradient(sx,sy,10,sx,sy,170);sg.addColorStop(0,'rgba(255,220,120,.95)');sg.addColorStop(1,'rgba(255,220,120,0)');ctx.fillStyle=sg;ctx.fillRect(sx-170,sy-170,340,340);
+    circle(sx,sy,44);ctx.fillStyle='#ffe08a';ctx.fill();
+    [[80,120,1],[420,90,.8],[900,140,1.1],[1150,80,.7]].forEach(([x,y,s],i)=>cloud(((x+lt*(10+i*4))%1500)-120,y,s,.85*(.4+.6*day)));
+    ctx.fillStyle=`rgba(${lerp(70,111,day)|0},${lerp(80,143,day)|0},${lerp(120,174,day)|0},.85)`;ctx.beginPath();ctx.moveTo(0,430);
+    [[120,335],[230,380],[360,300],[500,392],[640,322],[790,382],[950,312],[1110,372],[1280,330],[1280,720],[0,720]].forEach(p=>ctx.lineTo(p[0],p[1]));ctx.fill();
+  }
+  for(let i=0;i<5;i++){const bx=((lt*55+i*38)%1500)-100,by=210+i*12+Math.sin(lt+i)*8;bird(bx,by,.9,lt*9+i,'rgba(25,35,55,.75)');}
+  ctx.save();if(hasImg)ctx.translate(0,26);
+  const hg=ctx.createLinearGradient(0,340,0,520);hg.addColorStop(0,hasImg?'#86b552':'#6b9a4c');hg.addColorStop(1,hasImg?'#5f9140':'#4b7a37');ctx.fillStyle=hg;
+  ctx.beginPath();ctx.moveTo(0,440);ctx.quadraticCurveTo(220,330,460,420);ctx.quadraticCurveTo(700,360,900,430);ctx.lineTo(1280,440);ctx.lineTo(1280,720);ctx.lineTo(0,720);ctx.fill();
+  [[40,436],[430,418],[545,402],[770,412]].forEach(([x,y])=>tree(x,y,.95));
+  [[150,398],[250,386],[345,400],[680,396]].forEach(([x,y],i)=>{
+    const k=eback(seg(lt,4.8+i*.35,5.5+i*.35));hut(x,y,k);
+    if(k>=1)for(let j=0;j<4;j++){const ph=(lt*.4+j/4)%1;circle(x+14+Math.sin(ph*6+i)*6,y-58-ph*70,4+ph*9);ctx.fillStyle=`rgba(255,255,255,${(1-ph)*.45})`;ctx.fill();}
+  });
+  ctx.restore();
+  const fg=ctx.createLinearGradient(0,462,0,720);fg.addColorStop(0,'#8fac52');fg.addColorStop(1,'#6f8f3d');ctx.fillStyle=fg;ctx.fillRect(0,hasImg?468:458,1280,262);
+  const plowX=40+620*eio(seg(lt,1.2,9.5));
+  const sg2=ctx.createLinearGradient(0,472,0,690);sg2.addColorStop(0,'#9a7647');sg2.addColorStop(1,'#7a5832');ctx.fillStyle=sg2;ctx.fillRect(30,472,plowX-30,216);
+  for(let i=0;i<6;i++){const ry=495+i*34;line(30,ry,plowX,ry,'#5e4226',8);line(30,ry-5,plowX,ry-5,'rgba(255,230,190,.12)',2);
+    for(let j=0;j<14;j++){const x=58+j*46+(i%2)*20;const gk=clamp((plowX-x-50)/160)*seg(lt,2,3);if(gk<=0||x>740)continue;
+      const h2=seg(lt,9.5+j*.05,12.5+j*.05),h=12*gk+18*h2,sway=Math.sin(lt*2+j*.5+i)*2*h2;
+      line(x,ry,x+sway,ry-h,'#3f8a2c',3);
+      ctx.fillStyle='#55ad3e';ctx.beginPath();ctx.ellipse(x-5,ry-h*.55,5.5*gk,2.6*gk,-.6,0,TAU);ctx.ellipse(x+5,ry-h*.65,5.5*gk,2.6*gk,.6,0,TAU);ctx.fill();
+      if(h2>0){ctx.fillStyle='#f2c94c';ctx.beginPath();ctx.ellipse(x+sway,ry-h-4,3.2*h2,8*h2,0,0,TAU);ctx.fill();}
+    }}
+  const walk=lt<9.5&&lt>1.2?1:0,ox=plowX+72,fx=plowX-34,gy=704,bob=Math.abs(Math.sin(lt*8))*2*walk;
+  shadowEllipse(ox,gy,58,7,.3);shadowEllipse(fx,gy,20,5,.3);
+  for(let l=0;l<4;l++){const lx=ox-26+l*17,sw=Math.sin(lt*8+l*PI)*6*walk;line(lx,675,lx+sw,gy,'#4a2d17',7);}
+  const og=ctx.createLinearGradient(0,644,0,690);og.addColorStop(0,'#8a5832');og.addColorStop(1,'#5a3519');ctx.fillStyle=og;ctx.beginPath();ctx.ellipse(ox,666-bob,44,23,0,0,TAU);ctx.fill();
+  circle(ox+46,652-bob,15);ctx.fillStyle='#7a4a28';ctx.fill();line(ox+40,639-bob,ox+33,628-bob,'#efe3c6',3.5);line(ox+52,639-bob,ox+60,628-bob,'#efe3c6',3.5);
+  line(ox-42,662,fx+14,664,'#3a2815',4);line(fx+14,664,fx+30,692,'#2b1d10',5);
+  const fs=Math.sin(lt*8)*6*walk;
+  line(fx,650,fx-6+fs,gy,'#3b4a6b',6);line(fx,650,fx+6-fs,gy,'#3b4a6b',6);
+  line(fx,610-bob,fx,652,'#b5523a',12);line(fx,620-bob,fx+16,662,'#e0b088',4.5);
+  circle(fx,597-bob,10);ctx.fillStyle='#e0b088';ctx.fill();
+  ctx.fillStyle='#d9b45a';ctx.beginPath();ctx.ellipse(fx,590-bob,18,5,0,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(fx-9,590-bob);ctx.lineTo(fx,577-bob);ctx.lineTo(fx+9,590-bob);ctx.fill();
+  const tg=ctx.createLinearGradient(0,0,0,200);tg.addColorStop(0,'rgba(0,0,0,.55)');tg.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=tg;ctx.fillRect(0,0,W,200);
+  header(lt,'02','농업 혁명','기원전 1만 년~','농업 사회',A);
+  const ck=eo(seg(lt,1,1.8));
+  if(ck>0){glass(800,180,444,466,{a:ck,accent:A});
+    ctx.save();ctx.globalAlpha*=ck;
+    bulletList(lt,[[1.5,'농사 방법과 농기구가 발달해 식량을 직접 생산하게 되었다'],
+      [5,'정착 생활이 시작되어 수렵 사회에서 농업 사회로 바뀌었다'],
+      [9.5,'가내 수공업이 발달하고, 중세 후기에는 공장제 수공업이 발달했다']],828,246,392,A,{s:24,lh:36,gap:26});
+    ctx.restore();}
+  const hk=eo(seg(lt,10,10.8));
+  if(hk>0){glass(56,190,316,190,{a:hk,accent:A});
+    ctx.save();ctx.globalAlpha*=hk;
+    txt('장인의 분업과 협업',80,230,{s:22,w:800});
+    ctx.translate(-890,-278);
+    const ag=ctx.createLinearGradient(0,612,0,652);ag.addColorStop(0,'#7a808a');ag.addColorStop(1,'#3e434b');ctx.fillStyle=ag;
+    ctx.beginPath();ctx.moveTo(1000,612);ctx.lineTo(1100,612);ctx.lineTo(1085,628);ctx.lineTo(1070,628);ctx.lineTo(1078,652);ctx.lineTo(1022,652);ctx.lineTo(1030,628);ctx.lineTo(1012,628);ctx.closePath();ctx.fill();
+    const s=Math.abs(Math.sin(lt*4));
+    rr(1046,603,32,9,2);ctx.fillStyle=`rgb(230,${120+s*60|0},50)`;ctx.fill();
+    const a=PI+.75*s,px=1140,py=598,hx=px+70*Math.cos(a),hy=py+70*Math.sin(a);
+    line(px,py,hx,hy,'#8a5a2b',7);
+    ctx.save();ctx.translate(hx,hy);ctx.rotate(a);ctx.fillStyle='#a7adb5';rr(-7,-13,16,26,3);ctx.fill();ctx.restore();
+    circle(px+6,py+4,9);ctx.fillStyle='#e0b088';ctx.fill();
+    if(s<.22)for(let i=0;i<8;i++){const an=-PI*(.1+i*.1);line(1062+Math.cos(an)*10,604+Math.sin(an)*10,1062+Math.cos(an)*(24+rnd(i)*12),604+Math.sin(an)*(24+rnd(i)*12),`rgba(255,200,90,${1-s*4.5})`,2.5);}
+    ctx.restore();}
+}
+
+/* ============================================================
+   장면 2 : 1차 산업 혁명 – 증기 기관
+   ============================================================ */
+const OMAX=TAU*.9,RAMP=3,T0=7;
+function theta(lt){if(lt<T0)return 0;const a=OMAX/RAMP;if(lt<T0+RAMP){const u=lt-T0;return .5*a*u*u;}return .5*OMAX*RAMP+OMAX*(lt-T0-RAMP);}
+function chuffTimes(dur){const a=OMAX/RAMP,th9=.5*OMAX*RAMP,out=[];
+  for(let k=1;k<300;k++){const tg=k*PI;const t=tg<th9?T0+Math.sqrt(2*tg/a):T0+RAMP+(tg-th9)/OMAX;if(t>dur)break;out.push(t);}return out;}
+const STEAM_DUR=25,CHUFFS=chuffTimes(STEAM_DUR);
+const STEAM_STEPS=[[1.5,'연소','석탄을 태워 보일러 속 물을 끓인다'],[4,'증기 발생','물이 끓어 높은 압력의 증기가 만들어진다'],
+  [7,'왕복 운동','증기가 피스톤을 양쪽에서 번갈아 밀어 왕복 운동을 만든다'],[10.5,'회전 운동','크랭크가 왕복 운동을 회전 운동으로 바꾼다'],
+  [14,'기계 구동','이 회전력으로 방적기·방직기·기관차를 움직였다']];
+function partLabel(x,y,s){chip(x,y,s,'rgba(255,255,255,.25)',{s:19,w:700,h:34,px:22});}
+function drawSteam(lt,dur){
+  const A=ACC[2];
+  if(!drawImgBg('bg-steam',lt,dur,.68)){
+    const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#231b15');g.addColorStop(1,'#110d0a');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(255,220,190,.03)';ctx.lineWidth=1;
+    for(let y=0,r=0;y<H;y+=28,r++){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();for(let x=(r%2)*28;x<W;x+=56){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+28);ctx.stroke();}}
+    [610,770,930].forEach(x=>{ctx.save();ctx.beginPath();ctx.moveTo(x,210);ctx.lineTo(x,90);ctx.arc(x+50,90,50,PI,0);ctx.lineTo(x+100,210);ctx.closePath();
+      const wg=ctx.createLinearGradient(0,40,0,210);wg.addColorStop(0,'rgba(150,180,220,.16)');wg.addColorStop(1,'rgba(150,180,220,.05)');ctx.fillStyle=wg;ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=3;ctx.stroke();line(x+50,40,x+50,210,'rgba(0,0,0,.35)',3);line(x,130,x+100,130,'rgba(0,0,0,.35)',3);
+      ctx.globalCompositeOperation='lighter';ctx.fillStyle='rgba(170,190,230,.035)';ctx.beginPath();ctx.moveTo(x,210);ctx.lineTo(x+100,210);ctx.lineTo(x-40,620);ctx.lineTo(x-180,620);ctx.fill();ctx.restore();});
+  }
+  const heat=seg(lt,1.5,3.2),boil=seg(lt,4,5.5),pipeP=seg(lt,5.2,6.6),steamOn=seg(lt,6.2,7);
+  const th=theta(lt),Cx=860,Cy=404,r=50,L=150,R=95;
+  const X=Cx+r*Math.cos(th)-Math.sqrt(L*L-Math.pow(r*Math.sin(th),2)),xp=X-180;
+  const Px=Cx+r*Math.cos(th),Py=Cy+r*Math.sin(th);
+  const leftP=lt>T0?clamp(.5-3*Math.sin(th)):0,rightP=lt>T0?1-leftP:1;
+  let act=-1;STEAM_STEPS.forEach((s,i)=>{if(lt>=s[0])act=i;});
+  ctx.save();ctx.translate(30,-24);
+  const flg=ctx.createLinearGradient(0,612,0,660);flg.addColorStop(0,'rgba(255,255,255,.08)');flg.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=flg;ctx.fillRect(40,612,940,50);
+  line(40,612,980,612,'#5a4a3a',3);
+  shadowEllipse(200,614,130,8,.4);shadowEllipse(530,614,110,6,.3);shadowEllipse(Cx,614,90,7,.35);
+  // 화실
+  const fbg=ctx.createLinearGradient(90,0,310,0);fbg.addColorStop(0,'#21170f');fbg.addColorStop(.5,'#3b2a1f');fbg.addColorStop(1,'#21170f');
+  rr(90,515,220,95,10);ctx.fillStyle=fbg;ctx.fill();ctx.strokeStyle='#6a5040';ctx.lineWidth=3;ctx.stroke();
+  ctx.save();rr(118,532,164,64,8);ctx.fillStyle='#120a06';ctx.fill();ctx.clip();
+  for(let i=0;i<9;i++){circle(130+i*18,600,13);ctx.fillStyle=`rgb(${40+heat*120*(.6+.4*Math.sin(lt*5+i))|0},${20+heat*30|0},10)`;ctx.fill();}
+  for(let i=0;i<9;i++){const fx=128+i*19,fh=(28+18*Math.sin(lt*9+i*1.7)+10*Math.sin(lt*13+i))*heat;
+    const fg=ctx.createLinearGradient(0,598,0,598-fh);fg.addColorStop(0,'#ff4d14');fg.addColorStop(.55,'#ffae2a');fg.addColorStop(1,'rgba(255,245,170,0)');
+    ctx.fillStyle=fg;ctx.beginPath();ctx.moveTo(fx-13,600);ctx.quadraticCurveTo(fx-6,600-fh*.6,fx+Math.sin(lt*7+i)*5,600-fh);ctx.quadraticCurveTo(fx+6,600-fh*.6,fx+13,600);ctx.fill();}
+  ctx.restore();
+  if(heat>0)for(let i=0;i<10;i++){const ph=(lt*.7+rnd(i))%1;circle(130+rnd(i+5)*140+Math.sin(lt*3+i)*8,530-ph*40,1.8);ctx.fillStyle=`rgba(255,180,80,${(1-ph)*heat})`;ctx.fill();}
+  if(heat>0){ctx.save();ctx.globalCompositeOperation='lighter';const gg=ctx.createRadialGradient(200,565,10,200,565,220);gg.addColorStop(0,`rgba(255,110,30,${.32*heat})`);gg.addColorStop(1,'rgba(255,110,30,0)');ctx.fillStyle=gg;ctx.fillRect(-20,345,440,440);ctx.restore();}
+  // 보일러
+  const bg=ctx.createLinearGradient(80,0,320,0);bg.addColorStop(0,'#3b332c');bg.addColorStop(.45,'#6c6156');bg.addColorStop(1,'#2e2823');
+  rr(80,322,240,188,30);ctx.fillStyle=bg;ctx.fill();
+  ctx.save();rr(96,338,208,156,20);ctx.clip();ctx.fillStyle='#171310';ctx.fillRect(96,338,208,156);
+  ctx.fillStyle=`rgba(235,240,255,${.05+.35*boil})`;ctx.fillRect(96,338,208,90);
+  if(boil>0)for(let i=0;i<6;i++){const ph=(lt*.5+i/6)%1;circle(120+i*34+Math.sin(lt+i)*6,420-ph*70,10+ph*10);ctx.fillStyle=`rgba(255,255,255,${(1-ph)*.18*boil})`;ctx.fill();}
+  const wg=ctx.createLinearGradient(0,420,0,500);wg.addColorStop(0,'#3d86c6');wg.addColorStop(1,'#1f4f80');ctx.fillStyle=wg;ctx.beginPath();ctx.moveTo(96,500);
+  for(let x=96;x<=304;x+=6)ctx.lineTo(x,426+Math.sin(x*.08+lt*4)*3*(.3+boil*1.3));ctx.lineTo(304,500);ctx.fill();
+  for(let i=0;i<18;i++){const ph=(lt*(.9+rnd(i+1)*.5)+rnd(i))%1,bx=104+rnd(i+3)*192+Math.sin(lt*3+i)*3;
+    circle(bx,496-ph*72,2+(i%3)*1.5);ctx.fillStyle=`rgba(220,240,255,${.75*boil})`;ctx.fill();}
+  ctx.restore();
+  rr(80,322,240,188,30);ctx.strokeStyle='#cdb999';ctx.lineWidth=4;ctx.stroke();
+  for(let i=0;i<9;i++){circle(100+i*25,330,2.6);ctx.fillStyle='#d8c6a6';ctx.fill();circle(100+i*25,502,2.6);ctx.fill();}
+  circle(278,372,21);ctx.fillStyle='#efe6d4';ctx.fill();ctx.strokeStyle='#8c7a5e';ctx.lineWidth=3.5;ctx.stroke();
+  for(let i=0;i<7;i++){const a=-PI*.85+i*PI*1.15/6;line(278+15*Math.cos(a),372+15*Math.sin(a),278+18*Math.cos(a),372+18*Math.sin(a),'#555',1.5);}
+  const na=-PI*.85+boil*PI*1.15+Math.sin(lt*20)*.04*boil;line(278,372,278+15*Math.cos(na),372+15*Math.sin(na),'#c0392b',2.5);
+  // 증기관
+  const pipe=[[200,322],[200,282],[530,282],[530,326]];
+  ctx.beginPath();pipe.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle='#4a423a';ctx.lineWidth=22;ctx.lineJoin='round';ctx.stroke();
+  ctx.strokeStyle='#7d7266';ctx.lineWidth=16;ctx.stroke();
+  if(pipeP>0){partialPath(pipe,pipeP);ctx.strokeStyle='rgba(240,245,255,.92)';ctx.lineWidth=8;ctx.stroke();
+    if(pipeP>=1){ctx.save();ctx.setLineDash([6,14]);ctx.lineDashOffset=-lt*80;partialPath(pipe,1);ctx.strokeStyle='#8fc8ff';ctx.lineWidth=4;ctx.stroke();ctx.restore();}}
+  // 배기 굴뚝 + 증기
+  const cg=ctx.createLinearGradient(590,0,612,0);cg.addColorStop(0,'#3a3530');cg.addColorStop(.5,'#6a625a');cg.addColorStop(1,'#3a3530');ctx.fillStyle=cg;ctx.fillRect(590,236,22,92);
+  for(const c of CHUFFS){const u=(lt-c)/2.4;if(u<0||u>1)continue;
+    for(let j=0;j<3;j++){circle(601+u*60+Math.sin(c*7+j)*12+j*8,232-u*150-j*10,10+u*36-j*3);ctx.fillStyle=`rgba(232,232,238,${(1-u)*.34})`;ctx.fill();}}
+  // 밸브실
+  rr(430,326,200,30,5);ctx.fillStyle='#3d3833';ctx.fill();ctx.strokeStyle='#9d9384';ctx.lineWidth=2;ctx.stroke();
+  const vx=530+36*Math.sin(th);rr(vx-30,331,60,20,3);ctx.fillStyle='#b5a998';ctx.fill();
+  // 실린더
+  const y0=356,y1=456;
+  ctx.fillStyle='#1f1b18';ctx.fillRect(430,y0,200,100);
+  ctx.fillStyle=`rgba(235,240,255,${(.08+.7*leftP)*steamOn})`;ctx.fillRect(434,y0+4,Math.max(0,xp-10-434),92);
+  ctx.fillStyle=`rgba(235,240,255,${(.08+.7*rightP)*steamOn})`;ctx.fillRect(xp+10,y0+4,Math.max(0,626-xp-10),92);
+  const cyl=ctx.createLinearGradient(0,y0,0,y1);cyl.addColorStop(0,'rgba(255,255,255,.12)');cyl.addColorStop(.5,'rgba(255,255,255,0)');cyl.addColorStop(1,'rgba(0,0,0,.25)');ctx.fillStyle=cyl;ctx.fillRect(430,y0,200,100);
+  ctx.strokeStyle='#cdb999';ctx.lineWidth=5;ctx.strokeRect(430,y0,200,100);
+  if(steamOn>0&&lt>T0){ctx.save();ctx.globalAlpha*=steamOn*.95;
+    const ax=leftP>.5?(434+xp-10)/2:(xp+10+626)/2,dir=leftP>.5?1:-1;
+    ctx.fillStyle='#174a75';ctx.beginPath();ctx.moveTo(ax+18*dir,406);ctx.lineTo(ax-10*dir,392);ctx.lineTo(ax-10*dir,420);ctx.fill();ctx.restore();}
+  // 피스톤, 로드, 크로스헤드
+  rr(640,394,150,22,4);ctx.fillStyle='#2d2925';ctx.fill();
+  line(xp,406,X,406,'#c4c9d1',9);
+  const pg=ctx.createLinearGradient(xp-10,0,xp+10,0);pg.addColorStop(0,'#9aa0a8');pg.addColorStop(.5,'#eef0f3');pg.addColorStop(1,'#9aa0a8');
+  rr(xp-11,y0+4,22,92,3);ctx.fillStyle=pg;ctx.fill();
+  rr(X-16,390,32,32,5);ctx.fillStyle='#bcc1c8';ctx.fill();
+  // 플라이휠
+  line(Cx-55,612,Cx,Cy,'#3d3833',12);line(Cx+55,612,Cx,Cy,'#3d3833',12);
+  circle(Cx,Cy,R);ctx.strokeStyle='#40444b';ctx.lineWidth=22;ctx.stroke();ctx.strokeStyle='#8b919a';ctx.lineWidth=14;ctx.stroke();
+  ctx.beginPath();ctx.arc(Cx,Cy,R+3,-PI*.9,-PI*.4);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=3;ctx.stroke();
+  for(let k=0;k<6;k++){const a=th+k*PI/3;line(Cx,Cy,Cx+(R-8)*Math.cos(a),Cy+(R-8)*Math.sin(a),'#6d737c',7);}
+  circle(Cx,Cy,18);ctx.fillStyle='#a3a9b1';ctx.fill();circle(Cx,Cy,7);ctx.fillStyle='#4a4f56';ctx.fill();
+  line(X,406,Px,Py,'#dfe2e7',11);
+  circle(Px,Py,10);ctx.fillStyle='#f0c75e';ctx.fill();
+  if(lt>T0+.5){ctx.save();ctx.globalAlpha*=seg(lt,T0+.5,T0+1.5)*.9;ctx.beginPath();ctx.arc(Cx,Cy,R+26,-PI*.15,PI*.35);ctx.strokeStyle=A;ctx.lineWidth=4;ctx.stroke();
+    const ea=PI*.35,ex=Cx+(R+26)*Math.cos(ea),ey=Cy+(R+26)*Math.sin(ea);ctx.fillStyle=A;ctx.beginPath();ctx.moveTo(ex-12,ey-2);ctx.lineTo(ex+9,ey-9);ctx.lineTo(ex+3,ey+12);ctx.fill();ctx.restore();}
+  // 부품 이름
+  partLabel(176,368,'보일러');partLabel(200,560,'화실');
+  partLabel(530,490,'실린더 · 피스톤');partLabel(Cx,544,'크랭크 · 플라이휠');
+  if(lt>=10.5){const k=clamp(eback(seg(lt,10.5,11.1)));chip(530,532,'⇄ 왕복 운동',A,{a:k,s:20});chip(Cx,270,'↻ 회전 운동',A,{a:k,s:20});}
+  const boxes=[[78,505,244,118],[66,310,268,214],[418,316,224,156],[640,292,330,262]];
+  if(act>=0&&act<4&&lt<17){const b=boxes[act];ctx.save();ctx.setLineDash([12,9]);ctx.lineDashOffset=-lt*30;
+    ctx.globalAlpha*=.6+.4*Math.sin(lt*5);rr(b[0],b[1],b[2],b[3],16);ctx.strokeStyle=A;ctx.lineWidth=3.5;ctx.stroke();ctx.restore();}
+  ctx.restore();
+  // 오른쪽 단계 표시
+  const ik=eo(seg(lt,1,1.8));
+  if(ik>0){glass(1062,176,192,420,{a:ik});ctx.save();ctx.globalAlpha*=ik;
+    txt('작동 과정',1086,214,{s:19,w:800,c:A});
+    STEAM_STEPS.forEach((s,i)=>{const y=262+i*74,on=i<=act,cur=i===act;
+      if(i<4){line(1094,y+16,1094,y+58,'rgba(255,255,255,.15)',3);if(i<act)line(1094,y+16,1094,y+58,A,3);}
+      circle(1094,y,cur?15:12);ctx.fillStyle=on?A:'rgba(255,255,255,.15)';ctx.fill();
+      txt(String(i+1),1094,y+6,{s:cur?17:15,w:800,c:on?'#111':'#ddd',al:'center'});
+      txt(s[1],1120,y+8,{s:cur?22:20,w:cur?800:600,c:cur?'#fff':on?'rgba(255,255,255,.75)':'rgba(255,255,255,.4)'});});
+    ctx.restore();}
+  // 아래 자막 막대
+  const bk=eo(seg(lt,1.2,1.9));
+  if(bk>0){glass(40,612,1214,90,{a:bk,accent:lt>=17?A:null});ctx.save();ctx.globalAlpha*=bk;
+    if(lt<17){if(act>=0){const k=eo(seg(lt,STEAM_STEPS[act][0],STEAM_STEPS[act][0]+.5));ctx.save();ctx.globalAlpha*=k;ctx.translate(0,(1-k)*10);
+        circle(92,657,24);ctx.fillStyle=A;ctx.fill();txt(String(act+1),92,666,{s:24,w:900,c:'#111',al:'center'});
+        txt(STEAM_STEPS[act][2],132,668,{s:30,w:700});ctx.restore();}}
+    else{const k=eo(seg(lt,17,17.6)),k2=eo(seg(lt,18.4,19));
+      txt('산업 사회로',72,649,{s:20,w:800,c:A,a:k});
+      txt('공장제 수공업 → 공장제 기계 공업',72,686,{s:28,w:800,a:k});
+      txt('인구가 도시로 모이며 공업 중심 사회로 변화',1222,686,{s:26,w:600,al:'right',c:'rgba(255,255,255,.9)',a:k2});}
+    ctx.restore();}
+  header(lt,'03','1차 산업 혁명','18세기 중후반~','증기 기관의 작동 원리',A);
+}
+
+/* ============================================================
+   장면 3 : 2차 산업 혁명 – 컨베이어 시스템
+   ============================================================ */
+const CV_DUR=21,V=150,ST=[280,540,800,1060],CAR_T=[2.2,5.2,8.2,11.2,14.2,17.2],
+  CAR_C=['#d9544f','#3f7fd9','#e3a33b','#3fae73','#8e5fd6','#e07ab0'],
+  ST_L=['차체 얹기','바퀴 달기','엔진·좌석','검사·완성'];
+const carX=(lt,i)=>-80+V*(lt-CAR_T[i]);
+const beltPos=lt=>lt<2?0:V*(lt-2);
+function shade(hex,amt){const n=parseInt(hex.slice(1),16);const r=clamp((n>>16)+amt,0,255),g=clamp(((n>>8)&255)+amt,0,255),b=clamp((n&255)+amt,0,255);return `rgb(${r|0},${g|0},${b|0})`;}
+function drawCar(x,i){
+  const k=ST.map(s=>eo(clamp((x-s)/26))),c=CAR_C[i];
+  shadowEllipse(x,521,70,5,.4);
+  if(k[1]<=0){ctx.fillStyle='#3a3f48';ctx.fillRect(x-48,508,12,12);ctx.fillRect(x+36,508,12,12);}
+  ctx.fillStyle='#5a606b';ctx.fillRect(x-62,500,124,9);
+  if(k[0]>0){ctx.save();ctx.translate(x,505);ctx.scale(1,k[0]);ctx.translate(-x,-505);
+    const bg=ctx.createLinearGradient(0,438,0,502);bg.addColorStop(0,shade(c,50));bg.addColorStop(.5,c);bg.addColorStop(1,shade(c,-50));
+    ctx.fillStyle=bg;rr(x-60,468,120,34,7);ctx.fill();rr(x-34,438,58,34,8);ctx.fill();
+    ctx.fillStyle='rgba(210,235,255,.9)';rr(x-28,444,22,20,3);ctx.fill();rr(x-2,444,20,20,3);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.55)';ctx.beginPath();ctx.moveTo(x-26,446);ctx.lineTo(x-18,446);ctx.lineTo(x-26,460);ctx.fill();
+    line(x-56,472,x+56,472,'rgba(255,255,255,.35)',2);
+    ctx.restore();}
+  if(k[1]>0)[-38,38].forEach(dx=>{circle(x+dx,506,16*k[1]);ctx.fillStyle='#131313';ctx.fill();circle(x+dx,506,8*k[1]);ctx.fillStyle='#b8bec6';ctx.fill();circle(x+dx,506,3*k[1]);ctx.fillStyle='#555';ctx.fill();});
+  if(k[2]>0){ctx.save();ctx.globalAlpha*=k[2];circle(x+58,482,6);ctx.fillStyle='#ffe27a';ctx.fill();
+    ctx.save();ctx.globalCompositeOperation='lighter';const hg=ctx.createRadialGradient(x+60,482,2,x+60,482,40);hg.addColorStop(0,'rgba(255,230,140,.5)');hg.addColorStop(1,'rgba(255,230,140,0)');ctx.fillStyle=hg;ctx.fillRect(x+20,442,80,80);ctx.restore();
+    for(let j=0;j<3;j++)line(x+30,478+j*6,x+48,478+j*6,'rgba(0,0,0,.35)',2);
+    line(x-64,496,x+64,496,'#d5d9de',3.5);ctx.restore();}
+  if(k[3]>0){ctx.save();ctx.globalAlpha*=k[3];circle(x,416,18*k[3]);ctx.fillStyle='#4bd17a';ctx.shadowColor='#4bd17a';ctx.shadowBlur=16;ctx.fill();ctx.restore();
+    txt('✓',x,424,{s:22,w:900,c:'#fff',al:'center',a:k[3]});}
+}
+function drawConveyor(lt,dur){
+  const A=ACC[3];
+  if(!drawImgBg('bg-conveyor',lt,dur,.7)){
+    const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#14171c');g.addColorStop(1,'#242a33');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    for(let i=0;i<8;i++){const x=40+i*160;rr(x,320,120,120,6);ctx.fillStyle='rgba(140,170,210,.05)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,.04)';ctx.lineWidth=2;ctx.stroke();
+      line(x+60,320,x+60,440,'rgba(255,255,255,.04)',2);line(x,380,x+120,380,'rgba(255,255,255,.04)',2);}
+  }
+  const on=lt<.8?0:lt<1.6?(Math.sin(lt*70)>0?1:.25):1;
+  ctx.save();ctx.translate(0,22);
+  ctx.fillStyle='rgba(8,9,12,.75)';ctx.fillRect(0,612,W,130);
+  ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;for(let i=-10;i<20;i++){ctx.beginPath();ctx.moveTo(640+i*90,612);ctx.lineTo(640+i*220,740);ctx.stroke();}
+  ST.forEach(s=>{const lg=ctx.createLinearGradient(s-26,0,s+26,0);lg.addColorStop(0,'#2f343c');lg.addColorStop(.5,'#59606b');lg.addColorStop(1,'#2f343c');ctx.fillStyle=lg;
+    ctx.beginPath();ctx.moveTo(s-28,318);ctx.lineTo(s-12,298);ctx.lineTo(s+12,298);ctx.lineTo(s+28,318);ctx.fill();
+    if(on>0){const cg=ctx.createLinearGradient(0,318,0,545);cg.addColorStop(0,`rgba(255,226,140,${.25*on})`);cg.addColorStop(1,'rgba(255,226,140,0)');
+      ctx.fillStyle=cg;ctx.beginPath();ctx.moveTo(s-26,318);ctx.lineTo(s+26,318);ctx.lineTo(s+125,545);ctx.lineTo(s-125,545);ctx.fill();
+      circle(s,320,7);ctx.fillStyle=`rgba(255,240,180,${on})`;ctx.fill();}});
+  const acts=ST.map(s=>{let a=0;CAR_T.forEach((_,i)=>{a=Math.max(a,1-Math.abs(carX(lt,i)-s)/55);});return clamp(a);});
+  ST.forEach(s=>{const og=ctx.createLinearGradient(s-18,0,s+18,0);og.addColorStop(0,'#2b4664');og.addColorStop(.5,'#46709a');og.addColorStop(1,'#2b4664');
+    rr(s-18,424,36,74,11);ctx.fillStyle=og;ctx.fill();line(s-8,428,s-8,470,'#e3a33b',3);line(s+8,428,s+8,470,'#e3a33b',3);
+    circle(s,404,16);ctx.fillStyle='#e6b98d';ctx.fill();
+    ctx.beginPath();ctx.arc(s,400,17,PI,0);ctx.fillStyle=A;ctx.fill();rr(s-20,397,40,5,2);ctx.fill();});
+  ctx.fillStyle='#22262c';ctx.fillRect(30,546,1220,10);
+  for(let x=60;x<1250;x+=150){const lg=ctx.createLinearGradient(x,0,x+12,0);lg.addColorStop(0,'#2a2f36');lg.addColorStop(1,'#1a1d22');ctx.fillStyle=lg;ctx.fillRect(x,556,12,56);}
+  const blg=ctx.createLinearGradient(0,520,0,548);blg.addColorStop(0,'#4a505a');blg.addColorStop(.3,'#30353d');blg.addColorStop(1,'#1d2026');
+  rr(30,520,1220,28,14);ctx.fillStyle=blg;ctx.fill();
+  const bp=beltPos(lt);
+  ctx.save();rr(30,520,1220,28,14);ctx.clip();
+  for(let k=0;k<33;k++){const x=30+((k*40+bp)%1320)-20;ctx.fillStyle='rgba(255,255,255,.12)';ctx.fillRect(x,521,18,4);}
+  for(let x=50;x<1250;x+=80){circle(x,536,9);ctx.fillStyle='#545b66';ctx.fill();const a=bp/9;line(x,536,x+8*Math.cos(a),536+8*Math.sin(a),'#8a919c',2);}
+  ctx.restore();
+  CAR_T.forEach((_,i)=>{const x=carX(lt,i);if(lt>=CAR_T[i]&&x<1360)drawCar(x,i);});
+  ST.forEach((s,i)=>{const a=acts[i],sw=Math.sin(lt*13+i)*a;
+    line(s+13,436,s+27+10*sw,470+12*Math.abs(sw),'#e6b98d',7);line(s-13,436,s-25,462+8*a,'#e6b98d',7);
+    if(a>.4&&Math.abs(sw)>.8)for(let j=0;j<5;j++){const an=-PI/2+(rnd(j+i*7)-.5)*1.8;line(s+30,478,s+30+Math.cos(an)*16,478+Math.sin(an)*16,'rgba(255,215,120,.95)',2.5);}});
+  ST.forEach((s,i)=>{const a=acts[i],k=eo(seg(lt,3.2+i*.25,3.8+i*.25));if(k<=0)return;
+    ctx.save();ctx.globalAlpha*=k;circle(s-54,592,16);ctx.fillStyle=a>.3?A:'rgba(255,255,255,.2)';ctx.fill();
+    txt(String(i+1),s-54,599,{s:17,w:900,c:a>.3?'#111':'#fff',al:'center'});
+    txt(ST_L[i],s-32,600,{s:21,w:700,c:a>.3?'#fff':'rgba(255,255,255,.7)'});ctx.restore();});
+  ctx.restore();
+  const bx=1110,by=104;
+  if(on>0){ctx.save();ctx.globalCompositeOperation='lighter';const gg=ctx.createRadialGradient(bx,by,5,bx,by,140);gg.addColorStop(0,`rgba(255,215,110,${.6*on})`);gg.addColorStop(1,'rgba(255,215,110,0)');ctx.fillStyle=gg;ctx.fillRect(bx-140,by-140,280,280);ctx.restore();}
+  circle(bx,by,30);ctx.fillStyle=on>0?`rgba(255,236,160,${.35+.6*on})`:'rgba(255,255,255,.12)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,.65)';ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(bx-9,by+7);ctx.lineTo(bx-4,by-7);ctx.lineTo(bx,by+5);ctx.lineTo(bx+4,by-7);ctx.lineTo(bx+9,by+7);ctx.strokeStyle=on>0?'#ff8a1e':'#666';ctx.lineWidth=2.5;ctx.stroke();
+  rr(bx-14,by+28,28,22,4);ctx.fillStyle='#8c9098';ctx.fill();line(bx-14,by+35,bx+14,by+35,'#5e6168',2);line(bx-14,by+42,bx+14,by+42,'#5e6168',2);
+  const done=CAR_T.filter((_,i)=>carX(lt,i)>=ST[3]).length,ck=seg(lt,4,4.6);
+  if(ck>0){glass(1030,176,160,108,{a:ck});txt('완성',1110,212,{s:19,w:700,c:'rgba(255,255,255,.7)',al:'center',a:ck});
+    txt(String(done)+'대',1110,266,{s:46,w:900,c:A,al:'center',a:ck});}
+  header(lt,'04','2차 산업 혁명','19세기 중후반~','전기와 컨베이어 시스템',A);
+  bulletList(lt,[[.8,'석유·전기를 사용하는 생산 기계가 개발되었다'],[4,'컨베이어 시스템: 사람은 제자리에, 제품이 움직인다'],
+    [10.5,'작업을 나누고 표준화하여 대량 생산 시대가 열렸다']],56,208,960,A,{s:25,lh:34,gap:9,sh:8});
+  const fk=eo(seg(lt,14,14.7));
+  if(fk>0){glass(40,654,1200,56,{a:fk,accent:A,r:16});
+    txt('🕒',72,692,{s:24,f:EMOJI,a:fk});
+    txt('1913년 포드 자동차 공장 : 자동차 한 대 조립 시간  12시간 이상  →  약 1시간 30분',108,692,{s:24,w:700,a:fk});}
+}
+
+/* ============================================================
+   장면 4 : 3차 산업 혁명 – 정보 사회
+   ============================================================ */
+const NODES=Array.from({length:24},(_,i)=>[40+rnd(i)*1200,150+rnd(i+50)*560]);
+const EDGES=[];for(let i=0;i<NODES.length;i++)for(let j=i+1;j<NODES.length;j++){if(Math.hypot(NODES[i][0]-NODES[j][0],NODES[i][1]-NODES[j][1])<240)EDGES.push([i,j]);}
+const CARD_X=[60,470,880],CARD_T=[.8,5,9.5],CARD_TITLE=['💻 컴퓨터','🦾 공장 자동화','📱 스마트 기기·인터넷'];
+function drawBox(x,y,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;rr(x-13,y,26,24,3);ctx.fillStyle='#e3a33b';ctx.fill();line(x-13,y+9,x+13,y+9,'rgba(0,0,0,.25)',2);ctx.restore();}
+function drawInfo(lt,dur){
+  const A=ACC[4];
+  if(!drawImgBg('bg-info',lt,dur,.6)){
+    const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#071120');g.addColorStop(1,'#0f2440');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='rgba(91,200,230,.05)';for(let i=0;i<26;i++){const w=30+rnd(i)*40,h=60+rnd(i+9)*160;ctx.fillRect(i*50,H-h,w,h);}
+  }
+  EDGES.forEach(([a,b],e)=>{const k=seg(lt,.2+rnd(e+3)*6,1+rnd(e+3)*6);if(k<=0)return;
+    const [x1,y1]=NODES[a],[x2,y2]=NODES[b];ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(lerp(x1,x2,k),lerp(y1,y2,k));ctx.strokeStyle='rgba(91,200,230,.14)';ctx.lineWidth=1;ctx.stroke();
+    if(k>=1&&e%3===0){const p=(lt*.45+rnd(e))%1;circle(lerp(x1,x2,p),lerp(y1,y2,p),2.8);ctx.fillStyle='rgba(140,225,255,.7)';ctx.fill();}});
+  NODES.forEach(([x,y],i)=>{circle(x,y,3);ctx.fillStyle=`rgba(140,225,255,${.4*seg(lt,rnd(i)*3,rnd(i)*3+1)})`;ctx.fill();});
+  header(lt,'05','3차 산업 혁명','20세기 중후반~','정보 사회',A);
+  const labels=['정보를 가공·처리·유통하는 활동이 사회·경제의 중심이 되었다','컴퓨터와 로봇으로 공장 자동화가 이루어졌다','스마트 기기와 인터넷으로 생활 방식이 크게 바뀌었다'];
+  for(let i=0;i<3;i++){const k=eo(seg(lt,CARD_T[i],CARD_T[i]+.7));if(k<=0)continue;const x=CARD_X[i],cx=x+170;
+    glass(x,186+(1-k)*24,340,294,{a:k,fill:'rgba(10,28,48,.72)',stroke:'rgba(91,200,230,.45)'});
+    ctx.save();ctx.globalAlpha*=k;ctx.translate(0,(1-k)*24);
+    chip(x+20,186,CARD_TITLE[i],A,{al:'left',s:20,h:40,fill:'#0b1d31',c:'#fff'});
+    if(i===0){
+      rr(cx-125,214,250,150,10);ctx.fillStyle='#0c2033';ctx.fill();ctx.strokeStyle=A;ctx.lineWidth=2;ctx.stroke();
+      ctx.save();rr(cx-121,218,242,142,8);ctx.clip();
+      ctx.strokeStyle='rgba(91,200,230,.12)';ctx.lineWidth=1;for(let gx=cx-120;gx<cx+125;gx+=16){ctx.beginPath();ctx.moveTo(gx,218);ctx.lineTo(gx,360);ctx.stroke();}
+      for(let gy=218;gy<360;gy+=16){ctx.beginPath();ctx.moveTo(cx-121,gy);ctx.lineTo(cx+121,gy);ctx.stroke();}
+      const ay=(lt-CARD_T[0])*.9,ax=.5,P=[];
+      for(const a of[-1,1])for(const b of[-1,1])for(const c of[-1,1]){const x1=a*Math.cos(ay)-c*Math.sin(ay),z1=a*Math.sin(ay)+c*Math.cos(ay);const y1=b*Math.cos(ax)-z1*Math.sin(ax),z2=b*Math.sin(ax)+z1*Math.cos(ax);
+        const s=42/(1+z2*.15);P.push([cx+x1*s,290+y1*s]);}
+      ctx.shadowColor=A;ctx.shadowBlur=10;
+      [[0,1],[2,3],[4,5],[6,7],[0,2],[1,3],[4,6],[5,7],[0,4],[1,5],[2,6],[3,7]].forEach(([a,b])=>line(P[a][0],P[a][1],P[b][0],P[b][1],'#8fe3ff',2.2));
+      ctx.shadowBlur=0;
+      for(let j=0;j<6;j++)txt(((Math.floor(lt*6)+j*7)%2)+''+((Math.floor(lt*5)+j)%2)+((j+Math.floor(lt*4))%2),cx-112,236+j*22,{s:13,c:'rgba(91,200,230,.55)',f:'monospace'});
+      ctx.restore();
+      ctx.fillStyle='#2a3f55';ctx.fillRect(cx-10,364,20,20);rr(cx-50,384,100,8,4);ctx.fill();
+      rr(cx-110,402,220,26,6);ctx.fillStyle='#1d3247';ctx.fill();
+      for(let j=0;j<12;j++){const hit=Math.floor(lt*8+j*3)%7===0;rr(cx-104+j*18,407,14,16,3);ctx.fillStyle=hit?A:'#2e4a66';ctx.fill();}
+    }else if(i===1){
+      const bx=cx,by=440,L1=95,L2=80,c=((lt-CARD_T[1]-.4)/2.4%1+1)%1;
+      let m,carry=false;if(c<.15){m=0;carry=true;}else if(c<.5){m=eio((c-.15)/.35);carry=true;}else if(c<.65){m=1;}else m=1-eio((c-.65)/.35);
+      const lift=(c>.15&&c<.5)||(c>.65)?Math.sin(PI*(c<.5?(c-.15)/.35:(c-.65)/.35)):0;
+      const a1=lerp(-2.0,-1.1416,m),a2=lerp(2.3,.8416,m)-.7*lift;
+      const ex=bx+L1*Math.cos(a1),ey=by+L1*Math.sin(a1),gx=ex+L2*Math.cos(a2),gy=ey+L2*Math.sin(a2);
+      rr(cx-135,441,80,10,3);ctx.fillStyle='#24405c';ctx.fill();rr(cx+55,441,80,10,3);ctx.fill();
+      if(!(carry&&c<.5))drawBox(cx-93,417,1);
+      if(c>=.5){const sl=c<.65?0:(c-.65)/.35;drawBox(cx+93+sl*40,417,1-sl);}
+      rr(bx-28,440,56,16,4);ctx.fillStyle='#3a5874';ctx.fill();
+      line(bx,by,ex,ey,'#9fb3c6',17);line(bx,by,ex,ey,'#e1eaf2',12);line(ex,ey,gx,gy,'#9fb3c6',14);line(ex,ey,gx,gy,'#cad9e6',9);
+      circle(bx,by,12);ctx.fillStyle=A;ctx.fill();circle(ex,ey,10);ctx.fill();
+      line(gx-9,gy,gx-9,gy+13,'#e8eef5',4);line(gx+9,gy,gx+9,gy+13,'#e8eef5',4);
+      if(carry&&c<.5)drawBox(gx,gy+6,1);
+      circle(cx+130,232,10);ctx.fillStyle=Math.sin(lt*6)>0?'#4bd17a':'#265c3a';ctx.fill();
+      txt('AUTO',cx+112,238,{s:15,w:800,c:'rgba(255,255,255,.7)',al:'right'});
+    }else{
+      rr(cx-118,210,118,232,18);ctx.fillStyle='#0b0f14';ctx.fill();ctx.strokeStyle='#6f7d8c';ctx.lineWidth=2.5;ctx.stroke();
+      rr(cx-110,226,102,200,10);ctx.fillStyle='#14324e';ctx.fill();
+      const lt3=lt-CARD_T[2];
+      ['안녕! 👋','사진 보낼게','📷 바다','좋아요 👍'].forEach((m,j)=>{const kk=eo(seg(lt3,.6+j*.8,1+j*.8));if(kk<=0)return;
+        const mine=j%2===1,w=86,yy=238+j*45;ctx.save();ctx.globalAlpha*=kk;
+        rr(mine?cx-14-w:cx-104,yy,w,34,11);ctx.fillStyle=mine?A:'#e8eef5';ctx.fill();
+        txt(m,(mine?cx-14-w:cx-104)+w/2,yy+23,{s:15,w:700,c:'#0b1c2c',al:'center',f:SANS+','+EMOJI});ctx.restore();});
+      if(lt3>=1)for(let j=0;j<6;j++){const ph=((lt3*.5+j/6)%1);
+        emoji(['❤️','👍','😊','🌏','💬','❤️'][j],cx+4+Math.sin(ph*6+j)*12,430-ph*200,24,Math.sin(ph*PI));}
+      const gx=cx+82,gy=318,gr=54;
+      ctx.save();ctx.shadowColor=A;ctx.shadowBlur=20;circle(gx,gy,gr);ctx.fillStyle='#123a5a';ctx.fill();ctx.restore();ctx.strokeStyle=A;ctx.lineWidth=2;circle(gx,gy,gr);ctx.stroke();
+      ctx.save();circle(gx,gy,gr);ctx.clip();
+      for(let j=0;j<4;j++){const ph=((lt3*.25+j/4)%1)*PI;ctx.beginPath();ctx.ellipse(gx,gy,Math.abs(Math.cos(ph))*gr,gr,0,0,TAU);ctx.strokeStyle='rgba(91,200,230,.55)';ctx.lineWidth=1.3;ctx.stroke();}
+      [-.5,0,.5].forEach(f=>{ctx.beginPath();ctx.ellipse(gx,gy+f*gr,gr*Math.sqrt(1-f*f),6,0,0,TAU);ctx.stroke();});
+      ctx.restore();
+      ctx.save();ctx.setLineDash([4,6]);ctx.lineDashOffset=-lt*30;ctx.beginPath();ctx.moveTo(cx-10,262);ctx.quadraticCurveTo(cx+30,212,gx,gy-gr);ctx.strokeStyle='rgba(140,225,255,.8)';ctx.lineWidth=2.2;ctx.stroke();ctx.restore();
+    }
+    ctx.restore();
+    para(labels[i],x+8,518,328,31,{s:22,w:600,c:'rgba(255,255,255,.92)',a:k,sh:6});
+  }
+  const bk=eo(seg(lt,13,13.8));
+  if(bk>0){glass(60,622,1160,66,{a:bk,accent:A,r:18});
+    txt('정보가 사회·경제 활동의 중심  →  직업 세계에도 큰 변화',640,666,{s:28,w:800,al:'center',a:bk});}
+}
+
+/* ============================================================
+   장면 5 : 4차 산업 혁명 – 지능 정보 사회
+   ============================================================ */
+const DEV=[['🏭','스마트 공장'],['🚗','자율 주행차'],['🏠','스마트 홈'],['🥽','가상 현실'],['🚁','드론 배송'],['⌚','웨어러블']];
+function drawAI(lt,dur){
+  const A=ACC[5];
+  if(!drawImgBg('bg-ai',lt,dur,.66)){
+    const g=ctx.createRadialGradient(380,430,40,380,430,900);g.addColorStop(0,'#2a2058');g.addColorStop(1,'#0b0918');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  }
+  constellation(lt,'180,170,255',40,.6);
+  const hx=380,hy=420,R=186,ro=lt*.12;
+  [R-60,R+70].forEach((r2,j)=>{ctx.save();ctx.translate(hx,hy);ctx.rotate(lt*(j?-.08:.15));ctx.setLineDash([2,10]);circle(0,0,r2);ctx.strokeStyle='rgba(169,156,240,.25)';ctx.lineWidth=2;ctx.stroke();ctx.restore();});
+  const pos=DEV.map((_,i)=>{const a=ro+i*PI/3-PI/2;return[hx+R*Math.cos(a),hy+R*Math.sin(a)];});
+  if(lt>3.5){ctx.save();ctx.globalAlpha*=seg(lt,3.5,4.5)*.55;ctx.setLineDash([4,8]);ctx.lineDashOffset=-lt*20;
+    ctx.beginPath();pos.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.strokeStyle=A;ctx.lineWidth=2;ctx.stroke();ctx.restore();}
+  pos.forEach(([x,y],i)=>{const k=eo(seg(lt,.8+i*.25,1.4+i*.25));if(k<=0)return;
+    line(hx,hy,lerp(hx,x,k),lerp(hy,y,k),'rgba(169,156,240,.4)',2.5);
+    if(lt>2.5){const p=(lt*.7+i*.17)%1;ctx.save();ctx.shadowColor='#7fe0ff';ctx.shadowBlur=10;circle(lerp(x,hx,p),lerp(y,hy,p),5);ctx.fillStyle='#7fe0ff';ctx.fill();
+      const q=(lt*.7+i*.17+.5)%1;ctx.shadowColor='#ffd36b';circle(lerp(hx,x,q),lerp(hy,y,q),5);ctx.fillStyle='#ffd36b';ctx.fill();ctx.restore();}});
+  const pulse=.5+.5*Math.sin(lt*3),hk=eo(seg(lt,.3,1));
+  ctx.save();ctx.globalAlpha*=hk;
+  ctx.save();ctx.globalCompositeOperation='lighter';const gg=ctx.createRadialGradient(hx,hy,20,hx,hy,150);gg.addColorStop(0,`rgba(169,156,240,${.4+.2*pulse})`);gg.addColorStop(1,'rgba(169,156,240,0)');ctx.fillStyle=gg;ctx.fillRect(hx-150,hy-150,300,300);ctx.restore();
+  for(let j=0;j<4;j++){const o=-30+j*20;line(hx+o,hy-66,hx+o,hy-54,A,3);line(hx+o,hy+54,hx+o,hy+66,A,3);line(hx-66,hy+o,hx-54,hy+o,A,3);line(hx+54,hy+o,hx+66,hy+o,A,3);}
+  rr(hx-54,hy-54,108,108,20);const cg=ctx.createLinearGradient(hx-54,hy-54,hx+54,hy+54);cg.addColorStop(0,'#3a2f78');cg.addColorStop(1,'#1a1538');ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle=A;ctx.lineWidth=3;ctx.stroke();
+  txt('AI',hx,hy+16,{s:46,w:900,al:'center'});ctx.restore();
+  pos.forEach(([x,y],i)=>{const k=eback(seg(lt,.8+i*.25,1.4+i*.25));if(k<=0)return;ctx.save();ctx.globalAlpha*=clamp(k);
+    circle(x,y,38*k);ctx.fillStyle='#1d1838';ctx.shadowColor=A;ctx.shadowBlur=14;ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=A;ctx.lineWidth=2.5;ctx.stroke();
+    emoji(DEV[i][0],x,y+2,32);txt(DEV[i][1],x,y+62,{s:18,w:700,al:'center',c:'#fff',sh:8});ctx.restore();});
+  txt('데이터 수집 → 인공지능 분석 → 기기 제어',hx,706,{s:20,w:700,al:'center',c:'rgba(255,255,255,.82)',a:seg(lt,3,3.8)});
+  header(lt,'06','4차 산업 혁명','','지능 정보 사회',A);
+  let kx=716,ky=196;
+  ['인공지능','사물 인터넷','빅데이터','초고속 통신망','로봇'].forEach((w,i)=>{ctx.font=`700 20px ${SANS}`;const tw=ctx.measureText(w).width+34;
+    if(kx+tw>1244){kx=716;ky+=50;}const k=eback(seg(lt,1.5+i*.35,2.1+i*.35));
+    if(k>0)chip(kx,ky,w,A,{al:'left',a:clamp(k),s:20,h:42,px:34,fill:'rgba(169,156,240,.2)'});
+    kx+=tw+10;});
+  bulletList(lt,[[4,'첨단 정보 통신 기술과 로봇 기술이 적용된 초지능·초연결 시대가 되었다'],
+    [7,'생활·사회·경제의 모든 분야에 첨단 기술이 활용되어 새로운 가치를 만든다']],716,312,530,A,{s:23,lh:33,gap:14});
+  const sk=eo(seg(lt,8.4,9.2));if(sk<=0)return;
+  glass(716,462,530,240,{a:sk,fill:'rgba(20,16,40,.7)'});
+  ctx.save();ctx.globalAlpha*=sk;
+  line(732,670,1230,670,'rgba(255,255,255,.25)',2);
+  shadowEllipse(850,672,90,6,.35);
+  ctx.fillStyle='#d8c7a6';ctx.fillRect(775,598,160,11);ctx.fillRect(850,609,10,61);
+  [[784,'#e98a5a'],[926,'#6fb3e0']].forEach(([px,c])=>{circle(px,556,16);ctx.fillStyle='#f0c9a0';ctx.fill();rr(px-17,575,34,52,11);ctx.fillStyle=c;ctx.fill();});
+  const rx=lerp(1185,985,eio(seg(lt,9.2,13))),arrive=lt>13.1,bob=Math.sin(lt*10)*1.2*(arrive?0:1);
+  shadowEllipse(rx,672,40,5,.4);
+  const bodyG=ctx.createLinearGradient(rx-32,0,rx+32,0);bodyG.addColorStop(0,'#cfcbe0');bodyG.addColorStop(.5,'#ffffff');bodyG.addColorStop(1,'#bcb7d2');
+  rr(rx-32,606+bob,64,58,12);ctx.fillStyle=bodyG;ctx.fill();
+  circle(rx-20,666,6);ctx.fillStyle='#333';ctx.fill();circle(rx+20,666,6);ctx.fill();
+  line(rx-26,568+bob,rx+26,568+bob,'#dcd8ea',4);line(rx-26,538+bob,rx+26,538+bob,'#dcd8ea',4);line(rx-28,536+bob,rx-28,606+bob,'#dcd8ea',4);line(rx+28,536+bob,rx+28,606+bob,'#dcd8ea',4);
+  rr(rx-15,553+bob,13,15,2);ctx.fillStyle='#e3a33b';ctx.fill();circle(rx+10,561+bob,7);ctx.fillStyle='#fff';ctx.fill();circle(rx-4,530+bob,8);ctx.fillStyle='#d9544f';ctx.fill();
+  rr(rx-30,480+bob,60,42,10);ctx.fillStyle='#1b1830';ctx.fill();ctx.strokeStyle='#e6e2f2';ctx.lineWidth=3.5;ctx.stroke();
+  const blink=(lt%3)<.12;
+  if(blink){line(rx-15,501+bob,rx-6,501+bob,'#7fe0ff',3);line(rx+6,501+bob,rx+15,501+bob,'#7fe0ff',3);}
+  else{ctx.beginPath();ctx.arc(rx-10,503+bob,5.5,PI,0);ctx.moveTo(rx+15.5,503+bob);ctx.arc(rx+10,503+bob,5.5,PI,0);ctx.strokeStyle='#7fe0ff';ctx.lineWidth=3;ctx.stroke();}
+  for(let j=0;j<3;j++){const a=(.5+.5*Math.sin(lt*4-j))*.85;ctx.beginPath();ctx.arc(rx,476+bob,8+j*9,-PI*.75,-PI*.25);ctx.strokeStyle=`rgba(127,224,255,${a})`;ctx.lineWidth=3;ctx.stroke();}
+  if(arrive){const k=clamp(eback(seg(lt,13.1,13.6)));ctx.save();ctx.globalAlpha*=k;
+    rr(990,478,244,46,14);ctx.fillStyle='#fff';ctx.fill();ctx.beginPath();ctx.moveTo(1030,524);ctx.lineTo(1022,538);ctx.lineTo(1046,524);ctx.fill();
+    txt('주문하신 음식 나왔어요!',1112,509,{s:19,w:800,c:'#2a2250',al:'center'});
+    emoji('😋',784,512-seg(lt,13.5,15)*22,28,1-seg(lt,14.5,15.5));emoji('❤️',926,512-seg(lt,13.7,15.2)*22,26,1-seg(lt,14.7,15.7));ctx.restore();}
+  ctx.restore();
+}
+
+/* ============================================================
+   장면 6 : 정리
+   ============================================================ */
+function drawOutro(lt,dur){
+  const g=ctx.createRadialGradient(640,330,40,640,360,900);g.addColorStop(0,'#1f1b24');g.addColorStop(1,'#060608');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  drawImgBg('cover',dur-lt,dur,.78);
+  constellation(lt,'255,222,170',50,.6);
+  txt('기술이 바뀌면, 사회가 바뀐다',W/2,150,{s:58,w:900,f:SERIF,al:'center',a:eo(seg(lt,.3,1.1)),sh:20});
+  const xs=[160,400,640,880,1120],lk=eio(seg(lt,.6,2.6));
+  line(110,330,lerp(110,1170,lk),330,'rgba(255,255,255,.22)',4);
+  const prog=lerp(110,1170,eio(seg(lt,1,4.2)));
+  const pg=ctx.createLinearGradient(110,0,1170,0);['#e9b949','#9bd34a','#5bc8e6','#a99cf0','#f4c98a'].forEach((c,i)=>pg.addColorStop(i/4,c));
+  ctx.beginPath();ctx.moveTo(110,330);ctx.lineTo(prog,330);ctx.strokeStyle=pg;ctx.lineWidth=4;ctx.stroke();
+  const items=[['🌾','농업 사회','농업 혁명','#e9b949'],['⚙️','산업 사회','1·2차 산업 혁명','#9bd34a'],['💻','정보 사회','3차 산업 혁명','#5bc8e6'],['🤖','지능 정보 사회','4차 산업 혁명','#a99cf0'],['?','다음 사회는?','','#f4c98a']];
+  items.forEach((it,i)=>{const k=eback(seg(lt,1+i*.6,1.6+i*.6));if(k<=0)return;const x=xs[i];
+    ctx.save();ctx.globalAlpha*=clamp(k);ctx.translate(x,330);ctx.scale(k,k);ctx.translate(-x,-330);
+    circle(x,330,54);if(i<4){ctx.fillStyle=it[3];ctx.shadowColor=it[3];ctx.shadowBlur=26;ctx.fill();ctx.shadowBlur=0;emoji(it[0],x,333,46);}
+    else{ctx.fillStyle='rgba(244,201,138,.08)';ctx.fill();ctx.setLineDash([7,7]);ctx.lineDashOffset=-lt*12;ctx.strokeStyle=it[3];ctx.lineWidth=3;ctx.stroke();ctx.setLineDash([]);txt('?',x,350,{s:52,w:900,f:SERIF,al:'center',c:it[3]});}
+    ctx.restore();
+    txt(it[1],x,428,{s:27,w:800,al:'center',c:i<4?'#fff':it[3],a:clamp(k)});
+    if(it[2])txt(it[2],x,462,{s:19,w:500,al:'center',c:'rgba(255,255,255,.72)',a:clamp(k)});});
+  const qk=eo(seg(lt,4.8,5.8));
+  txt('다음 사회를 바꿀 기술은 무엇일까요?',W/2,572+(1-qk)*18,{s:40,w:800,al:'center',c:'#f4c98a',a:qk,sh:16});
+  txt('그 기술을 만들고 쓰는 사람은 바로 우리입니다.',W/2,626,{s:26,w:500,al:'center',c:'rgba(255,255,255,.82)',a:seg(lt,6.4,7.4)});
+}
+
+/* ============================================================
+   장면 목록 · 렌더링
+   ============================================================ */
+const SCENES=[
+  {name:'여는 장면',icon:'✨',dur:9,draw:drawIntro,music:'intro'},
+  {name:'농업 사회',icon:'🌾',dur:17,draw:drawAgri,music:'agri'},
+  {name:'1차 산업 혁명 · 증기 기관',icon:'🚂',dur:STEAM_DUR,draw:drawSteam,music:'steam'},
+  {name:'2차 산업 혁명 · 컨베이어',icon:'🚗',dur:CV_DUR,draw:drawConveyor,music:'conveyor'},
+  {name:'정보 사회',icon:'💻',dur:17,draw:drawInfo,music:'info'},
+  {name:'지능 정보 사회',icon:'🤖',dur:17,draw:drawAI,music:'ai'},
+  {name:'정리',icon:'🧭',dur:12,draw:drawOutro,music:'intro'},
+];
+let acc=0;SCENES.forEach(s=>{s.start=acc;acc+=s.dur;});
+const TOTAL=acc,TR=.8;
+
+const grain=document.createElement('canvas');grain.width=grain.height=256;
+{const g=grain.getContext('2d'),id=g.createImageData(256,256);for(let i=0;i<id.data.length;i+=4){const v=Math.random()*255;id.data[i]=id.data[i+1]=id.data[i+2]=v;id.data[i+3]=255;}g.putImageData(id,0,0);}
+let grainPat=null;
+
+function sceneAt(t){for(let i=SCENES.length-1;i>=0;i--)if(t>=SCENES[i].start)return i;return 0;}
+function drawSceneInto(c,i,lt){
+  ctx=c;ctx.setTransform(c.canvas.width/W,0,0,c.canvas.height/H,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+  ctx.save();SCENES[i].draw(lt,SCENES[i].dur);ctx.restore();ctx=mainCtx;
+}
+function render(t){
+  const i=sceneAt(Math.min(t,TOTAL-1e-6)),sc=SCENES[i],lt=t-sc.start;
+  drawSceneInto(mainCtx,i,lt);
+  if(i>0&&lt<TR){
+    drawSceneInto(bufCtx,i-1,SCENES[i-1].dur-.001);
+    const k=eio(lt/TR);
+    ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1-k;ctx.drawImage(buf,0,0);ctx.globalAlpha=1;
+    ctx.setTransform(cv.width/W,0,0,cv.height/H,0,0);
+    ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=Math.sin(PI*k)*.16;ctx.fillStyle=ACC[i];ctx.fillRect(0,0,W,H);ctx.restore();
+  }
+  ctx.setTransform(cv.width/W,0,0,cv.height/H,0,0);
+  const vg=ctx.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,H*1.05);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.5)');ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);
+  if(!grainPat)grainPat=ctx.createPattern(grain,'repeat');
+  ctx.save();ctx.globalAlpha=.045;const f=Math.floor(t*24);ctx.translate(-rnd(f)*256,-rnd(f+7)*256);ctx.fillStyle=grainPat;ctx.fillRect(0,0,W+256,H+256);ctx.restore();
+  const end=seg(t,TOTAL-1.3,TOTAL);if(end>0){ctx.fillStyle=`rgba(0,0,0,${end})`;ctx.fillRect(0,0,W,H);}
+}
+
+/* ============================================================
+   소리 : 배경 음악(실시간 생성) + 효과음
+   ============================================================ */
+const EVENTS=[];
+SCENES.forEach((s,i)=>{if(i>0)EVENTS.push([s.start+.05,'whoosh']);});
+{const s=SCENES[1].start;for(let k=Math.ceil(10.5*4/PI);k*PI/4<17;k++)EVENTS.push([s+k*PI/4,'clang']);for(let i=0;i<4;i++)EVENTS.push([s+5.3+i*.35,'pop']);}
+{const s=SCENES[2].start;EVENTS.push([s+1.5,'fire']);EVENTS.push([s+5.2,'hiss']);CHUFFS.forEach(c=>EVENTS.push([s+c,'chuff']));EVENTS.push([s+17,'chime']);}
+{const s=SCENES[3].start;EVENTS.push([s+.8,'bulb']);CAR_T.forEach(t0=>ST.forEach((st,j)=>{const t=t0+(st+80)/V;if(t<CV_DUR)EVENTS.push([s+t,j===3?'ding':'tick']);}));EVENTS.push([s+14,'chime']);}
+{const s=SCENES[4].start;CARD_T.forEach(t=>EVENTS.push([s+t,'blip']));EVENTS.push([s+13,'chime']);}
+{const s=SCENES[5].start;for(let i=0;i<6;i++)EVENTS.push([s+.8+i*.25,'blip']);EVENTS.push([s+13.1,'robot']);}
+{const s=SCENES[6].start;EVENTS.push([s+4.8,'chime']);}
+EVENTS.sort((a,b)=>a[0]-b[0]);
+
+let ac=null,master=null,sfxBus=null,musicBus=null,revIn=null,noiseBuf=null;
+let sfxOn=true,musicOn=true;
+const MUSIC_VOL=.55;
+function initAudio(){
+  try{
+    if(!ac){
+      ac=new (window.AudioContext||window.webkitAudioContext)();
+      const comp=ac.createDynamicsCompressor();comp.threshold.value=-14;comp.ratio.value=3;comp.connect(ac.destination);
+      master=ac.createGain();master.gain.value=.9;master.connect(comp);
+      sfxBus=ac.createGain();sfxBus.gain.value=sfxOn?.85:0;sfxBus.connect(master);
+      musicBus=ac.createGain();musicBus.gain.value=0;musicBus.connect(master);
+      const conv=ac.createConvolver(),len=ac.sampleRate*2.6,ib=ac.createBuffer(2,len,ac.sampleRate);
+      for(let c=0;c<2;c++){const d=ib.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);}
+      conv.buffer=ib;revIn=ac.createGain();const revOut=ac.createGain();revOut.gain.value=.32;revIn.connect(conv);conv.connect(revOut);revOut.connect(master);
+      noiseBuf=ac.createBuffer(1,ac.sampleRate,ac.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+    }
+    if(ac.state==='suspended')ac.resume();
+  }catch(e){ac=null;}
+}
+const mf=m=>440*Math.pow(2,(m-69)/12);
+function voice(type,freq,t0,dur,vol,o={}){
+  const osc=ac.createOscillator(),g=ac.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,t0);if(o.detune)osc.detune.value=o.detune;
+  if(o.glide)osc.frequency.exponentialRampToValueAtTime(o.glide,t0+(o.gt||dur));
+  let node=osc;if(o.lp){const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=o.lp;f.Q.value=o.q||.7;osc.connect(f);node=f;}
+  node.connect(g);const a=o.a??.006;
+  g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+a);
+  if(o.sus){g.gain.linearRampToValueAtTime(vol*.8,t0+dur*.7);g.gain.linearRampToValueAtTime(0,t0+dur);}
+  else g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+  g.connect(o.dest||musicBus);if(o.send){const s=ac.createGain();s.gain.value=o.send;g.connect(s);s.connect(revIn);}
+  osc.start(t0);osc.stop(t0+dur+.05);return osc;
+}
+function noiseHit(t0,dur,vol,type,freq,q,dest){
+  const src=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();src.buffer=noiseBuf;f.type=type;f.frequency.value=freq;f.Q.value=q;
+  g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+.006);g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+  src.connect(f);f.connect(g);g.connect(dest||musicBus);src.start(t0,Math.random()*.4);src.stop(t0+dur+.05);
+}
+function flute(m,t0,dur,vol,type='sine'){
+  const o=voice(type,mf(m),t0,dur,vol,{a:.08,sus:true,send:.55});
+  const l=ac.createOscillator(),lg=ac.createGain();l.frequency.value=5.2;lg.gain.value=mf(m)*.007;l.connect(lg);lg.connect(o.frequency);l.start(t0);l.stop(t0+dur+.05);
+}
+const STY={
+  intro:{bpm:72,ch:[[48,55,60,64],[45,52,57,60],[41,48,57,60],[43,50,55,62]],pad:.02,bass:[0,10],bassV:.13,arp:[0,4,8,12,14],arpType:'sine',arpV:.05,arpOct:12,mel:{notes:[72,74,76,79,81],steps:[0,6,8],v:.03}},
+  agri:{bpm:88,ch:[[43,50,55,59],[40,47,52,55],[36,43,52,55],[38,45,50,54]],pad:.013,bass:[0,8],bassV:.12,arp:[0,2,4,6,8,10,12,14],arpType:'triangle',arpV:.045,arpOct:12,
+    mel:{notes:[67,69,71,74,76,79],steps:[0,6,8,12],v:.045},hat:[2,6,10,14],hatV:.014},
+  steam:{bpm:108,ch:[[38,45,50,53],[34,41,46,50],[41,48,53,57],[36,43,48,52]],pad:.012,bass:[0,2,4,6,8,10,12,14],bassType:'sawtooth',bassV:.06,
+    kick:[0,8],kickV:.5,hat:[2,6,10,14],hatV:.022,metal:[4,12],metalV:.02,mel:{notes:[62,65,69,72,74],steps:[0,10],v:.035,type:'triangle'}},
+  conveyor:{bpm:116,ch:[[45,52,57,61],[42,49,54,57],[38,45,50,54],[40,47,52,56]],pad:.01,bass:[0,3,8,11],bassV:.12,arp:[0,2,4,6,8,10,12,14],arpType:'sine',arpV:.04,arpOct:24,
+    kick:[0,4,8,12],kickV:.38,hat:[2,6,10,14],hatV:.026,clap:[4,12],clapV:.06},
+  info:{bpm:120,ch:[[50,57,61,64],[47,54,57,62],[43,50,54,59],[45,52,57,61]],pad:.012,bass:[0,6,8,14],bassV:.12,arp:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],arpType:'sawtooth',arpLp:2400,arpV:.022,arpOct:12,
+    kick:[0,8],kickV:.42,hat:[2,6,10,14],hatV:.024,clap:[4,12],clapV:.045},
+  ai:{bpm:92,ch:[[42,49,54,57],[38,45,50,54],[45,52,57,61],[40,47,52,56]],pad:.02,bass:[0],bassV:.14,arp:[3,7,11,15],arpType:'sine',arpV:.035,arpOct:24,kick:[0],kickV:.3,hat:[2,6,10,14],hatV:.013,
+    mel:{notes:[78,81,83,85,88],steps:[0,8],v:.02}},
+};
+function playStep(S,step,t0,spb){
+  const s=step%16,bar=Math.floor(step/16),ch=S.ch[bar%S.ch.length];
+  if(s===0&&S.pad)ch.forEach(n=>[-8,8].forEach(d=>voice('sawtooth',mf(n+12),t0,spb*16+.4,S.pad,{a:.5,lp:1000,detune:d,send:.6,sus:true})));
+  if(S.bass&&S.bass.includes(s))voice(S.bassType||'triangle',mf(ch[0]-12),t0,spb*(S.bassType?1.7:4),S.bassV,{lp:S.bassType?420:900,send:.05});
+  if(S.arp&&S.arp.includes(s)){const idx=S.arp.indexOf(s);const n=ch[idx%ch.length]+(S.arpOct||12)+(Math.floor(idx/ch.length)%2)*12;
+    voice(S.arpType,mf(n),t0,spb*3,S.arpV,{lp:S.arpLp,send:.4});}
+  if(S.mel&&S.mel.steps.includes(s)&&rnd(bar*31+s)>.3){const n=S.mel.notes[Math.floor(rnd(bar*17+s*3)*S.mel.notes.length)];flute(n,t0,spb*6,S.mel.v,S.mel.type);}
+  if(S.kick&&S.kick.includes(s))voice('sine',150,t0,.32,S.kickV,{glide:45,gt:.12});
+  if(S.hat&&S.hat.includes(s))noiseHit(t0,.05,S.hatV,'highpass',7500,.7);
+  if(S.clap&&S.clap.includes(s))noiseHit(t0,.14,S.clapV,'bandpass',1500,.8);
+  if(S.metal&&S.metal.includes(s)){voice('square',1250,t0,.09,S.metalV,{lp:3200,send:.2});voice('square',1873,t0,.07,S.metalV*.7,{lp:3200});}
+}
+let mStep=0,mNext=0,mStyle=null;
+function schedule(){
+  if(!ac||!playing||!musicOn)return;
+  const key=SCENES[sceneAt(Math.min(t,TOTAL-1e-6))].music,S=STY[key],spb=60/S.bpm/4;
+  if(key!==mStyle){mStyle=key;mStep=0;mNext=Math.max(mNext,ac.currentTime+.05);}
+  if(mNext<ac.currentTime-.2)mNext=ac.currentTime+.05;
+  while(mNext<ac.currentTime+.2){playStep(S,mStep,mNext,spb);mNext+=spb;mStep++;}
+}
+function musicGain(){if(!ac)return;const v=(playing&&musicOn)?MUSIC_VOL:0;musicBus.gain.cancelScheduledValues(ac.currentTime);musicBus.gain.setTargetAtTime(v,ac.currentTime,.12);}
+setInterval(schedule,25);
+
+const SFX={
+  whoosh(){noiseHit(ac.currentTime,.7,.12,'bandpass',900,.5,sfxBus);},
+  chime(){[523.25,659.25,783.99,1046.5].forEach((f,i)=>voice('sine',f,ac.currentTime+i*.07,1.6,.06,{dest:sfxBus,send:.5}));},
+  clang(){voice('triangle',1800,ac.currentTime,.25,.07,{dest:sfxBus,send:.3});voice('sine',2710,ac.currentTime,.18,.045,{dest:sfxBus});},
+  pop(){voice('sine',420,ac.currentTime,.2,.08,{glide:820,dest:sfxBus});},
+  fire(){noiseHit(ac.currentTime,1.4,.14,'lowpass',700,.5,sfxBus);},
+  hiss(){noiseHit(ac.currentTime,1.2,.08,'highpass',3500,.6,sfxBus);},
+  chuff(){noiseHit(ac.currentTime,.22,.3,'bandpass',760,.7,sfxBus);},
+  bulb(){noiseHit(ac.currentTime,.1,.12,'bandpass',3800,3,sfxBus);voice('sawtooth',180,ac.currentTime,.25,.025,{dest:sfxBus});},
+  tick(){voice('square',380,ac.currentTime,.07,.035,{dest:sfxBus,lp:2000});noiseHit(ac.currentTime,.05,.1,'bandpass',2600,2,sfxBus);},
+  ding(){voice('sine',1318.5,ac.currentTime,.6,.09,{dest:sfxBus,send:.4});voice('sine',1760,ac.currentTime+.08,.7,.05,{dest:sfxBus,send:.4});},
+  blip(){voice('sine',880,ac.currentTime,.14,.07,{glide:1320,dest:sfxBus,send:.3});},
+  robot(){voice('square',660,ac.currentTime,.12,.035,{dest:sfxBus,lp:2500});voice('square',990,ac.currentTime+.13,.15,.035,{dest:sfxBus,lp:2500});},
+};
+function fireEvents(a,b){if(!ac||!sfxOn||b-a>.5)return;for(const e of EVENTS){if(e[0]>b)break;if(e[0]>a)try{SFX[e[1]]();}catch(_){}}}
+
+/* ============================================================
+   플레이어 UI
+   ============================================================ */
+let t=0,playing=false,started=false,speed=1,last=null;
+const $=id=>document.getElementById(id);
+const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+$('durLabel').textContent=fmt(TOTAL);$('startLabel').textContent=`${fmt(TOTAL)} 재생 · 소리 켜기`;
+function resize(){const r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);
+  cv.width=buf.width=Math.max(1,Math.round(r.width*d));cv.height=buf.height=Math.max(1,Math.round(r.height*d));grainPat=null;}
+const bar=$('bar'),segFills=[];
+SCENES.forEach((s,i)=>{
+  const sg=document.createElement('div');sg.className='segm';sg.style.flex=s.dur;const fi=document.createElement('i');fi.style.background=ACC[i];sg.appendChild(fi);bar.appendChild(sg);segFills.push(fi);
+  const b=document.createElement('button');b.className='chap';b.style.setProperty('--c',ACC[i]);
+  b.innerHTML=`<div class="ic">${s.icon}</div><small>${i+1} · ${fmt(s.start)}</small><b>${s.name}</b>`;
+  b.onclick=()=>{seek(s.start+.01);play();};$('chapters').appendChild(b);});
+const chapBtns=[...document.querySelectorAll('.chap')];
+let lastUI='';
+function updateUI(){
+  SCENES.forEach((s,i)=>{segFills[i].style.width=(clamp((t-s.start)/s.dur)*100)+'%';});
+  const key=fmt(t)+playing+sceneAt(t);if(key===lastUI)return;lastUI=key;
+  $('timeLabel').textContent=`${fmt(t)} / ${fmt(TOTAL)}`;
+  $('playBtn').textContent=playing?'❚❚ 멈춤':(t>=TOTAL?'↺ 다시':'▶ 재생');
+  const si=sceneAt(Math.min(t,TOTAL-1e-6));chapBtns.forEach((b,i)=>b.classList.toggle('on',i===si));
+}
+function play(){initAudio();if(t>=TOTAL)t=0;playing=true;started=true;$('poster').classList.add('hide');musicGain();}
+function pause(){playing=false;musicGain();}
+function toggle(){playing?pause():play();}
+function seek(v){t=clamp(v,0,TOTAL);mStyle=null;if(!started){started=true;$('poster').classList.add('hide');}}
+function loop(now){
+  if(last==null)last=now;const dt=Math.min(.1,(now-last)/1000);last=now;
+  if(playing){const pt=t;t=Math.min(TOTAL,t+dt*speed);fireEvents(pt,t);
+    if(t>=TOTAL){playing=false;musicGain();$('posterText').textContent='끝까지 보았어요. 아래 장면 카드를 눌러 다시 살펴보거나 처음부터 다시 볼 수 있어요.';$('startLabel').textContent='처음부터 다시 보기';$('poster').classList.remove('hide');}}
+  render(t);updateUI();requestAnimationFrame(loop);
+}
+$('startBtn').onclick=e=>{e.stopPropagation();if(t>=TOTAL)t=0;play();};
+$('playBtn').onclick=toggle;
+$('stage').addEventListener('click',e=>{if(e.target===cv)toggle();});
+$('speedBtn').onclick=()=>{speed=speed===1?.75:speed===.75?.5:1;$('speedBtn').textContent=speed+'×';};
+$('musicBtn').onclick=()=>{musicOn=!musicOn;$('musicBtn').classList.toggle('off',!musicOn);mStyle=null;musicGain();};
+$('sfxBtn').onclick=()=>{sfxOn=!sfxOn;$('sfxBtn').classList.toggle('off',!sfxOn);$('sfxBtn').textContent=(sfxOn?'🔊':'🔇')+' 효과음';if(sfxBus)sfxBus.gain.value=sfxOn?.85:0;};
+function fullscreen(){const p=$('player');if(document.fullscreenElement)document.exitFullscreen();else if(p.requestFullscreen)p.requestFullscreen();}
+$('fsBtn').onclick=fullscreen;
+let dragging=false;
+const seekFromEvent=e=>{const r=bar.getBoundingClientRect();seek((e.clientX-r.left)/r.width*TOTAL);};
+bar.addEventListener('pointerdown',e=>{dragging=true;bar.setPointerCapture(e.pointerId);seekFromEvent(e);});
+bar.addEventListener('pointermove',e=>{if(dragging)seekFromEvent(e);});
+bar.addEventListener('pointerup',()=>dragging=false);
+window.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.code==='Space'){e.preventDefault();toggle();}
+  else if(e.key==='ArrowRight')seek(t+5);
+  else if(e.key==='ArrowLeft')seek(t-5);
+  else if(e.key==='f'||e.key==='F')fullscreen();
+  else if(e.key==='m'||e.key==='M')$('sfxBtn').click();
+  else if(e.key==='b'||e.key==='B')$('musicBtn').click();
+  else if(/^[1-7]$/.test(e.key)){const s=SCENES[+e.key-1];if(s)seek(s.start+.01);}
+});
+window.addEventListener('resize',resize);document.addEventListener('fullscreenchange',()=>setTimeout(resize,60));
+resize();requestAnimationFrame(loop);
+window.__mg={seek:v=>{t=v;},get t(){return t;},TOTAL,SCENES};
+})();
+</script>
+</body>
+</html>

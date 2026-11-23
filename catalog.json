@@ -1,6 +1,13 @@
 {
-  "updated": "2026-11-18",
+  "updated": "2026-11-23",
   "games": [
+    {
+      "number": 26,
+      "title": "기술이 바꾼 사회",
+      "entry": "games/tech-society-motion/index.html",
+      "previousEntry": "games/tech-society-motion/index.html",
+      "gameUrl": "https://beefly1136-dev.github.io/kijeong-game-library/play/26/"
+    },
     {
       "number": 25,
       "title": "야생 생존 건축 3D",

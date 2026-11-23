@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-18T06:26:16.402Z",
+  "updated_at": "2026-11-23T07:59:17.453Z",
   "site_name": "기정T의 기술가정 놀이터",
   "popularity_note": "이전 당시 누적 플레이 횟수 기준",
   "categories": [
@@ -58,6 +58,26 @@
     }
   ],
   "games": [
+    {
+      "number": 26,
+      "kind": "channel",
+      "title": "기술이 바꾼 사회",
+      "description": "농업 사회에서 지능 정보 사회까지, 증기 기관과 컨베이어 시스템의 작동 과정을 따라가며 기술이 사회를 어떻게 바꾸었는지 보는 2분 모션 그래픽",
+      "how_to": "재생 버튼을 누르면 소리와 함께 시작돼요. 장면 카드나 숫자 1~7로 원하는 장면으로 가고, 속도 버튼으로 천천히 볼 수 있어요. Space 재생·멈춤, ←→ 5초 이동, F 전체 화면.",
+      "tags": "기술과 사회,산업 혁명,증기 기관,컨베이어,정보 사회,인공지능",
+      "category_id": 19,
+      "category_name": "기술 전반",
+      "game_type": "기타",
+      "duration": "short",
+      "people": "solo",
+      "length_label": "2분 영상 · 소리 켜기",
+      "play_count": 0,
+      "thumbnail_url": "covers/tech-society-motion-553c30c4e4201e3baf77854a.webp",
+      "play_url": "games/tech-society-motion/index.html",
+      "is_published": 1,
+      "is_featured": 0,
+      "sort_order": 0
+    },
     {
       "number": 25,
       "title": "야생 생존 건축 3D",
