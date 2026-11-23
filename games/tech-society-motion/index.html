@@ -132,6 +132,8 @@
   </details>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="scenes3d.js?v=eb509347"></script>
 <script>
 (()=>{
 try{if(window.self!==window.top)document.body.classList.add('embedded');}catch(e){document.body.classList.add('embedded');}
@@ -142,6 +144,7 @@ const W=1280,H=720;
 const cv=document.getElementById('cv'),mainCtx=cv.getContext('2d');
 const buf=document.createElement('canvas'),bufCtx=buf.getContext('2d');
 let ctx=mainCtx;
+const USE3D=!!(window.S3&&window.S3.ok);
 const RRpoly=function(x,y,w,h,r){r=Math.min(r,w/2,h/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();};
 [mainCtx,bufCtx].forEach(c=>{if(!c.roundRect)c.roundRect=RRpoly;});
 const SANS='"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
@@ -223,6 +226,11 @@ function partialPath(pts,p){
   for(let i=1;i<pts.length&&rem>0;i++){const d=L[i-1],k=Math.min(1,rem/d);ctx.lineTo(lerp(pts[i-1][0],pts[i][0],k),lerp(pts[i-1][1],pts[i][1],k));rem-=d;}
 }
 function shadowEllipse(x,y,rx,ry,a=.35){ctx.save();ctx.fillStyle=`rgba(0,0,0,${a})`;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,TAU);ctx.fill();ctx.restore();}
+
+/* ---------- 3D 장면 ---------- */
+function draw3D(key,lt){const cnv=ctx.canvas,c=S3.render(key,lt,cnv.width,cnv.height,'main');if(!c)return;
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(c,0,0,cnv.width,cnv.height);ctx.restore();}
+function at3D(key,name){const p=S3.project(key,name);return p&&p.vis?{x:p.x*W,y:p.y*H}:null;}
 
 /* ---------- 이미지 에셋 (assets 폴더에 있으면 사용, 없으면 직접 그린 배경) ---------- */
 const IMG={};
@@ -313,6 +321,7 @@ function drawAgri(lt,dur){
     [[120,335],[230,380],[360,300],[500,392],[640,322],[790,382],[950,312],[1110,372],[1280,330],[1280,720],[0,720]].forEach(p=>ctx.lineTo(p[0],p[1]));ctx.fill();
   }
   for(let i=0;i<5;i++){const bx=((lt*55+i*38)%1500)-100,by=210+i*12+Math.sin(lt+i)*8;bird(bx,by,.9,lt*9+i,'rgba(25,35,55,.75)');}
+  if(!USE3D){
   ctx.save();if(hasImg)ctx.translate(0,26);
   const hg=ctx.createLinearGradient(0,340,0,520);hg.addColorStop(0,hasImg?'#86b552':'#6b9a4c');hg.addColorStop(1,hasImg?'#5f9140':'#4b7a37');ctx.fillStyle=hg;
   ctx.beginPath();ctx.moveTo(0,440);ctx.quadraticCurveTo(220,330,460,420);ctx.quadraticCurveTo(700,360,900,430);ctx.lineTo(1280,440);ctx.lineTo(1280,720);ctx.lineTo(0,720);ctx.fill();
@@ -343,6 +352,7 @@ function drawAgri(lt,dur){
   line(fx,610-bob,fx,652,'#b5523a',12);line(fx,620-bob,fx+16,662,'#e0b088',4.5);
   circle(fx,597-bob,10);ctx.fillStyle='#e0b088';ctx.fill();
   ctx.fillStyle='#d9b45a';ctx.beginPath();ctx.ellipse(fx,590-bob,18,5,0,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(fx-9,590-bob);ctx.lineTo(fx,577-bob);ctx.lineTo(fx+9,590-bob);ctx.fill();
+  }else draw3D('agri',lt);
   const tg=ctx.createLinearGradient(0,0,0,200);tg.addColorStop(0,'rgba(0,0,0,.55)');tg.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=tg;ctx.fillRect(0,0,W,200);
   header(lt,'02','농업 혁명','기원전 1만 년~','농업 사회',A);
   const ck=eo(seg(lt,1,1.8));
@@ -353,7 +363,7 @@ function drawAgri(lt,dur){
       [9.5,'가내 수공업이 발달하고, 중세 후기에는 공장제 수공업이 발달했다']],828,246,392,A,{s:24,lh:36,gap:26});
     ctx.restore();}
   const hk=eo(seg(lt,10,10.8));
-  if(hk>0){glass(56,190,316,190,{a:hk,accent:A});
+  if(hk>0&&!USE3D){glass(56,190,316,190,{a:hk,accent:A});
     ctx.save();ctx.globalAlpha*=hk;
     txt('장인의 분업과 협업',80,230,{s:22,w:800});
     ctx.translate(-890,-278);
@@ -367,6 +377,7 @@ function drawAgri(lt,dur){
     circle(px+6,py+4,9);ctx.fillStyle='#e0b088';ctx.fill();
     if(s<.22)for(let i=0;i<8;i++){const an=-PI*(.1+i*.1);line(1062+Math.cos(an)*10,604+Math.sin(an)*10,1062+Math.cos(an)*(24+rnd(i)*12),604+Math.sin(an)*(24+rnd(i)*12),`rgba(255,200,90,${1-s*4.5})`,2.5);}
     ctx.restore();}
+  if(USE3D&&hk>0){const p=at3D('agri','workshop');if(p)chip(p.x,p.y,'🔨 장인의 분업과 협업',A,{a:hk,s:19,h:38});}
 }
 
 /* ============================================================
@@ -381,6 +392,12 @@ const STEAM_STEPS=[[1.5,'연소','석탄을 태워 보일러 속 물을 끓인�
   [7,'왕복 운동','증기가 피스톤을 양쪽에서 번갈아 밀어 왕복 운동을 만든다'],[10.5,'회전 운동','크랭크가 왕복 운동을 회전 운동으로 바꾼다'],
   [14,'기계 구동','이 회전력으로 방적기·방직기·기관차를 움직였다']];
 function partLabel(x,y,s){chip(x,y,s,'rgba(255,255,255,.25)',{s:19,w:700,h:34,px:22});}
+function steamLabels(lt,act,A){
+  [['fire','화실',0],['boiler','보일러',1],['cylinder','실린더 · 피스톤',2],['wheel','크랭크 · 플라이휠',3]].forEach(([n,t,i])=>{
+    const p=at3D('steam',n);if(p)chip(p.x,p.y,t,i===act?A:'rgba(255,255,255,.35)',{s:18,h:34,px:22,fill:i===act?'rgba(30,45,15,.88)':'rgba(10,12,18,.78)'});});
+  if(lt>=10.5){const k=clamp(eback(seg(lt,10.5,11.1))),a=at3D('steam','recip'),b=at3D('steam','rotate');
+    if(a)chip(a.x,a.y,'⇄ 왕복 운동',A,{a:k,s:19});if(b)chip(b.x,b.y,'↻ 회전 운동',A,{a:k,s:19});}
+}
 function drawSteam(lt,dur){
   const A=ACC[2];
   if(!drawImgBg('bg-steam',lt,dur,.68)){
@@ -398,6 +415,7 @@ function drawSteam(lt,dur){
   const Px=Cx+r*Math.cos(th),Py=Cy+r*Math.sin(th);
   const leftP=lt>T0?clamp(.5-3*Math.sin(th)):0,rightP=lt>T0?1-leftP:1;
   let act=-1;STEAM_STEPS.forEach((s,i)=>{if(lt>=s[0])act=i;});
+  if(!USE3D){
   ctx.save();ctx.translate(30,-24);
   const flg=ctx.createLinearGradient(0,612,0,660);flg.addColorStop(0,'rgba(255,255,255,.08)');flg.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=flg;ctx.fillRect(40,612,940,50);
   line(40,612,980,612,'#5a4a3a',3);
@@ -476,6 +494,7 @@ function drawSteam(lt,dur){
   if(act>=0&&act<4&&lt<17){const b=boxes[act];ctx.save();ctx.setLineDash([12,9]);ctx.lineDashOffset=-lt*30;
     ctx.globalAlpha*=.6+.4*Math.sin(lt*5);rr(b[0],b[1],b[2],b[3],16);ctx.strokeStyle=A;ctx.lineWidth=3.5;ctx.stroke();ctx.restore();}
   ctx.restore();
+  }else{draw3D('steam',lt);steamLabels(lt,act,A);}
   // 오른쪽 단계 표시
   const ik=eo(seg(lt,1,1.8));
   if(ik>0){glass(1062,176,192,420,{a:ik});ctx.save();ctx.globalAlpha*=ik;
@@ -529,6 +548,11 @@ function drawCar(x,i){
   if(k[3]>0){ctx.save();ctx.globalAlpha*=k[3];circle(x,416,18*k[3]);ctx.fillStyle='#4bd17a';ctx.shadowColor='#4bd17a';ctx.shadowBlur=16;ctx.fill();ctx.restore();
     txt('✓',x,424,{s:22,w:900,c:'#fff',al:'center',a:k[3]});}
 }
+function convLabels(lt,A){
+  [-4.5,-1.5,1.5,4.5].forEach((s,i)=>{const k=eo(seg(lt,3.2+i*.25,3.8+i*.25));if(k<=0)return;const p=at3D('conveyor','st'+i);if(!p)return;
+    let a=0;S3.carTimes.forEach(t0=>{if(lt>=t0)a=Math.max(a,1-Math.abs(-8.6+1.71*(lt-t0)-s)/.9);});
+    chip(p.x,p.y,(i+1)+'  '+ST_L[i],a>.3?A:'rgba(255,255,255,.4)',{a:k,s:19,h:36,fill:a>.3?'rgba(30,45,15,.9)':'rgba(10,12,18,.8)'});});
+}
 function drawConveyor(lt,dur){
   const A=ACC[3];
   if(!drawImgBg('bg-conveyor',lt,dur,.7)){
@@ -537,6 +561,7 @@ function drawConveyor(lt,dur){
       line(x+60,320,x+60,440,'rgba(255,255,255,.04)',2);line(x,380,x+120,380,'rgba(255,255,255,.04)',2);}
   }
   const on=lt<.8?0:lt<1.6?(Math.sin(lt*70)>0?1:.25):1;
+  if(!USE3D){
   ctx.save();ctx.translate(0,22);
   ctx.fillStyle='rgba(8,9,12,.75)';ctx.fillRect(0,612,W,130);
   ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;for(let i=-10;i<20;i++){ctx.beginPath();ctx.moveTo(640+i*90,612);ctx.lineTo(640+i*220,740);ctx.stroke();}
@@ -568,6 +593,7 @@ function drawConveyor(lt,dur){
     txt(String(i+1),s-54,599,{s:17,w:900,c:a>.3?'#111':'#fff',al:'center'});
     txt(ST_L[i],s-32,600,{s:21,w:700,c:a>.3?'#fff':'rgba(255,255,255,.7)'});ctx.restore();});
   ctx.restore();
+  }else{draw3D('conveyor',lt);convLabels(lt,A);}
   const bx=1110,by=104;
   if(on>0){ctx.save();ctx.globalCompositeOperation='lighter';const gg=ctx.createRadialGradient(bx,by,5,bx,by,140);gg.addColorStop(0,`rgba(255,215,110,${.6*on})`);gg.addColorStop(1,'rgba(255,215,110,0)');ctx.fillStyle=gg;ctx.fillRect(bx-140,by-140,280,280);ctx.restore();}
   circle(bx,by,30);ctx.fillStyle=on>0?`rgba(255,236,160,${.35+.6*on})`:'rgba(255,255,255,.12)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,.65)';ctx.lineWidth=2;ctx.stroke();
@@ -598,17 +624,20 @@ function drawInfo(lt,dur){
     const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#071120');g.addColorStop(1,'#0f2440');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
     ctx.fillStyle='rgba(91,200,230,.05)';for(let i=0;i<26;i++){const w=30+rnd(i)*40,h=60+rnd(i+9)*160;ctx.fillRect(i*50,H-h,w,h);}
   }
+  if(!USE3D){
   EDGES.forEach(([a,b],e)=>{const k=seg(lt,.2+rnd(e+3)*6,1+rnd(e+3)*6);if(k<=0)return;
     const [x1,y1]=NODES[a],[x2,y2]=NODES[b];ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(lerp(x1,x2,k),lerp(y1,y2,k));ctx.strokeStyle='rgba(91,200,230,.14)';ctx.lineWidth=1;ctx.stroke();
     if(k>=1&&e%3===0){const p=(lt*.45+rnd(e))%1;circle(lerp(x1,x2,p),lerp(y1,y2,p),2.8);ctx.fillStyle='rgba(140,225,255,.7)';ctx.fill();}});
   NODES.forEach(([x,y],i)=>{circle(x,y,3);ctx.fillStyle=`rgba(140,225,255,${.4*seg(lt,rnd(i)*3,rnd(i)*3+1)})`;ctx.fill();});
+  }else draw3D('info',lt);
   header(lt,'05','3차 산업 혁명','20세기 중후반~','정보 사회',A);
   const labels=['정보를 가공·처리·유통하는 활동이 사회·경제의 중심이 되었다','컴퓨터와 로봇으로 공장 자동화가 이루어졌다','스마트 기기와 인터넷으로 생활 방식이 크게 바뀌었다'];
   for(let i=0;i<3;i++){const k=eo(seg(lt,CARD_T[i],CARD_T[i]+.7));if(k<=0)continue;const x=CARD_X[i],cx=x+170;
-    glass(x,186+(1-k)*24,340,294,{a:k,fill:'rgba(10,28,48,.72)',stroke:'rgba(91,200,230,.45)'});
+    if(!USE3D)glass(x,186+(1-k)*24,340,294,{a:k,fill:'rgba(10,28,48,.72)',stroke:'rgba(91,200,230,.45)'});
     ctx.save();ctx.globalAlpha*=k;ctx.translate(0,(1-k)*24);
-    chip(x+20,186,CARD_TITLE[i],A,{al:'left',s:20,h:40,fill:'#0b1d31',c:'#fff'});
-    if(i===0){
+    if(USE3D){const p=at3D('info','c'+i);if(p)chip(p.x,p.y,CARD_TITLE[i],A,{s:20,h:40,fill:'#0b1d31',c:'#fff'});}
+    else chip(x+20,186,CARD_TITLE[i],A,{al:'left',s:20,h:40,fill:'#0b1d31',c:'#fff'});
+    if(USE3D){}else if(i===0){
       rr(cx-125,214,250,150,10);ctx.fillStyle='#0c2033';ctx.fill();ctx.strokeStyle=A;ctx.lineWidth=2;ctx.stroke();
       ctx.save();rr(cx-121,218,242,142,8);ctx.clip();
       ctx.strokeStyle='rgba(91,200,230,.12)';ctx.lineWidth=1;for(let gx=cx-120;gx<cx+125;gx+=16){ctx.beginPath();ctx.moveTo(gx,218);ctx.lineTo(gx,360);ctx.stroke();}
@@ -670,11 +699,21 @@ function drawInfo(lt,dur){
    장면 5 : 4차 산업 혁명 – 지능 정보 사회
    ============================================================ */
 const DEV=[['🏭','스마트 공장'],['🚗','자율 주행차'],['🏠','스마트 홈'],['🥽','가상 현실'],['🚁','드론 배송'],['⌚','웨어러블']];
+function aiLabels(lt,A){
+  DEV.forEach((d,i)=>{const k=eo(seg(lt,1+i*.25,1.6+i*.25));if(k<=0)return;const p=at3D('ai','dev'+i);if(p)txt(d[1],p.x,p.y+14,{s:17,w:800,al:'center',a:k,sh:10});});
+}
+function aiBubble(lt){
+  if(lt<13.1)return;const p=at3D('ai','robot');if(!p)return;const k=clamp(eback(seg(lt,13.1,13.6)));
+  ctx.save();ctx.globalAlpha*=k;rr(p.x-128,p.y-62,256,46,14);ctx.fillStyle='#fff';ctx.fill();
+  ctx.beginPath();ctx.moveTo(p.x-10,p.y-17);ctx.lineTo(p.x,p.y-2);ctx.lineTo(p.x+12,p.y-17);ctx.fill();
+  txt('주문하신 음식 나왔어요!',p.x,p.y-31,{s:19,w:800,c:'#2a2250',al:'center'});ctx.restore();
+}
 function drawAI(lt,dur){
   const A=ACC[5];
   if(!drawImgBg('bg-ai',lt,dur,.66)){
     const g=ctx.createRadialGradient(380,430,40,380,430,900);g.addColorStop(0,'#2a2058');g.addColorStop(1,'#0b0918');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   }
+  if(!USE3D){
   constellation(lt,'180,170,255',40,.6);
   const hx=380,hy=420,R=186,ro=lt*.12;
   [R-60,R+70].forEach((r2,j)=>{ctx.save();ctx.translate(hx,hy);ctx.rotate(lt*(j?-.08:.15));ctx.setLineDash([2,10]);circle(0,0,r2);ctx.strokeStyle='rgba(169,156,240,.25)';ctx.lineWidth=2;ctx.stroke();ctx.restore();});
@@ -694,7 +733,8 @@ function drawAI(lt,dur){
   pos.forEach(([x,y],i)=>{const k=eback(seg(lt,.8+i*.25,1.4+i*.25));if(k<=0)return;ctx.save();ctx.globalAlpha*=clamp(k);
     circle(x,y,38*k);ctx.fillStyle='#1d1838';ctx.shadowColor=A;ctx.shadowBlur=14;ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=A;ctx.lineWidth=2.5;ctx.stroke();
     emoji(DEV[i][0],x,y+2,32);txt(DEV[i][1],x,y+62,{s:18,w:700,al:'center',c:'#fff',sh:8});ctx.restore();});
-  txt('데이터 수집 → 인공지능 분석 → 기기 제어',hx,706,{s:20,w:700,al:'center',c:'rgba(255,255,255,.82)',a:seg(lt,3,3.8)});
+  }else{draw3D('ai',lt);aiLabels(lt,A);}
+  txt('데이터 수집 → 인공지능 분석 → 기기 제어',380,706,{s:20,w:700,al:'center',c:'rgba(255,255,255,.82)',a:seg(lt,3,3.8)});
   header(lt,'06','4차 산업 혁명','','지능 정보 사회',A);
   let kx=716,ky=196;
   ['인공지능','사물 인터넷','빅데이터','초고속 통신망','로봇'].forEach((w,i)=>{ctx.font=`700 20px ${SANS}`;const tw=ctx.measureText(w).width+34;
@@ -703,6 +743,7 @@ function drawAI(lt,dur){
     kx+=tw+10;});
   bulletList(lt,[[4,'첨단 정보 통신 기술과 로봇 기술이 적용된 초지능·초연결 시대가 되었다'],
     [7,'생활·사회·경제의 모든 분야에 첨단 기술이 활용되어 새로운 가치를 만든다']],716,312,530,A,{s:23,lh:33,gap:14});
+  if(USE3D){aiBubble(lt);return;}
   const sk=eo(seg(lt,8.4,9.2));if(sk<=0)return;
   glass(716,462,530,240,{a:sk,fill:'rgba(20,16,40,.7)'});
   ctx.save();ctx.globalAlpha*=sk;

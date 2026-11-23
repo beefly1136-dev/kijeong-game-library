@@ -42,12 +42,15 @@
     <a class="more" id="more" href="../../play/26/" target="_top" title="2분 영상 보기">▶ <span>2분 영상</span></a>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="scenes3d.js?v=eb509347"></script>
 <script>
 (()=>{
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 if(!ctx.roundRect)ctx.roundRect=function(x,y,w,h,r){r=Math.min(r,w/2,h/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();};
 const SANS='"Noto Sans KR","Malgun Gothic",sans-serif',SERIF='"Noto Serif KR","Batang",serif',EMOJI='"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';
 const PI=Math.PI,TAU=PI*2;
+const USE3D=!!(window.S3&&window.S3.ok);
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),seg=(t,a,b)=>clamp((t-a)/(b-a)),lerp=(a,b,k)=>a+(b-a)*k;
 const eo=x=>1-Math.pow(1-x,3),eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const rnd=i=>{const s=Math.sin(i*12.9898+78.233)*43758.5453;return s-Math.floor(s);};
@@ -72,11 +75,11 @@ Object.entries(IMG_FILES).forEach(([k,src])=>{const im=new Image();im.onload=()=
 
 /* ---------- 장면 정보 ---------- */
 const SC=[
-  {bg:'bg-agri',a:'#e9b949',name:'농업 사회',tag:'농업 혁명 · 기원전 1만 년~',title:'땅을 일구어 식량을 기르다',sub:'농기구로 식량을 직접 기르며 정착 생활이 시작됐어요.',draw:aAgri,fy:.62,music:'agri'},
-  {bg:'bg-steam',a:'#9bd34a',name:'1차 산업 혁명',tag:'1차 산업 혁명 · 18세기 중후반~',title:'증기 기관이 공장을 움직이다',sub:'증기가 피스톤을 밀고, 크랭크가 왕복 운동을 회전 운동으로 바꿔요.',draw:aSteam,fy:.55,music:'steam'},
-  {bg:'bg-conveyor',a:'#9bd34a',name:'2차 산업 혁명',tag:'2차 산업 혁명 · 19세기 중후반~',title:'컨베이어 벨트, 대량 생산을 열다',sub:'사람은 제자리에서 일하고, 제품이 벨트를 따라 움직여요.',draw:aConveyor,fy:.5,music:'conveyor'},
-  {bg:'bg-info',a:'#5bc8e6',name:'정보 사회',tag:'3차 산업 혁명 · 20세기 중후반~',title:'컴퓨터와 인터넷, 정보를 잇다',sub:'정보를 가공·처리·유통하는 일이 사회와 경제의 중심이 됐어요.',draw:aInfo,fy:.45,music:'info'},
-  {bg:'bg-ai',a:'#a99cf0',name:'지능 정보 사회',tag:'4차 산업 혁명',title:'인공지능이 생활 속으로',sub:'인공지능·사물 인터넷이 모든 것을 이어 새로운 가치를 만들어요.',draw:aAI,fy:.45,music:'ai'},
+  {bg:'bg-agri',a:'#e9b949',name:'농업 사회',tag:'농업 혁명 · 기원전 1만 년~',title:'땅을 일구어 식량을 기르다',sub:'농기구로 식량을 직접 기르며 정착 생활이 시작됐어요.',draw:aAgri,fy:.62,music:'agri',key:'agri',off:1.5},
+  {bg:'bg-steam',a:'#9bd34a',name:'1차 산업 혁명',tag:'1차 산업 혁명 · 18세기 중후반~',title:'증기 기관이 공장을 움직이다',sub:'증기가 피스톤을 밀고, 크랭크가 왕복 운동을 회전 운동으로 바꿔요.',draw:aSteam,fy:.55,music:'steam',key:'steam',off:10},
+  {bg:'bg-conveyor',a:'#9bd34a',name:'2차 산업 혁명',tag:'2차 산업 혁명 · 19세기 중후반~',title:'컨베이어 벨트, 대량 생산을 열다',sub:'사람은 제자리에서 일하고, 제품이 벨트를 따라 움직여요.',draw:aConveyor,fy:.5,music:'conveyor',key:'conveyor',off:5},
+  {bg:'bg-info',a:'#5bc8e6',name:'정보 사회',tag:'3차 산업 혁명 · 20세기 중후반~',title:'컴퓨터와 인터넷, 정보를 잇다',sub:'정보를 가공·처리·유통하는 일이 사회와 경제의 중심이 됐어요.',draw:aInfo,fy:.45,music:'info',key:'info',off:10.5},
+  {bg:'bg-ai',a:'#a99cf0',name:'지능 정보 사회',tag:'4차 산업 혁명',title:'인공지능이 생활 속으로',sub:'인공지능·사물 인터넷이 모든 것을 이어 새로운 가치를 만들어요.',draw:aAI,fy:.45,music:'ai',key:'ai',off:5},
 ];
 const DUR=8,TR=.8,TOTAL=SC.length*DUR,BW=640,BH=200;
 let W=1200,H=280,DPR=1;
@@ -206,7 +209,8 @@ function scene(i,lt,alpha){
     g=ctx.createLinearGradient(W,0,W-L.side-40,0);g.addColorStop(0,'rgba(8,8,12,.75)');g.addColorStop(1,'rgba(8,8,12,0)');ctx.fillStyle=g;ctx.fillRect(W-L.side-40,0,L.side+40,H);}
   const cg=ctx.createRadialGradient(W/2,H*.45,20,W/2,H*.45,BW*L.s*.62);cg.addColorStop(0,'rgba(8,8,12,.45)');cg.addColorStop(1,'rgba(8,8,12,0)');ctx.fillStyle=cg;ctx.fillRect(0,0,W,H);
   // 가운데 애니메이션
-  ctx.save();ctx.translate(L.x,L.y);ctx.scale(L.s,L.s);s.draw(lt,s.a);ctx.restore();
+  if(USE3D){const cnv=ctx.canvas,g=S3.render(s.key,lt+s.off,cnv.width,cnv.height,'banner');if(g){ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(g,0,0,cnv.width,cnv.height);ctx.restore();}}
+  else{ctx.save();ctx.translate(L.x,L.y);ctx.scale(L.s,L.s);s.draw(lt,s.a);ctx.restore();}
   // 글자
   const k=eo(seg(lt,.15,.9));ctx.save();ctx.globalAlpha*=k;
   const num=`${String(i+1).padStart(2,'0')} / ${String(SC.length).padStart(2,'0')}`;
