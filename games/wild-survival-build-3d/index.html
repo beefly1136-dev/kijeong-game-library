@@ -33,6 +33,12 @@ canvas#gl{display:block}
 .hs.sel{border-color:#ffd25a;background:rgba(255,210,90,.28)}
 #heldName{left:50%;bottom:76px;transform:translateX(-50%);font-size:14px;font-weight:bold;text-shadow:0 1px 3px #000;transition:opacity .4s}
 #cross{left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;text-shadow:0 0 3px #000;opacity:.85}
+#bowVig{left:0;top:0;right:0;bottom:0;display:none;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 45%,rgba(0,0,0,.45) 100%)}
+#bowAim{left:50%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);display:none}
+#bowAim svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 2px #000)}
+#bowAim .lbl2{position:absolute;left:50%;top:calc(100% + 30px);transform:translateX(-50%);font-size:11px;opacity:.8;white-space:nowrap;text-shadow:0 1px 3px #000}
+body.touch #bowAim .lbl2{display:none}
+#bowAim .lbl{position:absolute;left:50%;bottom:calc(100% + 2px);transform:translateX(-50%);font-size:12px;white-space:nowrap;text-shadow:0 1px 3px #000}
 #target{left:50%;top:calc(50% + 22px);transform:translateX(-50%);background:rgba(0,0,0,.55);padding:4px 10px;border-radius:10px;font-size:13px;white-space:nowrap;display:none}
 #target.bad{color:#ffb0a8}
 #prog{left:50%;top:calc(50% + 50px);transform:translateX(-50%);width:110px;height:7px;background:rgba(0,0,0,.5);border-radius:4px;overflow:hidden;display:none}
@@ -54,6 +60,10 @@ canvas#gl{display:block}
 #hotbar{pointer-events:auto}
 #hotbar .hs{cursor:pointer}
 #hotbar .hs:hover{border-color:rgba(255,255,255,.5)}
+#hotbar .hpg{width:30px;height:48px;padding:0;text-align:center;font-size:16px;background:rgba(255,255,255,.1);border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+#hotbar .hpg small{font-size:9px;color:#bbb}
+#hotbar .hpg.has{background:rgba(255,210,90,.25)}
+#hotbar .pgi{display:flex;flex-direction:column;justify-content:center;font-size:10px;color:#ccd;padding:0 2px;text-align:center;line-height:1.3}
 button{font-family:inherit;font-size:13px;border:0;border-radius:8px;padding:7px 11px;background:rgba(40,52,66,.88);color:#fff;cursor:pointer;text-align:left}
 button:hover{filter:brightness(1.15)}
 button.on{background:#c9832a}
@@ -124,6 +134,16 @@ body.touch #card{bottom:200px!important;right:190px}
 .need.ok small{color:#8fe08f}.need.no small{color:#ff9b9b}
 .stline{margin-top:10px;font-size:13px}
 .stline.ok{color:#8fe08f}.stline.no{color:#ff9b9b}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center}
+.ccard{background:#2a3542;border-radius:12px;padding:10px 6px 9px;border:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:150px;box-sizing:border-box}
+.ccard.can{border-color:#3f9a55}
+.ccard .cic{height:40px;display:flex;align-items:center;justify-content:center;font-size:34px}
+.ccard .cnm{font-weight:bold;font-size:14px}
+.ccard .cneed{font-size:12px;line-height:1.6}
+.ccard .cneed span{display:inline-block;margin:0 3px;white-space:nowrap}
+.ccard .cst{font-size:11px}
+.ccard button{margin-top:auto;padding:6px 16px;font-size:13px;border-radius:9px;background:#2f9a55;text-align:center}
+.ccard button:disabled{background:#3a4552}
 .mainbtn{display:block;margin:14px auto 0;padding:11px 34px;font-size:16px;font-weight:bold;border-radius:12px;background:#2f9a55;text-align:center}
 .mainbtn:disabled{background:#3a4552}
 .dots{text-align:center;margin-top:12px;letter-spacing:4px;font-size:11px;color:#5d6b7a}
@@ -146,6 +166,16 @@ body.touch #card{bottom:200px!important;right:190px}
 #overlay h1{margin:0;font-size:26px}
 #overlay h2{font-size:15px;color:#ffe08a;margin:14px 0 4px}
 #overlay td{padding:2px 14px 2px 0}
+#overlay .sub1{color:#cfe3f0;font-size:15px;margin:4px 0 14px}
+#overlay .keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+#overlay .keys div{background:#2c3846;border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.45;color:#dfe8ee}
+#overlay .keys b{display:block;color:#ffe08a;font-size:13.5px;margin-bottom:2px}
+#overlay .keys small{color:#9fb3c2}
+#overlay .more{margin-top:10px;font-size:13px}
+#overlay .more summary{cursor:pointer;color:#9fd3ff}
+#overlay .more table{margin-top:6px}
+#overlay .modes{font-size:12.5px;color:#cfd9e0;margin-top:10px}
+#overlay .savenote{font-size:12px;color:#9fb3c2;margin-top:4px}
 kbd{background:#3b4652;border-radius:4px;padding:1px 6px;font-family:inherit;font-size:12px}
 .startbtns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 .startbtns button{font-size:15px;padding:11px 20px;text-align:center}
@@ -165,10 +195,18 @@ kbd{background:#3b4652;border-radius:4px;padding:1px 6px;font-family:inherit;fon
 <div id="guide" class="hud"><h4 id="guideHead">🧭 가이드 <small>숨기기 ▲</small></h4><div id="glist"></div></div>
 <div id="heldName" class="hud"></div>
 <div id="hotbar" class="hud"></div>
+<div id="bowVig" class="hud"></div>
 <div id="cross" class="hud">+</div>
+<div id="bowAim" class="hud"><svg viewBox="-75 -75 150 150">
+  <circle r="34" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.6"/>
+  <circle id="bowPow" r="40" fill="none" stroke="#ffd25a" stroke-width="4" stroke-linecap="round" transform="rotate(-90)" stroke-dasharray="0 999"/>
+  <path d="M-30 0H-9M9 0H30M0 -30V-9M0 9V30" stroke="#fff" stroke-width="2"/>
+  <circle r="2.4" fill="#ff4a3a"/>
+  <path d="M-6 16H6M-4.5 24H4.5M-3 32H3" stroke="#ffd25a" stroke-width="1.6"/>
+</svg><div class="lbl" id="bowLbl"></div><div class="lbl2">🖱️ 오른쪽 버튼을 누른 채 끌면 조준 방향을 돌려요</div></div>
 <div id="target" class="hud"></div>
 <div id="prog" class="hud"><u></u></div>
-<div id="hint" class="hud">화면을 클릭하면 마우스로 시점을 돌릴 수 있어요 (Esc: 마우스 풀기)</div>
+<div id="hint" class="hud">🖱️ 마우스 오른쪽 버튼을 누른 채 끌면 둘러볼 수 있어요</div>
 <div id="toast" class="hud"></div>
 <div id="hurt"></div>
 <div id="touchUI">
@@ -188,6 +226,7 @@ kbd{background:#3b4652;border-radius:4px;padding:1px 6px;font-family:inherit;fon
   <button id="bSound">🔊 소리 켜짐</button>
   <button id="bPeace">⚔️ 생존 모드</button>
   <button id="bTouch">📱 터치 조작 켜기</button>
+  <button id="bLock">🖱️ 마우스 고정 꺼짐</button>
   <button id="bLow">⚡ 저사양 모드</button>
   <button id="bHelp">❓ 도움말·저장 (H)</button>
 </div>
@@ -215,26 +254,28 @@ kbd{background:#3b4652;border-radius:4px;padding:1px 6px;font-family:inherit;fon
 <div id="overlay">
   <div class="box">
     <h1>🏕️ 야생 생존 건축 3D</h1>
-    <div style="color:#9fb3c2">나만의 섬에서 자유롭게 살아가기 — 재료를 모으고, 도구를 만들고, 친구(펫)를 사귀고, 기술을 발전시켜요</div>
-    <h2>🎯 정해진 끝은 없어요</h2>
-    원하는 대로 탐험하고 만들고 지어 보세요. 처음 만든 물건마다 <b>실제 제조 기술 카드</b>가, 섬 곳곳의 보물 상자에서는 <b>우리 건축 유산 카드</b>가 도감에 모여요.
-    석기 시대에서 시작해 <b>철기 시대</b>까지 발전해 보세요!
-    <h2>🎮 조작법</h2>
-    <table>
-      <tr><td><kbd>W A S D</kbd> · <kbd>Shift</kbd> · <kbd>Space</kbd></td><td>이동 · 달리기 · 점프</td></tr>
-      <tr><td>마우스</td><td>시점 (화면 클릭 → 마우스 고정, <kbd>Esc</kbd>로 풀기)</td></tr>
-      <tr><td>왼쪽 클릭 (꾹)</td><td>줍기 · 베기 · 캐기 · 파기 · 물 뜨기 · 낚시 · 상자 열기</td></tr>
-      <tr><td>오른쪽 클릭</td><td>먹기 · 펫에게 먹이 주기 · 문 여닫기 · 침대에서 자기</td></tr>
-      <tr><td><kbd>1</kbd>~<kbd>9</kbd> / 핫바 클릭</td><td>손에 들 물건 고르기 (클릭은 <kbd>Esc</kbd>로 마우스를 푼 뒤)</td></tr>
-      <tr><td>마우스 휠</td><td>화면 확대 · 축소</td></tr>
-      <tr><td><kbd>E</kbd> · <kbd>K</kbd> · <kbd>P</kbd> · <kbd>G</kbd></td><td>제작·가방 · 도감 · 펫 · 내 집 (창 안에서 <kbd>←</kbd><kbd>→</kbd>로 넘기기)</td></tr>
-      <tr><td>블록·설치물 들고 왼쪽 클릭</td><td>바라보는 곳에 놓기 (꾹 누른 채 둘러보면 연달아 놓여요 · 오른쪽 클릭: 블록 회수)</td></tr>
-      <tr><td><kbd>F</kbd></td><td>펫 부르기</td></tr>
-      <tr><td><kbd>V</kbd> · <kbd>M</kbd></td><td>시점 전환 · 큰 지도</td></tr>
-    </table>
-    <div style="font-size:13px;margin-top:10px">📱 <b>태블릿</b>: 왼쪽 아래 조이스틱으로 이동, 화면을 손가락으로 끌어 둘러보기, 오른쪽 버튼으로 👊 캐기·놓기 / ✋ 사용·먹기 / ⤴️ 점프 / 🏃 달리기. 핫바는 눌러서 골라요.</div>
-    <div style="font-size:13px;margin-top:6px">⚔️ <b>생존 모드</b>: 배고픔·목마름을 챙기고, 밤에는 늑대를 피해 집이나 불빛 곁에 있어야 해요.<br>🕊️ <b>평화 모드</b>: 배고픔이 줄지 않고 늑대가 나오지 않아요. (왼쪽 메뉴에서 언제든 바꿀 수 있어요)</div>
-    <div style="font-size:12px;color:#9fb3c2;margin-top:8px">💾 30초마다 이 컴퓨터의 브라우저에 자동 저장돼요. 다음 시간에 같은 컴퓨터로 이어서 할 수 있어요.</div>
+    <div class="sub1">재료를 모으고 → 도구를 만들고 → 집을 지어 보세요!</div>
+    <div class="keys">
+      <div><b><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></b>이동 <small>(Shift 달리기 · Space 점프)</small></div>
+      <div><b>🖱️ 오른쪽 끌기</b>둘러보기</div>
+      <div><b>🖱️ 왼쪽 꾹</b>캐기 · 베기 · 줍기</div>
+      <div><b>🖱️ 오른쪽 클릭</b>먹기 · 문 · 펫 먹이 (음식은 왼쪽 클릭으로도 먹어요)</div>
+      <div><b>🧱 블록 들고</b>클릭 = 놓기<br>꾹 누르기 = 회수</div>
+      <div><b><kbd>1</kbd>~<kbd>9</kbd> · <kbd>Q</kbd><kbd>R</kbd></b>도구 고르기 · 핫바 넘기기</div>
+      <div><b><kbd>E</kbd></b>제작 · 가방</div>
+      <div><b><kbd>H</kbd></b>이 도움말 다시 보기</div>
+    </div>
+    <details class="more"><summary>➕ 조작 더 보기</summary>
+      <table>
+        <tr><td><kbd>K</kbd> · <kbd>P</kbd> · <kbd>G</kbd></td><td>도감 · 펫 · 내 집</td></tr>
+        <tr><td><kbd>F</kbd> · <kbd>V</kbd> · <kbd>M</kbd></td><td>펫 부르기 · 시점 전환 · 큰 지도</td></tr>
+        <tr><td>마우스 휠</td><td>화면 확대 · 축소</td></tr>
+        <tr><td>활</td><td>왼쪽 누르고 당기다 떼면 발사</td></tr>
+        <tr><td>📱 태블릿</td><td>왼쪽 조이스틱 이동 · 화면 끌어 둘러보기 · 오른쪽 버튼으로 행동</td></tr>
+      </table>
+    </details>
+    <div class="modes">⚔️ <b>생존 모드</b>: 배고픔·목마름을 챙기고 밤엔 늑대 조심 · 🕊️ <b>평화 모드</b>: 편하게 짓기만 (왼쪽 메뉴에서 바꿔요)</div>
+    <div class="savenote">💾 30초마다 이 브라우저에 자동 저장돼요</div>
     <div class="startbtns">
       <button id="bStart" style="background:#2f9a55" disabled>🌱 월드 만드는 중…</button>
       <button id="bNew" style="display:none">🌱 새 섬 만들기</button>
@@ -253,7 +294,7 @@ const $ = id => document.getElementById(id);
 // ===================== 기본 설정 =====================
 const N = 128, CS = 2, SIZE = N*CS;
 const DAY = 360, REACH = 3.3;
-const SAVEKEY = 'wild_build3d_save_v1';
+const SAVEKEY = 'wild_build3d_save_v2';   // 섬 만드는 방법이 바뀌어 예전 저장과 섞이지 않도록 v2
 const B = {DEEP:0, WATER:1, SAND:2, CLAY:3, GRASS:4, FOREST:5, DESERT:6, STONE:7, SNOW:8};
 const BCOL = ['#6e9aa8','#93b8a6','#efe0a8','#c09474','#9ad874','#68b552','#f2cf86','#a3a6a9','#f5f8fb'];
 const BINFO = [
@@ -274,8 +315,8 @@ const ITEMS = {
   fiber:{n:'풀',i:'🌿',d:'풀숲에서 뜯어요'}, rope:{n:'끈',i:'🧵',d:'풀을 꼬아 만든 끈 — 도구를 묶어요'},
   log:{n:'통나무',i:'🪵',d:'나무를 베어 얻어요'}, plank:{n:'판자',i:'🟫',d:'통나무를 켜서 만든 건축 재료'},
   stone:{n:'석재',i:'⬛',d:'바위를 캐서 얻는 돌'}, ore:{n:'철광석',i:'🟤',d:'화로에서 녹이면 철이 돼요'},
-  iron:{n:'철괴',i:'🔩',d:'철광석을 제련해 얻은 금속'}, sand:{n:'모래',i:'🟨',d:'화로에서 녹이면 유리가 돼요'},
-  clay:{n:'점토',i:'🟧',d:'화로에서 구우면 벽돌이 돼요'}, brick:{n:'벽돌',i:'🧱',d:'점토를 구워 만든 단단한 건축 재료'},
+  iron:{n:'철괴',i:'🔩',d:'철광석을 제련해 얻은 금속'}, sand:{n:'모래',i:'🟨',d:'화로에서 녹이면 유리가 돼요 · 들고 구덩이를 왼쪽 클릭하면 메울 수 있어요'},
+  clay:{n:'점토',i:'🟧',d:'화로에서 구우면 벽돌이 돼요 · 들고 구덩이를 왼쪽 클릭하면 메울 수 있어요'}, brick:{n:'벽돌',i:'🧱',d:'점토를 구워 만든 단단한 건축 재료'},
   glass:{n:'유리',i:'💠',d:'모래를 녹여 만든 투명한 재료'},
   berry:{n:'산딸기',i:'🍓',food:12,water:3,d:'달콤한 열매'}, mush:{n:'버섯',i:'🍄',food:8,d:'숲에서 주운 버섯'},
   fish:{n:'생선',i:'🐟',food:6,hp:-4,d:'날생선 · 고양이가 좋아해요'}, cfish:{n:'구운 생선',i:'🍣',food:28,hp:4,d:'든든한 음식 · 강아지가 좋아해요'},
@@ -289,8 +330,10 @@ const ITEMS = {
   shovel:{n:'나무삽',i:'🪏',tool:'shovel',pow:1,dur:50,d:'모래·점토를 팔 수 있어요'},
   bowl:{n:'나무 그릇',i:'🥣',tool:'bowl',pow:1,dur:40,d:'물을 떠서 담아 가요'},
   rod:{n:'낚싯대',i:'🎣',tool:'rod',pow:1,dur:30,d:'물에서 물고기를 낚아요'},
-  spear:{n:'돌창',i:'🔱',tool:'spear',pow:1,dur:50,d:'사냥 도구 (동물은 다음 업데이트)'},
-  sword:{n:'철검',i:'🗡️',tool:'spear',pow:2,dur:150,d:'튼튼한 사냥 도구 (동물은 다음 업데이트)'},
+  spear:{n:'돌창',i:'🔱',tool:'spear',pow:1,dur:50,d:'가까이 다가가 휘둘러 사냥해요'},
+  sword:{n:'철검',i:'🗡️',tool:'spear',pow:2,dur:150,d:'튼튼한 근거리 사냥 도구'},
+  bow:{n:'나무 활',i:'🏹',tool:'bow',pow:1,dur:80,d:'조준한 곳으로 화살을 쏘아 멀리서 사냥해요 (화살 필요)'},
+  arrow:{n:'화살',i:'🪶',d:'활로 쏘는 화살 — 나뭇가지 촉에 돌을 달았어요'},
   bench:{n:'작업대',i:'🛠️',place:1,d:'설치하면 옆에서 고급 도구를 만들어요'},
   fire:{n:'모닥불',i:'🔥',place:1,d:'설치하면 옆에서 요리하고, 밤을 밝혀요'},
   furnace:{n:'화로',i:'🏭',place:1,d:'설치하면 옆에서 벽돌·유리·철을 만들어요'},
@@ -299,6 +342,7 @@ const ITEMS = {
   thatch:{n:'초가 블록',i:'🌾',block:1,sw:'thatch',d:'풀을 엮은 지붕 재료 — 경사 지붕으로 인정돼요'},
   sblock:{n:'돌 블록',i:'⬜',block:1,sw:'stone',d:'불에 타지 않는 튼튼한 블록'},
   bblock:{n:'벽돌 블록',i:'🧱',block:1,sw:'brick',d:'가지런히 쌓기 좋은 튼튼한 블록'},
+  dirt:{n:'흙 블록',i:'🟫',block:1,sw:'dirt',d:'잔디 땅을 삽으로 파면 나와요 · 구덩이를 메우거나 쌓을 수 있어요'},
   woolb:{n:'양털 블록',i:'⬜',block:1,sw:'wool',d:'푹신한 흰 블록 — 카펫·이불·장식에 좋아요'},
   window:{n:'유리창',i:'🪟',block:1,sw:'glass',d:'빛이 들어오는 벽 블록'},
   stair:{n:'나무 계단',i:'📐',block:1,sw:'wood',d:'오르내리거나 경사 지붕을 만들어요 (바라보는 쪽으로 높아져요)'},
@@ -307,7 +351,7 @@ const ITEMS = {
   bed:{n:'침대',i:'🛏️',block:1,d:'집 안에 두고 밤에 오른쪽 클릭하면 아침이 돼요'},
 };
 const BLK = {
-  wblock:{mat:'wood',solid:1,hits:3,tool:'axe'}, thatch:{mat:'thatch',solid:1,hits:1}, woolb:{mat:'wool',solid:1,hits:1},
+  wblock:{mat:'wood',solid:1,hits:3,tool:'axe'}, thatch:{mat:'thatch',solid:1,hits:1}, dirt:{mat:'dirt',solid:1,hits:2,tool:'shovel'}, woolb:{mat:'wool',solid:1,hits:1},
   sblock:{mat:'stone',solid:1,hits:4,tool:'pick'}, bblock:{mat:'brick',solid:1,hits:4,tool:'pick'},
   window:{mat:'glass',solid:1,hits:1}, stair:{mat:'wood',solid:1,half:1,hits:2,tool:'axe'},
   door:{solid:1,door:1,hits:2,tool:'axe'}, torch:{solid:0,furn:1,hits:1}, bed:{solid:1,half:1,furn:1,hits:2,tool:'axe'},
@@ -325,6 +369,8 @@ const RECIPES = [
   {o:'spear', q:1, need:{pebble:1,stick:2,rope:1}, cat:'tool'},
   {o:'shovel',q:1, need:{plank:2,stick:1}, st:'bench', cat:'tool'},
   {o:'bowl',  q:1, need:{plank:2}, st:'bench', cat:'tool'},
+  {o:'bow',   q:1, need:{stick:3,rope:2}, st:'bench', cat:'tool'},
+  {o:'arrow', q:4, need:{stick:1,pebble:1}, cat:'tool'},
   {o:'iaxe',  q:1, need:{iron:2,stick:2}, st:'bench', cat:'tool'},
   {o:'ipick', q:1, need:{iron:3,stick:2}, st:'bench', cat:'tool'},
   {o:'sword', q:1, need:{iron:2,stick:1}, st:'bench', cat:'tool'},
@@ -357,6 +403,8 @@ const TECH = {
   axe:{t:'조립 도구 — 돌도끼', d:'날(돌)·자루(나무)·결속(끈) 세 부품을 조립한 도구예요. 긴 자루 끝의 날은 손보다 빠르게 움직여 큰 충격을 주고, 쐐기 모양 날이 힘을 모아 나무를 쪼개요.', q:'자루가 길면 왜 더 세게 찍을 수 있을까?'},
   pick:{t:'압력 집중 — 곡괭이', d:'같은 힘이라도 닿는 면적이 좁을수록 압력이 커져요. 뾰족한 곡괭이 끝은 힘을 한 점에 모아 단단한 바위에 금을 내요. 광산과 토목 공사의 기본 도구예요.', q:'못이나 압정 끝이 뾰족한 것도 같은 원리일까?'},
   rod:{t:'탄성 — 낚싯대', d:'잘 휘는 장대는 휘었다가 원래대로 돌아가려는 성질(탄성)이 있어요. 물고기가 당기는 힘을 장대가 흡수해 줄이 끊어지지 않게 해 줘요.', q:'우리 주변에서 탄성을 이용하는 물건을 찾아보자.'},
+  bow:{t:'탄성 에너지 — 활', d:'활시위를 당기면 휘어진 활대에 탄성 에너지가 저장되고, 놓는 순간 그 에너지가 화살의 운동 에너지로 바뀌어 멀리 날아가요.', q:'활시위를 더 많이 당기면 화살이 더 멀리 가는 까닭은?'},
+  arrow:{t:'화살 — 촉과 깃', d:'뾰족한 촉은 힘을 한 점에 모으고, 뒤쪽 깃(날개)은 공기 저항을 받아 화살이 흔들리지 않고 똑바로 날아가게 잡아 줘요.', q:'다트나 비행기 꼬리날개도 같은 원리일까?'},
   spear:{t:'긴 자루 도구 — 창', d:'긴 자루로 먼 거리에서 힘을 전달하고, 뾰족한 날로 힘을 한 점에 모아요. 인류가 처음 만든 조립 도구 중 하나예요.', q:'자루가 길면 좋은 점과 불편한 점은?'},
   bench:{t:'고정 — 작업대', d:'재료를 단단히 고정해야 정확하게 자르고 다듬을 수 있어요. 작업대는 정밀 가공의 출발점이고, 오늘날 공장의 바이스·지그로 발전했어요.', q:'재료를 잡지 않고 톱질하면 어떤 문제가 생길까?'},
   fire:{t:'연소의 3요소', d:'불이 타려면 연료(나무)·산소(공기)·열이 모두 필요해요. 셋 중 하나만 없애도 불이 꺼지는데, 이것이 소화의 원리예요. 돌로 둘러싸면 불이 번지지 않아요.', q:'모닥불에 흙을 덮으면 불이 꺼지는 까닭은?'},
@@ -407,8 +455,9 @@ const HCRIT = [
   {k:'space', i:'📐', n:'넉넉한 공간',   f:h=>h.cells>=9&&h.avgH>=3, how:'바닥 9칸 이상, 천장 높이 3칸 이상으로 지어요'},
 ];
 const HOWTO = [
+  {i:'🪏', t:'0. 집 지을 자리 마련', d:'작업대 옆에서 나무삽을 만들어 손에 들고, 집 지을 곳의 땅을 오른쪽 클릭해요. (왼쪽 클릭은 구덩이 파기)\n내가 서 있는 높이에 맞춰 땅이 평평해져요. 주변 나무·바위는 도끼·곡괭이로 치워요.\n땅이 평평하지 않으면 블록을 놓을 수 없어요!'},
   {i:'🟫', t:'1. 재료 준비', d:'작업대 옆에서 판자로 나무 블록을 만들어요. (판자 2 → 블록 4)\n4×4 크기의 집에는 블록이 60개쯤 필요해요.'},
-  {i:'🧱', t:'2. 벽 쌓기', d:'블록을 손에 들고 땅을 바라보며 왼쪽 클릭!\n꾹 누른 채 둘러보면 연달아 놓여요. 네모나게 둘러서 3칸 높이로 쌓아요.\n잘못 놓은 블록은 오른쪽 클릭으로 회수해요.'},
+  {i:'🧱', t:'2. 벽 쌓기', d:'블록을 손에 들고 땅을 바라보며 왼쪽 클릭!\n네모나게 둘러서 3칸 높이로 쌓아요.\n잘못 놓은 블록은 바라보고 왼쪽을 길게 누르면 회수돼요.'},
   {i:'🚪', t:'3. 문 달기', d:'벽 한 곳을 2칸 높이로 비워 두고, 그 자리에 나무 문을 놓아요.\n문은 오른쪽 클릭으로 열고 닫아요.'},
   {i:'🏠', t:'4. 지붕 덮기', d:'벽 위를 블록으로 빈틈없이 덮어요.\n문을 열고 안에 들어가면 집이 완성돼요!'},
 ];
@@ -473,15 +522,17 @@ function genTerrain(){
     let w=false; for(const n of [k-1,k+1,k-V,k+V]) if(bio[n]<=B.WATER) w=true;
     if(w && rnd()<(bio[k]===B.SAND?.3:.12)) bio[k]=B.CLAY;
   }
-  let best=null, bd=1e9;
-  for(let j=12;j<N-12;j++) for(let i=12;i<N-12;i++){
+  // 시작 장소: 숲과 물이 가까운 평원 후보 중에서 섬마다 무작위로 고름 (매번 다른 곳에서 시작)
+  let best=null, bd=1e9; const cand=[];
+  for(let j=14;j<N-14;j+=2) for(let i=14;i<N-14;i+=2){
     if(bio[vid(i,j)]!==B.GRASS) continue;
-    const d=(i-N/2)**2+(j-N/2)**2; if(d>=bd) continue;
     let f=false, w=false;
-    for(let y=-6;y<=6;y++) for(let x=-6;x<=6;x++) if(bio[vid(i+x,j+y)]===B.FOREST) f=true;
+    for(let y=-6;y<=6&&!f;y++) for(let x=-6;x<=6;x++) if(bio[vid(i+x,j+y)]===B.FOREST){f=true;break;}
+    if(!f) continue;
     for(let y=-12;y<=12&&!w;y++) for(let x=-12;x<=12;x++) if(hgt[vid(i+x,j+y)]<-0.5){w=true;break;}
-    if(f&&w){bd=d;best={i,j};}
+    if(w) cand.push({i,j});
   }
+  if(cand.length) best=cand[Math.floor(rnd()*cand.length)];
   if(!best){ for(let j=12;j<N-12;j++) for(let i=12;i<N-12;i++){ if(bio[vid(i,j)]!==B.GRASS) continue; const d=(i-N/2)**2+(j-N/2)**2; if(d<bd){bd=d;best={i,j};} } }
   spawn={x:best.i*CS+1, z:best.j*CS+1};
   let wb=null, wd=1e9;
@@ -493,7 +544,27 @@ function genTerrain(){
     dockInfo={x:spawn.x+ux*(s-1.5), z:spawn.z+uz*(s-1.5), ux, uz, len:7};
   }
 }
+// 구덩이: 1m 격자 칸마다 바닥 높이(정수). -999 = 구덩이 없음
+const HOLE=new Int16Array(SIZE*SIZE).fill(-999); let holeCount=0, holeTex=null, pitMesh=null;
+function holeAt(ix,iz){ return ix<0||iz<0||ix>=SIZE||iz>=SIZE ? -999 : HOLE[iz*SIZE+ix]; }
+// 물높이(0)보다 깊은 구덩이라도 바다·강·물찬 구덩이와 옆으로 붙어 있을 때만 물이 차요 (마인크래프트처럼)
+const WET=new Uint8Array(SIZE*SIZE), DIG_MIN=-16;   // DIG_MIN: 이보다 아래는 단단한 암반
+function dryHole(x,z){ const ix=Math.floor(x), iz=Math.floor(z); if(ix<0||iz<0||ix>=SIZE||iz>=SIZE) return false; const k=iz*SIZE+ix; return HOLE[k]>-999 && !WET[k]; }
+// 물 판정용 높이: 마른 구덩이는 땅으로 취급 (헤엄·물 마시기·설치 금지 판정에 사용)
+function wH(x,z){ return dryHole(x,z) ? 1 : heightAt(x,z); }
+function updateWet(){
+  WET.fill(0); const q=[];
+  for(let k=0;k<SIZE*SIZE;k++){ const f=HOLE[k]; if(f===-999||f>=0) continue; const ix=k%SIZE, iz=(k-ix)/SIZE;
+    for(const [dx,dz] of [[-1,0],[1,0],[0,-1],[0,1]]){ const nx=ix+dx, nz=iz+dz; if(holeAt(nx,nz)>-999) continue; if(terrainH(nx+.5,nz+.5)<-.05){ WET[k]=1; q.push(k); break; } } }
+  while(q.length){ const k=q.pop(), ix=k%SIZE, iz=(k-ix)/SIZE;
+    for(const [dx,dz] of [[-1,0],[1,0],[0,-1],[0,1]]){ const nx=ix+dx, nz=iz+dz; if(nx<0||nz<0||nx>=SIZE||nz>=SIZE) continue; const n=nz*SIZE+nx; if(!WET[n] && HOLE[n]>-999 && HOLE[n]<0){ WET[n]=1; q.push(n); } } }
+  if(holeTex){ for(let k=0;k<SIZE*SIZE;k++){ const f=HOLE[k]; holeTex.image.data[k]=f===-999?0:WET[k]?128:255; } holeTex.needsUpdate=true; }
+}
 function heightAt(x,z){
+  if(holeCount){ const ix=Math.floor(x), iz=Math.floor(z); if(ix>=0&&iz>=0&&ix<SIZE&&iz<SIZE){ const f=HOLE[iz*SIZE+ix]; if(f>-999) return f; } }
+  return terrainH(x,z);
+}
+function terrainH(x,z){
   const fx=x/CS, fz=z/CS; let i=Math.floor(fx), j=Math.floor(fz);
   if(i<0)i=0; if(j<0)j=0; if(i>N-1)i=N-1; if(j>N-1)j=N-1;
   const u=Math.min(1,Math.max(0,fx-i)), v=Math.min(1,Math.max(0,fz-j));
@@ -545,13 +616,99 @@ function buildTerrainMesh(){
   }
   const g=new THREE.BufferGeometry();
   g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('color',new THREE.BufferAttribute(col,3)); g.computeVertexNormals();
-  const mesh=new THREE.Mesh(g,new THREE.MeshLambertMaterial({vertexColors:true,flatShading:true})); mesh.receiveShadow=true; scene.add(mesh);
+  const tmat=new THREE.MeshLambertMaterial({vertexColors:true,flatShading:true});
+  holeTex=new THREE.DataTexture(new Uint8Array(SIZE*SIZE),SIZE,SIZE,THREE.RedFormat,THREE.UnsignedByteType); holeTex.magFilter=holeTex.minFilter=THREE.NearestFilter; holeTex.needsUpdate=true;
+  // 구덩이 칸의 땅 표면은 그리지 않고(잘라 내고), 대신 정육면체 구덩이 벽·바닥을 따로 그려요
+  tmat.onBeforeCompile=sh=>holeCut(sh,.25);
+  const mesh=new THREE.Mesh(g,tmat); mesh.receiveShadow=true; scene.add(mesh); terrainMesh=mesh;
+  pitMesh=new THREE.Mesh(new THREE.BufferGeometry(),new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide})); pitMesh.receiveShadow=true; scene.add(pitMesh);
+}
+function holeCut(sh,lim){ sh.uniforms.holeTex={value:holeTex};
+    sh.vertexShader='varying vec3 vHW;\n'+sh.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvHW=(modelMatrix*vec4(transformed,1.0)).xyz;');
+    sh.fragmentShader='uniform sampler2D holeTex;\nvarying vec3 vHW;\n'+sh.fragmentShader.replace('void main() {','void main() {\n  { vec2 hc=floor(vHW.xz); if(hc.x>=0.0&&hc.y>=0.0&&hc.x<'+SIZE+'.0&&hc.y<'+SIZE+'.0&&texture2D(holeTex,(hc+0.5)/'+SIZE+'.0).r>'+lim+') discard; }'); 
+}
+// ===== 땅 고르기 (삽): 지형 꼭짓점 높이를 바꾸고 해당 칸들의 메시를 다시 그림 =====
+let terrainMesh=null; const leveled=new Map();
+function setHole(ix,iz,f){ const k=iz*SIZE+ix; if(HOLE[k]===-999&&f>-999) holeCount++; else if(HOLE[k]>-999&&f===-999) holeCount--; HOLE[k]=f; if(f===-999) WET[k]=0; holeTex.image.data[k]=f===-999?0:WET[k]?128:255; holeTex.needsUpdate=true; }   // 물이 차는지는 updateWet()이 정해요
+// 구덩이 벽·바닥 메시 다시 만들기
+function rebuildPits(){
+  updateWet();
+  const pos=[], col=[], sand=new THREE.Color('#ecd9a0'), clay=new THREE.Color('#c79a7a'), dirt=new THREE.Color('#b08458'), tc=new THREE.Color();
+  const quad=(a,b,c,d,cl)=>{ for(const v of [a,b,c,a,c,d]){ pos.push(...v); col.push(cl.r,cl.g,cl.b); } };
+  // 한 칸(1m)마다 밝기를 살짝 바꿔서 블록처럼 정육면체 층이 보이게 해요
+  const shade=(base,k)=>tc.copy(base).multiplyScalar(k);
+  for(let iz=0;iz<SIZE;iz++) for(let ix=0;ix<SIZE;ix++){ const f=HOLE[iz*SIZE+ix]; if(f===-999) continue;
+    const bb=biomeAt(ix+.5,iz+.5), base=bb===B.CLAY?clay:(bb===B.GRASS||bb===B.FOREST)?dirt:sand;
+    quad([ix,f,iz],[ix+1,f,iz],[ix+1,f,iz+1],[ix,f,iz+1],shade(base,((ix+iz+f)&1)?1:.92));
+    // 벽 4면: 옆 칸이 구덩이가 아니면 땅 높이까지, 옆이 더 얕은 구덩이면 그 바닥까지 (1칸 높이씩 나눠 그려요)
+    for(const [dx,dz,ax,az,bx,bz] of [[-1,0,ix,iz,ix,iz+1],[1,0,ix+1,iz,ix+1,iz+1],[0,-1,ix,iz,ix+1,iz],[0,1,ix,iz+1,ix+1,iz+1]]){
+      const nf=holeAt(ix+dx,iz+dz); let ta,tb;
+      if(nf>-999){ if(nf<=f) continue; ta=tb=nf; } else { ta=terrainH(ax,az); tb=terrainH(bx,bz); }
+      if(ta<=f&&tb<=f) continue;
+      const hi=Math.max(ta,tb), side=dx?1:.9;
+      for(let y=f;y<hi;y++){ const last=y+1>=Math.min(ta,tb)-1e-6, ua=last?Math.max(y,ta):y+1, ub=last?Math.max(y,tb):y+1;
+        quad([ax,y,az],[bx,y,bz],[bx,ub,bz],[ax,ua,az],shade(base,side*(((y-f)&1)?.8:.92)));
+        if(last) break; } } }
+  const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); g.computeVertexNormals();
+  pitMesh.geometry.dispose(); pitMesh.geometry=g;
+}
+// 삽으로 한 칸 파기: 블록 격자에 맞춘 1×1×1 정육면체 구덩이. 같은 칸을 또 파면 1칸씩 계속 아래로 깊어져요 (마인크래프트처럼)
+function digCell(x,z){
+  const ix=Math.floor(x), iz=Math.floor(z), cur=holeAt(ix,iz), top=Math.floor(terrainH(ix+.5,iz+.5)+.25);
+  if(cur>-999 && WET[iz*SIZE+ix]){ toastOnce('digwet','💧 물이 찬 구덩이는 더 팔 수 없어요. 블록으로 메워 보세요'); return false; }
+  if((cur>-999?cur:top)-1<DIG_MIN){ toastOnce('deepest','🪨 단단한 암반이라 더 깊이 팔 수 없어요'); return false; }
+  for(const o of nearObjs(ix+.5,iz+.5,1)) if(o.alive && o.r && Math.abs(o.x-ix-.5)<o.r+.5 && Math.abs(o.z-iz-.5)<o.r+.5){ toastOnce('digobj',`${ONAME[o.type]||'물체'}을(를) 먼저 치워 주세요`); return false; }
+  const f=cur>-999?cur-1:top-1;
+  for(let y=f;y<=Math.max(top,cur)+1;y++) if(getB(ix,y,iz)){ toastOnce('digblk','블록이 있는 곳은 팔 수 없어요'); return false; }
+  for(const o of nearObjs(ix+.5,iz+.5,1)) if(o.alive && !o.r && o.parts.length && Math.floor(o.x)===ix && Math.floor(o.z)===iz){ o.parts.forEach(hidePart); o.alive=false; o.dead=1; o.regrowAt=1e9; }
+  setHole(ix,iz,f); rebuildPits(); return true;
+}
+// 파낸 재료(흙·모래·점토)를 구덩이에 다시 넣어 한 칸씩 메우기. 맨 위까지 채우면 원래 땅으로 돌아가요 (마인크래프트처럼)
+const FILLMAT={dirt:'dirt',sand:'sand',clay:'clay'};
+function fillTarget(t){
+  const h=heldId(); if(!h||!FILLMAT[h]||!t||!t.ground||t.kind==='far') return null;
+  let ix=Math.floor(t.x), iz=Math.floor(t.z);
+  if(holeAt(ix,iz)===-999){   // 구덩이 옆벽을 겨눴으면 그 앞(구덩이 쪽) 칸을 메워요
+    const bx=Math.floor(t.x-camDir.x*.35), bz=Math.floor(t.z-camDir.z*.35);
+    if(holeAt(bx,bz)===-999) return null; ix=bx; iz=bz; }
+  if(Math.hypot(ix+.5-P.x,iz+.5-P.z)>REACH+1.2) return null;
+  const f=holeAt(ix,iz), bad=getB(ix,f,iz)?'구덩이 안의 블록을 먼저 치워 주세요':'';
+  return {ix,iz,f,bad};
+}
+function fillCell(fi,mat){
+  const {ix,iz,f}=fi, top=Math.floor(terrainH(ix+.5,iz+.5)+.25), nf=f+1;
+  setHole(ix,iz,nf>=top?-999:nf); groundHits.delete(ix*1000+iz); rebuildPits();
+  return nf>=top;
+}
+function refreshCell(i,j){
+  if(i<0||j<0||i>=N||j>=N) return;
+  const a=terrainMesh.geometry.attributes.position.array, base=(j*N+i)*18;
+  const vs=[[i,j],[i,j+1],[i+1,j],[i+1,j],[i,j+1],[i+1,j+1]];
+  vs.forEach(([x,z],n)=>{ a[base+n*3+1]=hgt[vid(x,z)]; });
+}
+function setVertexHeight(vi,vj,h){
+  hgt[vid(vi,vj)]=h; leveled.set(vid(vi,vj),h);
+  for(const [di,dj] of [[0,0],[-1,0],[0,-1],[-1,-1]]) refreshCell(vi+di,vj+dj);
+  terrainMesh.geometry.attributes.position.needsUpdate=true; terrainDirty=true;
+}
+let terrainDirty=false, terrainNormT=0;
+function levelGround(x,z){
+  const vi=Math.round(x/CS), vj=Math.round(z/CS);
+  if(vi<2||vj<2||vi>N-2||vj>N-2) return false;
+  const k=vid(vi,vj), h=hgt[k];
+  if(h<.15) { toastOnce('lvwater','물가는 고를 수 없어요'); return false; }
+  const want=Math.max(.2,groundAt(P.x,P.z));      // 내가 서 있는 높이에 맞춰 평평하게
+  const diff=want-h;
+  if(Math.abs(diff)<.04) return 'flat';   // 이미 평평하면 대신 파기 (use()에서 처리)
+  setVertexHeight(vi,vj,h+Math.max(-.5,Math.min(.5,diff))); if(holeCount) rebuildPits();
+  return true;
 }
 let water, waterBase;
 function buildWater(){
   const g=new THREE.PlaneGeometry(SIZE+500,SIZE+500,90,90); g.rotateX(-Math.PI/2); g.translate(SIZE/2,0,SIZE/2);
   waterBase=g.attributes.position.array.slice();
   water=new THREE.Mesh(g,lam('#5ab4e6',{transparent:true,opacity:.78})); water.receiveShadow=true; scene.add(water);
+  water.material.onBeforeCompile=sh=>holeCut(sh,.75);   // 마른 구덩이 안에는 물을 그리지 않아요
 }
 function animWater(t){
   const a=water.geometry.attributes.position.array;
@@ -613,8 +770,8 @@ function buildNature(){
     const b=bio[ks[0]], h=hgt[ks[0]], r=rnd();
     const place=(n,fn)=>{ for(let t=0;t<n;t++){ const x=(i+.15+rnd()*.7)*CS, z=(j+.15+rnd()*.7)*CS; if(nearSpawn(x,z,3.5)) continue; fn(x,heightAt(x,z),z,b); } };
     if(b===B.FOREST){ const pine=h>3.6; place(r<.55?1:r<.75?2:0,(x,y,z)=>tree(x,y,z,pine||rnd()<.15,b));
-      if(rnd()<.25) place(1,grass); if(rnd()<.1) place(1,stick); if(rnd()<.06) place(1,mush); if(rnd()<.04) place(1,bush); }
-    else if(b===B.GRASS){ if(r<.05) place(1,(x,y,z)=>tree(x,y,z,h>3.6,b)); if(rnd()<.55) place(1+(rnd()<.4),grass);
+      if(rnd()<.08) place(1,grass); if(rnd()<.1) place(1,stick); if(rnd()<.06) place(1,mush); if(rnd()<.04) place(1,bush); }
+    else if(b===B.GRASS){ if(r<.05) place(1,(x,y,z)=>tree(x,y,z,h>3.6,b)); if(rnd()<.16) place(1,grass);
       if(rnd()<.05) place(1,bush); if(rnd()<.05) place(1,pebble); if(rnd()<.015) place(1,stick); }
     else if(b===B.STONE){ if(r<.3) place(1,(x,y,z)=>rock(x,y,z,rnd()<.2,b)); if(rnd()<.1) place(1,pebble); if(rnd()<.04) place(1,(x,y,z)=>tree(x,y,z,true,b)); }
     else if(b===B.SNOW){ if(r<.16) place(1,(x,y,z)=>rock(x,y,z,rnd()<.35,b)); }
@@ -755,23 +912,24 @@ function texCanvas(kind){
     x.fillStyle='#74787d'; x.fillRect(0,15,32,1); x.fillRect(15,0,1,15); x.fillRect(7,16,1,16); x.fillRect(24,16,1,16); x.fillRect(0,31,32,1); }
   else if(kind==='brick'){ x.fillStyle='#e3d6c4'; x.fillRect(0,0,32,32); for(let r=0;r<4;r++) for(let k=-1;k<2;k++){ x.fillStyle=R()<.5?'#b5523b':'#a84a34'; x.fillRect(k*16+(r%2?8:0)+1,r*8+1,14,6); } }
   else if(kind==='thatch'){ x.fillStyle='#d9b45a'; x.fillRect(0,0,32,32); for(let k=0;k<80;k++){ x.fillStyle=R()<.5?'#c49c42':'#e8c875'; x.fillRect(R()*32|0,R()*32|0,1,3+R()*6|0); } x.fillStyle='#b08a38'; x.fillRect(0,10,32,1); x.fillRect(0,21,32,1); }
+  else if(kind==='dirt'){ x.fillStyle='#8a6440'; x.fillRect(0,0,32,32); for(let k=0;k<70;k++){ x.fillStyle=R()<.5?'#7a5636':'#9c7550'; x.fillRect(R()*31|0,R()*31|0,1+R()*3|0,1+R()*2|0); } }
   else if(kind==='wool'){ x.fillStyle='#f4f1ea'; x.fillRect(0,0,32,32); for(let k=0;k<60;k++){ x.fillStyle=R()<.5?'#e6e1d6':'#ffffff'; x.beginPath(); x.arc(R()*32,R()*32,1.5+R()*2.5,0,6.3); x.fill(); } }
   else if(kind==='glass'){ x.fillStyle='rgba(190,228,245,.38)'; x.fillRect(0,0,32,32); x.fillStyle='#a87849'; x.fillRect(0,0,32,3); x.fillRect(0,29,32,3); x.fillRect(0,0,3,32); x.fillRect(29,0,3,32); x.fillRect(15,0,2,32); x.fillRect(0,15,32,2); x.fillStyle='rgba(255,255,255,.7)'; x.fillRect(6,6,6,2); x.fillRect(19,19,5,2); }
   return c;
 }
 const TEXURL={}, BMAT={};
-for(const k of ['wood','stone','brick','thatch','glass','wool']){
+for(const k of ['wood','stone','brick','thatch','glass','wool','dirt']){
   const c=texCanvas(k), t=new THREE.CanvasTexture(c); t.magFilter=THREE.NearestFilter; t.colorSpace=THREE.SRGBColorSpace;
   TEXURL[k]=c.toDataURL(); BMAT[k]=new THREE.MeshLambertMaterial(k==='glass'?{map:t,transparent:true,depthWrite:false}:{map:t});
 }
 const blocks=new Map(), bkey=(x,y,z)=>x+','+y+','+z, getB=(x,y,z)=>blocks.get(bkey(x,y,z));
 const isSolid=b=>b && BLK[b.type].solid && !(b.type==='door'&&b.open);
 const cellTop=(b,iy)=>BLK[b.type].half?iy+.5:iy+1;
-let blocksDirty=true, houseDirty=true, cutLevel=null, cutCenter={x:0,z:0};
+let doorsDirty=true, blocksDirty=true, houseDirty=true, cutLevel=null, cutCenter={x:0,z:0};
 const BMESH={};
 function initBlockMeshes(){
   const box=new THREE.BoxGeometry(1,1,1); box.translate(.5,.5,.5);
-  for(const t of ['wblock','sblock','bblock','thatch','window','woolb']){ const m=new THREE.InstancedMesh(box,BMAT[BLK[t].mat],4000); m.count=0; m.castShadow=t!=='window'; m.receiveShadow=true; m.frustumCulled=false; scene.add(m); BMESH[t]=m; }
+  for(const t of ['wblock','sblock','bblock','thatch','window','woolb','dirt']){ const m=new THREE.InstancedMesh(box,BMAT[BLK[t].mat],4000); m.count=0; m.castShadow=t!=='window'; m.receiveShadow=true; m.frustumCulled=false; scene.add(m); BMESH[t]=m; }
   const sh=new THREE.Shape(); sh.moveTo(0,0); sh.lineTo(1,0); sh.lineTo(1,.5); sh.lineTo(.5,.5); sh.lineTo(.5,1); sh.lineTo(0,1); sh.lineTo(0,0);
   const sg=new THREE.ExtrudeGeometry(sh,{depth:1,bevelEnabled:false}); sg.translate(-.5,0,-.5);
   BMESH.stair=new THREE.InstancedMesh(sg,BMAT.wood,2000);
@@ -779,15 +937,29 @@ function initBlockMeshes(){
   const fg=new THREE.OctahedronGeometry(.1,0); fg.translate(.5,.58,.5); BMESH.flame=new THREE.InstancedMesh(fg,new THREE.MeshBasicMaterial({color:'#ffc23a'}),500);
   for(const k of ['stair','torch','flame']){ const m=BMESH[k]; m.count=0; m.castShadow=k==='stair'; m.receiveShadow=true; m.frustumCulled=false; scene.add(m); }
 }
+// 문이 벽 줄을 따라 서도록 방향을 정해요: 양옆(x 또는 z)에 벽 블록이 있으면 그 방향, 없으면 바라보던 방향
+function doorAxisX(b){
+  const wall=(x,z)=>{ for(const yy of [b.y,b.y+1]){ const n=getB(x,yy,z); if(n&&n!==b&&BLK[n.type].solid&&n.type!=='door') return 1; } return 0; };
+  const sx=wall(b.x-1,b.z)+wall(b.x+1,b.z), sz=wall(b.x,b.z-1)+wall(b.x,b.z+1);
+  if(sx!==sz) return sx>sz; return b.rot%2===1;
+}
 function makeDoor(b){
-  const g=new THREE.Group(); g.position.set(b.x+.5,b.y,b.z+.5); g.rotation.y=(b.rot%2===0)?Math.PI/2:0;
-  const piv=new THREE.Group(); piv.position.set(-.5,0,0); g.add(piv);
+  // 놓은 칸(가로 1 × 높이 2 × 두께 1)에 꼭 맞는 문틀 + 그 안에서 열리는 문짝
+  const g=new THREE.Group(); g.position.set(b.x+.5,b.y,b.z+.5); g.rotation.y=doorAxisX(b)?0:Math.PI/2;
+  const frame=lam('#6e4520'), F=.1;
+  const fm=(geo,x,y,z)=>{ const m=new THREE.Mesh(geo,frame); m.position.set(x,y,z); m.castShadow=m.receiveShadow=true; g.add(m); };
+  fm(new THREE.BoxGeometry(F,2,1),-.5+F/2,1,0); fm(new THREE.BoxGeometry(F,2,1),.5-F/2,1,0); fm(new THREE.BoxGeometry(1,F,1),0,2-F/2,0);
+  fm(new THREE.BoxGeometry(1-2*F,.04,1),0,.02,0);   // 문지방
+  const W=1-2*F, H=2-F-.04;
+  const piv=new THREE.Group(); piv.position.set(-.5+F,.04,0); g.add(piv);
   const add=(geo,mat,x,y,z)=>{const m=new THREE.Mesh(geo,mat); m.position.set(x,y,z); m.castShadow=m.receiveShadow=true; piv.add(m); return m;};
-  add(new THREE.BoxGeometry(1,2,.12),lam('#8a5a2b'),.5,1,0);
-  for(const yy of [.4,1.6]) add(new THREE.BoxGeometry(.92,.1,.15),lam('#6e4520'),.5,yy,0);
-  add(new THREE.SphereGeometry(.05,6,4),lam('#e5c14a'),.86,1,.09); add(new THREE.SphereGeometry(.05,6,4),lam('#e5c14a'),.86,1,-.09);
+  add(new THREE.BoxGeometry(W,H,.12),lam('#8a5a2b'),W/2,H/2,0);
+  for(const yy of [.4,H-.4]) add(new THREE.BoxGeometry(W-.06,.1,.15),lam('#6e4520'),W/2,yy,0);
+  add(new THREE.SphereGeometry(.05,6,4),lam('#e5c14a'),W-.1,H/2,.09); add(new THREE.SphereGeometry(.05,6,4),lam('#e5c14a'),W-.1,H/2,-.09);
   g.userData.piv=piv; scene.add(g); return g;
 }
+// 문 옆에 벽을 새로 쌓거나 부수면 문 방향을 다시 맞춰요
+function refreshDoors(){ for(const b of new Set(blocks.values())) if(b.type==='door'&&b.group){ const want=doorAxisX(b)?0:Math.PI/2; if(Math.abs(b.group.rotation.y-want)>.01) b.group.rotation.y=want; } }
 function makeBed(b){
   const g=new THREE.Group(); g.position.set(b.x+.5,b.y,b.z+.5); g.rotation.y=b.rot*Math.PI/2;
   const add=(geo,mat,x,y,z)=>{const m=new THREE.Mesh(geo,mat); m.position.set(x,y,z); m.castShadow=m.receiveShadow=true; g.add(m); return m;};
@@ -799,18 +971,18 @@ function addBlock(type,x,y,z,rot=0,open=false){
   const b={type,x,y,z,rot,open,hits:0}; blocks.set(bkey(x,y,z),b);
   if(type==='door'){ blocks.set(bkey(x,y+1,z),b); b.group=makeDoor(b); if(open) b.group.userData.piv.rotation.y=-Math.PI/2; }
   if(type==='bed') b.group=makeBed(b);
-  blocksDirty=true; houseDirty=true; return b;
+  blocksDirty=true; houseDirty=true; doorsDirty=true; return b;
 }
 function removeBlock(b){
   blocks.delete(bkey(b.x,b.y,b.z)); if(b.type==='door') blocks.delete(bkey(b.x,b.y+1,b.z));
-  if(b.group) scene.remove(b.group); blocksDirty=true; houseDirty=true;
+  if(b.group) scene.remove(b.group); blocksDirty=true; houseDirty=true; doorsDirty=true;
 }
 const _bd=new THREE.Object3D();
 function rebuildBlocks(){
-  blocksDirty=false; const cnt={}; for(const k in BMESH) cnt[k]=0; const seen=new Set();
+  blocksDirty=false; if(doorsDirty){ doorsDirty=false; refreshDoors(); } const cnt={}; for(const k in BMESH) cnt[k]=0; const seen=new Set();
   for(const b of blocks.values()){
     if(seen.has(b)) continue; seen.add(b);
-    b.hidden = cutLevel!==null && b.y>=cutLevel && Math.hypot(b.x+.5-cutCenter.x,b.z+.5-cutCenter.z)<18;
+    b.hidden = cutLevel!==null && b.y+(b.type==='door'?1:0)>=cutLevel && Math.hypot(b.x+.5-cutCenter.x,b.z+.5-cutCenter.z)<18;
     if(b.group){ b.group.visible=!b.hidden; continue; }
     if(b.hidden) continue;
     _bd.rotation.set(0,0,0); _bd.scale.set(1,1,1);
@@ -854,6 +1026,7 @@ function rotFromFacing(){ const fx=Math.sin(P.face), fz=Math.cos(P.face); return
 let placeInfo=null;
 function computePlace(t){
   const held=heldId(); if(!held||!ITEMS[held].block||!t) return null;
+  if(fillTarget(t)) return null;   // 흙 블록으로 구덩이를 겨누면 블록 대신 땅을 메워요
   let x,y,z;
   if(t.block){ if(t.far) return null; x=t.block.x+t.block.n[0]; y=t.block.y+t.block.n[1]; z=t.block.z+t.block.n[2]; }
   else if(t.ground && t.kind!=='water'){ x=Math.floor(t.x); z=Math.floor(t.z); y=Math.floor(heightAt(x+.5,z+.5)+.25); }
@@ -866,7 +1039,13 @@ function computePlace(t){
     if(x+1>P.x-.3&&x<P.x+.3&&z+1>P.z-.3&&z<P.z+.3&&y+tall>P.y+.05&&y<P.y+1.8) why='내가 서 있는 자리예요';
     else for(const o of nearObjs(x+.5,z+.5,1)) if(o.alive&&o.r&&Math.hypot(o.x-x-.5,o.z-z-.5)<o.r+.45&&y<o.top&&y+tall>o.y){ why=`${ONAME[o.type]||'물체'}와(과) 겹쳐요`; break; }
   }
-  if(!why && heightAt(x+.5,z+.5)<-.05 && y<0) why='물속에는 지을 수 없어요';
+  if(!why && wH(x+.5,z+.5)<-.05 && y<0) why='물속에는 지을 수 없어요';
+  // 집 터 평탄화 검사: 땅 위에 바로 닿는 블록은 그 자리 땅이 평평해야 놓을 수 있음 (가구·횃불 제외)
+  if(!why && !BLK[held].furn && !getB(x,y-1,z) && holeAt(x,z)!==y){
+    const hs=[heightAt(x,z),heightAt(x+1,z),heightAt(x,z+1),heightAt(x+1,z+1),heightAt(x+.5,z+.5)];
+    const hi=Math.max(...hs), lo=Math.min(...hs);
+    if(y-hi<1 && hi-lo>.1) why='땅이 울퉁불퉁해요. 🪏 삽을 들고 오른쪽 클릭으로 먼저 평평하게 골라 주세요';
+  }
   return {x,y,z,tall,ok:!why,why};
 }
 const ghost=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.02,1.02,1.02)),new THREE.LineBasicMaterial({color:'#ffffff',transparent:true,opacity:.9,depthTest:false}));
@@ -909,9 +1088,9 @@ function detectHouse(){
 function updHouse(){
   const cell=Math.floor(P.x)+','+Math.floor(P.z)+','+Math.floor(P.y+.1);
   // 지붕 아래에 있으면 위쪽 블록을 잘라 보여 줌 (3인칭에서 집 안이 보이도록)
-  let roofOver=false; const px=Math.floor(P.x), pz=Math.floor(P.z), py=Math.floor(P.y+.1);
-  if(blocks.size) for(let yy=py+2;yy<=py+9;yy++) if(isSolid(getB(px,yy,pz))){ roofOver=true; break; }
-  const want=roofOver&&!firstPerson?py+1:null;   // 집 안: 무릎 높이 벽만 남기고 위를 잘라 인형의 집처럼 보여 줌
+  let roofOver=false, roofY=null; const px=Math.floor(P.x), pz=Math.floor(P.z), py=Math.floor(P.y+.1);
+  if(blocks.size) for(let yy=py+2;yy<=py+9;yy++) if(isSolid(getB(px,yy,pz))){ roofOver=true; roofY=yy; break; }
+  const want=roofOver&&!firstPerson?roofY:null;   // 집 안: 지붕(머리 위 블록 높이부터)만 숨기고 벽은 그대로 보여 줌
   if(want!==cutLevel || (want!==null && Math.hypot(P.x-cutCenter.x,P.z-cutCenter.z)>3)){ cutLevel=want; cutCenter={x:P.x,z:P.z}; blocksDirty=true; }
   if(!houseDirty && cell===houseCell) return;
   houseDirty=false; houseCell=cell;
@@ -970,6 +1149,8 @@ function makeHeld(id){
     case 'spear': m(new THREE.CylinderGeometry(.025,.03,1.3,6),brown,0,.45,0); m(new THREE.ConeGeometry(.06,.24,5),grey,0,1.2,0); break;
     case 'sword': m(new THREE.BoxGeometry(.05,.16,.06),brown,0,0,0); m(new THREE.BoxGeometry(.24,.04,.07),grey,0,.1,0); m(new THREE.BoxGeometry(.05,.62,.015),lam('#dfe5ea'),0,.43,0); break;
     case 'rod': m(new THREE.CylinderGeometry(.014,.025,1.4,5),brown,0,.6,0); break;
+    case 'bow': { const arc=m(new THREE.TorusGeometry(.38,.022,5,14,Math.PI),brown,0,.3,0); arc.rotation.z=-Math.PI/2;
+      m(new THREE.CylinderGeometry(.005,.005,.76,3),lam('#f4efe6'),0,.3,0); break; }
     case 'bowl': m(new THREE.SphereGeometry(.15,8,5,0,Math.PI*2,Math.PI/2,Math.PI/2),brown,0,.12,0); break;
     case 'stick': { m(new THREE.CylinderGeometry(.025,.035,.6,5),brown,0,.22,0); const tw=m(new THREE.CylinderGeometry(.012,.018,.2,4),brown,.05,.32,0); tw.rotation.z=-.7;
       m(new THREE.SphereGeometry(.035,5,3),lam('#5fa844'),.1,.4,0).scale.set(1.4,.5,1); break; }
@@ -1096,6 +1277,8 @@ const ICONIMG={stick:(()=>{ const c=document.createElement('canvas'); c.width=c.
 function iconInline(id){ const it=ITEMS[id]; if(it.img) return `<img src="${ICONIMG[it.img]}" style="width:18px;height:18px;vertical-align:-4px">`;
   if(it.sw) return `<span style="display:inline-block;width:15px;height:15px;vertical-align:-2px;border-radius:3px;background-size:cover;background-image:url(${TEXURL[it.sw]})"></span>`; return it.i; }
 function itemIcon(id,big){ const it=ITEMS[id];
+  if(big==='mid'){ if(it.img) return `<img src="${ICONIMG[it.img]}" width="40" height="40">`; if(!it.sw) return it.i;
+    return `<span style="display:block;width:38px;height:38px;border-radius:6px;background-size:cover;image-rendering:pixelated;background-image:url(${TEXURL[it.sw]})"></span>`; }
   if(it.img) return big?`<img class="bigsw" src="${ICONIMG[it.img]}" style="box-shadow:none;display:block">`:`<img src="${ICONIMG[it.img]}" width="32" height="32">`;
   if(!it.sw) return big?`<div class="bigic">${it.i}</div>`:it.i;
   return big?`<div class="bigsw" style="background-image:url(${TEXURL[it.sw]})${id==='stair'?';clip-path:polygon(0 0,50% 0,50% 50%,100% 50%,100% 100%,0 100%)':''}"></div>`
@@ -1107,11 +1290,19 @@ function slotHTML(s,i,showNum){
   else if(s.n>1) h+=`<b>${s.n}</b>`;
   return h;
 }
+// 핫바는 9칸씩 4쪽 (가방 36칸 전체) — ◀ ▶ 버튼이나 Q / R 키로 넘겨요
+const HPAGES=4; let hotPage=0;
 function refreshInv(){
-  $('hotbar').innerHTML=inv.slice(0,9).map((s,i)=>`<div class="hs${i===selSlot?' sel':''}" data-slot="${i}">${slotHTML(s,i,true)}</div>`).join('');
+  const b=hotPage*9, has=k=>inv.slice(k*9,k*9+9).some(Boolean);
+  const prev=(hotPage+HPAGES-1)%HPAGES, next=(hotPage+1)%HPAGES;
+  $('hotbar').innerHTML=`<button class="hpg${has(prev)?' has':''}" data-hpg="-1">◀<small>Q</small></button>`
+    +inv.slice(b,b+9).map((s,k)=>`<div class="hs${b+k===selSlot?' sel':''}" data-slot="${b+k}">${slotHTML(s,k,true)}</div>`).join('')
+    +`<button class="hpg${has(next)?' has':''}" data-hpg="1">▶<small>R</small></button><div class="pgi">${hotPage+1}<br>/${HPAGES}</div>`;
   refreshHeld(); if(panelOpen) renderPanel(); guideDirty=true;
 }
-$('hotbar').addEventListener('pointerdown',e=>{ const d=e.target.closest('[data-slot]'); if(!d) return; e.preventDefault(); e.stopPropagation(); selectSlot(+d.dataset.slot); });
+function hotbarPage(dir){ hotPage=(hotPage+dir+HPAGES)%HPAGES; beep(700,.03,'sine',.02); selectSlot(hotPage*9+(selSlot%9)); }
+$('hotbar').addEventListener('pointerdown',e=>{ const pg=e.target.closest('[data-hpg]'); if(pg){ e.preventDefault(); e.stopPropagation(); return hotbarPage(+pg.dataset.hpg); }
+  const d=e.target.closest('[data-slot]'); if(!d) return; e.preventDefault(); e.stopPropagation(); selectSlot(+d.dataset.slot); });
 let lastHitPos=null;
 function flyIcon(id,wp){ const emoji=ITEMS[id].i;
   if(!wp) return; const v=new THREE.Vector3(wp.x,wp.y,wp.z).project(camera); if(v.z>1||Math.abs(v.x)>1.2||Math.abs(v.y)>1.2) return;
@@ -1128,7 +1319,7 @@ function openPanel(t){
   if(t) tab=t; panelOpen=true; picked=-1; $('panel').style.display='block';
   if(document.pointerLockElement) document.exitPointerLock();
   if(tab==='craft' && !RECIPES.filter(r=>r.cat===craftCat).some(canCraft)){ const c=CATS.find(c=>RECIPES.some(r=>r.cat===c.k&&canCraft(r))); if(c){ craftCat=c.k; craftIdx=0; } }
-  if(tab==='craft'){ const list=RECIPES.filter(r=>r.cat===craftCat), k=list.findIndex(canCraft); if(k>=0 && !canCraft(list[craftIdx]||{})) craftIdx=k; }
+  if(tab==='craft'){ const list=RECIPES.filter(r=>r.cat===craftCat), k=list.findIndex(canCraft); if(k>=0 && !list.slice(craftIdx*4,craftIdx*4+4).some(canCraft)) craftIdx=Math.floor(k/4); }
   renderPanel();
 }
 function closePanel(){ panelOpen=false; $('panel').style.display='none'; if(playing && !noLock) requestLock(); }
@@ -1139,13 +1330,18 @@ function renderPanel(){
   const el=$('pbody'); let h='';
   if(tab==='craft'){
     h+='<div class="chips">'+CATS.map(c=>`<span class="chip${c.k===craftCat?' on':''}" data-cat="${c.k}">${c.i} ${c.n}${RECIPES.some(r=>r.cat===c.k&&canCraft(r))?'<span class="dot"></span>':''}</span>`).join('')+'</div>';
-    const list=RECIPES.filter(r=>r.cat===craftCat); craftIdx=(craftIdx+list.length)%list.length;
-    const r=list[craftIdx], it=ITEMS[r.o], stOk=!r.st||nearStation(r.st), ok=canCraft(r);
-    let inner=`${itemIcon(r.o,true)}<div class="nm">${it.n}${r.q>1?` ×${r.q}`:''}</div><div class="ds">${it.d}</div><div class="needs">`;
-    inner+=Object.keys(r.need).map(k=>{ const have=count(k), good=have>=r.need[k]; return `<div class="need ${good?'ok':'no'}">${iconInline(k)} ${ITEMS[k].n}<small>${have} / ${r.need[k]}</small></div>`; }).join('')+'</div>';
-    if(r.st) inner+=`<div class="stline ${stOk?'ok':'no'}">${STNAME[r.st]} 옆에서 만들 수 있어요 ${stOk?'✔':'✖'}</div>`;
-    inner+=`<button class="mainbtn" id="doCraft" ${ok?'':'disabled'}>${ok?'만들기 (Enter)':!afford(r.need)?'재료가 부족해요':'설치물 옆으로 가세요'}</button>`;
-    h+=pagerHTML(inner,craftIdx,list.length);
+    // 한 화면에 4개씩 (2×2), ◀ ▶로 다음 4개
+    const list=RECIPES.filter(r=>r.cat===craftCat), pages=Math.ceil(list.length/4); craftIdx=(craftIdx+pages)%pages;
+    let inner='<div class="cgrid">';
+    list.slice(craftIdx*4,craftIdx*4+4).forEach((r,k)=>{
+      const it=ITEMS[r.o], stOk=!r.st||nearStation(r.st), ok=canCraft(r), enough=afford(r.need);
+      inner+=`<div class="ccard${ok?' can':''}" title="${it.d}"><div class="cic">${itemIcon(r.o,'mid')}</div><div class="cnm">${it.n}${r.q>1?` ×${r.q}`:''}</div>
+        <div class="cneed">${Object.keys(r.need).map(n=>`<span class="${count(n)>=r.need[n]?'ok1':'no1'}">${iconInline(n)} ${count(n)}/${r.need[n]}</span>`).join('')}</div>
+        ${r.st?`<div class="cst ${stOk?'ok1':'no1'}">${STNAME[r.st]} 옆 ${stOk?'✔':'✖'}</div>`:''}
+        <button data-craft="${craftIdx*4+k}" ${ok?'':'disabled'}>${ok?'만들기':!enough?'재료 부족':'설치물 옆에서'}</button></div>`;
+    });
+    inner+='</div>';
+    h+=pagerHTML(inner,craftIdx,pages);
   } else if(tab==='bag'){
     h+=`<div class="sublbl">가방</div><div class="grid9" id="g1"></div><div class="sublbl">핫바 — 숫자키 1~9로 손에 들기</div><div class="grid9" id="g2"></div><div id="slotInfo">칸을 클릭해 집은 뒤, 다른 칸을 클릭하면 자리가 바뀌어요</div>`;
   } else if(tab==='codex'){
@@ -1193,11 +1389,11 @@ function renderPanel(){
   el.innerHTML=h;
   // 이벤트
   el.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>navPanel(+b.dataset.nav));
-  el.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{ craftCat=b.dataset.cat; const list=RECIPES.filter(r=>r.cat===craftCat); craftIdx=Math.max(0,list.findIndex(canCraft)); renderPanel(); });
+  el.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{ craftCat=b.dataset.cat; const list=RECIPES.filter(r=>r.cat===craftCat); craftIdx=Math.floor(Math.max(0,list.findIndex(canCraft))/4); renderPanel(); });
   el.querySelectorAll('[data-sub]').forEach(b=>b.onclick=()=>{ codexSub=b.dataset.sub; codexIdx=0; renderPanel(); });
-  const dc=$('doCraft'); if(dc) dc.onclick=doCraft;
+  el.querySelectorAll('[data-craft]').forEach(b=>b.onclick=()=>doCraft(+b.dataset.craft));
   if(tab==='bag'){
-    const mk=(from,to,g,num)=>{ for(let i=from;i<to;i++){ const d=document.createElement('div'); d.className='hs'+(i===picked?' pick':'')+(num&&i===selSlot?' sel':''); d.innerHTML=slotHTML(inv[i],i,num);
+    const mk=(from,to,g,num)=>{ for(let i=from;i<to;i++){ const d=document.createElement('div'); d.className='hs'+(i===picked?' pick':'')+(i===selSlot?' sel':''); d.innerHTML=slotHTML(inv[i],i,num);
       d.onclick=()=>{ if(picked<0){ if(inv[i]) picked=i; } else { const t=inv[i]; inv[i]=inv[picked]; inv[picked]=t; picked=-1; } refreshInv(); };
       d.onmouseenter=()=>{ const s=inv[i]; if(s) $('slotInfo').textContent=`${ITEMS[s.id].i} ${ITEMS[s.id].n} — ${ITEMS[s.id].d}${ITEMS[s.id].tool?` (내구도 ${s.dur}/${ITEMS[s.id].dur})`:''}`; };
       g.appendChild(d); } };
@@ -1211,8 +1407,10 @@ function renderPanel(){
   }
 }
 function navPanel(dir){ if(tab==='craft') craftIdx+=dir; else if(tab==='codex') codexIdx+=dir; else if(tab==='pets') petIdx+=dir; else if(tab==='house') houseIdx+=dir; else return; beep(700,.03,'sine',.02); renderPanel(); }
-function doCraft(){
-  const r=RECIPES.filter(r=>r.cat===craftCat)[craftIdx]; if(!canCraft(r)) return;
+function doCraft(idx){
+  const list=RECIPES.filter(r=>r.cat===craftCat);
+  if(idx===undefined){ idx=list.findIndex((r,k)=>k>=craftIdx*4&&k<craftIdx*4+4&&canCraft(r)); if(idx<0) return; }   // Enter: 이 화면의 첫 번째 만들 수 있는 것
+  const r=list[idx]; if(!r||!canCraft(r)) return;
   for(const k in r.need) removeItem(k,r.need[k]);
   addItem(r.o,r.q,true); const it=ITEMS[r.o]; S.made[r.o]=1; beep(660,.08,'sine'); setTimeout(()=>beep(880,.1,'sine'),80);
   toast(`🛠️ ${it.i} ${it.n}${r.q>1?' ×'+r.q:''} 완성!${it.tool?' 핫바에서 골라 손에 들어 보세요':it.place||it.block?' 손에 들고 왼쪽 클릭으로 놓아요':''}`);
@@ -1236,7 +1434,7 @@ function unlock(key){
 }
 function showCard(c){
   $('cardTag').textContent=c.tag; $('cardT').textContent=c.title; $('cardD').textContent=c.text; $('cardQ').textContent='🤔 '+c.q; $('cardIc').textContent=c.ic;
-  const el=$('card'); el.style.display='none'; void el.offsetWidth; el.style.display='block'; cardT=16;
+  const el=$('card'); el.style.display='none'; void el.offsetWidth; el.style.display='block'; cardT=3;
 }
 function hideCard(){ $('card').style.display='none'; cardT=0; if(cardQ.length) setTimeout(()=>showCard(cardQ.shift()),300); }
 $('cardX').onclick=hideCard;
@@ -1257,10 +1455,11 @@ const visited=new Set();
 const keys={};
 
 // ===================== 입력 =====================
-let noLock=false, mouseL=false, actCD=0;
+// 기본: 마우스 커서가 늘 보이고, 오른쪽 버튼을 누른 채 끌어서 둘러봐요. (원하면 '마우스 고정' 버튼으로 1인칭 게임처럼 고정)
+let lockPref=false, noLock=true, mouseL=false, actCD=0;
 const locked=()=>document.pointerLockElement===canvas;
 function requestLock(){ try{ const r=canvas.requestPointerLock(); if(r&&r.catch) r.catch(()=>{noLock=true;}); }catch(_){ noLock=true; } }
-document.addEventListener('pointerlockerror',()=>{ noLock=true; });
+document.addEventListener('pointerlockerror',()=>{ noLock=true; if(lockPref) toastOnce('lockfail','이 화면에서는 마우스를 고정할 수 없어요. 오른쪽 버튼을 누른 채 끌어 둘러보세요'); });
 addEventListener('keydown',e=>{
   const k=e.key.toLowerCase(); keys[k]=true; keys[e.code]=true;
   if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k)) e.preventDefault();
@@ -1282,17 +1481,24 @@ addEventListener('keydown',e=>{
   else if(k==='m') toggleMap();
   else if(k==='h') showHelp();
   else if(k==='z') camDist = camDist>8?4.5:camDist<5?7:11;
-  else if(/^[1-9]$/.test(k)) selectSlot(+k-1);
+  else if(/^[1-9]$/.test(k)) selectSlot(hotPage*9+(+k-1));
+  else if(k==='q') hotbarPage(-1);
+  else if(k==='r') hotbarPage(1);
 });
 addEventListener('keyup',e=>{ keys[e.key.toLowerCase()]=false; keys[e.code]=false; });
 let dragging=false, lastMX=0, lastMY=0, dragDist=0;
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
 // ===================== 터치(태블릿) 조작 =====================
 const joy={on:false,x:0,y:0,id:null}; let touchRun=false, touchMode=false, lookId=null, lookX=0, lookY=0, lastTouchT=0;
-function setTouchMode(v){ touchMode=v; document.body.classList.toggle('touch',v); if(v){ noLock=true; if(document.pointerLockElement) document.exitPointerLock(); }
+function setTouchMode(v){ touchMode=v; document.body.classList.toggle('touch',v); if(v){ noLock=true; if(document.pointerLockElement) document.exitPointerLock(); } else noLock=!lockPref;
   $('bTouch').textContent=v?'🖱️ 마우스 조작으로':'📱 터치 조작 켜기'; }
+$('bLock').onclick=()=>{ lockPref=!lockPref; noLock=!lockPref||touchMode; $('bLock').textContent=lockPref?'🖱️ 마우스 고정 켜짐':'🖱️ 마우스 고정 꺼짐'; $('bLock').classList.toggle('on',lockPref);
+  if(lockPref) toast('🖱️ 화면을 클릭하면 마우스가 고정돼 움직이는 대로 둘러봐요 (Esc로 풀기)'); else { if(document.pointerLockElement) document.exitPointerLock(); toast('🖱️ 마우스가 보여요. 오른쪽 버튼을 누른 채 끌면 둘러봐요'); } };
 $('bTouch').onclick=()=>setTouchMode(!touchMode);
-if(('ontouchstart' in window)||navigator.maxTouchPoints>0) setTouchMode(true);
+// 터치 화면 노트북은 PC로 취급: 손가락만 쓰는 기기일 때만 터치 모드, 실제로 화면을 터치하면 그때 전환
+if(matchMedia('(hover: none) and (pointer: coarse)').matches) setTouchMode(true);
+addEventListener('pointerdown',e=>{ if(e.pointerType==='touch'){ lastTouchT=performance.now(); if(!touchMode) setTouchMode(true); } },true);
+addEventListener('mousemove',e=>{ if(touchMode && (e.movementX||e.movementY) && performance.now()-lastTouchT>2000 && !matchMedia('(hover: none)').matches) setTouchMode(false); });
 const joyEl=$('joy'), knob=$('knob');
 function joyMove(e){ const r=joyEl.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, R=r.width/2-10;
   let dx=e.clientX-cx, dy=e.clientY-cy; const l=Math.hypot(dx,dy); if(l>R){ dx=dx/l*R; dy=dy/l*R; }
@@ -1308,7 +1514,7 @@ canvas.addEventListener('pointermove',e=>{ if(e.pointerId!==lookId) return; cons
 const lookEnd=e=>{ if(e.pointerId===lookId) lookId=null; };
 canvas.addEventListener('pointerup',lookEnd); canvas.addEventListener('pointercancel',lookEnd);
 const tbtn=(id,down,up)=>{ const b=$(id); b.addEventListener('pointerdown',e=>{ e.preventDefault(); e.stopPropagation(); if(playing&&!panelOpen) down(); }); if(up){ b.addEventListener('pointerup',up); b.addEventListener('pointercancel',up); b.addEventListener('pointerleave',up); } };
-tbtn('tAct',()=>{ mouseL=true; actCD=0; act(); },()=>{ mouseL=false; });
+tbtn('tAct',()=>pressStart(),()=>pressEnd());
 tbtn('tUse',()=>use());
 tbtn('tJump',()=>{ keys[' ']=true; },()=>{ keys[' ']=false; });
 tbtn('tRun',()=>{ touchRun=!touchRun; $('tRun').classList.toggle('on',touchRun); });
@@ -1317,11 +1523,20 @@ canvas.addEventListener('mousedown',e=>{
   if(!playing||panelOpen) return;
   if(touchMode && performance.now()-lastTouchT<800) return;   // 터치가 만든 가짜 마우스 클릭은 무시
   if(!locked() && !noLock){ requestLock(); return; }
-  if(e.button===0){ mouseL=true; actCD=0; act(); }
+  if(e.button===0) pressStart();
   else if(e.button===2){ if(noLock){ dragging=true; dragDist=0; lastMX=e.clientX; lastMY=e.clientY; } else use(); }
 });
 // 마우스 고정이 안 되는 환경: 오른쪽 드래그는 둘러보기, 드래그 없이 뗄 때만 오른쪽 클릭 동작
-addEventListener('mouseup',e=>{ if(e.button===0) mouseL=false; else { if(dragging && dragDist<6 && playing && !panelOpen) use(); dragging=false; } });
+addEventListener('mouseup',e=>{ if(e.button===0) pressEnd(); else { if(dragging && dragDist<6 && playing && !panelOpen) use(); dragging=false; } });
+// 마우스 고정이 꺼져 있으면 화면 가운데(+)가 아니라 마우스 커서가 가리키는 곳을 겨눠요
+let curNX=null, curNY=null;
+const setCur=e=>{ const r=canvas.getBoundingClientRect(); curNX=(e.clientX-r.left)/r.width*2-1; curNY=-(e.clientY-r.top)/r.height*2+1; };
+canvas.addEventListener('mousemove',e=>{ if(!locked()&&!dragging) setCur(e); });
+canvas.addEventListener('mousedown',e=>{ if(!locked()) setCur(e); },true);
+canvas.addEventListener('mouseleave',()=>{ curNX=curNY=null; });
+const cursorAim=()=>!locked() && !touchMode && curNX!==null;
+const aimRay=new THREE.Raycaster(), _ndc=new THREE.Vector2();
+function aimDir(v){ if(cursorAim()){ _ndc.set(curNX,curNY); aimRay.setFromCamera(_ndc,camera); return v.copy(aimRay.ray.direction); } return camera.getWorldDirection(v); }
 addEventListener('mousemove',e=>{
   if(!playing||panelOpen) return;
   let dx=0,dy=0;
@@ -1329,19 +1544,20 @@ addEventListener('mousemove',e=>{
   yaw-=dx*.0028;
   if(firstPerson) fpPitch=Math.max(-1.45,Math.min(1.45,fpPitch-dy*.0028)); else pitch=Math.max(-.15,Math.min(1.35,pitch+dy*.0028));
 });
-document.addEventListener('pointerlockchange',()=>{ $('hint').style.display=(playing&&!panelOpen&&!locked())?'block':'none'; if(!locked()) mouseL=false; });
+document.addEventListener('pointerlockchange',()=>{ if(!noLock) $('hint').style.display='none'; if(!locked()){ mouseL=false; endHold(); cancelPress(); } });
 // 마우스 휠: 확대·축소 (3인칭은 카메라 거리, 1인칭은 시야각)
 canvas.addEventListener('wheel',e=>{ e.preventDefault(); if(panelOpen) return;
   if(firstPerson){ camera.fov=Math.max(30,Math.min(75,camera.fov+(e.deltaY>0?4:-4))); camera.updateProjectionMatrix(); }
   else camDist=Math.max(2.5,Math.min(16,camDist*(e.deltaY>0?1.12:1/1.12)));
 },{passive:false});
 function toggleView(){
+  if(bowFP) bowFP=null;
   firstPerson=!firstPerson; if(firstPerson) fpPitch=-(pitch-.3); else pitch=.42;
   ch.g.visible=!firstPerson; fpArm.visible=firstPerson; $('bView').classList.toggle('on',firstPerson);
   toast(firstPerson?'👁️ 1인칭 시점':'🧍 3인칭 시점');
 }
 let heldNameT=0;
-function selectSlot(n){ selSlot=n; refreshInv(); const s=inv[n]; $('heldName').textContent=s?`${ITEMS[s.id].i} ${ITEMS[s.id].n}`:'✋ 맨손'; $('heldName').style.opacity=1; heldNameT=1.5; }
+function selectSlot(n){ if(n!==selSlot) cancelPress(); selSlot=n; hotPage=Math.floor(n/9); refreshInv(); const s=inv[n]; $('heldName').textContent=s?`${ITEMS[s.id].i} ${ITEMS[s.id].n}`:'✋ 맨손'; $('heldName').style.opacity=1; heldNameT=1.5; }
 function toggleMap(){ const b=$('bigmap'); b.style.display=b.style.display==='flex'?'none':'flex'; }
 $('bigmap').onclick=toggleMap;
 $('bView').onclick=toggleView; $('bMap').onclick=toggleMap; $('bHelp').onclick=()=>showHelp();
@@ -1380,16 +1596,39 @@ function bark(){ beep(420,.07,'sawtooth',.05); setTimeout(()=>beep(380,.09,'sawt
 // ===================== 조준 =====================
 const NEED={tree:'axe',stump:'axe',cactus:'axe',rock:'pick',ore:'pick'};
 const HITS={tree:4,stump:1,rock:5,ore:6,cactus:2,bench:3,fire:2,furnace:4};
-const ONAME={tree:'🌳 나무',stump:'🪵 그루터기',rock:'🪨 바위',ore:'🟤 철광석 바위',bush:'🍓 산딸기 덤불',grass:'🌿 풀',pebble:'🪨 돌멩이',stick:'🍂 나뭇가지',mush:'🍄 버섯',cactus:'🌵 선인장',bench:'🛠️ 작업대',fire:'🔥 모닥불',furnace:'🏭 화로',chest:'🎁 보물 상자'};
+const ONAME={tree:'🌳 나무',stump:'🪵 그루터기',rock:'🪨 바위',ore:'🟤 철광석 바위',bush:'🍓 산딸기 덤불',grass:'🌿 풀',pebble:'🪨 돌멩이',stick:'🍂 나뭇가지',mush:'🍄 버섯',cactus:'🌵 선인장',bench:'🛠️ 작업대',fire:'🔥 모닥불',furnace:'🏭 화로',chest:'🎁 보물 상자',sign:'🪧 표지판'};
 const TNAME={axe:'도끼',pick:'곡괭이'};
 const camDir=new THREE.Vector3(), v3=new THREE.Vector3();
 let target=null;
 function heldTool(){ const id=heldId(); return id&&ITEMS[id].tool ? ITEMS[id] : null; }
+// 휘두르기 채집: 바라보는 쪽(앞 약 75°) 가까이에 있는 자연물·동물을 골라요. 손에 든 도구에 맞는 대상을 먼저 골라요.
+function nearFront(){
+  const fx=-Math.sin(yaw), fz=-Math.cos(yaw), tl=heldTool();
+  let best=null, bs=1e9;
+  const list=nearObjs(P.x,P.z,1); for(const a of animals) if(Math.abs(a.x-P.x)<6&&Math.abs(a.z-P.z)<6) list.push(a);
+  for(const o of list){
+    if(!o.alive||!o.pr||o.type==='sign'||o.type==='bench'||o.type==='fire'||o.type==='furnace') continue;
+    if(o.type==='chest'&&o.state==='open') continue;
+    const dx=o.x-P.x, dz=o.z-P.z, d=Math.hypot(dx,dz);
+    if(d>2.3+(o.r||0)*.8 || Math.abs((o.y||0)-P.y)>2.5) continue;
+    const cos=d<.4?1:(dx*fx+dz*fz)/d; if(cos<.25) continue;
+    let s=d+(1-cos)*1.5;
+    const need=o.isAnimal?'spear':NEED[o.type];
+    if(tl){ if(need&&tl.tool===need) s-=2; else if(!need) s+=.6; }
+    else if(need) s+=1.2;
+    if(o.isAnimal&&(ANIMDEF[o.kind].hostile||o.angry)) s-=1.5;
+    if(s<bs){ bs=s; best=o; }
+  }
+  return best;
+}
 function findTarget(){
-  camera.getWorldDirection(camDir);
+  aimDir(camDir);
   const o=camera.position, fwdx=-Math.sin(yaw), fwdz=-Math.cos(yaw);
+  { const h=heldId(), it=h&&ITEMS[h];
+    const swingMode=!(it&&(it.block||it.place||FILLMAT[h]||['bowl','rod','shovel','bow'].includes(it.tool)));
+    if(swingMode){ const nf=nearFront(); if(nf) return nf.isAnimal?{animal:nf,near:true}:{obj:nf,near:true}; } }
   let gp=null, gt=null;
-  for(let t=.3;t<40;t+=.2){ const x=o.x+camDir.x*t, y=o.y+camDir.y*t, z=o.z+camDir.z*t, h=heightAt(x,z); if(y<Math.max(h,0.02)){ gp={x,y,z,h,t}; break; } }
+  for(let t=.3;t<40;t+=.2){ const x=o.x+camDir.x*t, y=o.y+camDir.y*t, z=o.z+camDir.z*t, h=heightAt(x,z); if(y<(dryHole(x,z)?h:Math.max(h,0.02))){ gp={x,y,z,h,t}; break; } }
   let best=null, bt=1e9;
   const cands=nearObjs(P.x,P.z,1); for(const p of pets) if(Math.abs(p.x-P.x)<8&&Math.abs(p.z-P.z)<8) cands.push(p);
   for(const a of animals) if(Math.abs(a.x-P.x)<8&&Math.abs(a.z-P.z)<8) cands.push(a);
@@ -1415,12 +1654,12 @@ function findTarget(){
     const d=Math.hypot(gp.x-P.x,gp.z-P.z);
     if(d<=REACH+.6 && dockHeight(gp.x,gp.z)<0){
       const b=biomeAt(gp.x,gp.z);
-      const kind=gp.h<-0.05?'water':(b===B.SAND||b===B.DESERT)?'sand':b===B.CLAY?'clay':'ground';
-      gt={ground:true,kind,x:gp.x,y:Math.max(gp.h,0),z:gp.z,h:gp.h};
+      const dry=dryHole(gp.x,gp.z), kind=!dry&&gp.h<-0.05?'water':(b===B.SAND||b===B.DESERT)?'sand':b===B.CLAY?'clay':'ground';
+      gt={ground:true,kind,x:gp.x,y:dry?gp.h:Math.max(gp.h,0),z:gp.z,h:gp.h};
       if(kind!=='ground' && !best) return gt;
     }
   }
-  if(!best && !firstPerson){
+  if(!best && !firstPerson && !cursorAim() && heldId()!=='shovel' && !FILLMAT[heldId()]){
     let bd=2.2;
     for(const ob of cands){ if(!ob.alive||!ob.pr) continue; const dx=ob.x-P.x, dz=ob.z-P.z, d=Math.hypot(dx,dz);
       if(d<bd && (dx*Math.sin(P.face)+dz*Math.cos(P.face))/(d||1)>.3){ bd=d; best=ob; } }
@@ -1431,15 +1670,19 @@ function findTarget(){
   return null;
 }
 function describe(t){
-  if(!t) return null;
   const held=heldId(), tool=heldTool();
+  if(held==='bow'){ if(press&&press.kind==='bow') return {txt:press.t>=1?'🏹 최대로 당겼어요! 버튼을 놓으면 발사':'🏹 당기는 중… 오래 당길수록 멀리·세게 날아가요'};
+    return count('arrow')>0?{txt:`🏹 왼쪽 버튼을 누르고 있으면 당기기(조준), 놓으면 발사 (화살 ${count('arrow')}개)`}:{txt:'🏹 화살이 없어요 — 나뭇가지 1 + 돌멩이 1로 만들어요',bad:true}; }
+  { const fi=held&&ITEMS[held]; if(fi&&(fi.food||fi.water)&&!fi.block&&!(t&&(t.pet||t.animal||t.obj))&&!(t&&t.block&&['door','bed'].includes(t.block.b.type)))
+      return {txt:`${fi.i} 클릭해서 ${fi.food?'먹기':'마시기'} (${fi.food?'🍗 +'+fi.food:''}${fi.water?' 💧 +'+fi.water:''}${fi.hp?` ❤️ ${fi.hp>0?'+':''}${fi.hp}`:''})${fi.hp<0?' — 날것은 구워 먹어요!':''}`,bad:fi.hp<0}; }
+  if(!t) return null;
   if(t.block){ const b=t.block.b, it=ITEMS[b.type];
     if(t.far) return {txt:`${it.i} ${it.n} — 조금 더 가까이 가세요`,bad:true};
     if(b.type==='door') return {txt:`🚪 나무 문 — 오른쪽 클릭: ${b.open?'닫기':'열기'} · 왼쪽 꾹: 부수기`};
     if(b.type==='bed') return {txt:'🛏️ 침대 — 오른쪽 클릭: 잠자기 · 왼쪽 꾹: 부수기'};
-    if(held&&ITEMS[held].block) return placeInfo&&placeInfo.ok?{txt:`왼쪽 클릭: ${ITEMS[held].n} 놓기 · 오른쪽: ${it.n} 회수`}:{txt:`🚫 ${placeInfo?placeInfo.why:'놓을 수 없어요'} · 오른쪽: ${it.n} 회수`,bad:true};
+    if(held&&ITEMS[held].block) return placeInfo&&placeInfo.ok?{txt:`왼쪽 클릭: ${ITEMS[held].n} 놓기 · 왼쪽 길게: ${it.n} 회수`}:{txt:`🚫 ${placeInfo?placeInfo.why:'놓을 수 없어요'} · 왼쪽 길게: ${it.n} 회수`,bad:true};
     return {txt:`${it.i} ${it.n} — 왼쪽 꾹: 부수기${BLK[b.type].tool?` (${BLK[b.type].tool==='axe'?'🪓 도끼':'⛏️ 곡괭이'}가 있으면 빨라요)`:''}`}; }
-  if(held && ITEMS[held].block && placeInfo && !t.pet) return placeInfo.ok?{txt:`왼쪽 클릭: ${ITEMS[held].n} 놓기 (꾹 누른 채 둘러보면 연달아)`}:{txt:`🚫 ${placeInfo.why}`,bad:true};
+  if(held && ITEMS[held].block && placeInfo && !t.pet) return placeInfo.ok?{txt:`왼쪽 클릭: ${ITEMS[held].n} 놓기 · 왼쪽 길게: 블록 회수`}:{txt:`🚫 ${placeInfo.why}`,bad:true};
   if(t.animal){ const a=t.animal, D=ANIMDEF[a.kind], w=weaponDmg(), danger=(D.hostile||a.angry)&&!isPeace();
     return {txt:`${D.i} ${D.n}${danger?' ⚠️ 위험!':''} — ${w||danger?'클릭해서 공격':'🔱 돌창 같은 무기를 들면 사냥할 수 있어요'} (체력 ${a.hp}/${D.hp})`,bad:!w&&!danger}; }
   if(t.pet){ const p=t.pet, d=PETDEF[p.kind];
@@ -1449,7 +1692,7 @@ function describe(t){
   if(t.obj){
     const o=t.obj, need=NEED[o.type];
     if(o.type==='chest') return o.state==='open'?{txt:'🎁 열린 상자 — 비어 있어요'}:{txt:'🎁 보물 상자 — 클릭해서 열기!'};
-    if(o.type==='bush' && o.state==='empty') return {txt:'덤불 — 열매가 다시 열릴 때까지 기다려요',bad:true};
+    if(o.type==='bush' && o.state==='empty') return {txt:'덤불 — 클릭해서 치우기 (나뭇가지·풀)'};
     if(need && (!tool||tool.tool!==need)) return {txt:`${ONAME[o.type]} — ${need==='axe'?'🪓':'⛏️'} ${TNAME[need]}를 손에 들어야 해요`,bad:true};
     if(o.type==='bench'||o.type==='fire'||o.type==='furnace') return {txt:`${ONAME[o.type]} — 옆에서 E로 제작 · 꾹 눌러 회수`};
     const verb={tree:'베기',stump:'치우기',rock:'캐기',ore:'캐기',cactus:'자르기',bush:'열매 따기',grass:'뜯기'}[o.type]||'줍기';
@@ -1460,8 +1703,9 @@ function describe(t){
     if(held==='rod') return {txt:'💧 물 — 클릭해서 낚싯대 던지기'};
     return {txt:'💧 물 — 클릭: 손으로 마시기'};
   }
+  if(t.kind==='ground' && held==='shovel'){ const bb=biomeAt(t.x,t.z); return {txt:(bb===B.GRASS||bb===B.FOREST?'🪏 잔디 땅 — 왼쪽: 파기(1칸 구덩이) · ':'⛰️ 바위 땅 — ')+'오른쪽: 평평하게 고르기'}; }
   if(t.kind==='sand'||t.kind==='clay'){ const nm=t.kind==='clay'?'🟧 진흙 땅':'🟨 모래 땅';
-    return held==='shovel'?{txt:`${nm} — 클릭해서 파기`}:{txt:`${nm} — 🪏 나무삽을 들면 팔 수 있어요`,bad:true}; }
+    return held==='shovel'?{txt:`${nm} — 클릭: 아래로 한 칸 파기 (계속 파면 더 깊어져요)`}:{txt:`${nm} — 🪏 나무삽을 들면 팔 수 있어요`,bad:true}; }
   if(held && ITEMS[held].place) return {txt:`${ITEMS[held].i} 왼쪽 클릭으로 ${ITEMS[held].n} 설치`};
   return null;
 }
@@ -1476,19 +1720,27 @@ const swing=()=>{ P.swing=.28; };
 const petNear=(kind,r)=>pets.some(p=>p.kind===kind&&p.mode==='follow'&&Math.hypot(p.x-P.x,p.z-P.z)<r);
 function act(){
   if(actCD>0) return; actCD=.32;
-  { const h=heldId(); if(h && (ITEMS[h].block||ITEMS[h].place)){ actCD=.25; return placeHeld(); } }
+  { const h=heldId(); if(h && (ITEMS[h].block||ITEMS[h].place||h==='bow')) return; }   // 블록·활은 pressStart/pressEnd에서 처리
+  if(!firstPerson) P.face=Math.atan2(-Math.sin(yaw),-Math.cos(yaw));   // 휘두를 때는 바라보는 쪽으로 몸을 돌려요
+  target=findTarget();
   const t=target; swing();
+  if(t && t.ground && !firstPerson && cursorAim()) P.face=Math.atan2(t.x-P.x,t.z-P.z);   // 커서로 고른 곳을 바라보며 파요
+  if(t && t.kind==='ground' && heldId()==='shovel'){   // 삽으로 잔디 땅 파기 (땅 고르기는 오른쪽 클릭)
+    lastHitPos={x:t.x,y:t.y+.2,z:t.z};
+    const bb=biomeAt(t.x,t.z);
+    if(bb!==B.GRASS&&bb!==B.FOREST){ toastOnce('rockdig','⛰️ 바위 땅은 삽으로 팔 수 없어요'); return; }
+    digHit(t,'dirt','dirt'); return; }
   if(!t || t.kind==='far' || t.kind==='ground'){ if(t&&t.kind==='far') toastOnce('far','조금 더 가까이 가세요'); return; }
   const held=heldId(), tool=heldTool();
   if(t.animal){ return attackAnimal(t.animal); }
   if(t.block){
     if(t.far) return toastOnce('far','조금 더 가까이 가세요');
     const b=t.block.b, d=BLK[b.type], good=d.tool&&tool&&tool.tool===d.tool, need=good?1:d.hits;
-    lastHitPos={x:t.block.x+.5,y:t.block.y+.5,z:t.block.z+.5};
+    setHoldTgt(b); lastHitPos={x:t.block.x+.5,y:t.block.y+.5,z:t.block.z+.5};
     b.hits=(b.hits||0)+1; burst(lastHitPos.x,lastHitPos.y,lastHitPos.z,'b_'+(d.mat||'wood'));
     if(d.mat==='stone'||d.mat==='brick') beep(380+Math.random()*60,.05,'triangle'); else if(d.mat==='glass') beep(1400,.04,'sine'); else noise(.08,.07,600);
     if(good) wearTool();
-    if(b.hits>=need){ removeBlock(b); addItem(b.type,1); if(d.mat==='glass') noise(.25,.06,3000); }
+    if(b.hits>=need){ holdTgt=null; removeBlock(b); addItem(b.type,1); if(d.mat==='glass') noise(.25,.06,3000); }
     return;
   }
   if(t.pet){ const p=t.pet, d=PETDEF[p.kind];
@@ -1501,12 +1753,12 @@ function act(){
     if(o.type==='sign') return;
     if(o.type==='chest'){ if(o.state!=='open') openChest(o); return; }
     if(need && (!tool||tool.tool!==need)){ toastOnce('need'+need,`${need==='axe'?'🪓':'⛏️'} ${TNAME[need]}를 손에 들어야 해요! (핫바 숫자키)`); beep(150,.05); return; }
-    if(o.type==='bush' && o.state==='empty'){ toastOnce('bushe','아직 열매가 없어요'); return; }
     const hitsNeed=Math.ceil((HITS[o.type]||1)/(need?tool.pow:1));
+    if(STNAME[o.type]) setHoldTgt(o); else setHoldTgt(null);
     o.hits++; burst(o.x,lastHitPos.y,o.z,o.type); wobble(o);
     if(o.type==='rock'||o.type==='ore') beep(420+Math.random()*60,.06,'triangle'); else if(o.type==='tree'||o.type==='stump') { noise(.09,.08,500); beep(160,.05); } else noise(.05,.04,1500);
     if(need) wearTool();
-    if(o.hits>=hitsNeed){ o.hits=0; harvest(o); }
+    if(o.hits>=hitsNeed){ o.hits=0; if(holdTgt===o) holdTgt=null; harvest(o); }
     return;
   }
   lastHitPos={x:t.x,y:t.y+.2,z:t.z};
@@ -1521,10 +1773,18 @@ function act(){
   }
   if(t.kind==='sand'||t.kind==='clay'){
     if(held!=='shovel'){ toastOnce('shov','🪏 땅을 파려면 나무삽을 손에 들어야 해요 (작업대에서 제작)'); return; }
-    const k=Math.round(t.x)*1000+Math.round(t.z), h=(groundHits.get(k)||0)+1;
-    burst(t.x,t.y,t.z,t.kind); noise(.08,.06,700); wearTool();
-    if(h>=2){ groundHits.delete(k); addItem(t.kind==='clay'?'clay':'sand',1); } else groundHits.set(k,h);
+    digHit(t,t.kind,t.kind==='clay'?'clay':'sand');
   }
+}
+// 삽으로 두 번 치면 한 칸(1×1×1) 구덩이가 파이고 흙·모래·점토가 나와요
+// 이 칸을 파면 사라질 블록 한 칸의 윗면 높이
+function digTopY(ix,iz){ const f=holeAt(ix,iz); return f>-999?f:Math.floor(terrainH(ix+.5,iz+.5)+.25); }
+function digHit(t,fx,item){
+  const ix=Math.floor(t.x), iz=Math.floor(t.z), k=ix*1000+iz, h=(groundHits.get(k)||0)+1, yTop=digTopY(ix,iz);
+  digFx(ix,iz,yTop,fx,false); noise(.08,.06,700); wearTool();
+  if(h<2){ groundHits.set(k,h); return; }
+  groundHits.delete(k);
+  if(digCell(t.x,t.z)){ digFx(ix,iz,yTop,fx,true); noise(.18,.09,500); beep(140,.08,'triangle',.04); addItem(item,1); S.dug=(S.dug||0)+1; if(S.dug===1) toast('🕳️ 구덩이를 팠어요! 같은 칸을 또 파면 한 칸씩 계속 깊어져요. 파낸 흙·모래·점토를 들고 구덩이를 왼쪽 클릭하면 다시 메울 수 있어요. 깊이 팠다면 옆 벽을 한 칸씩 파서 계단을 만들고 점프(Space)로 올라오세요'); }
 }
 const regrowList=[];
 function harvest(o){
@@ -1537,7 +1797,9 @@ function harvest(o){
     case 'stump': hidePart(o.parts[0]); o.alive=false; o.dead=1; addItem('stick',1); later(150); break;
     case 'rock': o.parts.forEach(hidePart); o.alive=false; o.dead=1; addItem('stone',2); if(Math.random()<.5) addItem('pebble',1); later(300); break;
     case 'ore': o.parts.forEach(hidePart); o.alive=false; o.dead=1; addItem('ore',1); addItem('stone',1); later(400); break;
-    case 'bush': o.berries.forEach(hidePart); o.state='empty'; addItem('berry',2); later(90); break;
+    case 'bush':
+      if(o.state==='empty'){ o.parts.forEach(hidePart); o.alive=false; o.dead=1; addItem('stick',1); addItem('fiber',1); toastOnce('bushgone','🌿 덤불을 치웠어요'); later(300); break; }
+      o.berries.forEach(hidePart); o.state='empty'; addItem('berry',2); later(90); toastOnce('bushc','🍓 한 번 더 치면 덤불을 치울 수 있어요'); break;
     case 'grass': o.parts.forEach(hidePart); o.alive=false; o.dead=1; addItem('fiber',Math.random()<.4?2:1); later(120); break;
     case 'pebble': case 'stick': case 'mush': o.parts.forEach(hidePart); o.alive=false; o.dead=1; addItem(o.type,1); later(180); break;
     case 'cactus': o.parts.forEach(hidePart); o.alive=false; o.dead=1; addItem('cactus',2); later(240); break;
@@ -1546,21 +1808,40 @@ function harvest(o){
   }
 }
 function setStump(o){ o.parts.slice(1).forEach(hidePart); showPart(o.parts[0],.22); o.type='stump'; o.top=o.y+.45; o.cr=.2; o.hy=.25; o.pr=.6; o.regrowAt=gameClock+200; if(!regrowList.includes(o)) regrowList.push(o); }
+function builtNear(o){
+  const r=(o.r||.3)+1;
+  for(let x=Math.floor(o.x-r);x<=Math.floor(o.x+r);x++) for(let z=Math.floor(o.z-r);z<=Math.floor(o.z+r);z++){
+    if(holeAt(x,z)>-999) return true;
+    if(blocks.size) for(let y=Math.floor(o.y)-2;y<=Math.floor(o.y)+3;y++) if(getB(x,y,z)) return true; }
+  return stations.some(s=>Math.hypot(s.x-o.x,s.z-o.z)<r+.8);
+}
 function regrowTick(){
   for(let i=regrowList.length-1;i>=0;i--){
     const o=regrowList[i]; if(gameClock<o.regrowAt) continue;
     if(Math.hypot(o.x-P.x,o.z-P.z)<14) continue;
+    if(o.dead && builtNear(o)) continue;   // 집터로 치운 땅(블록·설치물·구덩이 근처)에는 다시 자라지 않아요
     regrowList.splice(i,1);
     if(o.type==='stump'){ o.type='tree'; o.parts.forEach(p=>showPart(p)); o.top=o.y+4*o.s; o.cr=1.25*o.s; o.hy=1.1; o.pr=.85; }
-    else if(o.type==='bush'){ o.berries.forEach(p=>showPart(p)); o.state='full'; }
+    else if(o.type==='bush'){ if(o.dead) o.parts.forEach(p=>showPart(p)); o.berries.forEach(p=>showPart(p)); o.state='full'; }
     else o.parts.forEach(p=>showPart(p));
     o.alive=true; o.dead=0; o.hits=0;
     if(o.wasStump){ o.wasStump=0; }
   }
 }
+function eatHeld(){
+  const held=heldId(), it=held&&ITEMS[held]; if(!it||!(it.food||it.water)) return false;
+  if(it.food&&!it.water&&P.food>=100){ toastOnce('full','😋 배가 불러요! 배고픔 막대가 줄어들면 먹어요'); return true; }
+  removeItem(held,1);
+  if(it.food) P.food=Math.min(100,P.food+it.food); if(it.water) P.water=Math.min(100,P.water+it.water); if(it.hp) P.hp=Math.max(1,Math.min(100,P.hp+it.hp));
+  if(held==='water') addItem('bowl',1,true);
+  S.ate=S.ate||{}; S.ate[held]=(S.ate[held]||0)+1; guideDirty=true;
+  noise(.12,.05,1200); swing(); beep(520,.06,'sine',.03);
+  toast(`${it.i} ${it.n}을(를) ${it.food?'먹었어요':'마셨어요'} (${it.food?'🍗 +'+it.food:''}${it.water?' 💧 +'+it.water:''}${it.hp?` ❤️ ${it.hp>0?'+':''}${it.hp}`:''})${it.hp<0?' — 날것이라 배가 아파요':''}`);
+  updateBars(); return true;
+}
 function use(){
   const t=target, held=heldId(), it=held&&ITEMS[held];
-  if(t&&t.pet){ const p=t.pet, d=PETDEF[p.kind];
+  if(t&&t.pet&&!(t.pet.mode!=='wild'&&it&&(it.food||it.water))){ const p=t.pet, d=PETDEF[p.kind];
     if(p.mode==='wild'){
       if(!d.food.includes(held)) return toastOnce('food'+p.kind,`${d.i} ${d.n}은(는) ${ITEMS[d.food[0]].i} ${ITEMS[d.food[0]].n}을(를) 좋아해요. 손에 들고 주세요`);
       removeItem(held,1); p.aff++; heartFx(p.x,p.y,p.z); beep(700,.08,'sine'); swing();
@@ -1572,19 +1853,111 @@ function use(){
   if(t&&t.block&&!t.far){ const b=t.block.b;
     if(b.type==='door'){ swing(); return toggleDoor(b); }
     if(b.type==='bed'){ return trySleep(b); }
-    // 블록을 든 채 오른쪽 클릭: 바라보는 블록을 바로 회수 (잘못 놓은 블록 고치기)
-    if(it&&it.block){ removeBlock(b); addItem(b.type,1,true); burst(t.block.x+.5,t.block.y+.5,t.block.z+.5,'b_'+(BLK[b.type].mat||'wood')); noise(.08,.07,700); swing(); return; } }
-  if(!it) return;
-  if(it.block||it.place) return toastOnce('lcplace',`${it.i} ${it.n}은(는) 왼쪽 클릭으로 놓아요`);
-  if(it.food||it.water){
-    removeItem(held,1);
-    if(it.food) P.food=Math.min(100,P.food+it.food); if(it.water) P.water=Math.min(100,P.water+it.water); if(it.hp) P.hp=Math.max(1,Math.min(100,P.hp+it.hp));
-    if(held==='water') addItem('bowl',1,true);
-    noise(.12,.05,1200); swing(); toast(`${it.i} ${it.n}을(를) ${it.food?'먹었어요':'마셨어요'}${it.hp<0?' (날것이라 배가 아파요)':''}`); updateBars(); return;
   }
+  if(!it) return;
+  if(it.block||it.place) return toastOnce('lcplace',`${it.i} ${it.n}: 왼쪽 클릭은 놓기, 왼쪽을 길게 누르면 회수해요`);
+  if(it.food||it.water) return eatHeld();
+  if(held==='shovel' && t && t.ground && t.kind!=='far' && t.kind!=='water'){   // 삽 + 오른쪽 클릭: 땅 고르기
+    lastHitPos={x:t.x,y:t.y+.2,z:t.z}; swing();
+    const bb=biomeAt(t.x,t.z), soft=t.kind==='sand'||t.kind==='clay'||bb===B.GRASS||bb===B.FOREST;
+    // 구덩이 안이거나 이미 평평한 땅이면: 평평하다는 말 대신 아래로 한 칸 파기
+    const lv=holeAt(Math.floor(t.x),Math.floor(t.z))>-999?'flat':levelGround(t.x,t.z);
+    if(lv==='flat'){ if(soft) digHit(t,t.kind==='ground'?'dirt':t.kind,t.kind==='clay'?'clay':t.kind==='sand'?'sand':'dirt'); else toastOnce('rockdig','⛰️ 바위 땅은 삽으로 팔 수 없어요'); return; }
+    if(lv){ wearTool(); burst(t.x,t.y+.1,t.z,'clay'); noise(.1,.07,500); S.leveled=(S.leveled||0)+1; guideDirty=true;
+      if(S.leveled===1){ toast('🪏 땅을 골랐어요! 집 지을 자리를 넓고 평평하게 만들어 보세요'); unlock('c:shovel'); } }
+    return; }
   if(it.tool) toastOnce('lc',`${it.i} ${it.n}은(는) 왼쪽 클릭으로 사용해요`);
 }
-// 왼쪽 클릭: 손에 든 블록·설치물을 바라보는 곳에 놓기 (꾹 누른 채 둘러보면 연달아 놓여요)
+// ===== 왼쪽 버튼 누르기 처리 =====
+// 블록·설치물: 짧게 = 놓기, 길게(0.35초) = 바라보는 블록 회수(누르고 있으면 계속)
+// 활: 누르고 있으면 당기기(조준, 최대 1초), 놓으면 발사 — 많이 당길수록 멀리·세게
+let press=null, retrieveCD=0, baseFov=65;
+// 활 전용 1인칭: 활을 당기는 동안 1인칭으로 바꾸고, 화살이 떨어질 때까지 지켜본 뒤 원래 시점으로 돌아가요
+let bowFP=null;
+function enterBowFP(){
+  if(bowFP){ bowFP.hold=Infinity; return; }
+  bowFP={prev:firstPerson,hold:Infinity,arrow:null};
+  if(!firstPerson){ firstPerson=true; fpPitch=-(pitch-.3); ch.g.visible=false; fpArm.visible=true; }
+}
+function exitBowFP(){
+  if(!bowFP) return; const prev=bowFP.prev; bowFP=null;
+  if(!prev && firstPerson){ firstPerson=false; ch.g.visible=true; fpArm.visible=false; }
+}
+function updBowFP(dt){
+  if(!bowFP || press&&press.kind==='bow') return;
+  const a=bowFP.arrow;
+  if(a && arrows.includes(a) && !a.stuck && a.t<4){ bowFP.hold=Math.max(bowFP.hold,.9); return; }   // 날아가는 동안은 계속 지켜봐요
+  if(bowFP.hold===Infinity) bowFP.hold=.9;
+  bowFP.hold-=dt; if(bowFP.hold<=0) exitBowFP();
+}
+// 꾹 눌러 회수(작업대·모닥불·화로, 놓은 블록 부수기)는 한 번에 계속 눌러야 해요. 중간에 떼거나 다른 걸 겨누면 처음부터.
+let holdTgt=null;
+const holdReset=o=>!!(o&&(o.hits>0)&&(o.hits=0,true));
+function setHoldTgt(o){ if(holdTgt&&holdTgt!==o) holdReset(holdTgt); holdTgt=o; }
+function endHold(){ if(holdTgt&&holdReset(holdTgt)) toastOnce('holdagain','✋ 손을 떼서 처음부터예요. 회수는 끝까지 꾹 누르고 있어야 해요'); holdTgt=null; }
+const LONG=.35;
+function pressStart(){
+  if(!playing||panelOpen) return;
+  const h=heldId(), it=h&&ITEMS[h];
+  if(h&&FILLMAT[h]){ target=findTarget(); if(fillTarget(target)){ press={kind:'fill',t:0,t0:performance.now(),cd:.3}; doFill(); return; }
+    if(!it.block){ if(target&&target.ground&&target.kind!=='far'&&target.kind!=='water') toastOnce('fillhint',`${it.i} ${it.n}은(는) 삽으로 판 구덩이를 겨누고 왼쪽 클릭하면 넣어서 메울 수 있어요`); else { mouseL=true; actCD=0; act(); } return; } }
+  if(it&&(it.food||it.water)&&!it.block){ const t=findTarget(); if(!t||t.ground||t.block){ target=t; eatHeld(); return; } }
+  if(it&&(it.block||it.place)){ press={kind:'build',t:0,t0:performance.now()}; retrieveCD=0; return; }
+  if(h==='bow'){
+    if(count('arrow')<=0) return toastOnce('noarrow','🪶 화살이 없어요! 나뭇가지 1 + 돌멩이 1로 화살 4개를 만들어요 (제작 → 도구)');
+    enterBowFP(); press={kind:'bow',t:0,t0:performance.now()}; baseFov=camera.fov; beep(300,.12,'triangle',.02); return; }
+  mouseL=true; actCD=0; act();
+}
+function pressEnd(){
+  mouseL=false; endHold(); if(!press) return;
+  const p=press; press=null; p.t=(performance.now()-p.t0)/1000;   // 실제 시간으로 잼 (느린 컴퓨터에서도 같게)
+  if(p.kind==='build' && p.t<LONG) placeHeld();
+  if(p.kind==='bow'){ camera.fov=baseFov; camera.updateProjectionMatrix(); if(p.t>=.12) shootArrow(Math.min(1,p.t/1.0)); if(bowFP) bowFP.hold=bowFP.arrow?1:.25; }
+}
+function cancelPress(){ if(press&&press.kind==='bow'){ camera.fov=baseFov; camera.updateProjectionMatrix(); if(bowFP) bowFP.hold=.25; } press=null; }
+function updPress(dt){
+  if(!press) return;
+  press.t=(performance.now()-press.t0)/1000;
+  if(press.kind==='fill'){ press.cd-=dt; if(press.cd<=0){ press.cd=.3; target=findTarget(); if(fillTarget(target)) doFill(true); } return; }
+  if(press.kind==='build' && press.t>=LONG){ retrieveCD-=dt; if(retrieveCD<=0){ retrieveCD=.28; retrieveBlock(); } }
+  if(press.kind==='bow'){ const p=Math.min(1,press.t); camera.fov=baseFov*(1-.14*p); camera.updateProjectionMatrix();
+    if(!firstPerson) P.face=Math.atan2(-Math.sin(yaw),-Math.cos(yaw)); if(p>=1&&!press.full){ press.full=true; beep(880,.05,'sine',.03); } }
+}
+// 회수할 블록 찾기: 겨눈 블록이 없거나 멀면, 조준선 근처(1.1m) 6.5m 안의 블록 중 가장 가까운 것
+function blockForRemoval(){
+  aimDir(camDir); const o=camera.position;
+  const bh=rayBlock(o,camDir,30);
+  if(bh && Math.hypot(bh.x+.5-P.x,bh.y+.5-(P.y+1),bh.z+.5-P.z)<=6.5) return bh.b;
+  let best=null, bs=1e9; const seen=new Set();
+  for(const b of blocks.values()){
+    if(seen.has(b)||b.hidden) continue; seen.add(b);
+    const cx=b.x+.5, cy=b.y+(b.type==='door'?1:.5), cz=b.z+.5;
+    if(Math.abs(cx-P.x)>6.5||Math.abs(cz-P.z)>6.5||Math.hypot(cx-P.x,cy-(P.y+1),cz-P.z)>6.5) continue;
+    v3.set(cx-o.x,cy-o.y,cz-o.z); const t=v3.dot(camDir); if(t<0) continue;
+    const perp=v3.addScaledVector(camDir,-t).length();
+    if(perp<1.1){ const s=t+perp*4; if(s<bs){ bs=s; best=b; } }
+  }
+  return best;
+}
+function retrieveBlock(){
+  const b=blockForRemoval();
+  if(!b) return toastOnce('noret','회수할 블록을 바라보세요');
+  removeBlock(b); addItem(b.type,1,true); burst(b.x+.5,b.y+.5,b.z+.5,'b_'+(BLK[b.type].mat||'wood'));
+  noise(.08,.07,700); swing(); toastOnce('ret','↩️ 블록을 회수했어요 (누르고 있으면 계속 회수)');
+}
+// 손에 든 흙·모래·점토를 겨눈 구덩이에 한 칸 넣기 (누르고 있으면 계속)
+function doFill(quiet){
+  const h=heldId(), fi=fillTarget(target); if(!fi) return;
+  if(fi.bad) return toastOnce('fillblk','🚫 '+fi.bad);
+  if(count(h)<=0) return;
+  if(!firstPerson && cursorAim()) P.face=Math.atan2(fi.ix+.5-P.x,fi.iz+.5-P.z);
+  removeItem(h,1); const done=fillCell(fi,FILLMAT[h]); swing();
+  digFx(fi.ix,fi.iz,fi.f+1,FILLMAT[h],false); noise(.12,.08,450); beep(done?260:170,.06,'triangle',.03);
+  S.filled=(S.filled||0)+1;
+  if(done) toastOnce('filldone','🌱 구덩이를 끝까지 메워서 원래 땅으로 돌아왔어요!');
+  else if(S.filled===1) toast(`${ITEMS[h].i} ${ITEMS[h].n}을(를) 구덩이에 넣었어요! 한 번에 한 칸씩 차올라요. 누르고 있으면 계속 메워요`);
+}
+// 왼쪽 짧게 클릭: 손에 든 블록·설치물을 바라보는 곳에 놓기
 function placeHeld(){
   const t=target, held=heldId(), it=ITEMS[held];
   if(it.block){
@@ -1595,7 +1968,7 @@ function placeHeld(){
     removeItem(held,1); addBlock(held,pl.x,pl.y,pl.z,rotFromFacing()); S.placedBlocks=(S.placedBlocks||0)+1; guideDirty=true;
     placeInfo=null;   // 다음 화면에서 새 자리를 다시 계산
     noise(.07,.07,BLK[held].mat==='stone'||BLK[held].mat==='brick'?1600:500); swing();
-    if(S.placedBlocks===1) toast('🧱 첫 블록! 꾹 누른 채 둘러보면 연달아 놓여요. 잘못 놓으면 오른쪽 클릭으로 회수 (G: 집 짓는 법)');
+    if(S.placedBlocks===1) toast('🧱 첫 블록! 꾹 누른 채 둘러보면 연달아 놓여요. 잘못 놓으면 왼쪽을 꾹 눌러 회수 (G: 집 짓는 법)');
     return;
   }
   // 작업대·모닥불·화로
@@ -1603,7 +1976,7 @@ function placeHeld(){
   if(t && t.ground && t.kind!=='water' && Math.hypot(t.x-P.x,t.z-P.z)<=REACH+.6){ x=t.x; z=t.z; }
   else if(t && t.block && !t.far && t.block.n[1]===1){ x=t.block.x+.5; z=t.block.z+.5; }
   else { x=P.x+Math.sin(P.face)*1.8; z=P.z+Math.cos(P.face)*1.8; }
-  if(heightAt(x,z)<.1 && blockTopBelow(x,z,P.y+1.2)<0) return toastOnce('pw','물 위에는 설치할 수 없어요');
+  if(wH(x,z)<.1 && !(dryHole(x,z)) && blockTopBelow(x,z,P.y+1.2)<0) return toastOnce('pw','물 위에는 설치할 수 없어요');
   if(Math.hypot(x-P.x,z-P.z)<1) return toastOnce('pp','너무 가까워요. 한 걸음 떨어져서 설치하세요');
   for(const o of nearObjs(x,z,1)) if(o.alive && o.r && Math.hypot(o.x-x,o.z-z)<o.r+.75) return toastOnce('po','다른 물체와 너무 가까워요');
   removeItem(held,1); placeStation(held,x,z); S.placed[held]=1; beep(240,.08,'triangle'); noise(.15,.06,400); swing();
@@ -1611,12 +1984,77 @@ function placeHeld(){
 }
 
 // 효과: 파편 · 흔들림
-const PCOL={meat:'#b03030',b_wool:'#ffffff',b_wood:'#c99a62',b_stone:'#9a9ea3',b_brick:'#b5523b',b_thatch:'#d9b45a',b_glass:'#dff4ff',tree:'#7a5232',stump:'#7a5232',rock:'#9a9da1',ore:'#e8892e',bush:'#3f8a3a',grass:'#5fa844',pebble:'#8a8d91',stick:'#7a5232',mush:'#d9382e',cactus:'#4f9a45',water:'#bfe6ff',sand:'#efe0a8',clay:'#c09474',bench:'#b98450',fire:'#ff8a1f',furnace:'#7c7f83'};
-const pool=[]; for(let k=0;k<60;k++){ const m=new THREE.Mesh(new THREE.BoxGeometry(.09,.09,.09),new THREE.MeshLambertMaterial()); m.visible=false; scene.add(m); pool.push({m,vx:0,vy:0,vz:0,t:0}); }
+const PCOL={crit:'#ffe066',meat:'#b03030',b_wool:'#ffffff',b_wood:'#c99a62',b_stone:'#9a9ea3',b_brick:'#b5523b',b_thatch:'#d9b45a',b_glass:'#dff4ff',b_dirt:'#8a6440',dirt:'#8a6440',tree:'#7a5232',stump:'#7a5232',rock:'#9a9da1',ore:'#e8892e',bush:'#3f8a3a',grass:'#5fa844',pebble:'#8a8d91',stick:'#7a5232',mush:'#d9382e',cactus:'#4f9a45',water:'#bfe6ff',sand:'#efe0a8',clay:'#c09474',bench:'#b98450',fire:'#ff8a1f',furnace:'#7c7f83'};
+const pool=[]; for(let k=0;k<160;k++){ const m=new THREE.Mesh(new THREE.BoxGeometry(.09,.09,.09),new THREE.MeshLambertMaterial()); m.visible=false; scene.add(m); pool.push({m,vx:0,vy:0,vz:0,t:0}); }
 let pi=0;
-function burst(x,y,z,type){ for(let k=0;k<8;k++){ const p=pool[pi++%pool.length]; p.m.visible=true; p.m.position.set(x,y,z); p.m.material.color.set(PCOL[type]||'#ccc');
+function burst(x,y,z,type){ for(let k=0;k<8;k++){ const p=pool[pi++%pool.length]; p.m.visible=true; p.m.position.set(x,y,z); p.m.scale.setScalar(1); p.m.material.color.set(PCOL[type]||'#ccc');
   p.vx=(Math.random()-.5)*3; p.vy=1.5+Math.random()*2.5; p.vz=(Math.random()-.5)*3; p.t=.6; } }
-function updParticles(dt){ for(const p of pool){ if(!p.m.visible) continue; p.t-=dt; if(p.t<=0){p.m.visible=false;continue;} p.vy-=12*dt; p.m.position.x+=p.vx*dt; p.m.position.y+=p.vy*dt; p.m.position.z+=p.vz*dt; p.m.rotation.x+=dt*8; } }
+// 삽질 효과: 파는 칸에서 흙·모래 조각이 튀고, 다 파이면 블록 한 칸이 부서지며 사라져요
+const digBox=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshLambertMaterial({transparent:true,opacity:.9})); digBox.visible=false; scene.add(digBox); let digBoxT=0;
+const digMark=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.02,1.02,1.02)),new THREE.LineBasicMaterial({color:'#ffd25a',transparent:true,opacity:.95,depthTest:false})); digMark.renderOrder=12; digMark.visible=false; scene.add(digMark);
+function digFx(ix,iz,yTop,type,full){
+  const c=PCOL[type]||'#c9a46a', n=full?26:12;
+  for(let k=0;k<n;k++){ const p=pool[pi++%pool.length]; p.m.visible=true; p.m.material.color.set(c); p.m.material.color.multiplyScalar(.8+Math.random()*.35);
+    p.m.position.set(ix+.15+Math.random()*.7, yTop-(full?Math.random()*.9:0)+.05, iz+.15+Math.random()*.7); p.m.scale.setScalar(full?1.2+Math.random()*1.8:.8+Math.random()*1.2);
+    const a=Math.random()*6.283, sp=full?1.5+Math.random()*2.5:1+Math.random()*1.8; p.vx=Math.cos(a)*sp; p.vz=Math.sin(a)*sp; p.vy=(full?3:2.2)+Math.random()*2.5; p.t=full?.9:.6; }
+  if(full){ digBox.position.set(ix+.5,yTop-.5,iz+.5); digBox.material.color.set(c); digBox.scale.setScalar(1); digBox.material.opacity=.9; digBox.visible=true; digBoxT=.3; }
+}
+function updDigFx(dt){ if(digBoxT>0){ digBoxT-=dt; const k=Math.max(0,digBoxT/.3); digBox.scale.setScalar(.3+.7*k); digBox.material.opacity=.9*k; digBox.position.y+=dt*.8; if(digBoxT<=0) digBox.visible=false; } }
+// 활과 화살 (원거리 무기)
+const arrows=[];
+function makeArrowMesh(){ const g=new THREE.Group();
+  const s=new THREE.Mesh(new THREE.CylinderGeometry(.024,.024,.75,5),lam('#8a5a32')); s.rotation.x=Math.PI/2; g.add(s);
+  const tip=new THREE.Mesh(new THREE.ConeGeometry(.04,.12,4),lam('#8a8d91')); tip.rotation.x=Math.PI/2; tip.position.z=.4; g.add(tip);
+  for(const r of [0,Math.PI/2]){ const f=new THREE.Mesh(new THREE.BoxGeometry(.14,.008,.18),lam('#e8503a')); f.position.z=-.3; f.rotation.z=r; g.add(f); }
+  return g; }
+function shootArrow(power=1){
+  if(count('arrow')<=0) return toastOnce('noarrow','🪶 화살이 없어요! 나뭇가지 1 + 돌멩이 1로 화살 4개를 만들어요 (제작 → 도구)');
+  removeItem('arrow',1); wearTool();
+  if(bowFP) camera.getWorldDirection(camDir); else aimDir(camDir); const o=camera.position; let aim=null;
+  for(let t=1;t<50;t+=.5){ const x=o.x+camDir.x*t, y=o.y+camDir.y*t, z=o.z+camDir.z*t; if(y<heightAt(x,z)||(blocks.size&&solidAtPoint(x,y,z))){ aim={x,y,z}; break; } }
+  if(!aim) aim={x:o.x+camDir.x*50,y:o.y+camDir.y*50,z:o.z+camDir.z*50,sky:1};
+  // 많이 당길수록 빠르고(멀리) 세게. 덜 당기면 화살이 일찍 떨어져요
+  const fp=firstPerson, sx=fp?o.x+camDir.x*.5:P.x, sy=fp?o.y+camDir.y*.5-.12:P.y+1.4, sz=fp?o.z+camDir.z*.5:P.z, dx=aim.x-sx, dy=aim.y-sy, dz=aim.z-sz, l=Math.hypot(dx,dy,dz)||1, sp=8+24*power;
+  const crit=power>=1, dmg=Math.round(1+5*power)+(crit?1:0);
+  const m=makeArrowMesh(); m.position.set(sx,sy,sz); scene.add(m);
+  const ar={m,x:sx,y:sy,z:sz,vx:dx/l*sp,vy:dy/l*sp+4.9*(l/sp)*power,vz:dz/l*sp,t:0,stuck:0,dmg,crit,aim,sx,sz,power};
+  arrows.push(ar); if(bowFP) bowFP.arrow=ar;
+  P.face=Math.atan2(dx,dz); swing(); noise(.1,.06,2600); beep(crit?900:700,.06,'triangle',.03);
+}
+// 떨어진 곳과 조준한 곳을 비교해서 알려 줘요
+function arrowReport(a,hitAnimal){
+  const ai=a.aim; if(!ai) return;
+  if(hitAnimal) return;
+  const dAim=Math.hypot(ai.x-a.sx,ai.z-a.sz), dHit=Math.hypot(a.x-a.sx,a.z-a.sz), miss=Math.hypot(ai.x-a.x,ai.y-a.y,ai.z-a.z);
+  if(ai.sky) return toast(`🏹 먼 하늘을 겨눴어요 — 화살은 포물선을 그리며 ${dHit.toFixed(1)}m 날아가 떨어졌어요`);
+  if(miss<1.2) return toast('🎯 조준한 곳에 정확히 꽂혔어요!');
+  if(dHit<dAim-1) toast(`🏹 조준점보다 ${(dAim-dHit).toFixed(1)}m 앞에 떨어졌어요 — 중력 때문에 아래로 휘었어요. ${a.power<1?'더 오래 당기거나 ':''}조준을 조금 위로!`);
+  else if(dHit>dAim+1) toast(`🏹 조준점보다 ${(dHit-dAim).toFixed(1)}m 멀리 날아갔어요 — 조준을 조금 아래로!`);
+  else toast(`🏹 조준점에서 옆으로 ${miss.toFixed(1)}m 빗나갔어요`);
+}
+function updArrows(dt){
+  for(let i=arrows.length-1;i>=0;i--){ const a=arrows[i];
+    if(a.stuck>0){ a.stuck-=dt; a.age=(a.age||0)+dt;
+      if(a.age>1.2 && Math.hypot(a.x-P.x,a.z-P.z)<1.4 && Math.abs(a.y-P.y-.5)<2){ addItem('arrow',1,true); toastOnce('pickarrow','🪶 화살을 주웠어요'); a.stuck=0; }   // 꽂힌 화살 줍기
+      if(a.stuck<=0){ scene.remove(a.m); arrows.splice(i,1); } continue; }
+    a.t+=dt;
+    // 빠른 화살이 동물을 뚫고 지나가지 않도록 0.25m씩 나눠서 움직이며 확인
+    const steps=Math.max(1,Math.ceil(Math.hypot(a.vx,a.vy,a.vz)*dt/.25)), sdt=dt/steps; let hit=null, stop=false;
+    for(let s=0;s<steps&&!hit&&!stop;s++){
+      a.vy-=9.8*sdt; const nx=a.x+a.vx*sdt, ny=a.y+a.vy*sdt, nz=a.z+a.vz*sdt;
+      for(const an of animals){ const D=ANIMDEF[an.kind]; if(Math.hypot(an.x-nx,an.z-nz)<Math.max(.5,an.pr*.75) && ny>an.y-.1 && ny<an.y+(D.legH||.1)+(D.bh||.2)+.4){ hit=an; break; } }
+      if(hit) break;
+      stop=ny<heightAt(nx,nz) || (blocks.size&&solidAtPoint(nx,ny,nz));
+      if(!stop) for(const ob of nearObjs(nx,nz,1)) if(ob.alive&&ob.r&&ob.top&&Math.hypot(ob.x-nx,ob.z-nz)<ob.r+.1&&ny<ob.top){ stop=true; break; }
+      a.x=nx; a.y=ny; a.z=nz;
+    }
+    if(a.crit && Math.random()<.5) burst(a.x,a.y,a.z,'crit');
+    if(hit){ lastHitPos={x:hit.x,y:hit.y+.4,z:hit.z}; damageAnimal(hit,a.dmg||4,false); if(a.crit) toastOnce('crit','💥 강하게 명중!'); if(ANIMDEF[hit.kind].angry) hit.angry=true; scene.remove(a.m); arrows.splice(i,1); continue; }
+    a.m.position.set(a.x,a.y,a.z); a.m.lookAt(a.x+a.vx,a.y+a.vy,a.z+a.vz);
+    if(stop){ a.stuck=180; noise(.06,.05,900); { const l=Math.hypot(a.vx,a.vy,a.vz)||1; a.m.position.set(a.x-a.vx/l*.22,a.y-a.vy/l*.22,a.z-a.vz/l*.22); } arrowReport(a,false); } else if(a.t>4){ scene.remove(a.m); arrows.splice(i,1); }
+  }
+}
+function updParticles(dt){ updDigFx(dt); for(const p of pool){ if(!p.m.visible) continue; p.t-=dt; if(p.t<=0){p.m.visible=false;continue;} p.vy-=12*dt; p.m.position.x+=p.vx*dt; p.m.position.y+=p.vy*dt; p.m.position.z+=p.vz*dt; p.m.rotation.x+=dt*8; } }
 const wob=[]; const _m=new THREE.Matrix4(), _r=new THREE.Matrix4(), _t=new THREE.Matrix4(), _ti=new THREE.Matrix4();
 function wobble(o){ if(!o.parts.length||o.type==='stump') return; const w=wob.find(w=>w.o===o); if(w){ w.t=.35; return; }
   const dx=o.x-P.x, dz=o.z-P.z, l=Math.hypot(dx,dz)||1; wob.push({o,t:.35,ax:new THREE.Vector3(dz/l,0,-dx/l)}); }
@@ -1834,13 +2272,13 @@ function hurtPlayer(dmg,src,from){
   updateBars(); if(P.hp<=0) die();
 }
 function die(){
-  deadT=3; $('dead').style.display='flex'; mouseL=false;
-  setTimeout(()=>{
-    const b=S.bed; P.x=b?b.x:spawn.x; P.z=b?b.z+(b?0:0):spawn.z; P.y=b?b.y+.6:groundAt(P.x,P.z);
-    P.hp=70; P.food=Math.max(P.food,40); P.water=Math.max(P.water,40); P.vy=0;
-    for(let i=animals.length-1;i>=0;i--) if(animals[i].kind==='wolf'||animals[i].angry) removeAnimal(animals[i]);
-    $('dead').style.display='none'; deadT=0; updateBars(); toast(b?'🛏️ 침대에서 다시 일어났어요':'🪧 처음 장소에서 다시 일어났어요 (침대를 놓으면 그곳에서 일어나요)');
-  },2600);
+  // 쓰러지면 바로 처음 장소로 순간 이동해 다시 시작
+  deadT=1; mouseL=false; $('dead').style.display='flex';
+  P.x=spawn.x; P.z=spawn.z; P.y=groundAt(P.x,P.z); P.vy=0;
+  P.hp=70; P.food=Math.max(P.food,40); P.water=Math.max(P.water,40);
+  for(let i=animals.length-1;i>=0;i--) if(animals[i].kind==='wolf'||animals[i].angry) removeAnimal(animals[i]);
+  updateBars(); toast('🪧 처음 장소에서 다시 일어났어요');
+  setTimeout(()=>{ $('dead').style.display='none'; deadT=0; },1000);
 }
 function howl(){ if(!soundOn) return; const a=ac(); if(!a) return; try{ const o=a.createOscillator(), g=a.createGain(); o.type='sine'; const t=a.currentTime;
   o.frequency.setValueAtTime(380,t); o.frequency.linearRampToValueAtTime(620,t+.6); o.frequency.linearRampToValueAtTime(420,t+1.6);
@@ -1852,7 +2290,7 @@ function survival(dt,moving,running){
   const k=running&&moving?1.6:1;
   P.food=Math.max(0,P.food-dt*100/600*k);
   P.water=Math.max(0,P.water-dt*100/480*k);
-  if(P.food<25 && !warnFood){ warnFood=true; toast('🍗 배가 고파요! 열매나 구운 음식을 먹어요 (음식을 들고 오른쪽 클릭)'); } if(P.food>40) warnFood=false;
+  if(P.food<25 && !warnFood){ warnFood=true; toast('🍗 배가 고파요! 열매나 구운 음식을 먹어요 (음식을 손에 들고 클릭)'); } if(P.food>40) warnFood=false;
   if(P.water<25 && !warnWater){ warnWater=true; toast('💧 목이 말라요! 물가에서 물을 마시거나 그릇에 물을 떠 와요'); } if(P.water>40) warnWater=false;
   if(P.food<=0||P.water<=0){ starveT-=dt; if(starveT<=0){ starveT=2; hurtPlayer(2,P.food<=0?'배고픔':'목마름'); } }
   else if(P.food>60&&P.water>60&&P.hp<100){ regenT-=dt; if(regenT<=0){ regenT=2.5; P.hp=Math.min(100,P.hp+2); } }
@@ -1880,7 +2318,7 @@ function tryMove(nx,nz){
   if(nx<3||nz<3||nx>SIZE-3||nz>SIZE-3){ toastOnce('edge','🌊 섬의 끝이에요'); return false; }
   if(blocks.size && blockHit(nx,nz,P.y)) return false;
   const g=groundAt2(nx,nz,P.y);
-  if(g<-0.75 && !petNear('turtle',12)){ toastOnce('deep','🌊 물이 깊어요. 🐢 거북이 친구가 있으면 헤엄칠 수 있대요'); return false; }
+  if(g<-0.75 && wH(nx,nz)<-0.75 && !petNear('turtle',12)){ toastOnce('deep','🌊 물이 깊어요. 🐢 거북이 친구가 있으면 헤엄칠 수 있대요'); return false; }
   if(g>Math.max(P.y,-0.6)+.55){ toastOnce('steep','⛰️ 너무 가팔라요! 점프(Space)로 올라가 보세요'); return false; }
   return true;
 }
@@ -1897,9 +2335,9 @@ function update(dt){
     if(joy.on){ f-=joy.y; s+=joy.x; } }
   const fx=-Math.sin(yaw), fz=-Math.cos(yaw), rx=Math.cos(yaw), rz=-Math.sin(yaw);
   let mx=fx*f+rx*s, mz=fz*f+rz*s; const ml=Math.hypot(mx,mz);
-  const gh=heightAt(P.x,P.z), inWater=gh<-0.1 && dockHeight(P.x,P.z)<0, swimming=gh<-0.75;
+  const gh=wH(P.x,P.z), inWater=gh<-0.1 && dockHeight(P.x,P.z)<0, swimming=gh<-0.75;
   const run=keys['shift']||keys['ShiftLeft']||keys['ShiftRight']||touchRun;
-  const speed=(run?8:4.8)*(swimming?.5:inWater?.55:1)*(joy.on?Math.min(1,Math.max(.35,Math.hypot(joy.x,joy.y))):1);
+  const speed=(run?8:4.8)*(swimming?.5:inWater?.55:1)*(joy.on?Math.min(1,Math.max(.35,Math.hypot(joy.x,joy.y))):1)*(press&&press.kind==='bow'?.4:1);
   if(ml>0){
     mx/=ml; mz/=ml;
     const nx=P.x+mx*speed*dt, nz=P.z+mz*speed*dt;
@@ -1920,8 +2358,10 @@ function update(dt){
   ch.armL.rotation.x=sw; ch.legL.rotation.x=-sw*.9; ch.legR.rotation.x=sw*.9;
   if(P.swing>0){ P.swing-=dt; const k=Math.sin((1-P.swing/.28)*Math.PI); ch.armR.rotation.x=-1.9*k-.3; fpArm.rotation.x=.15-1.1*k; }
   else { ch.armR.rotation.x=-sw-(heldId()?.35:0); fpArm.rotation.x=.15; }
+  if(press&&press.kind==='bow'){ const p=Math.min(1,press.t); ch.armL.rotation.x=-1.55; ch.armR.rotation.x=-1.55+p*.35; fpArm.rotation.x=.15+.25*p; fpArm.position.z=-.6+.12*p; } else fpArm.position.z=-.6;
   ch.body.position.y=.98+Math.abs(Math.sin(P.walk))*.04*(ml>0?1:0);
-  actCD-=dt; if(mouseL && actCD<=0) act();
+  actCD-=dt; if(mouseL && !press && actCD<=0) act();
+  updPress(dt);
   if(fishing){ fishing.t-=dt; bobber.position.y=.05+Math.sin(gameClock*6)*.03;
     if(Math.hypot(P.x-fishing.x,P.z-fishing.z)>REACH+3 || heldId()!=='rod'){ fishing=null; bobber.visible=false; toast('🎣 낚싯줄을 거뒀어요'); }
     else if(fishing.t<=0){ bobber.visible=false; const cat=fishing.cat; lastHitPos={x:fishing.x,y:.3,z:fishing.z}; fishing=null; wearTool();
@@ -1937,7 +2377,8 @@ function update(dt){
   if(cardT>0){ cardT-=dt; if(cardT<=0) hideCard(); }
   ambT-=dt; if(ambT<=0){ ambT=3+Math.random()*7; if(gtime<2/3) chirp(); else cricket(); }
   updPets(dt,ml>0); updWobble(dt); updParticles(dt);
-  updAnimals(dt); survival(dt,ml>0,run);
+  updAnimals(dt); updArrows(dt); updBowFP(dt); survival(dt,ml>0,run);
+  if(terrainDirty){ terrainNormT-=dt; if(terrainNormT<=0){ terrainNormT=.2; terrainMesh.geometry.computeVertexNormals(); terrainDirty=false; } }
   if(hurtT>0) hurtT-=dt; $('hurt').style.opacity=hurtT>0?1:(P.hp<25&&!isPeace()?.35+Math.sin(gameClock*4)*.15:0);
   // 건축
   houseT-=dt; if(houseT<=0){ houseT=.25; updHouse(); }
@@ -1999,11 +2440,12 @@ const GUIDE=[
   {t:'도끼를 들고 나무 베기', f:()=>S.got.log},
   {t:'통나무 → 판자 가공', f:()=>S.made.plank},
   {t:'🛠️ 작업대 설치', f:()=>S.placed.bench},
+  {t:'🪏 나무삽으로 집 지을 땅 고르기', f:()=>S.leveled},
   {t:'🟫 나무 블록 만들기 (제작 → 건축)', f:()=>S.made.wblock},
   {t:'🏠 벽·문·지붕으로 집 완성 (G)', f:()=>S.house},
   {t:'🛏️ 침대를 놓고 밤에 자기', f:()=>S.slept},
   {t:'🔱 돌창을 들고 사냥하기', f:()=>(S.kills||0)>0},
-  {t:'🍖 모닥불에 고기 구워 먹기', f:()=>S.made.cmeat},
+  {t:'🍖 모닥불에 고기 구워 먹기', f:()=>S.ate&&(S.ate.cmeat||S.ate.cfish)},
   {t:'🎁 보물 상자 찾기', f:()=>S.chests>0},
   {t:'🐾 펫과 친구 되기 (P)', f:()=>Object.keys(S.tamed).length>0},
   {t:'⛏️ 곡괭이로 석재 캐기', f:()=>S.got.stone},
@@ -2022,25 +2464,38 @@ function renderGuide(){
 }
 let hudT=0;
 function updHUD(dt){
+  { const ca=cursorAim(), bw=!!bowFP && playing && !panelOpen, ba=$('bowAim');
+    $('cross').style.display=(ca||bw)?'none':''; canvas.style.cursor=bw?'none':ca?'crosshair':'';
+    ba.style.display=bw?'block':'none'; $('bowVig').style.display=bw?'block':'none';
+    if(bw){
+      const drawing=press&&press.kind==='bow', p=drawing?Math.min(1,press.t):0, C=2*Math.PI*40, pw=$('bowPow');
+      pw.setAttribute('stroke-dasharray',`${(C*p).toFixed(1)} 999`); pw.setAttribute('stroke',p>=1?'#ff7a3a':'#ffd25a');
+      $('bowLbl').textContent=drawing?(p>=1?'최대로 당김 — 놓으면 조준점으로 곧게!':'당기는 중… 덜 당기면 화살이 아래로 떨어져요'):'화살이 어디에 꽂히는지 보세요'; } }
   if(playing && !panelOpen){
-    target=findTarget(); placeInfo=computePlace(target); const d=describe(target), te=$('target');
+    target=findTarget(); placeInfo=computePlace(target); const fi=fillTarget(target), te=$('target');
+    let d=describe(target); if(fi){ const it=ITEMS[heldId()]; d=fi.bad?{txt:'🚫 '+fi.bad,bad:true}:{txt:`${it.i} 왼쪽 클릭: ${it.n}을(를) 구덩이에 넣어 메우기 (남은 깊이 ${Math.max(1,Math.floor(terrainH(fi.ix+.5,fi.iz+.5)+.25)-fi.f)}칸 · 누르고 있으면 계속)`}; }
     if(placeInfo){ ghost.visible=true; ghost.scale.set(1,placeInfo.tall,1); ghost.position.set(placeInfo.x+.5,placeInfo.y+placeInfo.tall/2,placeInfo.z+.5); ghost.material.color.set(placeInfo.ok?'#7dff7d':'#ff6060'); }
     else if(target&&target.block&&!target.far){ const b=target.block.b, tall=b.type==='door'?2:1; ghost.visible=true; ghost.scale.set(1,tall,1); ghost.position.set(b.x+.5,b.y+tall/2,b.z+.5); ghost.material.color.set('#ffffff'); }
     else ghost.visible=false;
+    { const dg=!placeInfo && heldId()==='shovel' && target && target.ground && !['far','water'].includes(target.kind);
+      digMark.visible=!!(dg||fi); if(fi){ digMark.position.set(fi.ix+.5,fi.f+.5,fi.iz+.5); digMark.material.color.set(fi.bad?'#ff6060':'#7dff7d'); digMark.material.opacity=.7+Math.sin(gameClock*8)*.25; }
+      else if(dg){ const ix=Math.floor(target.x), iz=Math.floor(target.z), yt=digTopY(ix,iz), hh=(groundHits.get(ix*1000+iz)||0);
+        digMark.position.set(ix+.5,yt-.5,iz+.5); digMark.material.color.set(hh?'#ff9a3a':'#ffd25a'); digMark.material.opacity=.7+Math.sin(gameClock*8)*.25; } }
     if(d){ te.textContent=d.txt; te.className='hud'+(d.bad?' bad':''); te.style.display='block'; } else te.style.display='none';
     const tObj=target&&(target.obj||target.pet||target.animal);
-    if(!placeInfo && (tObj || (target && target.ground && !['far','ground'].includes(target.kind)))){
+    if(!placeInfo && !digMark.visible && (tObj || (target && target.ground && !['far','ground'].includes(target.kind)))){
       ring.visible=true;
       if(tObj){ ring.position.set(tObj.x,(target.pet||target.animal?Math.max(heightAt(tObj.x,tObj.z),0):tObj.y)+.06,tObj.z); const s=Math.max(.45,(tObj.r||.3)+.25); ring.scale.set(s,s,s); }
       else { ring.position.set(target.x,target.y+.06,target.z); ring.scale.set(.45,.45,.45); }
       ring.material.opacity=.55+Math.sin(gameClock*6)*.25; ring.material.color.set(d&&d.bad?'#ff8080':'#ffffff');
     } else ring.visible=false;
     const o=target&&target.obj, pr=$('prog'), tb=target&&target.block&&!target.far&&target.block.b;
-    if(tb && tb.hits>0){ const dd=BLK[tb.type], tl=heldTool(), need=dd.tool&&tl&&tl.tool===dd.tool?1:dd.hits; pr.style.display='block'; pr.firstChild.style.width=Math.min(100,tb.hits/need*100)+'%'; }
-    else if(o && o.hits>0 && (HITS[o.type]||1)>1){ const tl=heldTool(), need=Math.ceil(HITS[o.type]/(NEED[o.type]&&tl?tl.pow:1)); pr.style.display='block'; pr.firstChild.style.width=(o.hits/need*100)+'%'; } else pr.style.display='none';
-  } else { ring.visible=false; ghost.visible=false; $('target').style.display='none'; }
+    if(press && press.kind!=='fill' && (press.kind==='bow' || press.t>.08)){ const p=press.kind==='bow'?Math.min(1,press.t):Math.min(1,press.t/LONG); pr.style.display='block'; pr.firstChild.style.width=(p*100)+'%'; pr.firstChild.style.background=press.kind==='bow'?(p>=1?'#ff7a3a':'#ffd25a'):'#7fd3ff'; }
+    else if(tb && tb.hits>0){ pr.firstChild.style.background='#ffd25a'; const dd=BLK[tb.type], tl=heldTool(), need=dd.tool&&tl&&tl.tool===dd.tool?1:dd.hits; pr.style.display='block'; pr.firstChild.style.width=Math.min(100,tb.hits/need*100)+'%'; }
+    else if(o && o.hits>0 && (HITS[o.type]||1)>1){ const tl=heldTool(), need=Math.ceil(HITS[o.type]/(NEED[o.type]&&tl?tl.pow:1)); pr.style.display='block'; pr.firstChild.style.background='#ffd25a'; pr.firstChild.style.width=(o.hits/need*100)+'%'; } else pr.style.display='none';
+  } else { ring.visible=false; ghost.visible=false; digMark.visible=false; $('target').style.display='none'; }
   hudT-=dt; if(hudT>0) return; hudT=.2;
-  const b=biomeAt(P.x,P.z), inWater=heightAt(P.x,P.z)<-0.1&&dockHeight(P.x,P.z)<0, bi=inWater?BINFO[B.WATER]:BINFO[b];
+  const b=biomeAt(P.x,P.z), inWater=wH(P.x,P.z)<-0.1&&dockHeight(P.x,P.z)<0, bi=inWater?BINFO[B.WATER]:BINFO[b];
   $('region').innerHTML=`📍 현재 지역: <b>${dockHeight(P.x,P.z)>0?'선착장':bi.n}</b><br>${bi.info}`;
   $('coord').textContent=`X ${P.x.toFixed(0)} · Z ${P.z.toFixed(0)} · 높이 ${P.y.toFixed(1)}m`;
   $('explorePct').textContent=`🗺️ 섬 탐험 ${Math.round(landSeen/landTotal*100)}% · 🎁 ${chests.filter(c=>c.state==='open').length}/${chests.length}`;
@@ -2088,7 +2543,7 @@ function save(){
       else if(o.type==='bush'&&o.state==='empty') objs.push([i,2,Math.round(o.regrowAt-gameClock)]); }
     let fog=''; for(let k=0;k<N*N;k+=8){ let v=0; for(let b=0;b<8;b++) if(FOG[k+b]) v|=1<<b; fog+=String.fromCharCode(v); }
     const data={v:1,seed,P:{x:P.x,y:P.y,z:P.z,face:P.face,hp:P.hp,food:P.food,water:P.water},inv,S,gtime,day,visited:[...visited],codex:[...codex],eraIdx,
-      objs,stations:stations.map(s=>({type:s.type,x:s.x,z:s.z,rot:s.rot})),blocks:[...new Set(blocks.values())].map(b=>[b.type,b.x,b.y,b.z,b.rot,b.open?1:0]),chests:chests.filter(c=>c.state==='open').map(c=>c.card),
+      objs,stations:stations.map(s=>({type:s.type,x:s.x,z:s.z,rot:s.rot})),blocks:[...new Set(blocks.values())].map(b=>[b.type,b.x,b.y,b.z,b.rot,b.open?1:0]),leveled:[...leveled].map(([k,h])=>[k,Math.round(h*100)/100]),holes:(()=>{const a=[]; if(holeCount) for(let k=0;k<SIZE*SIZE;k++) if(HOLE[k]>-999) a.push([k,HOLE[k]]); return a;})(),chests:chests.filter(c=>c.state==='open').map(c=>c.card),
       pets:pets.filter(p=>p.mode!=='wild').map(p=>({kind:p.kind,name:p.name,x:p.x,z:p.z,mode:p.mode})),fog:btoa(fog),time:Date.now()};
     localStorage.setItem(SAVEKEY,JSON.stringify(data));
   }catch(e){}
@@ -2098,10 +2553,14 @@ function applySave(d){
   gtime=d.gtime; day=d.day; (d.visited||[]).forEach(v=>visited.add(v)); (d.codex||[]).forEach(c=>codex.add(c)); eraIdx=d.eraIdx||0;
   for(const [i,st,rem] of d.objs||[]){ const o=objects[i]; if(!o) continue;
     if(st===1) { setStump(o); o.regrowAt=rem; }
-    else if(st===0){ o.parts.forEach(hidePart); o.alive=false; o.dead=1; o.regrowAt=rem; if(!regrowList.includes(o)) regrowList.push(o); }
+    else if(st===0){ o.parts.forEach(hidePart); if(o.berries) o.berries.forEach(hidePart); o.alive=false; o.dead=1; o.regrowAt=rem; if(!regrowList.includes(o)) regrowList.push(o); }
     else if(st===2){ o.berries.forEach(hidePart); o.state='empty'; o.regrowAt=rem; if(!regrowList.includes(o)) regrowList.push(o); } }
   for(const s of d.stations||[]) placeStation(s.type,s.x,s.z,s.rot);
   for(const k of d.chests||[]){ const c=chests.find(c=>c.card===k); if(c) openChest(c,true); }
+  for(const [k,h] of d.leveled||[]) setVertexHeight(k%V,Math.floor(k/V),h);
+  if(d.leveled&&d.leveled.length) terrainMesh.geometry.computeVertexNormals();
+  for(const [k,f] of d.holes||[]) setHole(k%SIZE,Math.floor(k/SIZE),f);
+  if(holeCount) rebuildPits();
   for(const a of d.blocks||[]) addBlock(a[0],a[1],a[2],a[3],a[4],!!a[5]);
   for(const p of d.pets||[]) addPet(p.kind,p.x,p.z,{name:p.name,mode:p.mode,aff:PETDEF[p.kind].need});
   if(d.fog){ const s=atob(d.fog); for(let k=0;k<s.length;k++){ const v=s.charCodeAt(k); for(let b=0;b<8;b++) if(v&(1<<b)) FOG[k*8+b]=1; } }
@@ -2121,7 +2580,7 @@ function loop(now){
 function showHelp(){ playing=false; if(panelOpen) closePanel(); if(document.pointerLockElement) document.exitPointerLock(); save();
   $('overlay').style.display='flex'; $('bStart').textContent='▶ 계속하기'; $('bNew').style.display='inline-block'; }
 $('bStart').onclick=()=>{ $('overlay').style.display='none'; playing=true; last=performance.now(); ac();
-  $('hint').style.display=locked()?'none':'block';
+  if(!touchMode && noLock){ $('hint').style.display='block'; setTimeout(()=>{ if(noLock) $('hint').style.display='none'; },9000); }
   if(!$('bStart').dataset.go){ $('bStart').dataset.go=1; if(!SAVE) toast('🪧 주변의 나뭇가지·돌멩이·풀을 클릭해서 모아 보세요!'); else toast(`▶ ${day}일차부터 이어서 시작해요`); } };
 $('bNew').onclick=()=>{ if(confirm('지금 섬을 지우고 새 섬을 만들까요?\n(저장된 진행 상황이 모두 사라져요)')){ location.hash='new'; location.reload(); } };
 addEventListener('beforeunload',save);
@@ -2138,9 +2597,9 @@ setTimeout(()=>{
   $('bStart').disabled=false; $('bStart').textContent=SAVE?`▶ 이어하기 (${day}일차)`:'🌱 시작하기';
   if(SAVE) $('bNew').style.display='inline-block';
   $('loading').textContent=`월드 생성 완료 (${Math.round(performance.now()-t0)}ms) · 보물 상자 ${chests.length}개 · 펫 ${pets.length}마리가 섬 어딘가에`;
-  window.__game={P,inv,get S(){return S;},objects,stations,pets,chests,codex,addItem,count,selectSlot,act,use,toggleView,openPanel,closePanel,heightAt,save,
+  window.__game={digCell,holeAt,harvest,P,inv,get S(){return S;},objects,stations,pets,chests,codex,addItem,count,selectSlot,act,use,toggleView,openPanel,closePanel,heightAt,save,
     get target(){return target;}, set gtime(v){gtime=v;}, get eraIdx(){return eraIdx;},
-    blocks, addBlock, animals, spawnAnimal, placeStation, get curHouse(){return curHouse;}, get gtime(){return gtime;}, get placeInfo(){return placeInfo;}, get pitch(){return pitch;}, set pitch(v){pitch=v;}, set yaw(v){yaw=v;}, get yaw(){return yaw;},
+    blocks, addBlock, animals, spawnAnimal, placeStation, arrows, pressStart, pressEnd, get bowFP(){return bowFP;}, get spawn(){return spawn;}, set fpPitch(v){fpPitch=v;}, get firstPerson(){return firstPerson;}, get curHouse(){return curHouse;}, get gtime(){return gtime;}, get placeInfo(){return placeInfo;}, get pitch(){return pitch;}, set pitch(v){pitch=v;}, set yaw(v){yaw=v;}, get yaw(){return yaw;},
     look(x,z){ yaw=Math.atan2(P.x-x,P.z-z); pitch=.42; fpPitch=0; }};
   requestAnimationFrame(loop);
 },30);
