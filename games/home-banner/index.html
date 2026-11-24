@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>홈 배너</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#0d0f18}
+  iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;opacity:0;pointer-events:none;transition:opacity .9s ease}
+  iframe.on{opacity:1;pointer-events:auto}
+  .dots{position:absolute;top:7px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+  .dots button{width:26px;height:6px;padding:0;border:0;border-radius:3px;background:rgba(255,255,255,.3);cursor:pointer}
+  .dots button.on{background:#ffd27a}
+  .dots button:focus-visible{outline:2px solid #ffd27a;outline-offset:2px}
+</style>
+</head>
+<body>
+<iframe id="b0" class="on" src="../tech-society-motion/banner.html?v=1d65d74c28" title="기술이 바꾼 사회 · 모션 배너" allow="autoplay; fullscreen"></iframe>
+<iframe id="b1" src="../thinking-techniques-motion/banner.html?v=f4e9cf5c0a" title="확산적 사고와 수렴적 사고 · 모션 배너" allow="autoplay; fullscreen" tabindex="-1"></iframe>
+<div class="dots" role="group" aria-label="배너 고르기">
+  <button type="button" class="on" aria-label="기술이 바꾼 사회" title="기술이 바꾼 사회"></button>
+  <button type="button" aria-label="확산적 사고와 수렴적 사고" title="확산적 사고와 수렴적 사고"></button>
+</div>
+<script>
+(()=>{
+const fr=[document.getElementById('b0'),document.getElementById('b1')],dots=[...document.querySelectorAll('.dots button')];
+let cur=0;
+const send=(i,msg)=>{try{fr[i].contentWindow.postMessage(msg,'*');}catch(e){}};
+fr[1].addEventListener('load',()=>{if(cur!==1)send(1,{banner:'stop'});});
+function show(i){if(i===cur)return;send(cur,{banner:'stop'});cur=i;send(cur,{banner:'start'});
+  fr.forEach((f,j)=>{f.classList.toggle('on',j===cur);f.tabIndex=j===cur?0:-1;});dots.forEach((d,j)=>d.classList.toggle('on',j===cur));}
+dots.forEach((d,j)=>d.onclick=()=>show(j));
+window.addEventListener('message',e=>{const d=e.data||{},from=fr.findIndex(f=>f.contentWindow===e.source);if(from<0)return;
+  if(d.banner==='cycle'&&from===cur)show(1-cur);
+  else if(d.banner==='sound')send(1-from,{banner:'sound',on:!!d.on});});
+})();
+</script>
+</body>
+</html>

@@ -274,7 +274,7 @@ setInterval(()=>{if(!ac||!soundOn||!playing)return;const key=SC[Math.floor(t/DUR
 function musicGain(){if(!ac)return;musicBus.gain.cancelScheduledValues(ac.currentTime);musicBus.gain.setTargetAtTime(soundOn&&playing?1.6:0,ac.currentTime,.12);}
 
 /* ---------- 조절 ---------- */
-let t=0,playing=true,visible=true,userPaused=false,last=null,started=false;
+let t=0,playing=true,visible=true,active=true,userPaused=false,last=null,started=false;
 const $=id=>document.getElementById(id),pp=$('pp'),snd=$('snd'),segsEl=$('segs'),segBtns=[],segFills=[];
 SC.forEach((s,j)=>{const b=document.createElement('button');b.type='button';b.className='seg';b.title=b.ariaLabel=`${j+1}. ${s.name}`;
   b.innerHTML=`<span>${s.name}</span><i><b></b></i>`;b.onclick=()=>go(j);segsEl.appendChild(b);segBtns.push(b);segFills.push(b.querySelector('b'));});
@@ -285,13 +285,17 @@ const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').m
 if(reduce){userPaused=true;playing=false;t=DUR+4;}
 function sync(){pp.textContent=playing?'❚❚':'▶';pp.title=pp.ariaLabel=playing?'일시정지':'재생';
   snd.firstChild.nodeValue=soundOn?'🔊':'🔇';snd.title=snd.ariaLabel=soundOn?'소리 끄기':'소리 켜기';musicGain();}
-pp.onclick=()=>{userPaused=!userPaused;playing=!userPaused&&visible;sync();};
-snd.onclick=()=>{soundOn=!soundOn;if(soundOn)initAudio();mStyle=null;sync();};
-document.addEventListener('visibilitychange',()=>{visible=!document.hidden;playing=visible&&!userPaused;sync();});
+pp.onclick=()=>{userPaused=!userPaused;playing=!userPaused&&visible&&active;sync();};
+snd.onclick=()=>{soundOn=!soundOn;if(soundOn)initAudio();mStyle=null;sync();try{parent.postMessage({banner:'sound',on:soundOn},'*');}catch(e){}};
+window.addEventListener('message',e=>{const d=e.data||{};if(e.source!==parent)return;
+  if(d.banner==='stop'){active=false;playing=false;sync();}
+  else if(d.banner==='start'){active=true;go(0);playing=visible&&!userPaused;sync();}
+  else if(d.banner==='sound'){soundOn=!!d.on;if(soundOn)initAudio();mStyle=null;sync();}});
+document.addEventListener('visibilitychange',()=>{visible=!document.hidden;playing=visible&&!userPaused&&active;sync();});
 function resize(){const r=cv.getBoundingClientRect();DPR=Math.min(window.devicePixelRatio||1,2);cv.width=Math.max(1,Math.round(r.width*DPR));cv.height=Math.max(1,Math.round(r.height*DPR));W=Math.max(360,H*r.width/Math.max(1,r.height));}
 window.addEventListener('resize',resize);resize();
 function loop(now){if(last==null)last=now;const dt=Math.min(.1,(now-last)/1000);last=now;
-  if(playing){const nt=t+dt;if(Math.floor(nt/DUR)!==Math.floor(t/DUR))started=true;t=nt%TOTAL;}
+  if(playing){const nt=t+dt;if(Math.floor(nt/DUR)!==Math.floor(t/DUR))started=true;if(nt>=TOTAL&&parent!==window){try{parent.postMessage({banner:'cycle'},'*');}catch(e){}}t=nt%TOTAL;}
   render(t);requestAnimationFrame(loop);}
 requestAnimationFrame(loop);sync();
 window.__banner={seek:v=>{t=v;started=true;},get t(){return t;}};
