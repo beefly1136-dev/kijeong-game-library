@@ -852,14 +852,14 @@ EVENTS.sort((a,b)=>a[0]-b[0]);
 
 let ac=null,master=null,sfxBus=null,musicBus=null,revIn=null,noiseBuf=null;
 let sfxOn=true,musicOn=true;
-const MUSIC_VOL=.55;
+const MUSIC_VOL=1.0;
 function initAudio(){
   try{
     if(!ac){
       ac=new (window.AudioContext||window.webkitAudioContext)();
-      const comp=ac.createDynamicsCompressor();comp.threshold.value=-14;comp.ratio.value=3;comp.connect(ac.destination);
-      master=ac.createGain();master.gain.value=.9;master.connect(comp);
-      sfxBus=ac.createGain();sfxBus.gain.value=sfxOn?.85:0;sfxBus.connect(master);
+      const comp=ac.createDynamicsCompressor();comp.threshold.value=-8;comp.ratio.value=6;comp.knee.value=6;comp.connect(ac.destination);
+      master=ac.createGain();master.gain.value=1.5;master.connect(comp);
+      sfxBus=ac.createGain();sfxBus.gain.value=sfxOn?1.5:0;sfxBus.connect(master);
       musicBus=ac.createGain();musicBus.gain.value=0;musicBus.connect(master);
       const conv=ac.createConvolver(),len=ac.sampleRate*2.6,ib=ac.createBuffer(2,len,ac.sampleRate);
       for(let c=0;c<2;c++){const d=ib.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);}
@@ -981,7 +981,7 @@ $('playBtn').onclick=toggle;
 $('stage').addEventListener('click',e=>{if(e.target===cv)toggle();});
 $('speedBtn').onclick=()=>{speed=speed===1?.75:speed===.75?.5:1;$('speedBtn').textContent=speed+'×';};
 $('musicBtn').onclick=()=>{musicOn=!musicOn;$('musicBtn').classList.toggle('off',!musicOn);mStyle=null;musicGain();};
-$('sfxBtn').onclick=()=>{sfxOn=!sfxOn;$('sfxBtn').classList.toggle('off',!sfxOn);$('sfxBtn').textContent=(sfxOn?'🔊':'🔇')+' 효과음';if(sfxBus)sfxBus.gain.value=sfxOn?.85:0;};
+$('sfxBtn').onclick=()=>{sfxOn=!sfxOn;$('sfxBtn').classList.toggle('off',!sfxOn);$('sfxBtn').textContent=(sfxOn?'🔊':'🔇')+' 효과음';if(sfxBus)sfxBus.gain.value=sfxOn?1.5:0;};
 function fullscreen(){const p=$('player');if(document.fullscreenElement)document.exitFullscreen();else if(p.requestFullscreen)p.requestFullscreen();}
 $('fsBtn').onclick=fullscreen;
 let dragging=false;

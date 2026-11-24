@@ -240,7 +240,7 @@ function render(t){
 
 /* ---------- 배경 음악 (소리 버튼을 눌렀을 때만) ---------- */
 let ac=null,musicBus=null,revIn=null,noiseBuf=null,soundOn=false;
-function initAudio(){try{if(!ac){ac=new (window.AudioContext||window.webkitAudioContext)();const comp=ac.createDynamicsCompressor();comp.connect(ac.destination);
+function initAudio(){try{if(!ac){ac=new (window.AudioContext||window.webkitAudioContext)();const comp=ac.createDynamicsCompressor();comp.threshold.value=-8;comp.ratio.value=6;comp.knee.value=6;comp.connect(ac.destination);
   musicBus=ac.createGain();musicBus.gain.value=0;musicBus.connect(comp);
   const conv=ac.createConvolver(),len=ac.sampleRate*2.4,ib=ac.createBuffer(2,len,ac.sampleRate);for(let c=0;c<2;c++){const d=ib.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);}
   conv.buffer=ib;revIn=ac.createGain();const ro=ac.createGain();ro.gain.value=.3;revIn.connect(conv);conv.connect(ro);ro.connect(comp);
@@ -271,7 +271,7 @@ let mStep=0,mNext=0,mStyle=null;
 setInterval(()=>{if(!ac||!soundOn||!playing)return;const key=SC[Math.floor(t/DUR)%SC.length].music,S=STY[key],spb=60/S.bpm/4;
   if(key!==mStyle){mStyle=key;mStep=0;mNext=Math.max(mNext,ac.currentTime+.05);}if(mNext<ac.currentTime-.2)mNext=ac.currentTime+.05;
   while(mNext<ac.currentTime+.2){playStep(S,mStep,mNext,spb);mNext+=spb;mStep++;}},25);
-function musicGain(){if(!ac)return;musicBus.gain.cancelScheduledValues(ac.currentTime);musicBus.gain.setTargetAtTime(soundOn&&playing?.5:0,ac.currentTime,.12);}
+function musicGain(){if(!ac)return;musicBus.gain.cancelScheduledValues(ac.currentTime);musicBus.gain.setTargetAtTime(soundOn&&playing?1.6:0,ac.currentTime,.12);}
 
 /* ---------- 조절 ---------- */
 let t=0,playing=true,visible=true,userPaused=false,last=null,started=false;
