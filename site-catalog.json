@@ -527,6 +527,26 @@
       "is_published": 1,
       "is_featured": 0,
       "sort_order": 24
+    },
+    {
+      "number": 27,
+      "kind": "channel",
+      "title": "확산적 사고와 수렴적 사고",
+      "description": "브레인스토밍·마인드맵·브레인 라이팅으로 해결 방안을 넓게 탐색하고, ALU·PMI·평가 행렬법으로 최적의 해결 방안을 선정하는 과정을 보는 모션 그래픽",
+      "how_to": "재생 버튼을 누르면 소리와 함께 시작돼요. 장면 카드나 숫자 1~9, 0으로 원하는 장면으로 가고, 속도 버튼으로 천천히 볼 수 있어요. Space 재생·멈춤, ←→ 5초 이동, F 전체 화면.",
+      "tags": "문제 해결,확산적 사고,수렴적 사고,브레인스토밍,마인드맵,브레인 라이팅,ALU,PMI,평가 행렬법",
+      "category_id": 9,
+      "category_name": "발명과 지식재산",
+      "game_type": "기타",
+      "duration": "short",
+      "people": "solo",
+      "length_label": "2분 43초 영상 · 소리 켜기",
+      "play_count": 0,
+      "thumbnail_url": "covers/thinking-techniques-motion-750a576e81645693d4b5317f.webp",
+      "play_url": "games/thinking-techniques-motion/index.html",
+      "is_published": 1,
+      "is_featured": 0,
+      "sort_order": 0
     }
   ]
 }
