@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1117">
+<meta name="theme-color" content="#d5d0c2">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -288,7 +288,8 @@ body.is-touch .hud-key{padding:.55em .8em}
   .top-actions .xp-pill{display:none}
 }
 </style>
-<link rel="preload" as="image" href="assets/scene-502365783265d3a35abf1ad5.webp" fetchpriority="high"><script>/* Scene images start on demand. After play begins, warm one image at a time. */
+<link rel="stylesheet" href="v3/theme.css?v=1">
+<link rel="preload" as="image" href="assets/v3/maps/hub.webp" fetchpriority="high"><script>/* Scene images start on demand. After play begins, warm one image at a time. */
 window.gcScenes = (() => {
   const entries = new Map();
   let playing = false, busy = false, timer;
@@ -398,7 +399,7 @@ window.gcScenes = (() => {
   <div class="prologue-highlights">
     <div class="prologue-item"><b>진행 방법</b><span>지역마다 담당자의 임무를 받고, 조사 대상 3곳의 과제를 풀어 단서를 모읍니다.</span></div>
     <div class="prologue-item"><b>배우는 내용</b><span>건설 재료와 구조, 도면 읽기, 시공, 재난 안전, 미래 건설기술</span></div>
-    <div class="prologue-item"><b>함께하는 동료</b><span>안내원 나래, 도시 관리 AI 윤미, 연구원 주영·지수, 현장 책임자 수산, 안전 담당 기정</span></div>
+    <div class="prologue-item"><b>함께하는 동료</b><span>안내원 나래, 도시 관리 AI 윤미, 연구원 수산·지수, 현장 책임자 주영, 안전 담당 기정</span></div>
   </div>
   <button id="btn-prologue-start" class="prologue-btn" type="button">작전 시작</button>
  </section>
@@ -495,7 +496,7 @@ window.gcScenes = (() => {
 <div class="dialog-backdrop recovery-backdrop" id="save-recovery" hidden><section class="dialog-card" role="alertdialog" aria-modal="true" aria-labelledby="recovery-title" style="max-width:620px"><div class="dialog-head"><div class="dialog-person">!</div><div><span class="dialog-tag">저장 데이터 확인</span><h2 id="recovery-title">저장 파일을 읽을 수 없습니다</h2></div></div><div class="dialog-body" style="padding-left:22px"><div class="dialog-text" style="font-size:16px"><p>기존 데이터는 보존됩니다. 백업 후 새로 시작하거나, 저장 없이 플레이할 수 있습니다.</p></div><div class="choices"><button class="choice selected" id="recovery-new">백업하고 새로 시작</button><button class="choice" id="recovery-play">저장 없이 플레이</button></div></div></section></div>
 
 <script>
-window.__ASSET_STORE__ = {"assets/cards/card-digital-twin.png":"assets/scene-d3aa959284e53784aa9e2fb8.webp","assets/cards/card-modular-infra.png":"assets/scene-a859c0c66a7bc418750eb315.webp","assets/cards/card-self-healing.png":"assets/scene-03406aedfae0775f07590e80.webp","assets/cards/card-smart-iot.png":"assets/scene-464e45899e5d66c2ff93efc2.webp","assets/cards/card-solar-bipv.png":"assets/scene-133605e9a9a47aca896e48c4.webp","assets/cards/card-sponge-park.png":"assets/scene-35acc2d252746dc64d2046d5.webp","assets/characters-build04.png":"assets/scene-94e98239f55132a33e51e2f1.webp","assets/drawings/block-3d-model.png":"assets/scene-a5d8f25529ae36e31d19ae88.webp","assets/drawings/equip-crane.png":"assets/scene-b296946b23257fcec28d87aa.webp","assets/drawings/equip-excavator.png":"assets/scene-4d3bd9637bb1bb2cb0299235.webp","assets/drawings/equip-pumpcar.png":"assets/scene-566aca643069c62595fb1eda.webp","assets/drawings/equip-roller.png":"assets/scene-864f7f38a1fbaef03f77c67c.webp","assets/drawings/flood-river-evacuation.png":"assets/scene-bde0ac25a5c0d5c709062cf2.webp","assets/drawings/floodwall-before.png":"assets/scene-9beef9cfcfedd45a39090bd3.webp","assets/drawings/floodwall-defense.png":"assets/scene-7c80da9ea8259fd2c23a6ec2.webp","assets/drawings/piloti-shear-reinforce.png":"assets/scene-7ec7cbf7f63d7e04b2909356.webp","assets/drawings/power-bipv.png":"assets/scene-a723e8e013bffff9ee2d7b0b.webp","assets/drawings/power-ess.png":"assets/scene-1f65b0d5aac2a9aeb2a7a758.webp","assets/drawings/power-grid.png":"assets/scene-e73f507b592985477a8c2b58.webp","assets/drawings/power-mobility.png":"assets/scene-c1ab09100830c7034467d22d.webp","assets/drawings/projection-isometric.png":"assets/scene-63fbf768fe90738ae2981da4.webp","assets/drawings/projection-oblique.png":"assets/scene-1fb8ecec8b1afb3cab75a7a7.webp","assets/drawings/projection-orthographic.png":"assets/scene-8089f8a22620c43c0bc6cd29.webp","assets/drawings/reinforced-concrete-beam.png":"assets/scene-3fafa05685b3c2d960b36962.webp","assets/drawings/supervision-report.png":"assets/scene-b2c0abfe16378f6df595cdec.webp","assets/drawings/symbol-door-slide.png":"assets/scene-5555a48d4f57d62add5c0e8f.webp","assets/drawings/symbol-door-swing.png":"assets/scene-0e9c82e2986b6d69cdaa8e35.webp","assets/drawings/symbol-window.png":"assets/scene-4e58eb00b37388504d41daf8.webp","assets/drawings/view-front.png":"assets/scene-8af01f1164f57f49c5c74efa.webp","assets/drawings/view-side.png":"assets/scene-1a44bbfbf7a2a9402b65be3d.webp","assets/drawings/view-top.png":"assets/scene-358044024ebc2641ffe0de81.webp","assets/icons/encyclopedia.png":"assets/scene-bfc8a6b6e1cca5c810ef2371.webp","assets/icons/evacuation.png":"assets/scene-dba4752005ec42538afde457.webp","assets/icons/inventory.png":"assets/scene-46024547f02aac9d7c169f2e.webp","assets/icons/investigation.png":"assets/scene-5abcd4164104b7728d80be5a.webp","assets/icons/map.png":"assets/scene-1e986924c71edeb82da4a40a.webp","assets/icons/materials.png":"assets/scene-9737245cb23b89b7006d79b2.webp","assets/icons/missions.png":"assets/scene-b3959ba073267ffbdb375005.webp","assets/icons/signal.png":"assets/scene-e662acd3856b8e2304595b88.webp","assets/maps/castnchill/bridge-repaired-span.png":"assets/scene-5483f1b08217e271df85b5ec.webp","assets/maps/castnchill/bridge.jpg":"assets/scene-6d67c8f8f6b4f407a6b1e016.webp","assets/maps/castnchill/eco.jpg":"assets/scene-6698e7421877e39100d0b97a.webp","assets/maps/castnchill/final.jpg":"assets/scene-8dd1478804cf12785f0a4e97.webp","assets/maps/castnchill/home.jpg":"assets/scene-390ad0765b8105f29daca295.webp","assets/maps/castnchill/hub.jpg":"assets/scene-502365783265d3a35abf1ad5.webp","assets/maps/castnchill/lab.jpg":"assets/scene-f950e4a0d375b0eb3ba6d801.webp","assets/maps/castnchill/safe.jpg":"assets/scene-b53226103b7baa07df1c5ea7.webp","assets/maps/castnchill/site.jpg":"assets/scene-ba317520423d5bbb61534e17.webp","assets/minigames/flood-shelter-emergency.png":"assets/scene-29bc031beb50773f37c12895.webp","assets/object-portraits.png":"assets/scene-9cbc7476160995e7c13701ec.webp","assets/objects-castnchill.png":"assets/scene-504ce1b27fdf27e68108119d.webp","assets/portrait-gijeong.png":"assets/scene-f5056f7cc51fb5e105cc33fb.webp","assets/portrait-jisu.png":"assets/scene-3d9334e6834d38fec3d5d0a5.webp","assets/portrait-susan.png":"assets/scene-99e104c90f74c71317de7704.webp","assets/portraits-castnchill.png":"assets/scene-2f7ca76489bbc8a77b2e917e.webp","assets/rebuild/outcome-eco.png":"assets/scene-d4b391690fc6d38bc7f160fc.webp","assets/rebuild/outcome-hybrid.png":"assets/scene-69b83c4fe4e8a2ca2112c491.webp","assets/rebuild/outcome-modular.png":"assets/scene-8ce562a5d6630304c14baf4e.webp","assets/rebuild/outcome-safe.png":"assets/scene-165407525cb9c658e88ee206.webp","assets/rebuild/outcome-smart.png":"assets/scene-ec1d0f96131ae8d0b085e824.webp","assets/recovery/step1-evacuation.png":"assets/scene-40756882ad4deba864c18384.webp","assets/recovery/step2-hazard-cutoff.png":"assets/scene-fd5f277c24528e5289f3301d.webp","assets/recovery/step3-lifeline-restore.png":"assets/scene-35cdf9fc6329b2c08d9808c1.webp","assets/recovery/step4-permanent-rebuild.png":"assets/scene-0f43c9deb2d11ad9767a86bf.webp","assets/sprites/build10/characters-clean-walk.png":"assets/scene-a6b1cf21732ee17c9758e650.webp"};
+window.__ASSET_STORE__ = {"assets/cards/card-digital-twin.png":"assets/scene-d3aa959284e53784aa9e2fb8.webp","assets/cards/card-modular-infra.png":"assets/scene-a859c0c66a7bc418750eb315.webp","assets/cards/card-self-healing.png":"assets/scene-03406aedfae0775f07590e80.webp","assets/cards/card-smart-iot.png":"assets/scene-464e45899e5d66c2ff93efc2.webp","assets/cards/card-solar-bipv.png":"assets/scene-133605e9a9a47aca896e48c4.webp","assets/cards/card-sponge-park.png":"assets/scene-35acc2d252746dc64d2046d5.webp","assets/characters-build04.png":"assets/scene-94e98239f55132a33e51e2f1.webp","assets/drawings/block-3d-model.png":"assets/scene-a5d8f25529ae36e31d19ae88.webp","assets/drawings/equip-crane.png":"assets/scene-b296946b23257fcec28d87aa.webp","assets/drawings/equip-excavator.png":"assets/scene-4d3bd9637bb1bb2cb0299235.webp","assets/drawings/equip-pumpcar.png":"assets/v3/equip/pumpcar.webp","assets/drawings/equip-roller.png":"assets/scene-864f7f38a1fbaef03f77c67c.webp","assets/drawings/flood-river-evacuation.png":"assets/scene-bde0ac25a5c0d5c709062cf2.webp","assets/drawings/floodwall-before.png":"assets/scene-9beef9cfcfedd45a39090bd3.webp","assets/drawings/floodwall-defense.png":"assets/scene-7c80da9ea8259fd2c23a6ec2.webp","assets/drawings/piloti-shear-reinforce.png":"assets/scene-7ec7cbf7f63d7e04b2909356.webp","assets/drawings/power-bipv.png":"assets/scene-a723e8e013bffff9ee2d7b0b.webp","assets/drawings/power-ess.png":"assets/scene-1f65b0d5aac2a9aeb2a7a758.webp","assets/drawings/power-grid.png":"assets/scene-e73f507b592985477a8c2b58.webp","assets/drawings/power-mobility.png":"assets/scene-c1ab09100830c7034467d22d.webp","assets/drawings/projection-isometric.png":"assets/v3/drawings/isometric.webp","assets/drawings/projection-oblique.png":"assets/scene-1fb8ecec8b1afb3cab75a7a7.webp","assets/drawings/projection-orthographic.png":"assets/scene-8089f8a22620c43c0bc6cd29.webp","assets/drawings/reinforced-concrete-beam.png":"assets/v3/drawings/rc-beam.webp","assets/drawings/supervision-report.png":"assets/scene-b2c0abfe16378f6df595cdec.webp","assets/drawings/symbol-door-slide.png":"assets/scene-5555a48d4f57d62add5c0e8f.webp","assets/drawings/symbol-door-swing.png":"assets/scene-0e9c82e2986b6d69cdaa8e35.webp","assets/drawings/symbol-window.png":"assets/scene-4e58eb00b37388504d41daf8.webp","assets/drawings/view-front.png":"assets/scene-8af01f1164f57f49c5c74efa.webp","assets/drawings/view-side.png":"assets/scene-1a44bbfbf7a2a9402b65be3d.webp","assets/drawings/view-top.png":"assets/scene-358044024ebc2641ffe0de81.webp","assets/icons/encyclopedia.png":"assets/scene-bfc8a6b6e1cca5c810ef2371.webp","assets/icons/evacuation.png":"assets/scene-dba4752005ec42538afde457.webp","assets/icons/inventory.png":"assets/scene-46024547f02aac9d7c169f2e.webp","assets/icons/investigation.png":"assets/scene-5abcd4164104b7728d80be5a.webp","assets/icons/map.png":"assets/scene-1e986924c71edeb82da4a40a.webp","assets/icons/materials.png":"assets/scene-9737245cb23b89b7006d79b2.webp","assets/icons/missions.png":"assets/scene-b3959ba073267ffbdb375005.webp","assets/icons/signal.png":"assets/scene-e662acd3856b8e2304595b88.webp","assets/maps/castnchill/bridge-repaired-span.png":"assets/scene-5483f1b08217e271df85b5ec.webp","assets/maps/castnchill/bridge.jpg":"assets/scene-6d67c8f8f6b4f407a6b1e016.webp","assets/maps/castnchill/eco.jpg":"assets/scene-6698e7421877e39100d0b97a.webp","assets/maps/castnchill/final.jpg":"assets/scene-8dd1478804cf12785f0a4e97.webp","assets/maps/castnchill/home.jpg":"assets/v3/maps/home.webp","assets/maps/castnchill/hub.jpg":"assets/v3/maps/hub.webp","assets/maps/castnchill/lab.jpg":"assets/v3/maps/lab.webp","assets/maps/castnchill/safe.jpg":"assets/v3/maps/safe.webp","assets/maps/castnchill/site.jpg":"assets/scene-ba317520423d5bbb61534e17.webp","assets/minigames/flood-shelter-emergency.png":"assets/scene-29bc031beb50773f37c12895.webp","assets/object-portraits.png":"assets/scene-9cbc7476160995e7c13701ec.webp","assets/objects-castnchill.png":"assets/scene-504ce1b27fdf27e68108119d.webp","assets/portrait-gijeong.png":"assets/scene-f5056f7cc51fb5e105cc33fb.webp","assets/portrait-jisu.png":"assets/scene-3d9334e6834d38fec3d5d0a5.webp","assets/portrait-susan.png":"assets/scene-99e104c90f74c71317de7704.webp","assets/portraits-castnchill.png":"assets/scene-2f7ca76489bbc8a77b2e917e.webp","assets/rebuild/outcome-eco.png":"assets/v3/rebuild/eco.webp","assets/rebuild/outcome-hybrid.png":"assets/v3/rebuild/hybrid.webp","assets/rebuild/outcome-modular.png":"assets/v3/rebuild/modular.webp","assets/rebuild/outcome-safe.png":"assets/v3/rebuild/safe.webp","assets/rebuild/outcome-smart.png":"assets/v3/rebuild/smart.webp","assets/recovery/step1-evacuation.png":"assets/scene-40756882ad4deba864c18384.webp","assets/recovery/step2-hazard-cutoff.png":"assets/scene-fd5f277c24528e5289f3301d.webp","assets/recovery/step3-lifeline-restore.png":"assets/scene-35cdf9fc6329b2c08d9808c1.webp","assets/recovery/step4-permanent-rebuild.png":"assets/scene-0f43c9deb2d11ad9767a86bf.webp","assets/sprites/build10/characters-clean-walk.png":"assets/scene-a6b1cf21732ee17c9758e650.webp"};
 (function() {
   const store = window.__ASSET_STORE__;
   const assets = {};
@@ -3222,6 +3223,9 @@ window.LEARNING_CONTENT = [
   M.createObjectMiniGame = (id, c, cb) => (V2[id] ? V2[id](c, cb) : orig(id, c, cb));
 })();
 </script>
+<script src="v3/core.js?v=1"></script>
+<script src="v3/missions-a.js?v=1"></script>
+<script src="v3/missions-b.js?v=1"></script>
 <script>
 /* --- game.js --- */
 (() => {
@@ -3232,6 +3236,7 @@ window.LEARNING_CONTENT = [
   const characterSprites=typeof Image!=='undefined'?new Image():null;
   const cleanWalkSprites=typeof Image!=='undefined'?new Image():null;
   const build4Sprites=typeof Image!=='undefined'?new Image():null;
+  const v3Sprites=typeof Image!=='undefined'?new Image():null;if(v3Sprites){v3Sprites.onload=()=>render();v3Sprites.src='assets/v3/characters.webp';}
   const objectSprites=typeof Image!=='undefined'?new Image():null;
   const cacheBust = "";
   if(typeof Image!=='undefined'){characterSprites.onload=()=>render();characterSprites.src = window.__ASSETS__['assets/portraits-castnchill.png'];cleanWalkSprites.onload=()=>render();cleanWalkSprites.src = window.__ASSETS__['assets/sprites/build10/characters-clean-walk.png'];build4Sprites.onload=()=>render();build4Sprites.src = window.__ASSETS__['assets/characters-build04.png'];objectSprites.onload=()=>render();objectSprites.src = window.__ASSETS__['assets/objects-castnchill.png'];}
@@ -3258,9 +3263,9 @@ window.LEARNING_CONTENT = [
       blocks:[],
       npcs:[{id:'nara',x:9.0,y:GROUND_Y},{id:'yunmi',x:48.0,y:GROUND_Y,kind:'ai'}],
       objects:[
-        {id:'signal',x:18.0,y:GROUND_Y,label:'📡 비상 통신 콘솔',kind:'console'},
-        {id:'safetyLog',x:28.0,y:GROUND_Y,label:'⚡ 비상 변전 배전반',kind:'console'},
-        {id:'restoreLog',x:38.0,y:GROUND_Y,label:'📋 도시 피해 현황판',kind:'mark'}
+        {id:'signal',x:18.0,y:GROUND_Y,label:'🗺️ 도시 피해 지도',kind:'console'},
+        {id:'safetyLog',x:28.0,y:GROUND_Y,label:'🔍 안전 점검표',kind:'console'},
+        {id:'restoreLog',x:38.0,y:GROUND_Y,label:'⬇️ 본부 구조 기록',kind:'mark'}
       ],
       exits:[{x:56.5,y:GROUND_Y,to:'lab',region:'LAB',label:'연구소 출입구'}]},
     lab:{id:'LAB',name:'건설기술 연구소',stamp:'1장 · 건설기술 연구소',ground:'lab',
@@ -3268,24 +3273,24 @@ window.LEARNING_CONTENT = [
       blocks:[],
       npcs:[{id:'yunmi',x:48.0,y:GROUND_Y,kind:'ai'}],
       objects:[
-        {id:'historyRecord',x:18.0,y:18.5,label:'🏛️ 건설 재료 전시대',kind:'console'},
+        {id:'historyRecord',x:18.0,y:18.5,label:'🏛️ 건설기술 연표',kind:'console'},
         {id:'bridgeDesign',x:28.0,y:18.5,label:'🌉 돌다리 모형',kind:'mark'},
-        {id:'approvalTrail',x:38.0,y:18.5,label:'📑 감리 문서 보관함',kind:'console'}
+        {id:'approvalTrail',x:38.0,y:18.5,label:'🧱 구조 형식 모형',kind:'console'}
       ],
       exits:[{x:3.5,y:GROUND_Y,to:'hub',region:'HUB',label:'복구 본부 출입구'},{x:56.5,y:GROUND_Y,to:'bridge',region:'BRG',label:'끊어진 연결로 출구'}]},
     bridge:{id:'BRG',name:'끊어진 연결로',stamp:'2장 · 끊어진 연결로',ground:'bridge',
       walls:[[0,0,cols,1],[0,rows-1,cols,1],[0,0,1,rows],[cols-1,0,1,rows]],
       blocks:[],
-      npcs:[{id:'jooyoung',x:10.5,y:GROUND_Y}],
+      npcs:[{id:'susan',x:10.5,y:GROUND_Y}],
       objects:[],
       exits:[{x:3.5,y:GROUND_Y,to:'lab',region:'LAB',label:'연구소 출입구'},{x:56.5,y:GROUND_Y,to:'home',region:'HOME',label:'주거 구역 통로'}]}
   };
   const regionBoundaries=[[0,0,cols,1],[0,rows-1,cols,1],[0,0,1,rows],[cols-1,0,1,rows]];
   const realisticLabels = {
-    homePlan:'📐 투상도 도면 묶음',routePlan:'📏 3면도 설계판',shelterPlan:'🏠 대피소 평면도',
-    materialsLog:'🧪 철근콘크리트 시험기',equipmentLog:'🚜 장비 관제 콘솔',processLog:'📋 공정 기록판',
-    floodMark:'🌊 제방 수위 관측판',inspectionGap:'🏢 필로티 기둥 점검표',evacuationMap:'🚨 대피 경로 안내도',
-    powerPlan:'⚡ 분산 전력망 설계도',waterPlan:'💧 빗물 관리 계획서',greenPlan:'🌿 친환경 건축 계획서'
+    homePlan:'📐 입체 도면 연습장',routePlan:'📏 3면도 설계판',shelterPlan:'🏠 대피소 평면도',
+    materialsLog:'🧪 철근콘크리트 보 시험체',equipmentLog:'🚜 장비 작업 일지',processLog:'📋 공정 기록판',
+    floodMark:'🌊 하천 수위 관측판',inspectionGap:'〰️ 지진 실험 모형',evacuationMap:'🏚️ 무너진 대피소',
+    powerPlan:'☀️ 제로에너지 집 설계도',waterPlan:'💧 빗물 관리 계획서',greenPlan:'🤖 스마트 건설 고민 상자'
   };
   function makeRegionMap(id,name,stamp,ground,npc,previous,next,recordIds,blocks){
     return {id,name,stamp,ground,walls:regionBoundaries,blocks:[],
@@ -3304,7 +3309,7 @@ window.LEARNING_CONTENT = [
   }
   Object.assign(maps,{
     home:makeRegionMap('HOME','주거 구역','3장 · 주거 구역','home','jisu',{to:'bridge',region:'BRG',name:'끊어진 연결로'},{to:'site',region:'SITE',name:'건설 현장'},['homePlan','routePlan','shelterPlan'],[]),
-    site:makeRegionMap('SITE','건설 현장','4장 · 건설 현장','site','susan',{to:'home',region:'HOME',name:'주거 구역'},{to:'safe',region:'SAFE',name:'재난 대응 구역'},['materialsLog','equipmentLog','processLog'],[]),
+    site:makeRegionMap('SITE','건설 현장','4장 · 건설 현장','site','jooyoung',{to:'home',region:'HOME',name:'주거 구역'},{to:'safe',region:'SAFE',name:'재난 대응 구역'},['materialsLog','equipmentLog','processLog'],[]),
     safe:makeRegionMap('SAFE','재난 대응 구역','5장 · 재난 대응 구역','safe','gijeong',{to:'site',region:'SITE',name:'건설 현장'},{to:'eco',region:'ECO',name:'미래도시 구역'},['floodMark','inspectionGap','evacuationMap'],[]),
     eco:makeRegionMap('ECO','미래도시 구역','6장 · 미래도시 구역','eco','yunmi',{to:'safe',region:'SAFE',name:'재난 대응 구역'},{to:'final',region:'FINAL',name:'도시 재건 구역'},['powerPlan','waterPlan','greenPlan'],[])
   });
@@ -3361,7 +3366,7 @@ window.LEARNING_CONTENT = [
     mapBackgrounds[id]=gcScenes.image(window.__ASSETS__['assets/maps/castnchill/'+id+'.jpg']||'',()=>render());
   }
   const dialogue=content.dialogue;
-  const fieldLessons={signal:'construction-tech',safetyLog:'disaster-recovery',restoreLog:'disaster-recovery',historyRecord:'materials-history',bridgeDesign:'arch',approvalTrail:'sequence',homePlan:'projection',routePlan:'third-angle',shelterPlan:'planning',materialsLog:'materials',equipmentLog:'equipment',processLog:'sequence',floodMark:'disaster-safety',inspectionGap:'maintenance',evacuationMap:'disaster-safety',powerPlan:'eco-city',waterPlan:'convergence',greenPlan:'eco-city'};
+  const fieldLessons={signal:'construction-tech',safetyLog:'construction-tech',restoreLog:'disaster-recovery',historyRecord:'materials-history',bridgeDesign:'arch',approvalTrail:'structure-form',homePlan:'projection',routePlan:'third-angle',shelterPlan:'planning',materialsLog:'materials',equipmentLog:'equipment',processLog:'sequence',floodMark:'disaster-safety',inspectionGap:'maintenance',evacuationMap:'disaster-safety',powerPlan:'eco-city',waterPlan:'eco-city',greenPlan:'convergence'};
   const CHAPTER_CHECKS={hub:'construction-tech',lab:'materials-history',home:'projection',site:'sequence',safe:'disaster-safety',eco:'eco-city'};
 
   function clamp(value,min,max){return Math.max(min,Math.min(max,value));}
@@ -3440,6 +3445,11 @@ window.LEARNING_CONTENT = [
     else{rect(x-4,y-7,8,13,character.color);rect(x-4,y-12,8,7,'#ddbc96');rect(x-5,y-13,10,4,'#51483d');rect(x-3,y-9,2,2,'#302d29');rect(x+1,y-9,2,2,'#302d29');rect(x-3,y+5,3,4,'#414c41');rect(x+1,y+5,3,4,'#414c41');}
   }
   function drawCharacterSprite(id,x,y,face,step){
+    const v3Row={player:0,nara:1,yunmi:2,susan:3,jooyoung:4,jisu:5,gijeong:6}[id];
+    if(v3Row!==undefined&&v3Sprites&&v3Sprites.complete&&v3Sprites.naturalWidth){
+      const dir={down:0,up:1,left:2,right:3}[face]??0,col=step<0?1:(Math.floor(step)%2?2:0);
+      ctx.save();ctx.imageSmoothingEnabled=true;ctx.drawImage(v3Sprites,(dir*3+col)*90,v3Row*144,90,144,Math.round(x-15),Math.round(y-48),30,48);ctx.restore();return true;
+    }
     const newCharacterRows={jisu:0,susan:1,gijeong:2};
     if(newCharacterRows[id]!==undefined){
       if(!build4Sprites||!build4Sprites.complete||!build4Sprites.naturalWidth)return false;
@@ -3655,7 +3665,7 @@ window.LEARNING_CONTENT = [
       else if(mission.status==='active'){goalTitle.textContent=count===total?'윤미에게 연구 기록을 보고하자':'연구 기록을 회수하자';progressLabel.textContent=`연구 기록 ${count} / ${total}`;progressBar.style.width=(count/total*100)+'%';}
       else{goalTitle.textContent='끊어진 연결로로 이동하자';progressLabel.textContent='연구소 기록 분석 완료';progressBar.style.width='100%';}
     }else if(currentMap==='bridge'){
-      const done=mission.status==='complete';goalTitle.textContent=done?'주거 구역으로 이동하자':'주영과 교량 복구 퍼즐을 풀자';progressLabel.textContent=done?'주거 구역 통로 개방':'구조와 하중 현장 검토';progressBar.style.width=done?'100%':'0%';
+      const done=mission.status==='complete';goalTitle.textContent=done?'주거 구역으로 이동하자':'수산과 교량 복구 퍼즐을 풀자';progressLabel.textContent=done?'주거 구역 통로 개방':'구조와 하중 현장 검토';progressBar.style.width=done?'100%':'0%';
     }else if(currentMap==='final'){const done=mission.status==='complete';goalTitle.textContent=done?'재건 완료 · 학습 보고서를 작성하자':'미래 건설기술 카드로 도시를 재건하자';progressLabel.textContent=done?'결과 · '+(ending||'재건 완료'):'기술 카드 3장 선택';progressBar.style.width=done?'100%':'0%';
     }else if(mission.status==='offered'){
       goalTitle.textContent=`${content.characters[maps[currentMap].npcs[0].id].name}에게 임무를 받자`;progressLabel.textContent='임무 수락 대기';progressBar.style.width='0%';
@@ -3695,7 +3705,7 @@ window.LEARNING_CONTENT = [
     }
     if(currentMap==='bridge'){
       if(mission.status==='complete')return {action:'열린 통로를 지나 주거 구역으로 이동하세요.',target:exit('home')};
-      return {action:'주영에게 대화해 교량 복구 퍼즐을 시작하세요.',target:npc('jooyoung')};
+      return {action:'수산에게 대화해 교량 복구 퍼즐을 시작하세요.',target:npc('susan')};
     }
     if(mission.status==='offered'||mission.status==='available')return {action:content.characters[map.npcs[0].id].name+'에게 대화해 임무를 시작하세요.',target:npc(map.npcs[0].id)};
     if(mission.status==='active'){const left=records();if(left.length)return {action:'표시된 오브젝트를 조사하고 미니게임을 해결해 단서를 모으세요.',target:left[0],count:mission.records.size,total:definition.recordIds.length};return {action:content.characters[map.npcs[0].id].name+'에게 돌아가 기록을 보고하세요.',target:{...map.npcs[0],type:'npc'},count:mission.records.size,total:definition.recordIds.length};}
@@ -3726,7 +3736,8 @@ window.LEARNING_CONTENT = [
   const objectPortraitOrder=['signal','safetyLog','restoreLog','historyRecord','bridgeDesign','approvalTrail','homePlan','routePlan','shelterPlan','materialsLog','equipmentLog','processLog','floodMark','inspectionGap','evacuationMap','powerPlan','waterPlan','greenPlan','planningBoard'];
   function setDialogPortrait(name,dialogId=''){
     if(!avatarEl)return;
-    const portraits={'나래':{src:window.__ASSETS__['assets/portraits-castnchill.png'],image:[1536,1024],crop:[404,76,160,160]},'윤미':{src:window.__ASSETS__['assets/portraits-castnchill.png'],image:[1536,1024],crop:[790,78,160,160]},'주영':{src:window.__ASSETS__['assets/portraits-castnchill.png'],image:[1536,1024],crop:[1172,78,160,160]},'지수':{src:window.__ASSETS__['assets/portrait-jisu.png'],image:[512,512],crop:[0,0,512,512]},'수산':{src:window.__ASSETS__['assets/portrait-susan.png'],image:[180,180],crop:[0,0,180,180]},'기정':{src:window.__ASSETS__['assets/portrait-gijeong.png'],image:[180,180],crop:[0,0,180,180]}};
+    const P3=n=>({src:'assets/v3/portraits/'+n+'.webp',image:[256,256],crop:[0,0,256,256]});
+    const portraits={'나래':P3('nara'),'윤미':P3('yunmi'),'주영':P3('jooyoung'),'지수':P3('jisu'),'수산':P3('susan'),'기정':P3('gijeong'),'대장':P3('player')};
     let portrait=portraits[name];
     if(!portrait){
       let objIdx=objectPortraitOrder.indexOf(dialogId);
@@ -3842,7 +3853,7 @@ window.LEARNING_CONTENT = [
     else if(id==='yunmi'&&currentMap==='hub'&&missions.eco.status==='complete')beginDialog('hubEpilogue');
     else if(id==='yunmi'&&currentMap==='hub')beginDialog(missions.hub.status==='active'&&missions.hub.records.size===content.missions.hub.recordIds.length?'hubReport':missions.hub.status==='complete'?'hubAfter':'hubYunmi');
     else if(id==='yunmi'&&currentMap==='lab')beginDialog(missions.lab.status==='offered'?'labIntro':missions.lab.status==='active'&&missions.lab.records.size===content.missions.lab.recordIds.length?'labReport':missions.lab.status==='complete'?'labAfter':'labActive');
-    else if(id==='jooyoung'){
+    else if(id==='susan'&&currentMap==='bridge'){
       if(missions.bridge.status==='complete') beginDialog('bridgeArrival');
       else {
         if(typeof window!=='undefined' && !window.__build5Actions) openMiniGame('bridge');
@@ -3970,7 +3981,7 @@ window.LEARNING_CONTENT = [
               <div aria-label="윤미" style="width:100%; height:100%; background:url('${window.__ASSETS__['assets/portraits-castnchill.png']}') no-repeat; background-size:${1536*44/160}px ${1024*44/160}px; background-position:-${790*44/160}px -${78*44/160}px;"></div>
             </div>
             <div>
-              <strong style="color:#ffd89b; font-size:14.5px;">수석 연구원 윤미의 도시 재건 브리핑</strong>
+              <strong style="color:#ffd89b; font-size:14.5px;">도시 관리 AI 윤미의 재건 브리핑</strong>
               <div style="font-size:11px; color:#8faec7;">솔라리스 미래도시 재건 최종 결과 보고서</div>
             </div>
           </div>
@@ -3992,9 +4003,9 @@ window.LEARNING_CONTENT = [
         ${outcome.cards && outcome.cards.length ? `
           <div style="background:#091522; border:1px solid #1a3552; border-radius:8px; padding:10px 14px; margin-bottom:14px;">
             <div style="font-size:11.5px; color:#ffd89b; font-weight:800; margin-bottom:8px;">
-              🛠️ 학생이 직접 접목한 3대 미래 건설기술:
+              🛠️ 구역마다 고른 미래 건설기술:
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:8px;">
               ${outcome.cards.map(c => `
                 <div style="background:#112336; border:1px solid #23476e; border-radius:6px; padding:6px 8px; font-size:11px; text-align:center;">
                   <span style="color:#7dd3fc; font-weight:800; display:block;">${c.name}</span>
@@ -4212,13 +4223,13 @@ window.LEARNING_CONTENT = [
   // 상단 단계 표시줄 · HUD 메뉴 버튼
   // =========================================================================
   const CHAPTERS=[
-    {map:'hub',short:'프롤로그',label:'프롤로그 · 복구 본부',topic:'재난 복구 절차와 비상 전력',ids:['signal','safetyLog','restoreLog']},
-    {map:'lab',short:'1장',label:'1장 · 건설기술 연구소',topic:'건설 재료의 발달과 아치 구조',ids:['historyRecord','bridgeDesign','approvalTrail']},
-    {map:'bridge',short:'2장',label:'2장 · 끊어진 연결로',topic:'트러스 구조와 하중 전달',ids:['bridge']},
-    {map:'home',short:'3장',label:'3장 · 주거 구역',topic:'투상법과 평면도 기호',ids:['homePlan','routePlan','shelterPlan']},
-    {map:'site',short:'4장',label:'4장 · 건설 현장',topic:'철근콘크리트, 건설 장비, 공정',ids:['materialsLog','equipmentLog','processLog']},
-    {map:'safe',short:'5장',label:'5장 · 재난 대응 구역',topic:'방재 시설, 내진 보강, 대피',ids:['floodMark','inspectionGap','evacuationMap']},
-    {map:'eco',short:'6장',label:'6장 · 미래도시 구역',topic:'분산 전력, 물순환, 친환경 건축',ids:['powerPlan','waterPlan','greenPlan']},
+    {map:'hub',short:'프롤로그',label:'프롤로그 · 복구 본부',topic:'건설기술과 구조물, 유지관리, 하중',ids:['signal','safetyLog','restoreLog']},
+    {map:'lab',short:'1장',label:'1장 · 건설기술 연구소',topic:'건설기술의 발달, 아치, 구조 형식',ids:['historyRecord','bridgeDesign','approvalTrail']},
+    {map:'bridge',short:'2장',label:'2장 · 끊어진 연결로',topic:'다리의 종류, 트러스와 하중',ids:['bridge']},
+    {map:'home',short:'3장',label:'3장 · 주거 구역',topic:'투상도, 정투상도, 평면도와 축척',ids:['homePlan','routePlan','shelterPlan']},
+    {map:'site',short:'4장',label:'4장 · 건설 현장',topic:'철근콘크리트, 건설 장비, 건설 과정',ids:['materialsLog','equipmentLog','processLog']},
+    {map:'safe',short:'5장',label:'5장 · 재난 대응 구역',topic:'홍수 방재, 내진·제진·면진, 구성 요소',ids:['floodMark','inspectionGap','evacuationMap']},
+    {map:'eco',short:'6장',label:'6장 · 미래도시 구역',topic:'제로에너지 건축, 스펀지 시티, 스마트 건설',ids:['powerPlan','waterPlan','greenPlan']},
     {map:'final',short:'최종장',label:'최종장 · 도시 재건',topic:'미래 건설기술로 도시 재건',ids:[]}
   ];
   const chapterTrackEl=$('#chapter-track'),reportBtn=$('#btn-open-report');
@@ -4284,7 +4295,7 @@ window.LEARNING_CONTENT = [
       jumpToStage(mapId,false);updateGoal();render();
     });
   });
-  const ADMIN_MG=[['signal','프롤로그 · 비상 통신 주파수'],['safetyLog','프롤로그 · 비상 전력 배분'],['restoreLog','프롤로그 · 재난 복구 절차'],['historyRecord','1장 · 건설 재료 발달'],['bridgeDesign','1장 · 아치와 홍예석'],['approvalTrail','1장 · 감리 보고서'],['bridge','2장 · 트러스 교량 시뮬레이터'],['homePlan','3장 · 투상법 판별'],['routePlan','3장 · 제3각법 배치'],['shelterPlan','3장 · 평면도 기호'],['materialsLog','4장 · 철근콘크리트 보'],['equipmentLog','4장 · 건설 장비'],['processLog','4장 · 건설 공정 순서'],['floodMark','5장 · 홍수 방재 시설'],['inspectionGap','5장 · 필로티 내진 보강'],['evacuationMap','5장 · 침수 대피 경로'],['powerPlan','6장 · 분산 전력망'],['waterPlan','6장 · 물순환 기술'],['greenPlan','6장 · 친환경 건축'],['final','최종장 · 도시 재건 카드']];
+  const ADMIN_MG=[['signal','프롤로그 · 피해 구조물 분류'],['safetyLog','프롤로그 · 안전 점검 순찰'],['restoreLog','프롤로그 · 하중 찾기'],['historyRecord','1장 · 건설기술 타임라인'],['bridgeDesign','1장 · 돌다리 아치 실험'],['approvalTrail','1장 · 구조 형식 쌓기'],['bridge','2장 · 다리 도감과 트러스 설계'],['homePlan','3장 · 모눈 위 입체 그리기'],['routePlan','3장 · 정투상도와 블록 쌓기'],['shelterPlan','3장 · 대피소 평면도'],['materialsLog','4장 · 철근콘크리트 보 실험'],['equipmentLog','4장 · 현장 장비 배치'],['processLog','4장 · 건물 쌓아 올리기'],['floodMark','5장 · 홍수 막기 실험'],['inspectionGap','5장 · 지진 흔들기 실험'],['evacuationMap','5장 · 대피소 다시 세우기'],['powerPlan','6장 · 제로에너지 집'],['waterPlan','6장 · 빗물이 스며드는 도시'],['greenPlan','6장 · 스마트 건설 해결사'],['final','최종장 · 도시 재건 계획판']];
   const adminMgList=$('#admin-mg-list');
   if(adminMgList){adminMgList.innerHTML=ADMIN_MG.map(([id,label])=>`<button class="admin-btn" type="button" data-mg="${id}">${label}</button>`).join('');
     adminMgList.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
@@ -4344,7 +4355,7 @@ window.LEARNING_CONTENT = [
   }
   function renderReportSummary(){
     const box=$('#report-summary');if(!box)return;
-    box.innerHTML=CHAPTERS.filter(c=>c.ids.length).map(c=>{const r=chapterResult(c);const cls=r.complete?(r.wrong<=1?'ok':'mid'):'no';const txt=r.complete?`완료 · 오답 ${r.wrong}회`:`진행 ${r.done}/${r.total}`;return `<div class="summary-item"><span><b>${c.label}</b><br><small style="color:var(--muted)">${c.topic}</small></span><em class="${cls}">${txt}</em></div>`;}).join('');
+    box.innerHTML=CHAPTERS.filter(c=>c.ids.length).map(c=>{const r=chapterResult(c);const cls=r.complete?(r.wrong<=1?'ok':'mid'):'no';const txt=r.complete?`완료 · 오답 ${r.wrong}회`:`진행 ${r.done}/${r.total}`;const notes=(window.V3&&window.V3.NOTES)?c.ids.filter(id=>mgStats[id]?.done||(id==='bridge'&&missions.bridge.status==='complete')).map(id=>`<div>📒 ${window.V3.NOTES[id]}</div>`).join(''):'';return `<div class="summary-item"><span><b>${c.label}</b><br><small style="color:var(--muted)">${c.topic}</small></span><em class="${cls}">${txt}</em></div>`+(notes?`<div class="v3-notes"><b>탐험 수첩</b>${notes}</div>`:'');}).join('');
   }
   function outcomeText(){const o=rebuildOutcome;if(!o)return ending?`재건 결과: ${ending}`:'최종장을 마치면 재건 결과가 표시됩니다.';return `재건 결과: ${o.short||o.title} — 선택한 기술: ${(o.cards||[]).map(c=>c.name.split(' (')[0].split(' &')[0]).join(', ')}`;}
   function updateCounts(){document.querySelectorAll('#student-report-modal .count').forEach(el=>{const t=document.getElementById(el.dataset.for);if(t)el.textContent=`${t.value.length} / ${t.maxLength}자`;});}
