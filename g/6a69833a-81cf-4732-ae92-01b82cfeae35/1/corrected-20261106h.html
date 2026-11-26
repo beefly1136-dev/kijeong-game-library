@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>시그널 크로니클: 시간의 전령 (Signal Chronicle: The Time Messenger) - v45</title>
+    <title>시그널 크로니클: 시간의 전령</title>
     <style>
         
 
@@ -117,7 +117,7 @@
             border: 1px solid var(--accent-cyan);
             padding: 4px 10px;
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.82rem;
             color: var(--accent-cyan);
             font-weight: bold;
             box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
@@ -205,7 +205,7 @@
             color: #fff;
             border: 1px solid var(--border-glowing);
             padding: 4px 10px;
-            font-size: 0.75rem;
+            font-size: 0.82rem;
             cursor: pointer;
             border-radius: 4px;
             margin-top: 8px;
@@ -285,9 +285,10 @@
             background-color: var(--terminal-bg);
             border: 2px solid var(--border-color);
             border-radius: 10px;
-            height: 140px;
+            height: 170px;
             overflow-y: auto;
             padding: 10px 15px;
+            cursor: pointer;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -376,9 +377,7 @@
             background-color: rgba(0, 0, 0, 0.5);
             border: 2px solid var(--border-color);
             border-radius: 8px;
-            min-height: 140px;
-            max-height: 175px;
-            overflow-y: auto;
+            min-height: 150px;
             padding: 10px 12px;
             display: flex;
             flex-direction: column;
@@ -410,7 +409,7 @@
         }
 
         .act-btn .badge {
-            font-size: 0.7rem;
+            font-size: 0.82rem;
             color: var(--accent-yellow);
             font-weight: normal;
             border: 1px solid rgba(255, 234, 0, 0.4);
@@ -456,7 +455,7 @@
         }
 
         .minigame-instruction {
-            font-size: 0.75rem;
+            font-size: 0.82rem;
             color: #b3a7ef;
             line-height: 1.3;
         }
@@ -581,7 +580,7 @@
             border: 1px solid var(--border-color);
             color: #ada0f1;
             padding: 4px 8px;
-            font-size: 0.75rem;
+            font-size: 0.82rem;
             font-weight: bold;
             border-radius: 4px 4px 0 0;
             cursor: pointer;
@@ -688,7 +687,7 @@
         /* Mobile phones */
         @media (max-width: 600px) {
             html {
-                font-size: 14px;
+                font-size: 15px;
             }
             .console-container {
                 padding: 8px;
@@ -704,20 +703,19 @@
                 gap: 4px !important;
             }
             .tab-btn {
-                font-size: 0.75rem !important;
+                font-size: 0.82rem !important;
                 padding: 8px 2px !important;
                 border-radius: 4px !important;
             }
             .actions-box {
                 min-height: 120px !important;
-                max-height: 150px !important;
                 padding: 8px !important;
             }
             .terminal-container {
-                height: 110px !important;
+                height: 150px !important;
             }
             .terminal-log {
-                font-size: 0.8rem !important;
+                font-size: 0.85rem !important;
             }
             .status-pane {
                 gap: 8px !important;
@@ -730,7 +728,7 @@
                 font-size: 1.5rem !important;
             }
             .overlay-screen p {
-                font-size: 0.75rem !important;
+                font-size: 0.85rem !important;
                 margin-bottom: 8px !important;
             }
             .tutorial-hub {
@@ -739,8 +737,8 @@
             }
             .tut-pane-content {
                 min-height: 100px !important;
-                max-height: 180px !important;
-                font-size: 0.75rem !important;
+                max-height: 220px !important;
+                font-size: 0.85rem !important;
             }
             .big-action-btn {
                 padding: 8px 20px !important;
@@ -751,7 +749,7 @@
         /* Tiny Mobile screens */
         @media (max-width: 400px) {
             html {
-                font-size: 12px;
+                font-size: 14px;
             }
             .console-container {
                 padding: 6px;
@@ -760,7 +758,7 @@
                 border-radius: 10px;
             }
             .tab-btn {
-                font-size: 0.7rem !important;
+                font-size: 0.82rem !important;
             }
             .game-header h1 {
                 font-size: 1.2rem !important;
@@ -773,26 +771,16 @@
                 padding: 5px !important;
             }
             .console-container {
-                max-height: 98vh;
-                overflow-y: auto;
-                gap: 6px;
+                gap: 8px;
                 padding: 8px;
-            }
-
-            .terminal-container {
-                height: 100px !important;
-            }
-            .actions-box {
-                min-height: 100px !important;
-                max-height: 130px !important;
             }
         }
     
         /* HUD Box Modular Styling */
         .hud-box {
             position: absolute;
-            width: 170px;
-            background: rgba(8, 5, 17, 0.95);
+            width: 200px;
+            background: rgba(8, 5, 17, 0.88);
             border-radius: 6px;
             padding: 6px;
             pointer-events: auto;
@@ -813,7 +801,7 @@
             box-shadow: 0 0 10px rgba(255, 56, 56, 0.5);
         }
         .hud-box .hud-header {
-            font-size: 0.75rem;
+            font-size: 0.82rem;
             font-weight: bold;
             margin-bottom: 3px;
             display: flex;
@@ -847,7 +835,7 @@
             background-color: var(--accent-red);
         }
         .hud-box .hud-text {
-            font-size: 0.75rem;
+            font-size: 0.82rem;
             text-align: right;
             font-family: 'Share Tech Mono', monospace;
             font-weight: bold;
@@ -862,7 +850,7 @@
         /* Mobile Adjustments for HUD Boxes */
         @media (max-width: 600px) {
             .hud-box {
-                width: 125px !important;
+                width: 150px !important;
                 padding: 4px !important;
                 border-radius: 4px !important;
             }
@@ -875,14 +863,14 @@
                 right: 6px !important;
             }
             .hud-box .hud-header {
-                font-size: 0.62rem !important;
+                font-size: 0.82rem !important;
                 margin-bottom: 2px !important;
             }
             .hud-box .hud-bar-container {
                 height: 7px !important;
             }
             .hud-box .hud-text {
-                font-size: 0.62rem !important;
+                font-size: 0.82rem !important;
             }
         }
 
@@ -890,6 +878,218 @@
             border-color: var(--accent-cyan) !important;
             color: var(--accent-cyan) !important;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.4) !important;
+        }
+
+        /* ═══════════ v46 가시성·가독성 업그레이드 ═══════════ */
+        .col-left, .col-right { display: contents; }
+        .game-header { order: 0; }
+        .screen-area { order: 1; }
+        .status-pane { order: 2; }
+        #enemy-status-pane { order: 3; }
+        .terminal-container { order: 4; }
+        .control-panel { order: 5; }
+
+        .header-right { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+        .header-btn {
+            background: rgba(150, 126, 245, 0.15); border: 2px solid var(--border-color); color: var(--accent-yellow);
+            padding: 6px 10px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; font-weight: bold;
+            transition: all 0.15s ease-in-out; white-space: nowrap;
+        }
+        .tech-status-badge { font-size: 0.85rem; white-space: nowrap; }
+
+        /* 버튼 공통 */
+        .tuning-btn {
+            background-color: var(--btn-bg); color: var(--text-color);
+            border: 1.5px solid var(--border-color); border-radius: 6px;
+            padding: 8px 10px; min-height: 40px; font-size: 0.92rem; font-weight: bold;
+            cursor: pointer; transition: all 0.15s; line-height: 1.2;
+        }
+        .tuning-btn:hover { border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0,255,255,0.35); filter: brightness(1.15); }
+        .tuning-btn.selected { background: var(--accent-cyan); color: #000; border-color: #fff; }
+        .tuning-btn.go { background: var(--accent-green); color: #000; border-color: #fff; }
+        .tuning-btn.danger { background: #5a1420; color: #ffb3b3; border-color: #ff6b6b; }
+        .zoom-btn {
+            background: rgba(0,255,255,0.1); border: 1.5px solid var(--accent-cyan); color: var(--accent-cyan);
+            border-radius: 5px; padding: 4px 8px; font-size: 0.82rem; font-weight: bold; cursor: pointer; white-space: nowrap;
+        }
+        .zoom-btn:hover { background: rgba(0,255,255,0.25); }
+        .act-btn, .tab-btn, .tuning-btn, .zoom-btn, .bongsu-toggle-btn { -webkit-tap-highlight-color: transparent; }
+        .act-btn:active, .tab-btn:active, .tuning-btn:active, .bongsu-toggle-btn:active { transform: translateY(1px); }
+        .act-btn:disabled, .tuning-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; filter: grayscale(0.4); }
+        .act-btn:disabled:hover { background-color: #1a1236; border-color: var(--border-color); color: var(--text-color); }
+        button:focus-visible { outline: 3px solid var(--accent-yellow); outline-offset: 2px; }
+        .tab-btn.locked { opacity: 0.4; }
+        .tab-btn.locked:hover { border-color: var(--border-color); background-color: var(--btn-bg); color: var(--text-color); box-shadow: none; }
+        .tab-icon { font-size: 1.15rem; }
+        .act-btn { font-size: 0.95rem; min-height: 44px; }
+        .act-btn .badge { font-size: 0.8rem; white-space: nowrap; }
+        .bongsu-toggle-btn { font-size: 0.95rem; min-height: 44px; color: #b9b0de; }
+        .minigame-title-bar { font-size: 0.92rem; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .minigame-instruction { font-size: 0.9rem; color: #d6ccff; line-height: 1.5; }
+        .minigame-reward { color: var(--accent-yellow); font-size: 0.85rem; white-space: nowrap; }
+        .mg-feedback { font-size: 0.88rem; font-weight: bold; color: #ff9b9b; background: rgba(255, 51, 51, 0.12); border: 1px solid rgba(255, 51, 51, 0.45); border-radius: 5px; padding: 5px 8px; }
+        .morse-button-row { flex-wrap: wrap; }
+        .morse-button-row .tuning-btn { flex: 1 1 18%; white-space: nowrap; }
+        @media (max-width: 600px) { .morse-button-row .tuning-btn { flex: 1 1 28%; } }
+        .morse-input-disp { font-size: 1.25rem; min-height: 40px; }
+        .quiz-title { font-size: 1rem; line-height: 1.45; word-break: keep-all; }
+        .quiz-hint { font-size: 0.86rem; color: #d1bcff; background: rgba(155, 130, 243, 0.1); border: 1px solid rgba(155, 130, 243, 0.3); border-radius: 5px; padding: 6px 9px; line-height: 1.45; word-break: keep-all; }
+        .quiz-answers .act-btn { justify-content: flex-start; text-align: left; word-break: keep-all; }
+        .panel-head { font-size: 0.92rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .item-desc { font-size: 0.8rem; font-weight: normal; color: #b9b0de; margin-top: 2px; line-height: 1.35; word-break: keep-all; }
+        .item-main { display: flex; flex-direction: column; min-width: 0; }
+        .item-name { display: flex; align-items: center; gap: 6px; }
+        .item-icon { font-size: 1.15rem; }
+        .act-btn.equipped { border: 2px solid var(--accent-yellow); background: rgba(255, 234, 0, 0.08); }
+        .act-btn.equipped .item-name { color: var(--accent-yellow); }
+        .badge.eq { background: var(--accent-yellow) !important; color: #000 !important; font-weight: bold !important; }
+        .act-btn.cant-afford { opacity: 0.5; }
+        .stat-up { color: var(--accent-green); font-weight: bold; }
+        .stat-down { color: #ff8a8a; font-weight: bold; }
+
+        /* 결과 카드 (정답/오답/성공) */
+        .result-card { border-radius: 7px; padding: 8px 11px; font-size: 0.9rem; line-height: 1.45; word-break: keep-all; animation: result-in 0.35s ease-out; }
+        .result-card.ok { background: rgba(57, 255, 20, 0.09); border: 1.5px solid var(--accent-green); }
+        .result-card.bad { background: rgba(255, 51, 51, 0.1); border: 1.5px solid var(--accent-red); }
+        .result-card .rc-title { font-weight: bold; font-size: 0.98rem; margin-bottom: 2px; }
+        .result-card.ok .rc-title { color: var(--accent-green); }
+        .result-card.bad .rc-title { color: #ff8080; }
+        .result-card .rc-detail { color: #ddd5ff; font-size: 0.86rem; }
+        @keyframes result-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+        /* 전투 차례 표시 */
+        .turn-banner { font-size: 0.9rem; font-weight: bold; padding: 6px 10px; border-radius: 6px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+        .turn-banner.mine { color: #000; background: var(--accent-cyan); }
+        .turn-banner.enemy { color: #fff; background: #7a1a2a; animation: turn-blink 0.9s ease-in-out infinite alternate; }
+        @keyframes turn-blink { from { opacity: 1; } to { opacity: 0.65; } }
+
+        /* 상태 카드 */
+        .status-pane { font-size: 0.9rem; }
+        .stat-label { font-size: 0.88rem; white-space: nowrap; color: #c3b8f7; }
+        .stat-val { font-size: 0.95rem; text-align: right; }
+        .stat-cards { border-left: 2px dashed rgba(93, 77, 154, 0.4); padding-left: 15px; display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .stat-card { border-radius: 6px; padding: 6px 6px; text-align: center; display: flex; flex-direction: column; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
+        .stat-card-label { font-size: 0.78rem; font-weight: bold; margin-bottom: 2px; color: #fff; white-space: nowrap; }
+        .stat-card-val { font-size: 1.15rem; font-weight: 900; font-family: 'Share Tech Mono', monospace; }
+        .stat-card-sub { font-size: 0.68rem; color: #cfc4ff; margin-top: 1px; }
+        .card-atk { background: rgba(0, 255, 255, 0.1); border: 1.5px solid var(--accent-cyan); }
+        .card-atk .stat-card-val { color: var(--accent-cyan); }
+        .card-spd { background: rgba(255, 0, 127, 0.08); border: 1.5px solid rgba(255, 0, 127, 0.55); }
+        .card-spd .stat-card-val { color: #ff6fb1; }
+        .card-gold { background: rgba(255, 234, 0, 0.07); border: 1.5px solid rgba(255, 234, 0, 0.5); }
+        .card-gold .stat-card-val { color: var(--accent-yellow); }
+        .card-tp { background: rgba(155, 130, 243, 0.15); border: 1.5px solid var(--border-glowing); }
+        .card-tp .stat-card-val { color: #fff; }
+        .bump { animation: bump 0.7s ease-out; }
+        @keyframes bump { 0% { transform: scale(1); box-shadow: 0 0 0 rgba(255,255,255,0); } 30% { transform: scale(1.08); box-shadow: 0 0 16px rgba(255,255,255,0.7); } 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,255,255,0); } }
+
+        /* 적 요약 */
+        #enemy-status-pane { background: linear-gradient(180deg, rgba(45, 10, 20, 0.85) 0%, rgba(20, 5, 10, 0.95) 100%); border: 2px solid var(--accent-red); border-radius: 10px; padding: 8px 14px; display: flex; flex-direction: column; gap: 5px; }
+        .enemy-pane-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+        .enemy-pane-name { color: #ff8080; font-weight: bold; font-size: 0.95rem; word-break: keep-all; }
+        .enemy-pane-hp { color: #ffc2c2; font-family: 'Share Tech Mono', monospace; font-weight: bold; white-space: nowrap; }
+        .enemy-bar { border-color: var(--accent-red) !important; background-color: #240a10 !important; height: 10px; }
+        #enemy-hp-bar-fill { background-color: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+        .enemy-pane-stats { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.85rem; color: #ffb0b0; }
+        .enemy-pane-stats b { color: #fff; font-family: 'Share Tech Mono', monospace; }
+
+        /* 그림 화면 위 요소 */
+        #html-combat-hud { display: none; position: absolute; inset: 0; pointer-events: none; font-family: 'Share Tech Mono', 'Nanum Gothic Coding', monospace; z-index: 4; }
+        .hud-enemy-name { color: #ffb3b3; white-space: normal !important; line-height: 1.25; word-break: keep-all; }
+        .hud-box .hud-header { font-size: 0.82rem; }
+        .hud-box .hud-text { font-size: 0.82rem; }
+        #damage-popup-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+        #explore-progress-box { position: absolute; top: 8px; right: 8px; z-index: 5; background: rgba(5, 3, 12, 0.78); border: 1.5px solid var(--accent-yellow); border-radius: 6px; padding: 4px 8px 6px; min-width: 150px; }
+        .progress-label { font-size: 0.82rem; color: var(--accent-yellow); font-weight: bold; white-space: nowrap; }
+        .progress-label b { font-family: 'Share Tech Mono', monospace; }
+        .progress-track { height: 7px; background: #241c45; border-radius: 4px; overflow: hidden; margin-top: 3px; }
+        #explore-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ffb300, var(--accent-yellow)); transition: width 0.5s ease; }
+        #center-banner { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.8); z-index: 6; pointer-events: none; opacity: 0; text-align: center; background: rgba(5, 3, 12, 0.88); border: 2px solid var(--accent-cyan); border-radius: 10px; padding: 10px 22px; transition: opacity 0.3s, transform 0.3s; max-width: 90%; }
+        #center-banner.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        #center-banner .cb-main { font-family: 'Share Tech Mono', 'Nanum Gothic Coding', monospace; font-size: 1.6rem; font-weight: 900; letter-spacing: 1px; }
+        #center-banner .cb-sub { font-size: 0.95rem; color: #fff; margin-top: 2px; word-break: keep-all; }
+
+        /* 로그 */
+        .log-time { font-size: 0.72em; color: #6e64a3; margin-right: 6px; font-family: 'Share Tech Mono', monospace; }
+        .log-line { padding: 1px 0; }
+        .log-line b { color: #fff; }
+        .log-story { color: #e9e4ff; }
+        .log-combat-e { color: #ff7070; }
+
+        /* 크게 보기 창 */
+        #zoom-overlay { display: none; position: fixed; inset: 0; background: rgba(6, 4, 12, 0.88); z-index: 2000; justify-content: center; align-items: center; padding: 16px; }
+        .zoom-card { background: var(--panel-bg); border: 3px solid var(--accent-cyan); border-radius: 12px; width: 100%; max-width: 820px; max-height: calc(100dvh - 32px); display: flex; flex-direction: column; box-shadow: 0 0 25px var(--accent-cyan); }
+        .zoom-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 18px 10px; border-bottom: 2px dashed var(--border-color); }
+        #zoom-title { font-size: 1.15rem; color: var(--accent-yellow); font-weight: bold; word-break: keep-all; }
+        .zoom-close { background: transparent; border: 2px solid var(--accent-red); color: var(--accent-red); border-radius: 6px; width: 40px; height: 40px; font-size: 1.2rem; font-weight: bold; cursor: pointer; flex-shrink: 0; }
+        #zoom-body { padding: 14px 18px; overflow-y: auto; flex: 1; font-size: 1rem; line-height: 1.55; color: #fff; word-break: keep-all; }
+        .zoom-foot { padding: 10px 18px 14px; text-align: right; border-top: 1px solid rgba(150, 126, 245, 0.25); }
+        .zoom-ok { background: var(--accent-green); color: #000; border-color: #fff; padding: 8px 22px; }
+
+        /* 시작 화면 */
+        .start-steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%; max-width: 560px; margin: 4px 0 12px; }
+        .start-steps li { background: #161033; border: 1.5px solid var(--border-color); border-radius: 7px; padding: 6px 4px; display: flex; flex-direction: column; gap: 2px; font-size: 0.85rem; }
+        .start-steps li b { color: var(--accent-cyan); }
+        .start-steps li span { color: #cfc4ff; font-size: 0.78rem; word-break: keep-all; }
+        .tut-tab-btn { font-size: 0.85rem; padding: 6px 9px; }
+        .tutorial-tabs { flex-wrap: wrap; }
+        .tut-pane-content { font-size: 0.9rem; line-height: 1.6; max-height: 300px; }
+
+        @media (max-width: 600px) {
+            .game-header h1 { font-size: 1.15rem; }
+            .game-header .subtitle { font-size: 0.78rem; }
+            .header-btn, .tech-status-badge { font-size: 0.75rem !important; padding: 4px 6px; }
+            .stat-cards { padding-left: 8px; gap: 6px; }
+            .stat-card-label { font-size: 0.7rem; white-space: normal; }
+            .stat-card-val { font-size: 1rem; }
+            .stat-card-sub { display: none; }
+            .stat-label { font-size: 0.8rem; }
+            .status-pane { grid-template-columns: 1fr 1fr !important; }
+            .grid-2col.quiz-answers { grid-template-columns: 1fr; }
+            #explore-progress-box { min-width: 0; padding: 3px 6px 5px; top: 5px; right: 5px; }
+            .progress-label { font-size: 0.72rem; }
+            #center-banner .cb-main { font-size: 1.2rem; }
+            #center-banner .cb-sub { font-size: 0.8rem; }
+            .hud-box .hud-header, .hud-box .hud-text { font-size: 0.72rem !important; }
+            .start-steps { grid-template-columns: repeat(2, 1fr); }
+            .zoom-head, #zoom-body, .zoom-foot { padding-left: 12px; padding-right: 12px; }
+            #zoom-body { font-size: 0.95rem; }
+        }
+
+        /* 노트북·PC: 2단 배치 (왼쪽 그림·로그 / 오른쪽 상태·조작) */
+        @media (min-width: 1100px) {
+            body { padding: 10px; align-items: flex-start; }
+            .console-container {
+                display: grid;
+                grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+                grid-template-rows: auto 1fr;
+                align-items: stretch;
+                max-width: min(1280px, calc((100vh - 250px) * 3.1 + 40px));
+                min-width: 1000px;
+            }
+            .game-header { grid-column: 1 / -1; padding: 8px 15px; }
+            .col-left, .col-right { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+            .col-left .terminal-container { flex: 1 1 auto; height: auto; min-height: 150px; }
+            .col-right .control-panel { flex: 1 1 auto; display: flex; flex-direction: column; }
+            .col-right .actions-box { flex: 1 1 auto; }
+        }
+
+        @media (max-width: 600px) {
+            .screen-area { padding: 0 !important; }
+            .status-pane { grid-template-columns: 1fr !important; }
+            .stat-cards { border-left: none; padding-left: 0; grid-template-columns: repeat(4, 1fr); gap: 5px; border-top: 2px dashed rgba(93, 77, 154, 0.4); padding-top: 8px; }
+            .stat-card { padding: 4px 2px; }
+            .stat-card-label { white-space: nowrap; font-size: 0.7rem; }
+            .game-header .subtitle { font-size: 0.72rem; }
+            .act-btn { flex-wrap: wrap; gap: 4px; }
+            .turn-banner { font-size: 0.85rem; }
+        }
+        @media (min-width: 1100px) {
+            .col-left .terminal-container { height: 0; flex: 1 1 0; min-height: 150px; }
+            .tab-btn { flex-direction: row; padding: 9px 4px; gap: 6px; }
+            .main-tabs { margin-bottom: 10px; }
+            .status-pane { padding: 10px 14px; }
+            .control-panel { padding: 10px 12px; }
         }
     </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Dosis:wght@600&family=Nanum+Gothic+Coding:wght@400;700&display=swap" media="print" onload="this.media='all'"><style id="gc-fullscreen-only">
@@ -915,6 +1115,14 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 [ 시간의 전령 : 시공간 통신 백본 복구 작전 ]
             </p>
             
+            <!-- 한눈에 보는 진행 순서 -->
+            <ol class="start-steps" aria-label="게임 진행 순서">
+                <li><b>🗺️ 탐색</b><span>퀴즈·미니게임 풀기</span></li>
+                <li><b>⚔️ 보스 전투</b><span>진행률 100%에 등장</span></li>
+                <li><b>🎒 정비</b><span>상점·장비·회복</span></li>
+                <li><b>🚀 시대 도약</b><span>고대 → 미래 4시대</span></li>
+            </ol>
+
             <!-- Interactive Multi-tab Tutorial Hub -->
             <div class="tutorial-hub">
                 <div class="tutorial-tabs">
@@ -949,175 +1157,163 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 <h1>SIGNAL CHRONICLE</h1>
                 <div class="subtitle" id="current-era-sub">고대 시대 • 시각 봉수 및 파발망</div>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-                <button id="bgm-toggle-btn" onclick="toggleBGM()" style="background: rgba(150, 126, 245, 0.15); border: 2px solid var(--border-color); color: var(--accent-yellow); padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-weight: bold; transition: all 0.15s ease-in-out; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); text-shadow: 0 0 4px rgba(255, 234, 0, 0.5);" title="배경음악 켜기/끄기">🔊 BGM ON</button>
-                <div class="tech-status-badge" id="system-quality-badge">신호 세기: Excellent</div>
+            <div class="header-right">
+                <button id="bgm-toggle-btn" class="header-btn" onclick="toggleBGM()" title="배경음악 켜기/끄기">🔊 BGM ON</button>
+                <div class="tech-status-badge" id="system-quality-badge">📶 신호 우수</div>
             </div>
         </div>
 
-        <!-- Visual Screen Viewport -->
-        <div class="screen-area" style="position: relative;">
-            <svg id="visual-viewport" viewBox="0 0 480 270" preserveAspectRatio="none" shape-rendering="crispEdges">
-                <!-- Direct Vector Graphics Rendered Here dynamically -->
-            </svg>
-            
-            <!-- HTML-based Combat HUD Overlay -->
-            <div id="html-combat-hud" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; box-sizing: border-box; font-family: 'Share Tech Mono', 'Nanum Gothic Coding', monospace; z-index: 4;">
-                <!-- Player Box (Bottom Left) -->
-                <div id="hud-player-box" class="hud-box">
-                    <div class="hud-header" style="color: #fff;">
-                        <span>📡 시간의 전령 (Lv.<span id="hud-player-level">1</span>)</span>
-                    </div>
-                    <div class="hud-bar-container">
-                        <div id="hud-player-hp-bar" class="hud-bar-fill"></div>
-                    </div>
-                    <div id="hud-player-hp-text" class="hud-text">100/100</div>
-                </div>
+        <!-- 왼쪽 열: 그림 화면 + 로그 (넓은 화면에서 2단 배치) -->
+        <div class="col-left">
+            <!-- Visual Screen Viewport -->
+            <div class="screen-area">
+                <svg id="visual-viewport" viewBox="0 0 480 270" preserveAspectRatio="none" shape-rendering="crispEdges">
+                    <!-- Direct Vector Graphics Rendered Here dynamically -->
+                </svg>
 
-                <!-- Enemy Box (Top Right) -->
-                <div id="hud-enemy-box" class="hud-box">
-                    <div class="hud-header" style="color: #ff9999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="hud-enemy-name">⚠️ -</div>
-                    <div class="hud-bar-container">
-                        <div id="hud-enemy-hp-bar" class="hud-bar-fill"></div>
+                <!-- HTML-based Combat HUD Overlay -->
+                <div id="html-combat-hud">
+                    <!-- Player Box (Bottom Left) -->
+                    <div id="hud-player-box" class="hud-box">
+                        <div class="hud-header" style="color: #fff;">
+                            <span>📡 시간의 전령 (Lv.<span id="hud-player-level">1</span>)</span>
+                        </div>
+                        <div class="hud-bar-container">
+                            <div id="hud-player-hp-bar" class="hud-bar-fill"></div>
+                        </div>
+                        <div id="hud-player-hp-text" class="hud-text">100/100</div>
                     </div>
-                    <div id="hud-enemy-hp-text" class="hud-text">0/0 dB</div>
+
+                    <!-- Enemy Box (Top Right) -->
+                    <div id="hud-enemy-box" class="hud-box">
+                        <div class="hud-header hud-enemy-name" id="hud-enemy-name">⚠️ -</div>
+                        <div class="hud-bar-container">
+                            <div id="hud-enemy-hp-bar" class="hud-bar-fill"></div>
+                        </div>
+                        <div id="hud-enemy-hp-text" class="hud-text">0/0 dB</div>
+                    </div>
+                </div>
+                <!-- HTML-based Floating Damage Popup Layer -->
+                <div id="damage-popup-layer"></div>
+
+                <!-- 레벨업·보스 등장·시대 이동 알림 배너 -->
+                <div id="center-banner" aria-live="polite"></div>
+
+                <!-- 수리 진행률 (탐색 중에만 표시) -->
+                <div id="explore-progress-box" title="100%가 되면 보스가 나타납니다">
+                    <div class="progress-label">🔧 수리 진행률 <b id="explore-progress-text">0%</b></div>
+                    <div class="progress-track"><div id="explore-progress-fill"></div></div>
                 </div>
             </div>
-            <!-- HTML-based Floating Damage Popup Layer -->
-            <div id="damage-popup-layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 5;"></div>
 
-            <!-- High-Visibility Modal Zoom Card Overlay -->
-            <div id="zoom-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(6, 4, 12, 0.96); z-index: 1100; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box; pointer-events: auto;">
-                <div style="background-color: var(--panel-bg); border: 3px solid var(--accent-cyan); border-radius: 12px; max-width: 680px; width: 98%; padding: 20px; box-shadow: 0 0 25px var(--accent-cyan); position: relative; box-sizing: border-box;">
-                    <button onclick="closeZoomCard()" style="position: absolute; top: 10px; right: 15px; background: transparent; border: none; color: var(--accent-red); font-size: 1.4rem; font-weight: bold; cursor: pointer; text-shadow: 0 0 5px var(--accent-red);">✕</button>
-                    <h3 id="zoom-title" style="font-size: 1.15rem; color: var(--accent-yellow); margin-top: 5px; margin-bottom: 12px; border-bottom: 2px dashed var(--border-color); padding-bottom: 8px; text-shadow: 0 0 5px var(--accent-yellow); font-family: 'Nanum Gothic Coding', sans-serif; font-weight: bold;">🔍 크게 보기</h3>
-                    <div id="zoom-body" style="font-size: 0.95rem; line-height: 1.5; color: #fff; max-height: 220px; overflow-y: auto; word-break: keep-all; margin-bottom: 15px; font-family: 'Nanum Gothic Coding', sans-serif;">
-                        <!-- Zoom content gets injected dynamically -->
-                    </div>
-                    <div style="text-align: right;">
-                        <button class="tuning-btn" onclick="closeZoomCard()" style="font-size: 0.85rem; padding: 6px 16px; font-weight: bold; border-color: #fff; background: var(--accent-green); color: #000; box-shadow: 0 0 8px var(--accent-green);">확인 (Close)</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Floating Indicator -->
-            <div style="position: absolute; bottom: 8px; right: 10px; background: rgba(0,0,0,0.65); border: 1px solid var(--border-color); padding: 2px 8px; font-size: 0.75rem; border-radius: 3px; color: var(--accent-yellow); font-weight: bold; z-index: 5;">
-                수리 진행율: <span id="explore-progress-text" style="font-family:'Share Tech Mono'; font-weight:bold;">0%</span>
-            </div>
-        </div>
-
-
-
-        <!-- Upgraded High-Visibility Status Dashboard -->
-        <div class="status-pane">
-            <div class="status-column">
-                <div class="stat-row">
-                    <span class="stat-label">📡 통신 연결 상태</span>
-                    <span class="stat-val" style="color: var(--accent-green);" id="status-mode">ON-LINE</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">🔋 배터리 수용량 (HP)</span>
-                    <span class="stat-val" id="hp-text">100 / 100</span>
-                </div>
-                <div class="bar-outer">
-                    <div class="bar-inner" id="hp-bar-fill"></div>
-                </div>
-                <div class="stat-row" style="margin-top: 4px;">
-                    <span class="stat-label">🏆 전령 동조 수준</span>
-                    <span class="stat-val" style="color:#fff;">Lv. <span id="player-level">1</span></span>
-                </div>
-            </div>
-            
-            <div class="status-column" style="border-left: 2px dashed rgba(93, 77, 154, 0.4); padding-left: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <!-- ATK Card (UPGRADED FOR VISIBILITY) -->
-                <div style="background: rgba(0, 255, 255, 0.12); border: 2px solid var(--accent-cyan); border-radius: 6px; padding: 6px 8px; text-align: center; box-shadow: 0 0 10px rgba(0, 255, 255, 0.4); animation: pulse-cyan 1.5s infinite alternate;">
-                    <div style="font-size: 0.72rem; color: #ffffff; font-weight: 900; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.5px;">⚡ 대역폭 화력 (DMG)</div>
-                    <div style="font-size: 1.2rem; font-weight: 900; color: var(--accent-cyan); font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 8px var(--accent-cyan);" id="stat-atk">15 bps</div>
-                </div>
-                <!-- SPD Card -->
-                <div style="background: rgba(255, 0, 127, 0.05); border: 1px solid rgba(255, 0, 127, 0.25); border-radius: 4px; padding: 4px 6px; text-align: center;">
-                    <div style="font-size: 0.65rem; color: #ff9ec4; font-weight: bold; margin-bottom: 2px;">🏎️ 처리속도 (SPD)</div>
-                    <div style="font-size: 1rem; font-weight: bold; color: var(--accent-pink); font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 5px var(--accent-pink);" id="stat-spd">10 ms</div>
-                </div>
-                <!-- GOLD Card -->
-                <div style="background: rgba(255, 234, 0, 0.05); border: 1px solid rgba(255, 234, 0, 0.25); border-radius: 4px; padding: 4px 6px; text-align: center;">
-                    <div style="font-size: 0.65rem; color: #ffe875; font-weight: bold; margin-bottom: 2px;">💰 보유 예산 (Gold)</div>
-                    <div style="font-size: 1rem; font-weight: bold; color: var(--accent-yellow); font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 5px var(--accent-yellow);"><span id="stat-gold">100</span> G</div>
-                </div>
-                <!-- TP Card (UPGRADED FOR VISIBILITY) -->
-                <div style="background: rgba(155, 130, 243, 0.18); border: 2px solid var(--border-glowing); border-radius: 6px; padding: 6px 8px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 0 10px rgba(155, 130, 243, 0.5); animation: pulse-purple 1.5s infinite alternate;">
-                    <div style="font-size: 0.72rem; color: #ffffff; font-weight: 900; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.5px;">🔌 전술에너지 (TP)</div>
-                    <div style="font-size: 1.1rem; font-weight: bold; color: #fff; font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 8px rgba(155, 130, 243, 1);"><span id="stat-tp">0</span> / <span id="stat-next-tp">50</span></div>
+            <!-- Terminal Logs -->
+            <div class="terminal-container" id="terminal-wrapper" title="누르면 글자가 바로 표시됩니다">
+                <div class="terminal-log text-log" id="terminal-log">
+                    <!-- Typing messages -->
                 </div>
             </div>
         </div>
 
-        <!-- Enemy HP Panel (Visible only during battle) -->
-        <div id="enemy-status-pane" class="status-pane" style="display: none; border-bottom: 3px double var(--accent-red); background: linear-gradient(180deg, rgba(45, 10, 20, 0.8) 0%, rgba(20, 5, 10, 0.95) 100%); margin-top: -2px;">
-            <div class="status-column">
-                <div class="stat-row">
-                    <span class="stat-label" style="color: var(--accent-red); font-weight: bold; display: flex; align-items: center; gap: 4px;">⚠️ 방해 잡음체 (Enemy Signal)</span>
-                    <span class="stat-val" style="color: var(--accent-red); font-weight: bold;" id="enemy-name-text">-</span>
+        <!-- 오른쪽 열: 상태 + 조작판 -->
+        <div class="col-right">
+            <!-- Status Dashboard -->
+            <div class="status-pane">
+                <div class="status-column">
+                    <div class="stat-row">
+                        <span class="stat-label">📡 연결 상태</span>
+                        <span class="stat-val" style="color: var(--accent-green);" id="status-mode">안전 (ON-LINE)</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">🔋 배터리 (HP)</span>
+                        <span class="stat-val" id="hp-text">100 / 100</span>
+                    </div>
+                    <div class="bar-outer">
+                        <div class="bar-inner" id="hp-bar-fill"></div>
+                    </div>
+                    <div class="stat-row" style="margin-top: 4px;">
+                        <span class="stat-label">🏆 전령 레벨</span>
+                        <span class="stat-val" style="color:#fff;" id="player-level-box">Lv. <span id="player-level">1</span></span>
+                    </div>
                 </div>
-                <div class="stat-row">
-                    <span class="stat-label" style="color: #ff9999;">📉 노이즈 왜곡율 (HP)</span>
-                    <span class="stat-val" id="enemy-hp-text" style="color: #ff9999;">0 / 0 dB</span>
-                </div>
-                <div class="bar-outer" style="border-color: var(--accent-red); background-color: #240a10;">
-                    <div class="bar-inner" id="enemy-hp-bar-fill" style="background-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-red);"></div>
+
+                <div class="status-column stat-cards">
+                    <div class="stat-card card-atk" id="card-atk">
+                        <div class="stat-card-label">⚡ 공격력</div>
+                        <div class="stat-card-val" id="stat-atk">15 bps</div>
+                    </div>
+                    <div class="stat-card card-spd" id="card-spd">
+                        <div class="stat-card-label">🏎️ 처리속도</div>
+                        <div class="stat-card-val" id="stat-spd">10</div>
+                    </div>
+                    <div class="stat-card card-gold" id="card-gold">
+                        <div class="stat-card-label">💰 예산</div>
+                        <div class="stat-card-val"><span id="stat-gold">100</span> G</div>
+                    </div>
+                    <div class="stat-card card-tp" id="card-tp">
+                        <div class="stat-card-label">🔌 TP</div>
+                        <div class="stat-card-val"><span id="stat-tp">0</span> / <span id="stat-next-tp">50</span></div>
+                        <div class="stat-card-sub">스킬·레벨업에 사용</div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="status-column" style="border-left: 2px dashed rgba(255, 56, 56, 0.3); padding-left: 15px; display: flex; flex-direction: column; justify-content: center; gap: 4px;">
-                <div class="stat-row">
-                    <span class="stat-label" style="color: #ff9999;">⚡ 적 대역폭 (ATK)</span>
-                    <span class="stat-val" style="color: #fff; font-family: 'Share Tech Mono';" id="enemy-stat-atk">0 bps</span>
+
+            <!-- Enemy summary (Visible only during battle) -->
+            <div id="enemy-status-pane" style="display: none;">
+                <div class="enemy-pane-top">
+                    <span class="enemy-pane-name" id="enemy-name-text">-</span>
+                    <span class="enemy-pane-hp" id="enemy-hp-text">0 / 0 dB</span>
                 </div>
-                <div class="stat-row">
-                    <span class="stat-label" style="color: #ff9999;">🏎️ 적 처리속도 (SPD)</span>
-                    <span class="stat-val" style="color: #fff; font-family: 'Share Tech Mono';" id="enemy-stat-spd">0 ms</span>
+                <div class="bar-outer enemy-bar">
+                    <div class="bar-inner" id="enemy-hp-bar-fill"></div>
+                </div>
+                <div class="enemy-pane-stats">
+                    <span>⚡ 적 공격력 <b id="enemy-stat-atk">0 bps</b></span>
+                    <span>🏎️ 적 처리속도 <b id="enemy-stat-spd">0</b></span>
+                    <span id="enemy-dodge-hint"></span>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel" id="control-panel">
+                <div class="main-tabs" id="tab-actions">
+                    <button class="tab-btn" id="tab-explore" onclick="switchTab('explore')">
+                        <span class="tab-icon">🗺️</span>
+                        <span>탐색 회선</span>
+                    </button>
+                    <button class="tab-btn" id="tab-combat" onclick="switchTab('combat')">
+                        <span class="tab-icon">⚔️</span>
+                        <span>수리 전투</span>
+                    </button>
+                    <button class="tab-btn" id="tab-inventory" onclick="switchTab('inventory')">
+                        <span class="tab-icon">🎒</span>
+                        <span>파츠 가방</span>
+                    </button>
+                    <button class="tab-btn" id="tab-leap" onclick="switchTab('leap')">
+                        <span class="tab-icon">🚀</span>
+                        <span>시대 도약</span>
+                    </button>
+                </div>
+
+                <!-- Context Actions Box -->
+                <div class="actions-box minigame-view" id="actions-box">
+                    <!-- Replaced dynamically by Javascript Tab Actions -->
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Terminal Logs -->
-        <div class="terminal-container" id="terminal-wrapper">
-            <div class="terminal-log text-log" id="terminal-log">
-                <!-- Typing messages -->
+    <!-- 크게 보기 창 (화면 전체를 덮는 창) -->
+    <div id="zoom-overlay" onclick="if(event.target===this) closeZoomCard()">
+        <div class="zoom-card" role="dialog" aria-modal="true" aria-labelledby="zoom-title">
+            <div class="zoom-head">
+                <h3 id="zoom-title">🔍 크게 보기</h3>
+                <button class="zoom-close" onclick="closeZoomCard()" aria-label="닫기">✕</button>
             </div>
-        </div>
-
-        <!-- Double Column UI Controller Panel -->
-        <div class="control-panel" id="control-panel">
-            <!-- Source 1 status-bar integration -->
-            <div id="status-bar" style="display: flex; background: #07040e; border: 1px solid rgba(155, 130, 243, 0.35); border-radius: 6px; padding: 6px 12px; font-size: 0.72rem; font-family: 'Share Tech Mono', monospace; color: var(--accent-cyan); margin-bottom: 12px; align-items: center; box-shadow: inset 0 0 5px rgba(0,0,0,0.85); animation: pulse-cyan 3s infinite alternate;">
-                <span id="sb-era" style="font-weight: bold; color: var(--accent-yellow);">고대 시대 (ERA 1)</span>
-                <span style="flex: 1;"></span>
-                <span id="sb-bw" style="margin-right: 20px; font-weight: bold; color: var(--accent-cyan); text-shadow: 0 0 4px var(--accent-cyan);">BW: 15 bps</span>
-                <span id="sb-lat" style="font-weight: bold; color: var(--accent-pink); text-shadow: 0 0 4px var(--accent-pink);">LAT: 10 ms</span>
+            <div id="zoom-body">
+                <!-- Zoom content gets injected dynamically -->
             </div>
-            <div class="main-tabs" id="tab-actions">
-                <button class="tab-btn" id="tab-explore" onclick="switchTab('explore')">
-                    <span style="font-size:1.1rem;">🗺️</span>
-                    <span>탐색 회선</span>
-                </button>
-                <button class="tab-btn" id="tab-combat" onclick="switchTab('combat')">
-                    <span style="font-size:1.1rem;">⚔️</span>
-                    <span>수리 전투</span>
-                </button>
-                <button class="tab-btn" id="tab-inventory" onclick="switchTab('inventory')">
-                    <span style="font-size:1.1rem;">🎒</span>
-                    <span>파츠 가방</span>
-                </button>
-                <button class="tab-btn" id="tab-leap" onclick="switchTab('leap')">
-                    <span style="font-size:1.1rem;">🚀</span>
-                    <span>시대 도약</span>
-                </button>
-            </div>
-
-            <!-- Context Actions Box -->
-            <div class="actions-box minigame-view" id="actions-box">
-                <!-- Replaced dynamically by Javascript Tab Actions -->
+            <div class="zoom-foot">
+                <button class="tuning-btn zoom-ok" onclick="closeZoomCard()">확인 (닫기)</button>
             </div>
         </div>
     </div>
@@ -1414,7 +1610,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <!-- Embedded High-Quality AI Pixel Art Beacon Tower Sprite -->
                     <image href="assets/fast-91b077e4092da3e9fc7e397c.webp" x="-15" y="5" width="70" height="105" />
                     <!-- High-Contrast Label with text-shadow (no background block) -->
-                    <text x="20" y="64" fill="#ffffff" font-size="8" text-anchor="middle" font-weight="bold" style="text-shadow: 0px 0px 4px #000, 0px 0px 4px #000;">T1</text>
+                    <text x="20" y="64" fill="#ffffff" font-size="10" text-anchor="middle" font-weight="bold" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">T1</text>
                     <!-- Flame / Smoke -->
                     <g id="fg-flame-1" transform="translate(0, -20)">
                         <!-- Glow behind fire -->
@@ -1452,7 +1648,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <!-- Embedded High-Quality AI Pixel Art Beacon Tower Sprite -->
                     <image href="assets/fast-91b077e4092da3e9fc7e397c.webp" x="-15" y="5" width="70" height="105" />
                     <!-- High-Contrast Label with text-shadow (no background block) -->
-                    <text x="20" y="64" fill="#ffffff" font-size="8" text-anchor="middle" font-weight="bold" style="text-shadow: 0px 0px 4px #000, 0px 0px 4px #000;">T2</text>
+                    <text x="20" y="64" fill="#ffffff" font-size="10" text-anchor="middle" font-weight="bold" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">T2</text>
                     <!-- Flame / Smoke -->
                     <g id="fg-flame-2" transform="translate(0, -20)">
                         <circle cx="20" cy="15" r="30" fill="url(#fireGlow)" />
@@ -1483,7 +1679,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <!-- Embedded High-Quality AI Pixel Art Beacon Tower Sprite -->
                     <image href="assets/fast-91b077e4092da3e9fc7e397c.webp" x="-15" y="5" width="70" height="105" />
                     <!-- High-Contrast Label with text-shadow (no background block) -->
-                    <text x="20" y="64" fill="#ffffff" font-size="8" text-anchor="middle" font-weight="bold" style="text-shadow: 0px 0px 4px #000, 0px 0px 4px #000;">T3</text>
+                    <text x="20" y="64" fill="#ffffff" font-size="10" text-anchor="middle" font-weight="bold" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">T3</text>
                     <!-- Flame / Smoke -->
                     <g id="fg-flame-3" transform="translate(0, -20)">
                         <circle cx="20" cy="15" r="30" fill="url(#fireGlow)" />
@@ -1576,13 +1772,13 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 <!-- Grounding beacon tower being disrupted - blocky background tower removed -->
                 <g transform="translate(60, 150)">
                     <!-- Blocked visual transmission line with text-shadow for high-contrast legibility -->
-                    <text x="12" y="25" fill="#ff3333" font-size="10" font-family="'Share Tech Mono'" font-weight="bold" style="text-shadow: 0px 0px 5px #000, 0px 0px 5px #000;">
+                    <text x="12" y="25" fill="#ff5555" font-size="11" font-family="'Share Tech Mono'" font-weight="bold" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">
                         SIGNAL BLOCKED
                         <animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite"/>
                     </text>
                     <!-- Disrupted transmission line removed for clean background view -->
                 </g>
-                <text x="20" y="30" fill="#ff3838" font-size="12" font-weight="bold" letter-spacing="1">BOSS: [폭풍우와 짙은 안개] 기상 노이즈</text>
+                <!-- 보스 이름은 HUD에 표시 -->
 `,
             era2_field: `
                 <!-- Embedded High-Quality AI Pixel Art Background -->
@@ -1597,7 +1793,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <animate attributeName="cx" from="0" to="480" dur="4s" repeatCount="indefinite" />
                 </circle>
                 
-                <text x="20" y="30" fill="#ffffff" font-size="12" font-family="'Share Tech Mono'" letter-spacing="1">ERA 02: TELEGRAPH STATION (MODERN)</text>
+                <!-- 시대 이름은 상단 헤더에 표시 -->
 `,
             era2_boss: `
                 <!-- Embedded High-Quality AI Pixel Art Background -->
@@ -1618,7 +1814,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <circle cx="320" cy="270" r="4"><animate attributeName="cy" from="270" to="-30" dur="4.2s" repeatCount="indefinite"/><animate attributeName="cx" values="320;330;310;320" dur="4.2s" repeatCount="indefinite"/></circle>
                     <circle cx="420" cy="270" r="2"><animate attributeName="cy" from="270" to="-30" dur="2.3s" repeatCount="indefinite"/><animate attributeName="cx" values="420;423;417;422" dur="2.3s" repeatCount="indefinite"/></circle>
                 </g>
-                <text x="20" y="30" fill="#ff3838" font-size="12" font-weight="bold" letter-spacing="1">BOSS: [해저 케이블 누전 노이즈] CORE SPARK</text>
+                <!-- 보스 이름은 HUD에 표시 -->
 `,
             era3_field: `
                 <!-- Embedded High-Quality AI Pixel Art Background -->
@@ -1639,9 +1835,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <line x1="80" y1="20" x2="80" y2="30" stroke="#ada0f1" stroke-width="1" />
                     
                     <!-- Static labels -->
-                    <text x="-80" y="41" fill="#ada0f1" font-size="6" text-anchor="middle">AM 540</text>
-                    <text x="0" y="41" fill="#ffe57f" font-size="6" text-anchor="middle">MHz 88.5</text>
-                    <text x="80" y="41" fill="#ada0f1" font-size="6" text-anchor="middle">FM 108</text>
+                    <text x="-80" y="42" fill="#d6ccff" font-size="8" text-anchor="middle" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">AM 540</text>
+                    <text x="0" y="42" fill="#ffe57f" font-size="8" text-anchor="middle" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">MHz 88.5</text>
+                    <text x="80" y="42" fill="#d6ccff" font-size="8" text-anchor="middle" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">FM 108</text>
                     
                     <!-- Tuning Needle that moves dynamically using javascript -->
                     <line x1="0" y1="18" x2="0" y2="45" stroke="#ff0055" stroke-width="2.5" id="radio-needle" />
@@ -1649,7 +1845,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
 
                 <!-- Flashing ON AIR banner removed for clean background view -->
                 
-                <text x="20" y="30" fill="#ffffff" font-size="12" font-family="'Share Tech Mono'" letter-spacing="1">ERA 03: RF BROADCAST (LATE MODERN)</text>
+                <!-- 시대 이름은 상단 헤더에 표시 -->
 `,
             era3_boss: `
                 <!-- Embedded High-Quality AI Pixel Art Background -->
@@ -1664,7 +1860,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                         <image href="assets/fast-52c4de75cc46ff1321174e1a.webp" x="-90" y="-90" width="180" height="180" />
                     </g>
                 </g>
-                <text x="20" y="30" fill="#ff3838" font-size="12" font-weight="bold" letter-spacing="1">BOSS: [전파 재밍 괴물] NOISE TRANSMITTER</text>
+                <!-- 보스 이름은 HUD에 표시 -->
 `,
             era4_field: `
                 <!-- Embedded High-Quality AI Pixel Art Background -->
@@ -1689,7 +1885,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
 
                 <!-- Fiber optic laser reflection line removed for clean background view -->
                 
-                <text x="20" y="30" fill="#ffffff" font-size="12" font-family="'Share Tech Mono'" letter-spacing="1">ERA 04: QUANTUM GRID (FUTURE)</text>
+                <!-- 시대 이름은 상단 헤더에 표시 -->
 `,
             era4_boss: `
                 <!-- Embedded High-Quality AI Pixel Art Background -->
@@ -1706,11 +1902,11 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 </g>
                 
                 <!-- Warnings flashing text -->
-                <text x="240" y="205" fill="#ff1e1e" font-size="10" font-weight="bold" text-anchor="middle" font-family="'Share Tech Mono'">
+                <text x="240" y="205" fill="#ff4a4a" font-size="11" font-weight="bold" text-anchor="middle" font-family="'Share Tech Mono'" stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke">
                     DDoS PACKET OVERFLOW CRITICAL (850k req/s)
                     <animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite" />
                 </text>
-                <text x="20" y="30" fill="#ff3838" font-size="12" font-weight="bold" letter-spacing="1">BOSS: [DDoS 멀웨어 군단] FLOOD MONSTER</text>
+                <!-- 보스 이름은 HUD에 표시 -->
 `
         };
 
@@ -1764,19 +1960,19 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
         };
 
         const ITEMS = {
-            wolf_dung: { id: "wolf_dung", name: "늑대 똥 포션", type: "consumable", desc: "연기 성분을 고밀화하여 배터리(HP)를 45 복구합니다.", value: 15, action: (state) => { state.hp = Math.min(state.maxHp, state.hp + 45); return { success: true, msg: "배터리 수용량이 45 복구되었습니다!" }; } },
+            wolf_dung: { id: "wolf_dung", name: "늑대 똥 포션", type: "consumable", desc: "연기 성분을 고밀화하여 배터리(HP)를 45 복구합니다.", value: 15, action: (state) => { state.hp = Math.min(state.maxHp, state.hp + 45); return { success: true, msg: "배터리(HP)가 45 회복되었어요!" }; } },
             dry_wood: { id: "dry_wood", name: "마른 섶나무", type: "weapon", desc: "봉수 광학 화력을 증진합니다. 대역폭(공격력) +8 장착 무기.", value: 50, stat: { atk: 8 } },
-            gong: { id: "gong", name: "신호용 징", type: "consumable", desc: "굉장한 물리 음향 간섭을 주어 적을 1턴간 기절(스턴)시킵니다.", value: 30, action: (state) => { if(!state.inBattle) return { success: false, msg: "전투 상태에서만 신호를 가동할 수 있습니다!" }; state.bossStunned = 2; return { success: true, msg: "징소리의 거대한 아날로그 음파 간섭으로 적의 펄스가 1턴 끊어졌습니다!" }; } },
+            gong: { id: "gong", name: "신호용 징", type: "consumable", desc: "굉장한 물리 음향 간섭을 주어 적을 1턴간 기절(스턴)시킵니다.", value: 30, action: (state) => { if(!state.inBattle) return { success: false, msg: "징은 전투 중에만 쓸 수 있어요." }; state.bossStunned = 2; return { success: true, msg: "징소리에 적이 1턴 동안 기절했어요!" }; } },
             horse_badge: { id: "horse_badge", name: "파발마 마패", type: "armor", desc: "전령 행군 속도 개량. 처리속도(SPD) +6, 최대 HP +20 장착 방어구.", value: 90, stat: { spd: 6, maxHp: 20 } },
             
-            voltaic_cell: { id: "voltaic_cell", name: "황산 볼타 전지", type: "consumable", desc: "전기 에너지를 즉시 주입하여 배터리(HP)를 110 복구합니다.", value: 35, action: (state) => { state.hp = Math.min(state.maxHp, state.hp + 110); return { success: true, msg: "전압 공급 완료! 배터리가 110 복구되었습니다!" }; } },
+            voltaic_cell: { id: "voltaic_cell", name: "황산 볼타 전지", type: "consumable", desc: "전기 에너지를 즉시 주입하여 배터리(HP)를 110 복구합니다.", value: 35, action: (state) => { state.hp = Math.min(state.maxHp, state.hp + 110); return { success: true, msg: "배터리(HP)가 110 회복되었어요!" }; } },
             morse_key: { id: "morse_key", name: "모스 전건", type: "weapon", desc: "수동 펄스 변조 공격기. 대역폭(공격력) +22 장착 무기.", value: 140, stat: { atk: 22 } },
             insulator: { id: "insulator", name: "절연 애자", type: "armor", desc: "선로의 전력 누설을 방어합니다. 최대 HP +60 장착 방어구.", value: 180, stat: { maxHp: 60 } },
-            copper_wire: { id: "copper_wire", name: "구리 도선", type: "consumable", desc: "도전율 개선을 유도해 대역폭(영구 공격력)을 즉시 +4 늘립니다.", value: 75, action: (state) => { state.baseBandwidth += 4; return { success: true, msg: "동선 수리 완료! 영구 대역폭이 4 증가했습니다!" }; } },
+            copper_wire: { id: "copper_wire", name: "구리 도선", type: "consumable", desc: "도전율 개선을 유도해 대역폭(영구 공격력)을 즉시 +4 늘립니다.", value: 75, action: (state) => { state.baseBandwidth += 4; return { success: true, msg: "공격력(대역폭)이 영구히 +4 올랐어요!" }; } },
             
             vacuum_amp: { id: "vacuum_amp", name: "진공관 앰프", type: "weapon", desc: "전자기 주파수 진폭 가동기. 대역폭(공격력) +45 장착 무기.", value: 280, stat: { atk: 45 } },
             pager: { id: "pager", name: "무선 호출기(삐삐)", type: "armor", desc: "텍스트 수신 메인 칩셋. 최대 HP +120, 처리속도(SPD) +12 장착 방어구.", value: 320, stat: { maxHp: 120, spd: 12 } },
-            tuner_coil: { id: "tuner_coil", name: "라디오 튜너 코일", type: "consumable", desc: "영구 처리속도(SPD) +5 증가 및 HP 160을 즉시 회복시킵니다.", value: 95, action: (state) => { state.hp = Math.min(state.maxHp, state.hp + 160); state.baseSpeed += 5; return { success: true, msg: "주파수 공진 보정 성공! 배터리 160 복원 및 영구 처리속도가 5 ms 단축되었습니다!" }; } },
+            tuner_coil: { id: "tuner_coil", name: "라디오 튜너 코일", type: "consumable", desc: "영구 처리속도(SPD) +5 증가 및 HP 160을 즉시 회복시킵니다.", value: 95, action: (state) => { state.hp = Math.min(state.maxHp, state.hp + 160); state.baseSpeed += 5; return { success: true, msg: "배터리 160 회복, 처리속도(SPD)가 영구히 +5 올랐어요!" }; } },
             
             quantum_key: { id: "quantum_key", name: "양자 암호화 키", type: "weapon", desc: "중첩 암호화 공격기. 대역폭(공격력) +90 장착 무기.", value: 550, stat: { atk: 90 } },
             firewall_shield: { id: "firewall_shield", name: "차세대 방화벽 실드", type: "armor", desc: "악성 인바운드 차단용 실드. 최대 HP +350 장착 방어구.", value: 650, stat: { maxHp: 350 } },
@@ -2049,23 +2245,23 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                       <line x1="40" y1="30" x2="120" y2="30" stroke="#00ffff" stroke-width="2" />
                       <circle cx="40" cy="30" r="13" fill="#1b0c25" stroke="#ff4d00" stroke-width="2" />
                       <text x="40" y="34" fill="#ffaa64" font-size="10" text-anchor="middle" font-weight="bold">🔥</text>
-                      <text x="40" y="55" fill="#ffaa64" font-size="8" text-anchor="middle">고대 봉수</text>
+                      <text x="40" y="55" fill="#ffaa64" font-size="10" text-anchor="middle">고대 봉수</text>
                       
                       <circle cx="120" cy="30" r="13" fill="#0c1125" stroke="#00ffff" stroke-width="2" />
                       <text x="120" y="33" fill="#00ffff" font-size="9" text-anchor="middle" font-weight="bold">••—</text>
-                      <text x="120" y="55" fill="#00ffff" font-size="8" text-anchor="middle">근대 전신</text>
+                      <text x="120" y="55" fill="#00ffff" font-size="10" text-anchor="middle">근대 전신</text>
                       
                       <circle cx="200" cy="30" r="13" fill="#081515" stroke="#ff007f" stroke-width="2" />
                       <text x="200" y="34" fill="#ff007f" font-size="10" text-anchor="middle" font-weight="bold">📻</text>
-                      <text x="200" y="55" fill="#ff007f" font-size="8" text-anchor="middle">현대 전파</text>
+                      <text x="200" y="55" fill="#ff007f" font-size="10" text-anchor="middle">현대 전파</text>
                       
                       <circle cx="280" cy="30" r="13" fill="#031508" stroke="#39ff14" stroke-width="2" />
                       <text x="280" y="34" fill="#39ff14" font-size="10" text-anchor="middle" font-weight="bold">🔑</text>
-                      <text x="280" y="55" fill="#39ff14" font-size="8" text-anchor="middle">미래 양자</text>
+                      <text x="280" y="55" fill="#39ff14" font-size="10" text-anchor="middle">미래 양자</text>
                       
                       <circle cx="360" cy="30" r="13" fill="#221a44" stroke="#ffea00" stroke-width="2" />
                       <text x="360" y="34" fill="#ffea00" font-size="10" text-anchor="middle" font-weight="bold">🛰️</text>
-                      <text x="360" y="55" fill="#ffea00" font-size="8" text-anchor="middle">초연결</text>
+                      <text x="360" y="55" fill="#ffea00" font-size="10" text-anchor="middle">초연결</text>
                   </svg>
                   시공 연결 네트워크 중앙 기지에 비상이 선포되었습니다! 악성 '전자기 노이즈 보스' 군단이 과거와 미래의 핵심 통신 기지국을 점령하여 선로를 모두 차단시켰습니다.<br><br>
                   시간의 유랑에 견디며 인프라를 복원할 수 있는 능력자는 오직 <b>'시간의 전령(Player)'</b>뿐입니다. 각 역사적 문명을 수색해 통신로를 재개척하고, 최종 양자 시대로 돌파하십시오! 본 게임은 중학교 기술·가정② 교과서 6단원 [세상과 소통하는 기술] 내용을 기반으로 제작되었습니다.`,
@@ -2081,20 +2277,20 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                           </marker>
                       </defs>
                       <rect x="10" y="12" width="70" height="36" fill="#1b1235" stroke="var(--accent-cyan)" stroke-width="1.5" rx="4" />
-                      <text x="45" y="26" fill="var(--accent-cyan)" font-size="9" text-anchor="middle" font-weight="bold">🔍 1. 탐색</text>
-                      <text x="45" y="40" fill="#fff" font-size="8" text-anchor="middle">진행도 채우기</text>
+                      <text x="45" y="26" fill="var(--accent-cyan)" font-size="10" text-anchor="middle" font-weight="bold">🔍 1. 탐색</text>
+                      <text x="45" y="40" fill="#fff" font-size="10" text-anchor="middle">진행도 채우기</text>
                       
                       <rect x="110" y="12" width="70" height="36" fill="#1b1235" stroke="var(--accent-red)" stroke-width="1.5" rx="4" />
-                      <text x="145" y="26" fill="var(--accent-red)" font-size="9" text-anchor="middle" font-weight="bold">⚡ 2. 전투</text>
-                      <text x="145" y="40" fill="#fff" font-size="8" text-anchor="middle">노이즈 격퇴</text>
+                      <text x="145" y="26" fill="var(--accent-red)" font-size="10" text-anchor="middle" font-weight="bold">⚡ 2. 전투</text>
+                      <text x="145" y="40" fill="#fff" font-size="10" text-anchor="middle">노이즈 격퇴</text>
                       
                       <rect x="210" y="12" width="70" height="36" fill="#1b1235" stroke="var(--accent-green)" stroke-width="1.5" rx="4" />
-                      <text x="245" y="26" fill="var(--accent-green)" font-size="9" text-anchor="middle" font-weight="bold">🔋 3. 관리</text>
-                      <text x="245" y="40" fill="#fff" font-size="8" text-anchor="middle">상점 파츠 보강</text>
+                      <text x="245" y="26" fill="var(--accent-green)" font-size="10" text-anchor="middle" font-weight="bold">🔋 3. 관리</text>
+                      <text x="245" y="40" fill="#fff" font-size="10" text-anchor="middle">상점 파츠 보강</text>
                       
                       <rect x="310" y="12" width="70" height="36" fill="#1b1235" stroke="var(--accent-yellow)" stroke-width="1.5" rx="4" />
-                      <text x="345" y="26" fill="var(--accent-yellow)" font-size="9" text-anchor="middle" font-weight="bold">🚀 4. 도약</text>
-                      <text x="345" y="40" fill="#fff" font-size="8" text-anchor="middle">시대 주파수 이동</text>
+                      <text x="345" y="26" fill="var(--accent-yellow)" font-size="10" text-anchor="middle" font-weight="bold">🚀 4. 도약</text>
+                      <text x="345" y="40" fill="#fff" font-size="10" text-anchor="middle">시대 주파수 이동</text>
                   </svg>
                    1. <b>[탐색 회선]</b> 탭을 클릭하여 회선 수리를 진행하십시오. 수리 진행율이 100%가 되면 해당 시대의 보스가 엄습합니다.<br>
                    2. <b>[수리 전투]</b> 탭에서 보스를 타격하십시오. 보스를 이겨야 다음 세대 도킹용 <b>'시대 공조 파트(Core Part)'</b>가 회수됩니다.<br>
@@ -2105,33 +2301,33 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                   <svg width="100%" height="95" viewBox="0 0 400 95" style="background:#090515; border:1px solid #4a3e75; border-radius:4px; margin:8px 0;">
                       <rect x="8" y="10" width="70" height="75" fill="#150f2e" stroke="#4a3e75" stroke-width="1" rx="4" />
                       <text x="43" y="32" font-size="14" text-anchor="middle">🔥</text>
-                      <text x="43" y="52" fill="var(--accent-yellow)" font-size="8" text-anchor="middle" font-weight="bold">봉수 OOK</text>
-                      <text x="43" y="65" fill="#aaa" font-size="7" text-anchor="middle">101 광학신호</text>
-                      <text x="43" y="75" fill="#aaa" font-size="7" text-anchor="middle">[180쪽]</text>
+                      <text x="43" y="52" fill="var(--accent-yellow)" font-size="10" text-anchor="middle" font-weight="bold">봉수 OOK</text>
+                      <text x="43" y="65" fill="#aaa" font-size="9" text-anchor="middle">101 광학신호</text>
+                      <text x="43" y="75" fill="#aaa" font-size="9" text-anchor="middle">[180쪽]</text>
                       
                       <rect x="86" y="10" width="70" height="75" fill="#150f2e" stroke="#4a3e75" stroke-width="1" rx="4" />
                       <text x="121" y="32" font-size="14" text-anchor="middle">⌨️</text>
-                      <text x="121" y="52" fill="var(--accent-cyan)" font-size="8" text-anchor="middle" font-weight="bold">한글 모스</text>
-                      <text x="121" y="65" fill="#aaa" font-size="7" text-anchor="middle">자모 타건</text>
-                      <text x="121" y="75" fill="#aaa" font-size="7" text-anchor="middle">[183쪽]</text>
+                      <text x="121" y="52" fill="var(--accent-cyan)" font-size="10" text-anchor="middle" font-weight="bold">한글 모스</text>
+                      <text x="121" y="65" fill="#aaa" font-size="9" text-anchor="middle">자모 타건</text>
+                      <text x="121" y="75" fill="#aaa" font-size="9" text-anchor="middle">[183쪽]</text>
                       
                       <rect x="164" y="10" width="70" height="75" fill="#150f2e" stroke="#4a3e75" stroke-width="1" rx="4" />
                       <text x="199" y="32" font-size="14" text-anchor="middle">📱</text>
-                      <text x="199" y="52" fill="var(--accent-pink)" font-size="8" text-anchor="middle" font-weight="bold">스마트폰</text>
-                      <text x="199" y="65" fill="#aaa" font-size="7" text-anchor="middle">CPU/NFC 결합</text>
-                      <text x="199" y="75" fill="#aaa" font-size="7" text-anchor="middle">[191쪽]</text>
+                      <text x="199" y="52" fill="var(--accent-pink)" font-size="10" text-anchor="middle" font-weight="bold">스마트폰</text>
+                      <text x="199" y="65" fill="#aaa" font-size="9" text-anchor="middle">CPU/NFC 결합</text>
+                      <text x="199" y="75" fill="#aaa" font-size="9" text-anchor="middle">[191쪽]</text>
                       
                       <rect x="242" y="10" width="70" height="75" fill="#150f2e" stroke="#4a3e75" stroke-width="1" rx="4" />
                       <text x="277" y="32" font-size="14" text-anchor="middle">⚙️</text>
-                      <text x="277" y="52" fill="var(--accent-green)" font-size="8" text-anchor="middle" font-weight="bold">정보기술4</text>
-                      <text x="277" y="65" fill="#aaa" font-size="7" text-anchor="middle">투입-과정-산출</text>
-                      <text x="277" y="75" fill="#aaa" font-size="7" text-anchor="middle">[175쪽]</text>
+                      <text x="277" y="52" fill="var(--accent-green)" font-size="10" text-anchor="middle" font-weight="bold">정보기술4</text>
+                      <text x="277" y="65" fill="#aaa" font-size="9" text-anchor="middle">투입-과정-산출</text>
+                      <text x="277" y="75" fill="#aaa" font-size="9" text-anchor="middle">[175쪽]</text>
                       
                       <rect x="320" y="10" width="72" height="75" fill="#150f2e" stroke="#4a3e75" stroke-width="1" rx="4" />
                       <text x="356" y="32" font-size="14" text-anchor="middle">🛡️</text>
-                      <text x="356" y="52" fill="#fff" font-size="8" text-anchor="middle" font-weight="bold">패리티 검사</text>
-                      <text x="356" y="65" fill="#aaa" font-size="7" text-anchor="middle">오류제어 1비트</text>
-                      <text x="356" y="75" fill="#aaa" font-size="7" text-anchor="middle">실시간 연산</text>
+                      <text x="356" y="52" fill="#fff" font-size="10" text-anchor="middle" font-weight="bold">패리티 검사</text>
+                      <text x="356" y="65" fill="#aaa" font-size="9" text-anchor="middle">오류제어 1비트</text>
+                      <text x="356" y="75" fill="#aaa" font-size="9" text-anchor="middle">실시간 연산</text>
                   </svg>
                       주행 수리 도중 돌발적으로 시대를 초월한 5대 하드웨어 미니게임이 순차 출현합니다.<br>
                       - <b>봉수 광학 OOK</b>: 교과서 180쪽 광학 변조를 시뮬레이션하여 3개 봉수대 불꽃(1/0)을 결합 일치시키십시오.<br>
@@ -2167,9 +2363,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             // Ingest starter item
             addItemToInventory("wolf_dung");
             
-            addLog("📡 전령 중앙 시간 회로 제어권 획득. 주파수 안정 주사 완료.", "system");
-            addLog("당신은 무너져 내린 지구 인프라를 복구하는 '시간의 전령'입니다.", "story");
-            addLog("고대 개마고원 봉수대 구역에서 연기 전송로를 교란시키는 기상 폭우를 처단하십시오.", "story");
+            addLog("📡 시간 통신망에 접속했습니다. 임무를 시작합니다.", "system");
+            addLog("당신은 끊어진 통신망을 시대별로 고치는 '시간의 전령'입니다.", "story");
+            addLog("👉 [탐색 회선] 탭의 [수리 탐색 진행]을 눌러 고대 봉수대 구역부터 수리하세요. 진행률이 100%가 되면 보스가 나타납니다.", "story");
             addLog("[교사 노트] 고대의 통신은 주로 기상(안개, 눈비)과 산맥 장벽에 극도로 간섭을 크게 받는 광학 전송 방식이었습니다.", "edu");
 
             updateSceneGraphics();
@@ -2253,42 +2449,78 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
 
 
         /* RENDER SYSTEM */
+        const ITEM_ICONS = {
+            wolf_dung: "🧪", dry_wood: "🪵", gong: "🔔", horse_badge: "🐎",
+            voltaic_cell: "🔋", morse_key: "📟", insulator: "🧱", copper_wire: "🧵",
+            vacuum_amp: "📻", pager: "📟", tuner_coil: "🌀",
+            quantum_key: "🔑", firewall_shield: "🛡️", fiber_cape: "🌈"
+        };
+        const SKILLS = {
+            1: { name: "[파발 우회 전송 / Physical Bypass]", cost: 15, concept: "봉수 불빛이 날씨에 막히면 파발(사람·말)로 우회해 전달합니다.", effect: "공격력 ×1.8 피해" },
+            2: { name: "[모스 긴급 SOS / 1-Bit Encoding]", cost: 25, concept: "점(•)과 선(—)만으로 약해진 신호에서도 확실하게 전달합니다.", effect: "피해 + 배터리 55 회복 + 적 1턴 기절" },
+            3: { name: "[주파수 분할 다중화 / FDM Tuning]", cost: 35, concept: "대역을 여러 주파수 채널로 나눠 동시에 보내 혼선을 이겨냅니다.", effect: "3채널 연속 공격" },
+            4: { name: "[TCP 패킷 재전송 / ARQ Protocol]", cost: 50, concept: "잃어버린 패킷을 수신 측 응답에 맞춰 다시 보내 복구합니다.", effect: "큰 피해 + 배터리 120 회복" }
+        };
+        const prevShown = {};
+
+        function bumpIfChanged(key, value, elId) {
+            if (prevShown[key] !== undefined && prevShown[key] !== value) {
+                const el = document.getElementById(elId);
+                if (el) { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+            }
+            prevShown[key] = value;
+        }
+
+        function showBanner(main, sub, color) {
+            const el = document.getElementById('center-banner');
+            if (!el) return;
+            const c = color || 'var(--accent-cyan)';
+            el.innerHTML = `<div class="cb-main" style="color:${c}; text-shadow:0 0 10px ${c};">${main}</div>` + (sub ? `<div class="cb-sub">${sub}</div>` : '');
+            el.style.borderColor = c;
+            el.classList.add('show');
+            clearTimeout(showBanner._t);
+            showBanner._t = setTimeout(() => el.classList.remove('show'), 1800);
+        }
+
         function renderUI() {
             calculateStats();
 
             const eraObj = ERAS[gameState.era];
-            
-            // Update status-bar elements from original code
-            const sbEra = document.getElementById('sb-era');
-            const sbBw = document.getElementById('sb-bw');
-            const sbLat = document.getElementById('sb-lat');
-            if (sbEra) sbEra.innerText = `${eraObj.name} (ERA ${gameState.era})`;
-            if (sbBw) sbBw.innerText = `BW: ${gameState.bandwidth} bps`;
-            if (sbLat) sbLat.innerText = `LAT: ${gameState.speed} ms`;
-            document.getElementById('current-era-sub').innerText = `${eraObj.name} • ${eraObj.subtitle}`;
+
+            document.getElementById('current-era-sub').innerText = `ERA ${gameState.era} · ${eraObj.name} • ${eraObj.subtitle}`;
             document.getElementById('player-level').innerText = gameState.level;
             document.getElementById('hp-text').innerText = `${gameState.hp} / ${gameState.maxHp}`;
             document.getElementById('stat-atk').innerText = `${gameState.bandwidth} bps`;
-            document.getElementById('stat-spd').innerText = `${gameState.speed} ms`;
+            document.getElementById('stat-spd').innerText = `${gameState.speed}`;
             document.getElementById('stat-tp').innerText = gameState.tp;
             document.getElementById('stat-next-tp').innerText = gameState.nextLevelTp;
             document.getElementById('stat-gold').innerText = gameState.gold;
             document.getElementById('explore-progress-text').innerText = `${gameState.explorationProgress}%`;
+            const progFill = document.getElementById('explore-progress-fill');
+            if (progFill) progFill.style.width = `${gameState.explorationProgress}%`;
+            const progBox = document.getElementById('explore-progress-box');
+            if (progBox) progBox.style.display = gameState.inBattle ? 'none' : 'block';
+
+            bumpIfChanged('atk', gameState.bandwidth, 'card-atk');
+            bumpIfChanged('spd', gameState.speed, 'card-spd');
+            bumpIfChanged('gold', gameState.gold, 'card-gold');
+            bumpIfChanged('tp', gameState.tp + '/' + gameState.nextLevelTp, 'card-tp');
 
             // Connection Badge Status
             const sysBadge = document.getElementById('system-quality-badge');
-            if (gameState.hp > 65) {
-                sysBadge.innerText = "신호 강도: 우수 (On-Line)";
+            const hpRatio = gameState.hp / gameState.maxHp;
+            if (hpRatio > 0.55) {
+                sysBadge.innerText = "📶 신호 우수";
                 sysBadge.style.color = "var(--accent-green)";
                 sysBadge.style.borderColor = "var(--accent-green)";
                 sysBadge.style.backgroundColor = "rgba(57, 255, 20, 0.1)";
-            } else if (gameState.hp > 30) {
-                sysBadge.innerText = "신호 강도: 혼선 지연 (Ping Spike)";
+            } else if (hpRatio > 0.25) {
+                sysBadge.innerText = "📶 신호 약함";
                 sysBadge.style.color = "var(--accent-yellow)";
                 sysBadge.style.borderColor = "var(--accent-yellow)";
                 sysBadge.style.backgroundColor = "rgba(255, 234, 0, 0.1)";
             } else {
-                sysBadge.innerText = "신호 강도: 회선 단절 경고 (Fading)";
+                sysBadge.innerText = "📶 끊김 위험!";
                 sysBadge.style.color = "var(--accent-red)";
                 sysBadge.style.borderColor = "var(--accent-red)";
                 sysBadge.style.backgroundColor = "rgba(255, 51, 51, 0.15)";
@@ -2312,42 +2544,35 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             // Connection Mode
             const statusMode = document.getElementById('status-mode');
             if (gameState.inBattle) {
-                statusMode.innerText = "잡음 전자기 구속 (LOCK-ON)";
+                statusMode.innerText = "⚔️ 전투 중";
                 statusMode.style.color = "var(--accent-red)";
             } else {
-                statusMode.innerText = "정류 안전 전송 (ON-LINE)";
+                statusMode.innerText = "안전 (ON-LINE)";
                 statusMode.style.color = "var(--accent-green)";
             }
 
-            // Switch active highlights
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            if (gameState.activeTab === 'explore') document.getElementById('tab-explore').classList.add('active');
-            if (gameState.activeTab === 'combat') document.getElementById('tab-combat').classList.add('active');
-            if (gameState.activeTab === 'inventory') document.getElementById('tab-inventory').classList.add('active');
-            if (gameState.activeTab === 'leap') document.getElementById('tab-leap').classList.add('active');
+            // Switch active highlights + 전투 중 잠긴 탭 표시
+            const tabMap = { explore: 'tab-explore', combat: 'tab-combat', inventory: 'tab-inventory', leap: 'tab-leap' };
+            Object.keys(tabMap).forEach(key => {
+                const btn = document.getElementById(tabMap[key]);
+                btn.classList.toggle('active', gameState.activeTab === key);
+                const locked = gameState.inBattle && (key === 'explore' || key === 'leap');
+                btn.classList.toggle('locked', locked);
+                btn.title = locked ? '전투 중에는 사용할 수 없어요' : '';
+            });
 
-            // Prompt Sync
-            let activePrompt = "";
-            if (gameState.inBattle && gameState.currentEnemy && gameState.currentEnemy.isBoss) {
-                activePrompt = ERAS[gameState.era].bossPrompt;
-            } else {
-                activePrompt = ERAS[gameState.era].fieldPrompt;
-            }
-            const promptBox = document.getElementById('prompt-text-box');
-            if (promptBox) {
-                promptBox.innerText = activePrompt;
-            }
-
-            // Update Enemy HP Panel UI
+            // Update Enemy summary panel
             const enemyPane = document.getElementById('enemy-status-pane');
             if (gameState.inBattle && gameState.currentEnemy) {
                 const enemy = gameState.currentEnemy;
-                enemyPane.style.display = "grid";
-                document.getElementById('enemy-name-text').innerText = enemy.name + (enemy.isBoss ? " [BOSS]" : " [잡음]");
+                enemyPane.style.display = "flex";
+                document.getElementById('enemy-name-text').innerText = `⚠️ ${enemy.name} ${enemy.isBoss ? "[BOSS]" : "[잡음]"}`;
                 document.getElementById('enemy-hp-text').innerText = `${enemy.hp} / ${enemy.maxHp} dB`;
                 document.getElementById('enemy-stat-atk').innerText = `${enemy.atk} bps`;
-                document.getElementById('enemy-stat-spd').innerText = `${enemy.spd} ms`;
-                
+                document.getElementById('enemy-stat-spd').innerText = `${enemy.spd}`;
+                const dodge = Math.round(Math.min(45, Math.max(5, (gameState.speed - enemy.spd) * 1.5)));
+                document.getElementById('enemy-dodge-hint').innerHTML = `💨 내 회피 확률 <b>${dodge}%</b>`;
+
                 const enemyHpPct = Math.max(0, Math.min(100, (enemy.hp / enemy.maxHp) * 100));
                 document.getElementById('enemy-hp-bar-fill').style.width = `${enemyHpPct}%`;
             } else {
@@ -2370,14 +2595,13 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             const enemy = gameState.currentEnemy;
             hud.style.display = "block";
 
-            // Update Player Status inside HTML HUD
             document.getElementById('hud-player-level').innerText = gameState.level;
             document.getElementById('hud-player-hp-text').innerText = `${gameState.hp} / ${gameState.maxHp} HP`;
-            
+
             const playerHpPct = Math.max(0, Math.min(100, (gameState.hp / gameState.maxHp) * 100));
             const playerHpBar = document.getElementById('hud-player-hp-bar');
             playerHpBar.style.width = `${playerHpPct}%`;
-            
+
             let playerHpColor = "var(--accent-green)";
             if (playerHpPct <= 25) playerHpColor = "var(--accent-red)";
             else if (playerHpPct <= 55) playerHpColor = "var(--accent-yellow)";
@@ -2385,10 +2609,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             document.getElementById('hud-player-box').style.borderColor = playerHpColor;
             document.getElementById('hud-player-box').style.boxShadow = `0 0 10px ${playerHpColor}`;
 
-            // Update Enemy Status inside HTML HUD
             document.getElementById('hud-enemy-name').innerText = `⚠️ ${enemy.name}` + (enemy.isBoss ? " [BOSS]" : " [잡음]");
             document.getElementById('hud-enemy-hp-text').innerText = `${enemy.hp} / ${enemy.maxHp} dB`;
-            
+
             const enemyHpPct = Math.max(0, Math.min(100, (enemy.hp / enemy.maxHp) * 100));
             document.getElementById('hud-enemy-hp-bar').style.width = `${enemyHpPct}%`;
         }
@@ -2398,7 +2621,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             playClickSound();
 
             if (gameState.inBattle && tab !== 'combat' && tab !== 'inventory') {
-                addLog("경보! 악성 노이즈 펄스에 묶여 대상을 완전히 정화하기 전까진 우회 이탈이 불가능합니다!", "system");
+                addLog("⚠️ 전투 중에는 [수리 전투]와 [파츠 가방] 탭만 쓸 수 있어요. 먼저 적을 물리치세요!", "system");
                 return;
             }
 
@@ -2406,10 +2629,36 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             renderUI();
         }
 
+        function resultCardHtml() {
+            const r = gameState.lastResult;
+            if (!r) return "";
+            return `<div class="result-card ${r.ok ? 'ok' : 'bad'}"><div class="rc-title">${r.title}</div>${r.detail ? `<div class="rc-detail">${r.detail}</div>` : ''}</div>`;
+        }
+
+        function setResult(ok, title, detail) {
+            gameState.lastResult = { ok, title, detail: detail || "" };
+        }
+
+        function feedbackHtml() {
+            return gameState.minigameFeedback ? `<div class="mg-feedback">${gameState.minigameFeedback}</div>` : "";
+        }
+
+        function minigameHead(title, reward) {
+            return `
+                <div class="minigame-title-bar">
+                    <span>${title}</span>
+                    <span style="display:flex; gap:6px; align-items:center;">
+                        <button class="zoom-btn" onclick="zoomCurrentGame()">🔍 크게 보기</button>
+                        <span class="minigame-reward">${reward}</span>
+                    </span>
+                </div>`;
+        }
 
         /* HIGHLY INTERACTIVE MINIGAMES PER ERA */
         function renderContextActions() {
             const box = document.getElementById('actions-box');
+            const prevView = box.dataset.view || "";
+            let view = gameState.activeTab;
             box.innerHTML = "";
 
             if (gameState.activeTab === 'explore') {
@@ -2419,292 +2668,283 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     return;
                 }
 
-                // CHECK ACTIVE MINIGAMES PER ERA
                 if (gameState.minigameActive) {
+                    view = 'mg-' + gameState.activeMinigameType + '-' + gameState.minigameIndex;
                     if (gameState.activeMinigameType === "Ook") {
-                        // Minigame 1 Panel
                         box.innerHTML = `
                             <div class="minigame-container">
-                                <div class="minigame-title-bar">
-                                    <span><span>📟 고대 봉수 광학 진폭 변조 (OOK Modulation)</span></span>
-                                    <span style="color:var(--accent-yellow)">공사 예산: +25 G, +15 TP</span>
-                                </div>
+                                ${minigameHead("📟 봉수 OOK 신호 보내기 (교과서 180쪽)", "+25 G, +15 TP")}
                                 <div class="minigame-instruction">
-                                    비트 1은 불꽃 점화, 0은 소화를 뜻합니다. 3비트 전송 규약에 맞춰 메인 스크린 T1, T2, T3 불꽃을 목표 비트열과 결합 일치시키십시오.
+                                    불꽃을 켜면 <b>1</b>, 끄면 <b>0</b>입니다. T1·T2·T3 버튼으로 목표 비트열과 똑같이 맞춘 뒤 <b>[신호 송출]</b>을 누르세요. 위 그림의 봉수대 불꽃도 함께 바뀝니다.
                                 </div>
+                                ${feedbackHtml()}
                                 <div class="bongsu-toggles-grid ook-panel" id="ook-panel">
-                                    <button class="bongsu-toggle-btn ook-switch ${gameState.ookCurrent[0] === 1 ? 'on' : ''}" id="ook-sw-1" onclick="toggleBongsu(0)">T1: ${gameState.ookCurrent[0] === 1 ? '🔥 ON (1)' : '📭 OFF (0)'}</button>
-                                    <button class="bongsu-toggle-btn ook-switch ${gameState.ookCurrent[1] === 1 ? 'on' : ''}" id="ook-sw-2" onclick="toggleBongsu(1)">T2: ${gameState.ookCurrent[1] === 1 ? '🔥 ON (1)' : '📭 OFF (0)'}</button>
-                                    <button class="bongsu-toggle-btn ook-switch ${gameState.ookCurrent[2] === 1 ? 'on' : ''}" id="ook-sw-3" onclick="toggleBongsu(2)">T3: ${gameState.ookCurrent[2] === 1 ? '🔥 ON (1)' : '📭 OFF (0)'}</button>
+                                    ${[0, 1, 2].map(i => `<button class="bongsu-toggle-btn ook-switch ${gameState.ookCurrent[i] === 1 ? 'on' : ''}" id="ook-sw-${i + 1}" onclick="toggleBongsu(${i})">T${i + 1}: ${gameState.ookCurrent[i] === 1 ? '🔥 켜짐 (1)' : '⚫ 꺼짐 (0)'}</button>`).join('')}
                                 </div>
-                                <div style="display:flex; justify-content:space-between; align-items:center;">
-                                    <div style="font-size:0.8rem; font-family:'Share Tech Mono';">🎯 목표 비트열: <b style="color:var(--accent-yellow)">[${gameState.ookTarget.join(', ')}]</b></div>
-                                    <button class="act-btn" style="width:130px; height:28px; font-size:0.75rem; background:var(--accent-green); color:#000; font-weight:bold;" onclick="verifyOokMinigame()">⚡ 신호 광학 송출</button>
+                                <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+                                    <div style="font-size:0.95rem; font-family:'Share Tech Mono';">🎯 목표: <b style="color:var(--accent-yellow); font-size:1.1rem; letter-spacing:2px;">[${gameState.ookTarget.join(', ')}]</b> &nbsp;현재: <b style="letter-spacing:2px;">[${gameState.ookCurrent.join(', ')}]</b></div>
+                                    <button class="tuning-btn go" onclick="verifyOokMinigame()">⚡ 신호 송출</button>
                                 </div>
                             </div>
                         `;
-                    } 
+                    }
                     else if (gameState.activeMinigameType === "Morse") {
-                        // Minigame 2 Panel
                         box.innerHTML = `
                             <div class="minigame-container">
-                                <div class="minigame-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
-                                    <span>📟 교과서 183쪽: 한글 모스 부호화</span>
-                                    <div style="display:flex; gap:6px; align-items:center;">
-                                        <button class="tuning-btn" style="padding:1px 5px; font-size:0.65rem; background:rgba(0,255,255,0.1); border-color:var(--accent-cyan); color:var(--accent-cyan); cursor:pointer;" onclick="zoomCurrentGame()">🔍 크게 보기</button>
-                                        <span style="color:var(--accent-yellow); font-size:0.75rem;">+30 G, +20 TP</span>
-                                    </div>
-                                </div>
+                                ${minigameHead("📟 한글 모스 부호 보내기 (교과서 183쪽)", "+30 G, +20 TP")}
                                 <div class="minigame-instruction">
-                                    단어: <b style="color:var(--accent-yellow); font-size:0.85rem;">"${gameState.morseTargetWord}"</b><br>
-                                    목표 모스 시퀀스: <b style="color:var(--accent-cyan); font-family:'Share Tech Mono'; letter-spacing:1px;">${gameState.morseTargetCode}</b>
+                                    단어: <b style="color:var(--accent-yellow); font-size:1rem;">"${gameState.morseTargetWord}"</b><br>
+                                    보낼 부호: <b style="color:var(--accent-cyan); font-family:'Share Tech Mono'; letter-spacing:2px; font-size:1.05rem;">${gameState.morseTargetCode}</b>
                                 </div>
+                                ${feedbackHtml()}
                                 <div class="morse-input-disp" id="morse-buffer-disp">
-                                    ${gameState.morseBuffer === "" ? "입력 대기 중..." : gameState.morseBuffer}
+                                    ${gameState.morseBuffer === "" ? '<span style="color:#6e64a3; font-size:0.9rem;">입력 대기 중... (•/— 버튼을 누르세요)</span>' : gameState.morseBuffer.replace(/\./g, '•').replace(/-/g, '—')}
                                 </div>
                                 <div class="morse-button-row">
-                                    <button class="tuning-btn" style="flex-grow:1; font-weight:bold; font-size:1.1rem;" onclick="inputMorse('.')">• (Dot)</button>
-                                    <button class="tuning-btn" style="flex-grow:1; font-weight:bold; font-size:1.1rem;" onclick="inputMorse('-')">— (Dash)</button>
-                                    <button class="tuning-btn" style="flex-grow:0.5;" onclick="inputMorse(' ')">Space</button>
-                                    <button class="tuning-btn" style="background:var(--accent-red); border-color:#ff9999;" onclick="clearMorse()">Reset</button>
-                                    <button class="tuning-btn" style="background:var(--accent-green); color:#000; font-weight:bold; border-color:#fff;" onclick="verifyMorseMinigame()">전송 (Send)</button>
+                                    <button class="tuning-btn" style="font-size:1.15rem;" onclick="inputMorse('.')">• 점</button>
+                                    <button class="tuning-btn" style="font-size:1.15rem;" onclick="inputMorse('-')">— 선</button>
+                                    <button class="tuning-btn" onclick="inputMorse(' ')">띄우기</button>
+                                    <button class="tuning-btn danger" onclick="clearMorse()">Reset</button>
+                                    <button class="tuning-btn go" onclick="verifyMorseMinigame()">전송 (Send)</button>
                                 </div>
                             </div>
                         `;
-                    } 
+                    }
                     else if (gameState.activeMinigameType === "Smartphone") {
-                        // Minigame 3 Panel
+                        const diff = Math.abs(gameState.currentTuningValue - gameState.currentTuningTarget);
+                        const tuneColor = diff <= 4 ? 'var(--accent-green)' : (diff <= 12 ? 'var(--accent-yellow)' : 'var(--accent-pink)');
                         box.innerHTML = `
                             <div class="minigame-container">
-                                <div class="minigame-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
-                                    <span>📟 교과서 191쪽: 스마트폰 결합 & 튜닝</span>
-                                    <div style="display:flex; gap:6px; align-items:center;">
-                                        <button class="tuning-btn" style="padding:1px 5px; font-size:0.65rem; background:rgba(0,255,255,0.1); border-color:var(--accent-cyan); color:var(--accent-cyan); cursor:pointer;" onclick="zoomCurrentGame()">🔍 크게 보기</button>
-                                        <span style="color:var(--accent-yellow); font-size:0.75rem;">+35 G, +25 TP</span>
-                                    </div>
+                                ${minigameHead("📟 스마트폰 부품 결합 & 주파수 맞추기 (교과서 191쪽)", "+35 G, +25 TP")}
+                                <div class="minigame-instruction">
+                                    📝 부품 설명: <b style="color:#e3d6ff;">"${gameState.phonePartDesc}"</b>
                                 </div>
-                                <div class="minigame-instruction" style="border-bottom:1px dashed rgba(255,255,255,0.1); padding-bottom:3px; margin-bottom:2px;">
-                                    📝 부품설명: <b style="color:#d1bcff;">"${gameState.phonePartDesc}"</b>
+                                ${feedbackHtml()}
+                                <div style="font-size:0.85rem; color:#c3b8f7;">① 설명에 맞는 부품 고르기</div>
+                                <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:6px;">
+                                    ${gameState.phoneOptions.map(opt => `
+                                        <button class="tuning-btn ${gameState.selectedPhonePart === opt ? 'selected' : ''}" onclick="selectPhonePart('${opt}')">${gameState.selectedPhonePart === opt ? '✔ ' : ''}${opt}</button>
+                                    `).join('')}
                                 </div>
-                                <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin: 2px 0;">
-                                    <span style="font-size:0.75rem; color:#aaa; white-space:nowrap;">🔧 결합 부품 선택:</span>
-                                    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; width:70%;">
-                                        ${gameState.phoneOptions.map(opt => `
-                                            <button class="tuning-btn" style="padding:2px 4px; font-size:0.7rem; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; background:${gameState.selectedPhonePart === opt ? 'var(--accent-cyan)' : '#171131'}; color:${gameState.selectedPhonePart === opt ? '#000' : '#fff'};" onclick="selectPhonePart('${opt}')">${opt}</button>
-                                        `).join('')}
-                                    </div>
+                                <div style="font-size:0.85rem; color:#c3b8f7;">② 주파수를 🎯목표에 맞추기 (±4 이내)</div>
+                                <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+                                    <div style="font-size:0.9rem; font-family:'Share Tech Mono';">🎯 목표 <b style="color:var(--accent-cyan);">${gameState.currentTuningTarget} MHz</b></div>
+                                    <div style="font-size:0.9rem; font-family:'Share Tech Mono';">🎛️ 현재 <b style="color:${tuneColor};">${gameState.currentTuningValue} MHz</b></div>
                                 </div>
-                                <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-                                    <div style="font-size:0.75rem; font-family:'Share Tech Mono';">🎯 목표: <b style="color:var(--accent-cyan);">${gameState.currentTuningTarget} MHz</b></div>
-                                    <div class="tuning-bar-display">
-                                        <div style="position:absolute; left:0; right:0; top:13px; height:2px; background:rgba(255,255,255,0.15);"></div>
-                                        <div style="position:absolute; left:${gameState.currentTuningTarget}%; top:8px; width:8px; height:12px; background:var(--accent-cyan); border-radius:1px; transform:translateX(-50%);"></div>
-                                        <div style="position:absolute; left:${gameState.currentTuningValue}%; top:6px; width:10px; height:16px; background:var(--accent-pink); border:1.5px solid #fff; transform:translateX(-50%);"></div>
-                                    </div>
-                                    <div style="font-size:0.75rem; font-family:'Share Tech Mono';">🎛️ 현재: <b style="color:var(--accent-pink);">${gameState.currentTuningValue} MHz</b></div>
+                                <div class="tuning-bar-display">
+                                    <div style="position:absolute; left:0; right:0; top:14px; height:2px; background:rgba(255,255,255,0.2);"></div>
+                                    <div style="position:absolute; left:${gameState.currentTuningTarget}%; top:5px; width:12px; height:20px; background:var(--accent-cyan); border-radius:2px; transform:translateX(-50%); box-shadow:0 0 6px var(--accent-cyan);"></div>
+                                    <div style="position:absolute; left:${gameState.currentTuningValue}%; top:3px; width:8px; height:24px; background:${tuneColor}; border:1.5px solid #fff; transform:translateX(-50%);"></div>
                                 </div>
-                                <div style="display:flex; gap:6px;">
-                                    <button class="tuning-btn" style="padding:2px 8px; font-size:0.7rem;" onclick="adjustTuningValue(-15)">-15</button>
-                                    <button class="tuning-btn" style="padding:2px 8px; font-size:0.7rem;" onclick="adjustTuningValue(-2)">-2</button>
-                                    <button class="tuning-btn" style="padding:2px 8px; font-size:0.7rem;" onclick="adjustTuningValue(2)">+2</button>
-                                    <button class="tuning-btn" style="padding:2px 8px; font-size:0.7rem;" onclick="adjustTuningValue(15)">+15</button>
-                                    <button class="tuning-btn" style="background:var(--accent-green); color:#000; font-weight:bold; border-color:#fff; flex-grow:1; padding:2px; font-size:0.75rem;" onclick="verifySmartphoneMinigame()">부품결합 및 동조 (Tuning)</button>
+                                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                                    <button class="tuning-btn" style="flex:1;" onclick="adjustTuningValue(-15)">-15</button>
+                                    <button class="tuning-btn" style="flex:1;" onclick="adjustTuningValue(-2)">-2</button>
+                                    <button class="tuning-btn" style="flex:1;" onclick="adjustTuningValue(2)">+2</button>
+                                    <button class="tuning-btn" style="flex:1;" onclick="adjustTuningValue(15)">+15</button>
+                                    <button class="tuning-btn go" style="flex:2 1 160px;" onclick="verifySmartphoneMinigame()">③ 결합 및 동조</button>
                                 </div>
                             </div>
                         `;
-                    } 
+                    }
                     else if (gameState.activeMinigameType === "System4") {
-                        // Minigame 4 Panel
                         box.innerHTML = `
                             <div class="minigame-container">
-                                <div class="minigame-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
-                                    <span>📟 교과서 175쪽: 정보 기술 시스템 4단계</span>
-                                    <div style="display:flex; gap:6px; align-items:center;">
-                                        <button class="tuning-btn" style="padding:1px 5px; font-size:0.65rem; background:rgba(0,255,255,0.1); border-color:var(--accent-cyan); color:var(--accent-cyan); cursor:pointer;" onclick="zoomCurrentGame()">🔍 크게 보기</button>
-                                        <span style="color:var(--accent-yellow); font-size:0.75rem;">+35 G, +25 TP</span>
-                                    </div>
+                                ${minigameHead("📟 정보 기술 시스템 4단계 (교과서 175쪽)", "+35 G, +25 TP")}
+                                <div class="minigame-instruction">
+                                    📝 상황: <b style="color:#ffe875;">"${gameState.systemScenario}"</b>
                                 </div>
-                                <div class="minigame-instruction" style="border-bottom:1px dashed rgba(255,255,255,0.1); padding-bottom:3px; margin-bottom:3px;">
-                                    📝 시나리오: <b style="color:#ffe875;">"${gameState.systemScenario}"</b>
-                                </div>
-                                <div style="display:flex; flex-direction:column; gap:6px;">
-                                    <span style="font-size:0.75rem; color:#aaa;">올바른 시스템 단계를 선택하십시오:</span>
-                                    <div style="display:grid; grid-template-columns: repeat(2, 2fr); gap:6px;">
-                                        ${gameState.systemOptions.map(opt => `
-                                            <button class="act-btn" style="font-size:0.8rem; text-align:center; padding:6px; background:#1c1538; justify-content:center;" onclick="verifySystem4Minigame('${opt}')">
-                                                <span>${opt}</span>
-                                            </button>
-                                        `).join('')}
-                                    </div>
+                                ${feedbackHtml()}
+                                <div style="font-size:0.85rem; color:#c3b8f7;">이 설명은 어느 단계일까요? (틀리면 배터리 -12)</div>
+                                <div class="grid-2col">
+                                    ${gameState.systemOptions.map(opt => `
+                                        <button class="act-btn" style="justify-content:center; text-align:center;" onclick="verifySystem4Minigame('${opt}')">
+                                            <span>${opt}</span>
+                                        </button>
+                                    `).join('')}
                                 </div>
                             </div>
                         `;
                     }
                     else if (gameState.activeMinigameType === "Parity") {
-                        // Minigame 5 Panel
+                        const ones = (gameState.parityDataStr.match(/1/g) || []).length;
                         box.innerHTML = `
                             <div class="minigame-container">
-                                <div class="minigame-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
-                                    <span>📟 오류 제어: 실시간 패리티 검사</span>
-                                    <div style="display:flex; gap:6px; align-items:center;">
-                                        <button class="tuning-btn" style="padding:1px 5px; font-size:0.65rem; background:rgba(0,255,255,0.1); border-color:var(--accent-cyan); color:var(--accent-cyan); cursor:pointer;" onclick="zoomCurrentGame()">🔍 크게 보기</button>
-                                        <span style="color:var(--accent-yellow); font-size:0.75rem;">+30 G, +20 TP</span>
-                                    </div>
-                                </div>
+                                ${minigameHead("📟 패리티 비트 붙이기 (오류 제어)", "+30 G, +20 TP")}
                                 <div class="minigame-instruction">
-                                    7비트 원시 데이터: <b style="color:var(--accent-cyan); font-family:'Share Tech Mono'; letter-spacing:1px; font-size:0.95rem;">"${gameState.parityDataStr}"</b><br>
-                                    검증 오류제어 필터 규칙: <b style="color:var(--accent-pink); font-size:0.85rem;">${gameState.parityType} 패리티</b>
+                                    7비트 데이터: <b style="color:var(--accent-cyan); font-family:'Share Tech Mono'; letter-spacing:3px; font-size:1.15rem;">${gameState.parityDataStr}</b><br>
+                                    규칙: <b style="color:#ff6fb1;">${gameState.parityType} 패리티</b> — 패리티 비트까지 합친 1의 개수가 ${gameState.parityType.startsWith('Even') ? '<b>짝수</b>' : '<b>홀수</b>'}가 되어야 해요.
                                 </div>
-                                <div style="font-size:0.72rem; color:#b3a7ef;">규칙에 부합하도록 1의 개수를 맞춰주는 전송용 패리티 비트를 도출 결합하십시오.</div>
-                                <div style="display:flex; gap:12px; justify-content:center; align-items:center; margin-top:2px;">
-                                    <button class="act-btn" style="width:120px; justify-content:center; background:#100b2e; border:1.5px solid var(--accent-cyan); font-size:1rem;" onclick="verifyParityMinigame(0)">
+                                ${feedbackHtml()}
+                                <div style="font-size:0.85rem; color:#c3b8f7;">덧붙일 비트를 고르세요. (틀리면 배터리 -10)</div>
+                                <div style="display:flex; gap:12px; justify-content:center; align-items:center;">
+                                    <button class="act-btn" style="width:140px; justify-content:center; border:1.5px solid var(--accent-cyan); font-size:1.05rem;" onclick="verifyParityMinigame(0)">
                                         <span>[ 비트: 0 ]</span>
                                     </button>
-                                    <button class="act-btn" style="width:120px; justify-content:center; background:#100b2e; border:1.5px solid var(--accent-cyan); font-size:1rem;" onclick="verifyParityMinigame(1)">
+                                    <button class="act-btn" style="width:140px; justify-content:center; border:1.5px solid var(--accent-cyan); font-size:1.05rem;" onclick="verifyParityMinigame(1)">
                                         <span>[ 비트: 1 ]</span>
                                     </button>
                                 </div>
                             </div>
                         `;
                     }
+                } else if (gameState.activeQuiz) {
+                    // 퀴즈는 정답을 고를 때까지 유지됩니다 (탭을 옮겨도 사라지지 않음)
+                    const quiz = gameState.activeQuiz;
+                    view = 'quiz-' + quiz.q.length;
+                    box.innerHTML = `
+                        <div class="panel-head" style="color:var(--accent-yellow);">
+                            <span>🛡️ 보안 검증 퀴즈 <span style="color:#c3b8f7; font-weight:normal; font-size:0.82rem;">정답 +${quiz.gold} G · +${quiz.exp} TP · 진행률 +10%</span></span>
+                            <button class="zoom-btn" onclick="zoomCurrentGame()">🔍 크게 보기</button>
+                        </div>
+                        <div class="quiz-title">${quiz.q}</div>
+                        <div class="quiz-hint">📖 힌트: ${quiz.hint}</div>
+                        <div class="grid-2col quiz-answers">
+                            ${quiz.a.map((ans, idx) => `
+                                <button class="act-btn" onclick="submitQuizAnswer(${idx})">
+                                    <span>${idx + 1}. ${ans}</span>
+                                </button>`).join('')}
+                        </div>
+                    `;
+                } else if (gameState.shopOpen) {
+                    view = 'shop';
+                    renderShop(box);
                 } else {
                     // Normal Exploration Tab
+                    view = 'explore-main';
+                    const done = gameState.collectedParts.includes(gameState.era);
                     box.innerHTML = `
-                        <div class="grid-2col" style="height: 100%;">
-                            <button class="act-btn" onclick="exploreRoute()" style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-                                <span style="font-size:1.4rem; margin-bottom:4px;">🚜</span>
+                        ${resultCardHtml()}
+                        <div class="grid-2col" style="flex:1;">
+                            <button class="act-btn" onclick="exploreRoute()" style="min-height: 110px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:4px; ${done ? '' : 'border:2px solid var(--accent-yellow);'}">
+                                <span style="font-size:1.6rem;">🚜</span>
                                 <span>수리 탐색 진행</span>
-                                <span class="badge">배터리 소요 0</span>
+                                <span class="badge">${done ? '이 시대 수리 완료 → 시대 도약' : `진행률 ${gameState.explorationProgress}% · 퀴즈/미니게임`}</span>
                             </button>
                             <div style="display:flex; flex-direction:column; gap:6px;">
-                                <button class="act-btn" onclick="openEraShop()">
+                                <button class="act-btn" onclick="openEraShop()" style="flex:1;">
                                     <span>🛒 시대별 부품 상점</span>
-                                    <span class="badge">Parts Shop</span>
+                                    <span class="badge">${gameState.gold} G</span>
                                 </button>
-                                <button class="act-btn" onclick="readEduConcept()">
-                                    <span>📚 통신 교과서 해독</span>
-                                    <span class="badge">ICT Concept</span>
+                                <button class="act-btn" onclick="readEduConcept()" style="flex:1;">
+                                    <span>📚 교과서 정리 보기</span>
+                                    <span class="badge">로그에 표시</span>
                                 </button>
                             </div>
                         </div>
                     `;
                 }
-            } 
+            }
             else if (gameState.activeTab === 'combat') {
                 if (!gameState.inBattle || !gameState.currentEnemy) {
                     box.innerHTML = `
-                        <div class="empty-action-text">현재 무선 전송 잡음이 고요합니다. 탐색을 수행하다 보면 무선 신호 방해 적들이 돌발 기습해 옵니다!</div>
+                        <div class="empty-action-text">지금은 전투 중이 아니에요.<br>[탐색 회선]에서 수리 진행률을 100%로 채우면 이 시대의 보스가 나타납니다.</div>
                     `;
-                    return;
+                } else {
+                    const enemy = gameState.currentEnemy;
+                    const sk = SKILLS[gameState.era];
+                    const myTurn = gameState.battleTurn === 'player';
+                    const lackTp = gameState.tp < sk.cost;
+                    view = 'combat-' + gameState.battleTurn + '-' + lackTp;
+
+                    box.innerHTML = `
+                        <div class="turn-banner ${myTurn ? 'mine' : 'enemy'}">
+                            <span>${myTurn ? '▶ 내 차례: 행동을 고르세요' : '⏳ 적의 차례...'}</span>
+                            <span>${enemy.isBoss ? 'BOSS' : '잡음'} ${enemy.hp} / ${enemy.maxHp} dB</span>
+                        </div>
+                        <div class="grid-2col">
+                            <button class="act-btn" onclick="battleAction('attack')" ${myTurn ? '' : 'disabled'}>
+                                <span>⚡ 정밀 통신 공격</span>
+                                <span class="badge">약 ${gameState.bandwidth} 피해</span>
+                            </button>
+                            <button class="act-btn" onclick="battleAction('defend')" ${myTurn ? '' : 'disabled'}>
+                                <span>🛡️ 노이즈 필터링</span>
+                                <span class="badge">피해 50%↓</span>
+                            </button>
+                            <button class="act-btn" style="grid-column: span 2; border-color:var(--accent-cyan); background-color:rgba(0,255,255,0.06); gap:8px;" onclick="battleAction('skill')" ${myTurn && !lackTp ? '' : 'disabled'}>
+                                <div class="item-main">
+                                    <span style="color:var(--accent-cyan);">✨ 교과 스킬: ${sk.name}</span>
+                                    <span class="item-desc">${sk.concept} <b style="color:#fff;">효과: ${sk.effect}</b></span>
+                                </div>
+                                <span class="badge" style="color:${lackTp ? '#ff8a8a' : 'var(--accent-yellow)'}">${lackTp ? `TP 부족 ${gameState.tp}/${sk.cost}` : `TP ${sk.cost} 사용`}</span>
+                            </button>
+                        </div>
+                        ${gameState.hp / gameState.maxHp < 0.5 ? '<div style="font-size:0.82rem; color:var(--accent-yellow);">💡 배터리가 부족해요! [파츠 가방] 탭에서 회복 아이템을 쓸 수 있어요.</div>' : ''}
+                    `;
                 }
-
-                const enemy = gameState.currentEnemy;
-                let skillName = "";
-                let tpCost = 0;
-                let technicalConcept = "";
-
-                if (gameState.era === 1) { 
-                    skillName = "[파발 우회 전송 / Physical Bypass]"; 
-                    tpCost = 15;
-                    technicalConcept = "기상 장애로 봉수의 빛이 막히면 물리적 이동 선로인 파발망으로 안전하게 패킷을 우회 전송합니다.";
-                } else if (gameState.era === 2) { 
-                    skillName = "[모스 긴급 SOS / 1-Bit Encoding]"; 
-                    tpCost = 25;
-                    technicalConcept = "전압 격감 상태에서도 정교하게 짜인 1비트 모스 코드 도트-대시 조합으로 확실하게 연결 수혈을 합니다.";
-                } else if (gameState.era === 3) { 
-                    skillName = "[주파수 분할 다중화 / FDM Tuning]"; 
-                    tpCost = 35;
-                    technicalConcept = "가용 단일 물리선로를 주파수 채널별 다중 조각으로 동조 분산 전송하여 적의 노이즈 재밍을 전면 소거합니다.";
-                } else if (gameState.era === 4) { 
-                    skillName = "[TCP 패킷 재전송 / ARQ Protocol]"; 
-                    tpCost = 50;
-                    technicalConcept = "수십만 좀비 PC가 퍼붓는 DDoS 패킷 유실을 감지하고, 수신측 피드백에 맞춰 즉시 오류 패킷을 복구 재송출합니다.";
-                }
-
-                box.innerHTML = `
-                    <div style="font-size:0.8rem; color:var(--accent-red); margin-bottom:5px; font-weight:bold; display:flex; justify-content:space-between;">
-                        <span>대상: ${enemy.name} ${enemy.isBoss ? '[BOSS]' : '[잡음]'}</span>
-                        <span>왜곡 전압 세기: ${enemy.hp} / ${enemy.maxHp} dB</span>
-                    </div>
-                    <div class="grid-2col">
-                        <button class="act-btn" onclick="battleAction('attack')">
-                            <span>⚡ 정밀 통신 공격</span>
-                            <span class="badge">${gameState.bandwidth} dmg</span>
-                        </button>
-                        <button class="act-btn" onclick="battleAction('defend')">
-                            <span>🛡️ 노이즈 필터링</span>
-                            <span class="badge">대미지 50% 감쇄</span>
-                        </button>
-                        <button class="act-btn" style="grid-column: span 2; border-color:var(--accent-cyan); background-color:rgba(0,255,255,0.05);" onclick="battleAction('skill')">
-                            <div style="display:flex; flex-direction:column;">
-                                <span style="color:var(--accent-cyan); font-size:0.85rem;">✨ 교과 전술 스킬: ${skillName}</span>
-                                <span style="font-size:0.65rem; color:#b1a5e5; font-weight:normal; margin-top:1px;">${technicalConcept}</span>
-                            </div>
-                            <span class="badge" style="color:var(--accent-yellow)">TP ${tpCost} 소모</span>
-                        </button>
-                    </div>
-                `;
-            } 
+            }
             else if (gameState.activeTab === 'inventory') {
                 if (gameState.inventory.length === 0) {
-                    box.innerHTML = `<div class="empty-action-text">상점에서 회수한 파츠나 장비가 없습니다. 탐색 중 얻거나 상점에서 구비하십시오.</div>`;
-                    return;
+                    box.innerHTML = `<div class="empty-action-text">가방이 비어 있어요. [탐색 회선] → [시대별 부품 상점]에서 부품을 살 수 있어요.</div>`;
+                } else {
+                    // 같은 아이템은 하나로 묶어서 보여줍니다
+                    const groups = [];
+                    gameState.inventory.forEach((itemId, idx) => {
+                        const g = groups.find(x => x.id === itemId);
+                        if (g) g.count++; else groups.push({ id: itemId, idx, count: 1 });
+                    });
+                    view = 'inv-' + gameState.inventory.join(',') + gameState.equippedWeapon + gameState.equippedArmor;
+                    let html = `<div style="font-size:0.85rem; color:#c3b8f7;">🧪 소모품은 누르면 바로 사용 · ⚔️🛡️ 장비는 눌러서 장착/해제</div><div class="grid-2col">`;
+                    groups.forEach(g => {
+                        const item = ITEMS[g.id];
+                        if (!item) return;
+                        const isEquipped = (gameState.equippedWeapon === g.id || gameState.equippedArmor === g.id);
+                        const kind = item.type === 'weapon' ? '무기' : (item.type === 'armor' ? '방어구' : '소모품');
+                        html += `
+                            <button class="act-btn ${isEquipped ? 'equipped' : ''}" onclick="handleInventoryAction(${g.idx})">
+                                <div class="item-main">
+                                    <span class="item-name"><span class="item-icon">${ITEM_ICONS[g.id] || '📦'}</span>${item.name}${g.count > 1 ? ` <span style="color:var(--accent-cyan);">×${g.count}</span>` : ''}</span>
+                                    <span class="item-desc">[${kind}] ${item.desc}</span>
+                                </div>
+                                <span class="badge ${isEquipped ? 'eq' : ''}">${isEquipped ? '장착 중' : (item.type === 'consumable' ? '사용' : '장착')}</span>
+                            </button>
+                        `;
+                    });
+                    html += `</div>`;
+                    box.innerHTML = html;
                 }
-
-                let html = `<div style="font-size:0.75rem; color:#ada0f1; margin-bottom:6px;">장비를 다시 클릭하면 장착이 해제됩니다.</div><div class="grid-2col">`;
-                gameState.inventory.forEach((itemId, idx) => {
-                    const item = ITEMS[itemId];
-                    if (!item) return;
-
-                    const isEquipped = (gameState.equippedWeapon === itemId || gameState.equippedArmor === itemId);
-                    const label = isEquipped ? `[E] ${item.name}` : item.name;
-                    const style = isEquipped ? 'style="border-color: var(--accent-yellow); color: var(--accent-yellow); background: rgba(255,234,0,0.08);"' : '';
-
-                    html += `
-                        <button class="act-btn" ${style} onclick="handleInventoryAction(${idx})">
-                            <div style="display:flex; flex-direction:column;">
-                                <span>${label}</span>
-                                <span style="font-size:0.65rem; font-weight:normal; color:#aaa; margin-top:1px;">${item.desc}</span>
-                            </div>
-                            <span class="badge" style="white-space:nowrap;">${item.type === 'weapon' || item.type === 'armor' ? '장착' : '사용'}</span>
-                        </button>
-                    `;
-                });
-                html += `</div>`;
-                box.innerHTML = html;
-            } 
+            }
             else if (gameState.activeTab === 'leap') {
                 const hasPart = gameState.collectedParts.includes(gameState.era);
-                
+
                 if (hasPart) {
                     if (gameState.era < 4) {
                         box.innerHTML = `
-                            <div style="font-size:0.85rem; color:var(--accent-green); margin-bottom:8px; line-height:1.4;">
-                                ✔️ 시대 통기성 파츠 <b>[${ERAS[gameState.era].corePart}]</b> 정류에 완수 성공!<br>
-                                다음 문명의 시공간 통신 주파수 대역이 잠금 해제되었습니다.
+                            <div style="font-size:0.95rem; color:var(--accent-green); line-height:1.5;">
+                                ✔️ 핵심 부품 <b>[${ERAS[gameState.era].corePart}]</b>을(를) 얻었어요!<br>
+                                다음 시대로 이동할 수 있습니다.
                             </div>
-                            <button class="act-btn" onclick="executeEraJump()" style="background:var(--border-glowing); text-align:center; padding:12px; border:2px solid #fff; box-shadow:0 0 15px var(--border-glowing);">
-                                <span style="width:100%; text-align:center; font-size:1rem; font-weight:bold; color:#fff;">🚀 ${ERAS[gameState.era + 1].name} 차원 공조 점프 가동</span>
+                            <button class="act-btn" onclick="executeEraJump()" style="background:var(--border-glowing); justify-content:center; padding:14px; border:2px solid #fff; box-shadow:0 0 15px var(--border-glowing);">
+                                <span style="font-size:1.05rem; font-weight:bold; color:#fff;">🚀 ${ERAS[gameState.era + 1].name}(으)로 도약하기</span>
                             </button>
                         `;
                     } else {
                         box.innerHTML = `
-                            <div style="font-size:0.85rem; color:var(--accent-yellow); margin-bottom:10px; line-height:1.5; text-align:center;">
-                                🎆 경하드립니다! 시간의 전령이여. 고대에서 미래에 이르는 전 통신망 백본을 구축하고 복구하였습니다!
+                            <div style="font-size:0.95rem; color:var(--accent-yellow); line-height:1.5; text-align:center;">
+                                🎆 축하합니다, 시간의 전령! 고대부터 미래까지 모든 통신망을 복구했어요!
                             </div>
-                            <button class="act-btn" onclick="showTrueVictory()" style="background:var(--accent-green); text-align:center; padding:12px; border:2px solid #fff; color:#000;">
-                                <span style="width:100%; text-align:center; font-size:1rem; font-weight:bold;">🏁 시공 연결 대단원 엔딩 뷰어</span>
+                            <button class="act-btn" onclick="showTrueVictory()" style="background:var(--accent-green); justify-content:center; padding:14px; border:2px solid #fff; color:#000;">
+                                <span style="font-size:1.05rem; font-weight:bold;">🏁 엔딩 보기</span>
                             </button>
                         `;
                     }
                 } else {
                     box.innerHTML = `
-                        <div style="font-size:0.85rem; color:var(--accent-red); line-height:1.4;">
-                            ❌ 주파수 동조 단절: 이 시대의 핵심 부속인 <b>[${ERAS[gameState.era].corePart}]</b>가 없습니다.<br>
-                            이 부속은 <b>${BOSSES[gameState.era].name}</b> 보스를 정밀 수리하여야 수급됩니다.<br>
-                            수리 탐색 진행률을 100% 채워 보스를 격퇴하십시오!
+                        <div style="font-size:0.95rem; color:#ff8a8a; line-height:1.55;">
+                            🔒 아직 이동할 수 없어요.<br>
+                            이 시대의 핵심 부품 <b>[${ERAS[gameState.era].corePart}]</b>이(가) 필요해요.<br>
+                            <span style="color:#ddd5ff;">👉 [탐색 회선]에서 수리 진행률을 100%로 채우고, 보스 <b>${BOSSES[gameState.era].name}</b>을(를) 물리치면 얻을 수 있어요. (현재 ${gameState.explorationProgress}%)</span>
                         </div>
                     `;
+                }
+            }
+
+            // 좁은 화면에서는 새 퀴즈·미니게임·전투가 나타나면 조작판이 보이도록 스크롤
+            box.dataset.view = view;
+            if (view !== prevView && prevView !== "" && window.innerWidth < 1100 && gameState.gameActive &&
+                (view.startsWith('mg-') || view.startsWith('quiz-') || (view.startsWith('combat-') && !prevView.startsWith('combat-')))) {
+                const rect = box.getBoundingClientRect();
+                if (rect.top > window.innerHeight * 0.55 || rect.bottom > window.innerHeight) {
+                    try { box.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
                 }
             }
         }
@@ -2716,9 +2956,26 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             }
         }
 
+        // 로그에는 <b> 강조만 허용하고 나머지는 글자 그대로 표시합니다
+        function logToHtml(text) {
+            const esc = String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return esc.replace(/&lt;(\/?)b&gt;/g, '<$1b>');
+        }
+        function logToPlain(text) {
+            return String(text).replace(/<\/?b>/g, '');
+        }
+
+        // 로그 창을 누르면 타이핑 중인 글을 바로 끝까지 보여줍니다
+        let logFastForward = false;
+        document.addEventListener('DOMContentLoaded', () => {
+            const w = document.getElementById('terminal-wrapper');
+            if (w) w.addEventListener('click', () => { if (gameState.isTyping) logFastForward = true; });
+        });
+
         function processNextLog() {
             if (gameState.logQueue.length === 0) {
                 gameState.isTyping = false;
+                logFastForward = false;
                 return;
             }
 
@@ -2727,27 +2984,39 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             const logBox = document.getElementById('terminal-log');
             const wrapper = document.getElementById('terminal-wrapper');
 
+            // 오래된 로그는 정리 (최근 80줄 유지)
+            while (logBox.children.length > 80) logBox.removeChild(logBox.firstChild);
+
             const p = document.createElement('div');
             p.className = `log-line log-entry log-${logItem.type}`;
+            const timeStr = new Date().toLocaleTimeString('ko-KR', { hour12: false, hour: '2-digit', minute: '2-digit' });
+            const timeHtml = `<span class="log-time">${timeStr}</span>`;
+            p.innerHTML = timeHtml;
+            const textNode = document.createTextNode('');
+            p.appendChild(textNode);
             logBox.appendChild(p);
 
+            const plain = logToPlain(logItem.text);
+            const finalHtml = timeHtml + logToHtml(logItem.text);
             let charIdx = 0;
-            const timeStr = `[${new Date().toLocaleTimeString('ko-KR', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}] `;
-            const textToType = timeStr + logItem.text;
+
+            function finishLine() {
+                p.innerHTML = finalHtml;
+                wrapper.scrollTop = wrapper.scrollHeight;
+                setTimeout(processNextLog, logFastForward ? 0 : 60);
+            }
 
             function typeChar() {
                 if (!gameState.gameActive) return;
-                if (charIdx < textToType.length) {
-                    p.innerText += textToType.charAt(charIdx);
-                    charIdx++;
-                    if (textToType.charAt(charIdx) !== ' ' && charIdx % 2 === 0) {
-                        playTypeSound();
-                    }
+                if (logFastForward) { finishLine(); return; }
+                if (charIdx < plain.length) {
+                    // 한 번에 2글자씩 표시해 읽기 흐름을 덜 끊습니다
+                    charIdx = Math.min(plain.length, charIdx + 2);
+                    textNode.data = plain.slice(0, charIdx);
                     wrapper.scrollTop = wrapper.scrollHeight;
-                    setTimeout(typeChar, 10);
+                    setTimeout(typeChar, 14);
                 } else {
-                    wrapper.scrollTop = wrapper.scrollHeight;
-                    setTimeout(processNextLog, 60);
+                    finishLine();
                 }
             }
 
@@ -2759,42 +3028,65 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
         function readEduConcept() {
             playClickSound();
             const era = ERAS[gameState.era];
-            addLog(`--- 📖 [${era.name}] 정보통신 학술 바인더 ---`, "info");
+            addLog(`📖 [${era.name}] 교과서 정리`, "info");
             addLog(era.info, "edu");
-            addLog(`시대 전송 기술 표준: ${era.techDetails}`, "system");
+            addLog(`핵심 기술: ${era.techDetails}`, "system");
         }
 
         function openEraShop() {
             playClickSound();
-            const shopItems = ERAS[gameState.era].shopItems;
-            const box = document.getElementById('actions-box');
-            box.innerHTML = "";
+            gameState.shopOpen = true;
+            gameState.lastResult = null;
+            renderUI();
+        }
 
+        function closeEraShop() {
+            playClickSound();
+            gameState.shopOpen = false;
+            renderUI();
+        }
+
+        function compareText(item) {
+            const cur = item.type === 'weapon' ? gameState.equippedWeapon : (item.type === 'armor' ? gameState.equippedArmor : null);
+            if (item.type !== 'weapon' && item.type !== 'armor') return "";
+            if (cur === item.id) return `<br><span class="stat-up">➜ 지금 장착 중</span>`;
+            const curStat = cur && ITEMS[cur] ? ITEMS[cur].stat : {};
+            const parts = [];
+            const label = { atk: '공격력', maxHp: '최대HP', spd: '속도' };
+            ['atk', 'maxHp', 'spd'].forEach(k => {
+                const d = (item.stat[k] || 0) - (curStat[k] || 0);
+                if (d !== 0) parts.push(`<span class="${d > 0 ? 'stat-up' : 'stat-down'}">${label[k]} ${d > 0 ? '+' : ''}${d}</span>`);
+            });
+            return parts.length ? `<br>➜ 지금 장비와 비교: ${parts.join(' ')}` : "";
+        }
+
+        function renderShop(box) {
+            const shopItems = ERAS[gameState.era].shopItems;
             let html = `
-                <div style="font-size:0.8rem; color:var(--accent-yellow); font-weight:bold; display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <span>🏪 특산 부품 상점 • 보유 재화: ${gameState.gold} G</span>
-                    <span style="color:#aaa;">(구매하면 인벤토리로 수집됩니다)</span>
+                <div class="panel-head" style="color:var(--accent-yellow);">
+                    <span>🏪 ${ERAS[gameState.era].name} 부품 상점</span>
+                    <span>💰 보유 ${gameState.gold} G</span>
                 </div>
                 <div class="grid-2col">
             `;
-
             shopItems.forEach(itemId => {
                 const item = ITEMS[itemId];
                 if (!item) return;
+                const canBuy = gameState.gold >= item.value;
+                const kind = item.type === 'weapon' ? '무기' : (item.type === 'armor' ? '방어구' : '소모품');
                 html += `
-                    <button class="act-btn" onclick="buyPartItem('${itemId}')">
-                        <div style="display:flex; flex-direction:column;">
-                            <span>${item.name}</span>
-                            <span style="font-size:0.65rem; color:#aaa; font-weight:normal;">${item.desc}</span>
+                    <button class="act-btn ${canBuy ? '' : 'cant-afford'}" onclick="buyPartItem('${itemId}')" title="${canBuy ? '' : '예산이 부족해요'}">
+                        <div class="item-main">
+                            <span class="item-name"><span class="item-icon">${ITEM_ICONS[itemId] || '📦'}</span>${item.name}</span>
+                            <span class="item-desc">[${kind}] ${item.desc}${compareText(item)}</span>
                         </div>
-                        <span class="badge" style="color:var(--accent-green); font-weight:bold;">${item.value} G</span>
+                        <span class="badge" style="color:${canBuy ? 'var(--accent-green)' : '#ff8a8a'}; font-weight:bold;">${item.value} G</span>
                     </button>
                 `;
             });
-
             html += `
-                <button class="act-btn" onclick="renderContextActions()" style="grid-column: span 2; text-align:center; background:#4a1c38; border-color:#ff007f;">
-                    <span style="width:100%; text-align:center; font-weight:bold; color:var(--accent-pink);">⬅️ 수리 메뉴 뒤로가기</span>
+                <button class="act-btn" onclick="closeEraShop()" style="grid-column: span 2; justify-content:center; background:#4a1c38; border-color:#ff007f;">
+                    <span style="font-weight:bold; color:#ff8cc6;">⬅️ 상점 나가기</span>
                 </button>
             </div>`;
             box.innerHTML = html;
@@ -2804,15 +3096,14 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             const item = ITEMS[itemId];
             if (gameState.gold < item.value) {
                 playClickSound();
-                addLog(`결제 승인 오류: 회선 공사 예산(Gold)이 부족합니다! (소요: ${item.value} G)`, "system");
+                addLog(`💰 예산이 부족해요. (필요: ${item.value} G / 보유: ${gameState.gold} G)`, "system");
                 return;
             }
 
             gameState.gold -= item.value;
             addItemToInventory(itemId);
             playHealSound();
-            addLog(`[${item.name}] 전자기 파츠를 획득하여 네트워크 보관소에 수집했습니다.`, "system");
-            openEraShop();
+            addLog(`🛒 [${item.name}]을(를) 샀어요. [파츠 가방] 탭에서 쓰거나 장착하세요.`, "system");
             renderUI();
         }
 
@@ -2829,30 +3120,30 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             if (item.type === 'consumable') {
                 const res = item.action(gameState);
                 if (res.success) {
-                    addLog(`[${item.name}] 수리 도구 가동: ${res.msg}`, "info");
+                    addLog(`🧪 [${item.name}] 사용: ${res.msg}`, "info");
                     gameState.inventory.splice(idx, 1);
                     playHealSound();
                 } else {
-                    addLog(`가동 제어 불능: ${res.msg}`, "system");
+                    addLog(`⚠️ 지금은 쓸 수 없어요: ${res.msg}`, "system");
                 }
             } 
             else if (item.type === 'weapon') {
                 if (gameState.equippedWeapon === itemId) {
                     gameState.equippedWeapon = null;
-                    addLog(`주 전송 가속기 해제: [${item.name}] 장착 해제.`, "system");
+                    addLog(`[${item.name}] 무기를 해제했어요.`, "system");
                 } else {
                     gameState.equippedWeapon = itemId;
-                    addLog(`주 전송 가속기 결합: [${item.name}] 장착! 전송 대역폭 화력이 증가했습니다.`, "system");
+                    addLog(`⚔️ [${item.name}] 무기를 장착했어요. 공격력(대역폭)이 올랐습니다.`, "system");
                 }
                 playHealSound();
             } 
             else if (item.type === 'armor') {
                 if (gameState.equippedArmor === itemId) {
                     gameState.equippedArmor = null;
-                    addLog(`보안 수리 방패 장벽 해제: [${item.name}] 장착 해제.`, "system");
+                    addLog(`[${item.name}] 방어구를 해제했어요.`, "system");
                 } else {
                     gameState.equippedArmor = itemId;
-                    addLog(`보안 수리 방패 장벽 가동: [${item.name}] 장착! 메인 프레임 배터리 용량 및 물리속도가 보강되었습니다.`, "system");
+                    addLog(`🛡️ [${item.name}] 방어구를 장착했어요. 최대 배터리(HP)·처리속도가 올랐습니다.`, "system");
                 }
                 playHealSound();
             }
@@ -2867,15 +3158,17 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             
             // Check if the boss of this era is already defeated to prevent infinite boss battle loops!
             if (gameState.collectedParts.includes(gameState.era)) {
-                addLog(`✨ 이 시대의 핵심 통신 복구 부품 [${ERAS[gameState.era].corePart}]이 이미 완전 복구되었습니다! 더 이상 탐색할 필요가 없습니다. [시대 도약] 탭을 눌러 다음 시대로 점프하십시오!`, "info");
+                addLog(`✨ 이 시대의 핵심 부품 [${ERAS[gameState.era].corePart}]을(를) 이미 얻었어요. 이제 [시대 도약] 탭을 눌러 다음 시대로 이동하세요!`, "info");
                 return;
             }
             
             playClickSound();
+            gameState.lastResult = null;
+            gameState.shopOpen = false;
 
             const step = Math.floor(Math.random() * 11) + 15; // 15 ~ 25%
             gameState.explorationProgress = Math.min(100, gameState.explorationProgress + step);
-            addLog(`시대 통신로 케이블 교정 주행 중... (진행도: ${gameState.explorationProgress}%)`, "story");
+            addLog(`🚜 통신로를 수리하며 나아갑니다... (수리 진행률 ${gameState.explorationProgress}%)`, "story");
 
             if (gameState.explorationProgress >= 100) {
                 triggerBossScene();
@@ -2899,6 +3192,8 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
         /* 4 UNIQUE PERIOD-APPROPRIATE MINIGAMES INGEST */
                 function triggerEraMinigame() {
             gameState.minigameActive = true;
+            gameState.minigameFeedback = "";
+            gameState.selectedPhonePart = null;
             
             const gameTypes = ["Ook", "Morse", "Smartphone", "System4", "Parity"];
             if (gameState.minigameIndex === undefined) {
@@ -2920,8 +3215,8 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 }
                 gameState.ookCurrent = [0, 0, 0];
                 
-                addLog("📟 [봉수 광학 OOK 변조 감지] 교과서 180쪽 광학식 비트 변조 송출을 정류하십시오!", "system");
-                addLog("아래 스위치 버튼으로 제1, 제2, 제3 봉수대의 불꽃 신호(ON:1 / OFF:0)를 목표 비트열과 결합 일치시키십시오.", "info");
+                addLog("🎮 미니게임: 봉수 OOK 신호 보내기 (교과서 180쪽)", "system");
+                addLog("👉 T1·T2·T3 버튼으로 불꽃을 켜고(1) 끄고(0) 목표 비트열과 똑같이 맞춘 뒤 [신호 송출]을 누르세요.", "info");
             } 
             else if (chosenType === "Morse") {
                 // Minigame 2: 한글 자모음 모스 부호화 (183쪽)
@@ -2938,8 +3233,8 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.morseTargetCode = targetObj.morse;
                 gameState.morseBuffer = "";
                 
-                addLog("📟 [한글 모스 부호화 챌린지] 교과서 183쪽 '한글 모스 부호표'에 근거한 타건 전송 가동!", "system");
-                addLog(`주어진 한글 단어 "<b>${gameState.morseTargetWord}</b>"의 모스 부호 [<b>${gameState.morseTargetCode}</b>]를 하단 키로 정확히 타건 송출하십시오.`, "info");
+                addLog("🎮 미니게임: 한글 모스 부호 보내기 (교과서 183쪽)", "system");
+                addLog(`👉 단어 "<b>${gameState.morseTargetWord}</b>"의 모스 부호 <b>${gameState.morseTargetCode}</b> 를 •/— 버튼으로 입력하고 [전송]을 누르세요.`, "info");
             } 
             else if (chosenType === "Smartphone") {
                 // Minigame 3: 스마트폰 내부 구조 & 공진 튜닝 (191쪽)
@@ -2960,8 +3255,8 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.currentTuningTarget = Math.floor(Math.random() * 41) + 40; // 40~80 MHz
                 gameState.currentTuningValue = Math.floor(Math.random() * 30) + 10;
 
-                addLog("📟 [스마트폰 하드웨어 결합 & 공진 동조 수리] 스마트폰 내부 회로 결합 및 주파수 튜닝 기동!", "system");
-                addLog(`설명에 부합하는 올바른 191쪽 하드웨어 부품을 결합하고, 수신 코일 주파수를 🎯목표치에 맞춰 공진시키십시오.`, "info");
+                addLog("🎮 미니게임: 스마트폰 부품 결합 & 주파수 맞추기 (교과서 191쪽)", "system");
+                addLog(`👉 설명에 맞는 부품을 고르고, -15/-2/+2/+15 버튼으로 주파수를 🎯목표에 맞춘 뒤 [결합 및 동조]를 누르세요.`, "info");
             } 
             else if (chosenType === "System4") {
                 // Minigame 4: 정보 기술 시스템 4단계 PAPS 시나리오 (175쪽)
@@ -2976,8 +3271,8 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.systemScenario = selectedSys.scenario;
                 gameState.systemOptions = sysPool.map(s => s.step).sort(() => Math.random() - 0.5);
 
-                addLog("📟 [정보 기술 시스템 4단계 흐름 교정] 교과서 175쪽 체력 건강 평가(PAPS) 데이터 순환 동조 개시!", "system");
-                addLog(`설명하고 있는 정보 기술 시스템 단계(투입-과정-산출-되먹임)를 정확히 판독하여 수립하십시오.`, "info");
+                addLog("🎮 미니게임: 정보 기술 시스템 4단계 (교과서 175쪽)", "system");
+                addLog(`👉 설명이 투입·과정·산출·되먹임 중 어느 단계인지 고르세요.`, "info");
             }
             else if (chosenType === "Parity") {
                 // Minigame 5: 패리티 오류 검출 제어 (우수/기수)
@@ -2995,8 +3290,8 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     gameState.parityTargetBit = (onesCount % 2 !== 0) ? 0 : 1;
                 }
 
-                addLog("📟 [패리티 오류 제어 비트 결합] 데이터 무결성 검증 필터 기동!", "system");
-                addLog(`제시된 7비트 데이터 [ <b>${gameState.parityDataStr}</b> ]에 가해지는 <b>${gameState.parityType} 패리티 검사 규칙</b>을 통과시킬 패리티 비트(0 또는 1)를 클릭해 결합하세요.`, "info");
+                addLog("🎮 미니게임: 패리티 비트 붙이기 (오류 제어)", "system");
+                addLog(`👉 7비트 데이터 <b>${gameState.parityDataStr}</b> 에 <b>${gameState.parityType} 패리티</b> 규칙이 맞도록 덧붙일 비트(0 또는 1)를 고르세요.`, "info");
             }
 
             updateSceneGraphics();
@@ -3028,12 +3323,15 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.gold += 25;
                 gameState.tp += 15;
                 flashViewport("brightness(1.2) sepia(0.5) hue-rotate(80deg) saturate(2)", 200); // Green flash
-                addLog("✔️ 비트 결합 일치! 진폭 온오프 광학 변조 변환이 정상 주입되었습니다. 예산 +25 G, +15 TP!", "info");
+                addLog("✔️ 성공! 불꽃 신호가 목표 비트열과 일치합니다. +25 G, +15 TP", "info");
+                setResult(true, "✔️ 봉수 신호 성공! +25 G · +15 TP", "불꽃 켜짐(1)·꺼짐(0)으로 정보를 보내는 방식이 OOK(온·오프 변조)입니다.");
+                showDamagePopup("+25 G", "var(--accent-yellow)", "skill");
                 checkLevelUp();
             } else {
                 playHitSound();
                 flashViewport("brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(3)", 200); // Red flash
-                addLog(`❌ 신호 전송 오류: 불꽃 광학 비트열이 목표 비트열과 일치하지 않습니다!`, "combat-e");
+                addLog(`❌ 불꽃 상태가 목표 비트열과 달라요. 다시 맞춰 보세요.`, "combat-e");
+                gameState.minigameFeedback = `❌ 지금 [${gameState.ookCurrent.join(', ')}] → 목표 [${gameState.ookTarget.join(', ')}]와 달라요. 다시 맞춰 보세요.`;
             }
             renderUI();
         }
@@ -3078,12 +3376,15 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.gold += 30;
                 gameState.tp += 20;
                 flashViewport("brightness(1.2) sepia(0.5) hue-rotate(80deg) saturate(2)", 200); // Green flash
-                addLog(`✔️ 전보 타건 검증 승인! 단어 \"${gameState.morseTargetWord}\"가 모스 직렬 전류로 정상 부호화되었습니다. 예산 +30 G, +20 TP!`, "info");
+                addLog(`✔️ 성공! \"${gameState.morseTargetWord}\"를 모스 부호로 정확히 보냈어요. +30 G, +20 TP`, "info");
+                setResult(true, `✔️ 모스 전송 성공! +30 G · +20 TP`, `"${gameState.morseTargetWord}" = ${gameState.morseTargetCode}`);
+                showDamagePopup("+30 G", "var(--accent-yellow)", "skill");
                 checkLevelUp();
             } else {
                 playHitSound();
                 flashViewport("brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(3)", 200); // Red flash
-                addLog(`❌ 전보 부호 에러! 잘못 입력된 모스 부호입니다. (전송 시도: ${cleanInput === "" ? "없음" : cleanInput})`, "combat-e");
+                addLog(`❌ 모스 부호가 달라요. (입력: ${cleanInput === "" ? "없음" : cleanInput}) [Reset]으로 지우고 다시 입력하세요.`, "combat-e");
+                gameState.minigameFeedback = `❌ 부호가 달라요. [Reset]으로 지우고 위 부호를 한 글자씩 다시 입력하세요.`;
             }
             renderUI();
         }
@@ -3131,7 +3432,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
 
         function verifySmartphoneMinigame() {
             if (!gameState.selectedPhonePart) {
-                addLog("⚠️ 무선 수리 경고: 결합할 하드웨어 부품을 먼저 고르십시오!", "system");
+                addLog("⚠️ 먼저 결합할 부품을 고르세요.", "system");
                 return;
             }
 
@@ -3146,17 +3447,22 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.gold += 35;
                 gameState.tp += 25;
                 flashViewport("brightness(1.2) sepia(0.5) hue-rotate(80deg) saturate(2)", 200); // Green flash
-                addLog(`✔️ 스마트폰 결합 완료! [${gameState.phoneTargetPart}] 부품이 안전하게 탑재되고 무선 주파수가 공진 동조되었습니다. 예산 +35 G, +25 TP!`, "info");
+                addLog(`✔️ 성공! [${gameState.phoneTargetPart}] 결합과 주파수 동조를 마쳤어요. +35 G, +25 TP`, "info");
+                setResult(true, `✔️ 스마트폰 수리 성공! +35 G · +25 TP`, `정답 부품: ${gameState.phoneTargetPart} — ${gameState.phonePartDesc}`);
+                showDamagePopup("+35 G", "var(--accent-yellow)", "skill");
                 checkLevelUp();
             } else {
                 playHitSound();
                 flashViewport("brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(3)", 200); // Red flash
+                gameState.minigameFeedback = !partMatch && !freqMatch ? "❌ 부품도 틀렸고 주파수도 목표와 멀어요."
+                    : (!partMatch ? `❌ [${gameState.selectedPhonePart}]은(는) 설명과 맞지 않아요. 다른 부품을 골라 보세요.`
+                    : `❌ 부품은 맞았어요! 주파수를 목표 ${gameState.currentTuningTarget} MHz ±4 안으로 맞추세요. (현재 ${gameState.currentTuningValue})`);
                 if (!partMatch && !freqMatch) {
-                    addLog("❌ 수리 실패: 장착 부품 설계 결합 오류 및 수신 주파수 동조 이탈(오차 심함) 상태입니다!", "combat-e");
+                    addLog("❌ 부품도 틀리고 주파수도 목표와 멀어요.", "combat-e");
                 } else if (!partMatch) {
-                    addLog(`❌ 부품 설계 오류: 설명하고 있는 부품은 [${gameState.selectedPhonePart}]이 아닙니다!`, "combat-e");
+                    addLog(`❌ 설명에 맞는 부품은 [${gameState.selectedPhonePart}]이(가) 아니에요.`, "combat-e");
                 } else {
-                    addLog(`❌ 주파수 동조 이탈: 결합은 완비되었으나 수신 주파수(현재: ${gameState.currentTuningValue} MHz)가 목표치에 공진 동조되지 않았습니다!`, "combat-e");
+                    addLog(`❌ 부품은 맞았어요! 주파수(현재 ${gameState.currentTuningValue} MHz)를 목표 ${gameState.currentTuningTarget} MHz에 ±4 이내로 맞추세요.`, "combat-e");
                 }
             }
             renderUI();
@@ -3170,20 +3476,17 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.gold += 35;
                 gameState.tp += 25;
                 flashViewport("brightness(1.2) sepia(0.5) hue-rotate(80deg) saturate(2)", 200); // Green flash
-                addLog(`✔️ 시스템 동조 완료! 설명에 부합하는 정밀 단계 [${gameState.systemTargetStep}]가 정확히 연결되어 정보 시스템 순환 회선이 가동됩니다. 예산 +35 G, +25 TP!`, "info");
+                addLog(`✔️ 정답! 설명은 [${gameState.systemTargetStep}] 단계입니다. +35 G, +25 TP`, "info");
+                setResult(true, `✔️ 정답: ${gameState.systemTargetStep} · +35 G · +25 TP`, `정보 기술 시스템: 투입 → 과정 → 산출 → 되먹임`);
+                showDamagePopup("+35 G", "var(--accent-yellow)", "skill");
                 checkLevelUp();
             } else {
                 playHitSound();
                 gameState.hp = Math.max(15, gameState.hp - 12);
-                gameState.activeDamagePopup = {
-                    text: "-12 HP!",
-                    color: "var(--accent-red)",
-                    x: 100,
-                    y: 160,
-                    id: Date.now()
-                };
+                showDamagePopup("-12 HP", "var(--accent-red)", "player");
+                gameState.minigameFeedback = `❌ [${chosenStep}] 단계가 아니에요. (배터리 -12) 설명을 다시 읽고 골라 보세요.`;
                 flashViewport("brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(3)", 200); // Red flash
-                addLog(`❌ 흐름 제어 오류: 입력하신 단계 [${chosenStep}]은 올바른 해석 순서가 아닙니다! 배터리가 12 소실됩니다.`, "combat-e");
+                addLog(`❌ [${chosenStep}] 단계가 아니에요. 배터리 -12`, "combat-e");
             }
             renderUI();
         }
@@ -3196,20 +3499,18 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.gold += 30;
                 gameState.tp += 20;
                 flashViewport("brightness(1.2) sepia(0.5) hue-rotate(80deg) saturate(2)", 200); // Green flash
-                addLog(`✔️ 패리티 검사 통과! 전송 데이터 뒤에 오류 제어 비트(${chosenBit})가 올바르게 결합되어 데이터 프레임 무결성 통제가 확인되었습니다. 예산 +30 G, +20 TP!`, "info");
+                addLog(`✔️ 정답! 패리티 비트 ${chosenBit}을(를) 붙이면 규칙이 맞아요. +30 G, +20 TP`, "info");
+                const ones = (gameState.parityDataStr.match(/1/g) || []).length;
+                setResult(true, `✔️ 패리티 정답! +30 G · +20 TP`, `${gameState.parityDataStr} 의 1은 ${ones}개 → 비트 ${chosenBit}을(를) 붙이면 ${ones + chosenBit}개 (${gameState.parityType})`);
+                showDamagePopup("+30 G", "var(--accent-yellow)", "skill");
                 checkLevelUp();
             } else {
                 playHitSound();
                 gameState.hp = Math.max(15, gameState.hp - 10);
-                gameState.activeDamagePopup = {
-                    text: "-10 HP!",
-                    color: "var(--accent-red)",
-                    x: 100,
-                    y: 160,
-                    id: Date.now()
-                };
+                showDamagePopup("-10 HP", "var(--accent-red)", "player");
+                gameState.minigameFeedback = `❌ 틀렸어요. (배터리 -10) 데이터의 1의 개수를 세어 보세요.`;
                 flashViewport("brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(3)", 200); // Red flash
-                addLog(`❌ 패리티 오류(Parity Error) 감지: 송수신 1의 개수 규칙이 붕괴되어 비트가 유실 및 누전 파쇄되었습니다. 배터리 -10!`, "combat-e");
+                addLog(`❌ 1의 개수 규칙이 맞지 않아요. 배터리 -10`, "combat-e");
             }
             renderUI();
         }
@@ -3238,33 +3539,10 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
         function triggerICTQuiz() {
             const pool = ICT_QUIZ[gameState.era];
             const quiz = pool[Math.floor(Math.random() * pool.length)];
-            gameState.activeQuiz = quiz; // Store the current active quiz in game state to avoid HTML string escaping bugs!
+            gameState.activeQuiz = quiz; // 정답을 고를 때까지 유지 (탭을 옮겨도 사라지지 않음)
 
-            addLog("🚨 [정보통신 교육 챌린지 감지] 중앙 인증 서버에서 정품 전령 검증 보안 질문을 송출합니다!", "system");
-            
-            const box = document.getElementById('actions-box');
-            box.innerHTML = "";
-
-            let answersHtml = "";
-            quiz.a.forEach((ans, idx) => {
-                answersHtml += `
-                    <button class="act-btn" onclick="submitQuizAnswer(${idx})">
-                        <span>${idx + 1}. ${ans}</span>
-                    </button>
-                `;
-            });
-
-            box.innerHTML = `
-                <div style="font-size:0.8rem; color:var(--accent-yellow); font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom: 2px;">
-                    <span>🛡️ 통신망 복구 보안 검증 질문</span>
-                    <button class="tuning-btn" style="padding:1px 5px; font-size:0.65rem; background:rgba(0,255,255,0.1); border-color:var(--accent-cyan); color:var(--accent-cyan); cursor:pointer;" onclick="zoomCurrentGame()">🔍 크게 보기</button>
-                </div>
-                <div class="quiz-title" style="margin-bottom: 3px;">${quiz.q}</div>
-                <div style="font-size:0.75rem; color:#d1bcff; background:rgba(155, 130, 243, 0.1); border:1px solid rgba(155, 130, 243, 0.3); border-radius:4px; padding:4px 8px; margin-bottom: 5px; line-height:1.3; font-weight:bold; box-shadow:0 0 5px rgba(155, 130, 243, 0.2);">
-                    📖 교과서 핵심 힌트: ${quiz.hint}
-                </div>
-                <div class="grid-2col">${answersHtml}</div>
-            `;
+            addLog("🛡️ 보안 검증 퀴즈가 나왔어요! 아래에서 정답을 고르세요.", "system");
+            renderUI();
         }
 
         function submitQuizAnswer(chosenIdx) {
@@ -3285,22 +3563,19 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.gold += goldAward;
                 gameState.tp += expAward;
                 flashViewport("brightness(1.2) sepia(0.5) hue-rotate(80deg) saturate(2)", 200); // Green heal flash
-                addLog(`정답 일치! 인증에 승인되었습니다. 핵심 정리: ${explanation}`, "info");
-                addLog(`인증 통신망 복구 완료 수혜: +${goldAward} G, +${expAward} TP! 수리 진행도가 보너스로 +10% 추가 개선됩니다.`, "info");
+                addLog(`✔️ 정답! 핵심 정리: ${explanation}`, "info");
+                addLog(`보상: +${goldAward} G, +${expAward} TP, 수리 진행률 +10%`, "info");
+                setResult(true, `✔️ 정답! (${quiz.a[correctIdx]}) +${goldAward} G · +${expAward} TP · 진행률 +10%`, explanation);
+                showDamagePopup(`+${goldAward} G`, "var(--accent-yellow)", "skill");
                 gameState.explorationProgress = Math.min(100, gameState.explorationProgress + 10);
                 checkLevelUp();
             } else {
                 playHitSound();
                 gameState.hp = Math.max(10, gameState.hp - 15);
-                gameState.activeDamagePopup = {
-                    text: `-15 HP!`,
-                    color: "var(--accent-red)",
-                    x: 100,
-                    y: 160,
-                    id: Date.now()
-                };
+                showDamagePopup("-15 HP", "var(--accent-red)", "player");
+                setResult(false, `❌ 오답이에요 (배터리 -15) · 정답: ${correctIdx + 1}. ${quiz.a[correctIdx]}`, explanation);
                 flashViewport("brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(3)", 200); // Red damage flash
-                addLog(`❌ 정답 오검출! 입력 데이터 전송 에러 발생. 입력 회신 에러로 수리 배터리가 15 소실되었습니다.`, "combat-e");
+                addLog(`❌ 오답이에요. 배터리 -15 (정답: ${quiz.a[correctIdx]})`, "combat-e");
                 addLog(`학습 보완 교과 설명: ${explanation}`, "edu");
             }
             
@@ -3319,7 +3594,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             gameState.activeTab = "combat";
             gameState.battleTurn = "player";
 
-            addLog(`⚠️ 경보! 신호 통로상에 통신 방해 고조파 잡음 [${gameState.currentEnemy.name}]이 불시에 난입 기입되었습니다!`, "system");
+            addLog(`⚠️ 방해 잡음 [${gameState.currentEnemy.name}]이(가) 나타났어요!`, "system");
             playHitSound();
             updateSceneGraphics();
             renderUI();
@@ -3332,8 +3607,11 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             gameState.battleTurn = "player";
             gameState.bossStunned = 0;
 
-            addLog(`🚨 경보! 해당 문명 시대의 중추 통신 백본을 마비시킨 최종 전자기 파괴 보스 [${gameState.currentEnemy.name}] 가 검출되었습니다!`, "system");
-            addLog(`보스 기술 분석: ${gameState.currentEnemy.desc}`, "info");
+            gameState.lastResult = null;
+            gameState.shopOpen = false;
+            showBanner("⚠️ BOSS 등장!", gameState.currentEnemy.name, "var(--accent-red)");
+            addLog(`🚨 보스 등장! ${gameState.currentEnemy.name} — 이 시대의 통신망을 끊은 범인입니다. [수리 전투] 탭에서 행동을 고르세요.`, "system");
+            addLog(`보스 정보: ${gameState.currentEnemy.desc}`, "info");
             playHitSound();
             updateSceneGraphics();
             renderUI();
@@ -3345,7 +3623,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             if (!gameState.inBattle || !gameState.currentEnemy) return;
 
             if (gameState.battleTurn !== 'player') {
-                addLog("동기화 대기 중... 현재 보스의 노이즈 방해파 살포 중입니다.", "system");
+                addLog("⏳ 지금은 적의 차례예요. 잠시 기다리세요.", "system");
                 return;
             }
 
@@ -3357,7 +3635,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 showDamagePopup(`-${d} dB!`, "var(--accent-cyan)", "enemy");
                 flashViewport("brightness(1.4) contrast(1.1)", 150); // White flash for damage to enemy
 
-                addLog(`[정밀 전송 공격]을 송출해 적의 노이즈 밀도를 ${d} dB 제거 정화시켰습니다!`, "combat-p");
+                addLog(`⚡ 정밀 통신 공격! 적에게 ${d} dB 피해를 줬어요.`, "combat-p");
                 playHitSound();
 
                 if (gameState.currentEnemy.hp <= 0) {
@@ -3369,7 +3647,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             else if (act === 'defend') {
                 playClickSound();
                 gameState.defending = true;
-                addLog("신호 수신 필터(Noise Filter) 가동! 이번 턴 가해지는 적의 전자기 공격 피해가 반으로 감쇄합니다.", "combat-p");
+                addLog("🛡️ 노이즈 필터링! 이번 턴에 받는 피해가 절반으로 줄어요.", "combat-p");
                 passTurnToEnemy();
             } 
             else if (act === 'skill') {
@@ -3383,7 +3661,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 else if (gameState.era === 4) { skName = "[패킷 재전송 프로토콜]"; tpReq = 50; }
 
                 if (gameState.tp < tpReq) {
-                    addLog(`기술 기동 가동 차단: TP가 수급되지 않았습니다. (보유: ${gameState.tp} / 필요: ${tpReq})`, "system");
+                    addLog(`⚠️ TP가 부족해요. (보유 ${gameState.tp} / 필요 ${tpReq}) 퀴즈·미니게임으로 TP를 모으세요.`, "system");
                     return;
                 }
 
@@ -3394,7 +3672,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     gameState.currentEnemy.hp = Math.max(0, gameState.currentEnemy.hp - d);
                     showDamagePopup(`-${d} dB!`, "var(--accent-yellow)", "skill");
                     addLog("[파발 우회 전송] 기술 발동! 기상 이변(안개 잡음)으로 불빛 광학 통로가 차단되자 파발마들이 물리 우회 전송 선로를 구축 완료합니다.", "edu");
-                    addLog(`적의 차단을 통과해 보스의 중심 코어에 ${d} dB의 물리 패킷 피해를 가했습니다!`, "combat-p");
+                    addLog(`✨ 스킬 성공! 적에게 ${d} dB 피해를 줬어요.`, "combat-p");
                 } 
                 else if (gameState.era === 2) {
                     const d = Math.floor(gameState.bandwidth * 1.3);
@@ -3403,7 +3681,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     gameState.bossStunned = 2; // Stun
                     showDamagePopup(`-${d} dB! (STUN)`, "var(--accent-yellow)", "skill");
                     addLog("[모스 긴급 SOS] 기술 발동! 1비트의 가장 단순하고 명료한 도트(•)와 대시(—)로 '... --- ...' 긴급 구조 주파수를 동시 연타 가동합니다.", "edu");
-                    addLog(`적에게 ${d} dB 피해를 주고 메인 배터리를 55 수령하고, 전자기 쇼크로 적의 전도 회선을 일시 스턴시켰습니다!`, "combat-p");
+                    addLog(`✨ 스킬 성공! 적에게 ${d} dB 피해, 배터리 +55 회복, 적을 1턴 기절시켰어요.`, "combat-p");
                 } 
                 else if (gameState.era === 3) {
                     addLog("[주파수 분할 다중화(FDM)] 기술 발동! 보스의 전파 재밍 대역 혼선을 돌파하기 위해 가용 대역폭을 3개의 주파수 전송 채널로 잘라 분산 송출합니다.", "edu");
@@ -3414,7 +3692,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                         hitSum += hit;
                     }
                     showDamagePopup(`-${hitSum} dB! (FDM 3-HIT)`, "var(--accent-yellow)", "skill");
-                    addLog(`채널 조각별 동시 동조 타격으로 총 ${hitSum} dB의 가우시안 노이즈 덩어리를 정화시켰습니다!`, "combat-p");
+                    addLog(`✨ 스킬 성공! 3개 채널로 나눠 공격해 총 ${hitSum} dB 피해를 줬어요.`, "combat-p");
                 } 
                 else if (gameState.era === 4) {
                     gameState.hp = Math.min(gameState.maxHp, gameState.hp + 120);
@@ -3422,7 +3700,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     gameState.currentEnemy.hp = Math.max(0, gameState.currentEnemy.hp - d);
                     showDamagePopup(`-${d} dB! (TCP RECOVER)`, "var(--accent-yellow)", "skill");
                     addLog("[패킷 재전송 프로토콜(TCP ARQ)] 기술 발동! DDoS 폭탄 공격으로 드롭 및 유실된 패킷 조각을 검증 후 즉각 수신지에 자동 재송출합니다.", "edu");
-                    addLog(`신뢰성 회선 구축으로 배터리를 120 회생 완료하고, 양자 역학 결합 공격으로 보스에게 ${d} dB의 치명상 정화 타격을 입혔습니다!`, "combat-p");
+                    addLog(`✨ 스킬 성공! 배터리 +120 회복, 적에게 ${d} dB 피해를 줬어요.`, "combat-p");
                 }
 
                 playHitSound();
@@ -3461,7 +3739,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             try {
                 if (gameState.bossStunned > 0) {
                     gameState.bossStunned--;
-                    addLog(`⚙️ 잡음 소강 상태: 보스가 주입된 주파수 충격으로 통신 지연 오차에 포획되었습니다. (남은 지연: ${gameState.bossStunned}턴)`, "info");
+                    addLog(`💫 적이 기절해서 이번 턴을 쉬어요. (남은 기절: ${gameState.bossStunned}턴)`, "info");
                     gameState.battleTurn = 'player';
                     gameState.defending = false;
                     renderUI();
@@ -3481,12 +3759,12 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 const rng = Math.random() * 100;
 
                 if (rng < dodgeChance) {
-                    addLog(`💨 동조 회피 성공! 속도 주사 차이 덕택에 적 [${enemy.name}]의 노이즈 펄스를 수동으로 회피(Bypass) 우회 전송했습니다!`, "combat-p");
+                    addLog(`💨 회피 성공! 처리속도가 빨라 ${enemy.name}의 공격을 피했어요.`, "combat-p");
                     showDamagePopup(`EVADE!`, "var(--accent-green)", "player");
                     flashViewport("brightness(1.1) sepia(0.2) hue-rotate(90deg)", 150); // Greenish evade flash
                 } else {
                     gameState.hp = Math.max(0, gameState.hp - d);
-                    addLog(`💥 적 [${enemy.name}]의 혼선 전자기 테러! 배터리 세기 전하가 ${d} 만큼 깎여나갔습니다!`, "combat-e");
+                    addLog(`💥 ${enemy.name}의 공격! 배터리 -${d}`, "combat-e");
                     try { playHitSound(); } catch (e) {}
                     showDamagePopup(`-${d} HP`, "var(--accent-red)", "player");
                     flashViewport("brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(3)", 200); // Red damage flash
@@ -3510,18 +3788,19 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             gameState.currentEnemy = null;
 
             playVictorySound();
-            addLog(`🏆 완벽 조율! 통신 방해 적 [${enemy.name}]의 전자기 혼선을 완전히 정화 정쇄하였습니다!`, "system");
+            showBanner("🏆 승리!", enemy.isBoss ? `핵심 부품 [${ERAS[gameState.era].corePart}] 획득` : enemy.name, "var(--accent-green)");
+            addLog(`🏆 승리! ${enemy.name}을(를) 물리쳤어요.`, "system");
             
             gameState.tp += enemy.exp;
             gameState.gold += enemy.gold;
-            addLog(`중추 수리 전리품 수취: +${enemy.exp} TP (기술점수) 및 +${enemy.gold} G (예산)를 추가 융합합니다.`, "info");
+            addLog(`보상: +${enemy.exp} TP, +${enemy.gold} G`, "info");
 
             checkLevelUp();
 
             if (enemy.isBoss) {
                 gameState.collectedParts.push(gameState.era);
-                addLog(`🎉 위대한 도약 기틀 마련! 시대 결합 통신 복구 주 부품 [${ERAS[gameState.era].corePart}]를 가로채 모듈에 삽입 완료했습니다!`, "info");
-                addLog(`[시대 도약] 탭 메뉴에서 시공간 동기 주파수를 전개해 다음 시대로 안전 공조 도약을 개시할 수 있습니다.`, "system");
+                addLog(`🎉 핵심 부품 [${ERAS[gameState.era].corePart}]을(를) 얻었어요!`, "info");
+                addLog(`👉 [시대 도약] 탭을 눌러 다음 시대로 이동하세요.`, "system");
                 gameState.explorationProgress = 100;
             } else {
                 if (Math.random() < 0.45) {
@@ -3534,10 +3813,13 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     const drops = listPool[gameState.era];
                     const dropId = drops[Math.floor(Math.random() * drops.length)];
                     addItemToInventory(dropId);
-                    addLog(`회선 보수 흔적에서 예비 보조 자재 [${ITEMS[dropId].name}]을 획득 수습하였습니다.`, "info");
+                    addLog(`🎁 [${ITEMS[dropId].name}]을(를) 주웠어요.`, "info");
                 }
             }
 
+            if (enemy.isBoss) {
+                setResult(true, `🏆 보스 격파! 핵심 부품 [${ERAS[gameState.era].corePart}] 획득`, gameState.era < 4 ? "👉 [시대 도약] 탭을 눌러 다음 시대로 이동하세요." : "👉 [시대 도약] 탭에서 엔딩을 볼 수 있어요.");
+            }
             gameState.activeTab = "explore";
             updateSceneGraphics();
             renderUI();
@@ -3548,11 +3830,11 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             gameState.currentEnemy = null;
             playDefeatSound();
 
-            addLog(`💀 경보: 메인 배터리가 전고전압 방전되어 전령 시공 통신망이 전면 오프라인 차단되었습니다.`, "combat-e");
+            addLog(`💀 배터리가 모두 닳아 통신이 끊겼어요.`, "combat-e");
             
-            document.getElementById('end-title').innerText = "접속 선로 전면 오프라인 (Lost Conn)";
-            document.getElementById('end-desc').innerText = `[${ERAS[gameState.era].name}] 복구 도중 전력 완전 손실. 시간 통신 회로가 초기화되어 시공간 링크가 처음 시대로 회귀합니다.`;
-            document.getElementById('end-btn').innerText = "주파수 채널 처음부터 다시 동조 (Restart)";
+            document.getElementById('end-title').innerText = "통신 끊김 (Lost Connection)";
+            document.getElementById('end-desc').innerText = `[${ERAS[gameState.era].name}] 수리 중에 배터리(HP)가 모두 닳았어요. 처음 시대부터 다시 시작합니다. 💡 다음엔 상점에서 회복 아이템과 장비를 준비하고, [노이즈 필터링]으로 피해를 줄여 보세요.`;
+            document.getElementById('end-btn').innerText = "처음부터 다시 하기 (Restart)";
             document.getElementById('end-overlay').style.display = 'flex';
         }
 
@@ -3567,7 +3849,8 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 gameState.level++;
                 gameState.nextLevelTp = Math.floor(gameState.nextLevelTp * 1.5);
                 playLevelUpSound();
-                addLog(`⚡ 전령 숙련성 보완! LEVEL ${gameState.level}로 동기화 업링크 완료! 기본 수량 및 전자기 대역폭 한계가 향상됩니다.`, "system");
+                setTimeout(() => showBanner(`⬆️ LEVEL UP! Lv.${gameState.level}`, "최대 배터리·공격력·처리속도 상승", "var(--accent-yellow)"), 1400);
+                addLog(`⬆️ 레벨 업! Lv.${gameState.level} — 최대 배터리·공격력·처리속도가 올랐어요.`, "system");
             }
         }
 
@@ -3584,8 +3867,11 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             gameState.era++;
             gameState.explorationProgress = 0;
             gameState.activeTab = "explore";
+            gameState.lastResult = null;
+            gameState.shopOpen = false;
+            setTimeout(() => showBanner(`🚀 ERA ${gameState.era}`, `${ERAS[gameState.era].name} · ${ERAS[gameState.era].subtitle}`, "var(--accent-cyan)"), 500);
 
-            addLog(`🚀 슈우우우웅--- 파지지직! 통신 연쇄가 개시되어 다음 시대 [${ERAS[gameState.era].name}] 차원으로 안전 공조 도약 도킹 완료했습니다!`, "system");
+            addLog(`🚀 ${ERAS[gameState.era].name}(으)로 이동했어요! 다시 [수리 탐색 진행]으로 이 시대를 수리하세요.`, "system");
             addLog(`[시대 브리핑] ${ERAS[gameState.era].info}`, "edu");
 
             updateSceneGraphics();
@@ -3596,7 +3882,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             playVictorySound();
             document.getElementById('end-title').innerText = "✨ 시간 네트워크 동축 수복 완수 ✨";
             document.getElementById('end-desc').innerText = `경하드립니다! 시간의 전령이여. 고대 아날로그 봉수 및 물리 파발로부터, 전선을 통과한 모스 직렬 전신, 공간을 점령한 고주파 라디오 전파, 그리고 우주의 레이저 광섬유 전반사 백본 및 양자 무결 암호화 네트워크까지 단절된 모든 세대를 영구 접속 동조 완료했습니다! 단절되었던 문명의 역사가 하나의 깨끗한 주파수 안에서 노래하기 시작합니다.`;
-            document.getElementById('end-btn').innerText = "대단원 완수: 처음부터 다시 복습";
+            document.getElementById('end-btn').innerText = "처음부터 다시 복습하기";
             document.getElementById('end-btn').onclick = () => {
                 location.reload();
             };
@@ -3651,6 +3937,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             playClickSound();
             document.getElementById('zoom-overlay').style.display = 'none';
         }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('zoom-overlay').style.display === 'flex') closeZoomCard();
+        });
 
         function getEraTextbookNotes(era) {
             if (era === 1) {
@@ -3681,7 +3970,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 return `
                     <b>📖 교과서 191~199쪽 - 광인터넷 백본망과 TCP/IP</b><br><br>
                     • <b>빛의 전반사 (Total Internal Reflection)</b>: 빛이 굴절율이 높은 코어에서 낮은 클래딩 매체로 주사될 때, 임계각 이상으로 쏘면 밖으로 굴절 탈출하지 않고 코어 내벽을 따라 100% 반사 주행하는 신비로운 광학 현상으로, 초고속 <b>광섬유 케이블</b>의 물리 기반입니다.<br><br>
-                    • <b>패킷 교환 방식 (Packet Switching)</b>: 대용량 데이터를 소형 데이터 조각 주머니인 **'패킷(Packet)'**으로 격자 분할한 뒤 송수신 IP 주소 헤더를 부착해, 유휴 통로로 영리하게 나누어 보내는 디지털 통신 방식입니다.<br><br>
+                    • <b>패킷 교환 방식 (Packet Switching)</b>: 대용량 데이터를 소형 데이터 조각 주머니인 <b>'패킷(Packet)'</b>으로 격자 분할한 뒤 송수신 IP 주소 헤더를 부착해, 유휴 통로로 영리하게 나누어 보내는 디지털 통신 방식입니다.<br><br>
                     • <b>3-Way Handshake (3단계 핸드셰이크)</b>: 전 가동 전에 송수신 포트가 세션 동축을 맺고자 SYN ➔ SYN-ACK ➔ ACK 순서의 신뢰 검증을 거치는 TCP 연결 핵심 규약 프로토콜입니다.<br><br>
                     • <b>라우터 (Router)</b>: 수신지 주소 IP 정보를 전송로 길목에서 포착하여, 혼잡하지 않은 최적의 지름길로 패킷을 안내 수송해 주는 분기점 통제 장치입니다.<br><br>
                     • <b>ARQ (자동 재전송 요구)</b>: 수신측 드롭 에러 위상을 수신지가 피드백 회신하면, 분실 및 오류 패킷 번호를 찾아 송신기가 자동으로 오류 회선을 무결 복구 순차 재전송하는 프로토콜입니다.
@@ -3708,7 +3997,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                             <div style="font-size:1.1rem; color:var(--accent-yellow); font-weight:bold; margin-bottom:8px;">🎯 목표 비트열: <span style="font-family:'Share Tech Mono', monospace; font-size:1.4rem; letter-spacing:3px; color:var(--accent-yellow); text-shadow:0 0 5px var(--accent-yellow);">[${gameState.ookTarget.join(', ')}]</span></div>
                             <div style="font-size:1rem; color:#fff;">현재 설정 상태: <span style="font-family:'Share Tech Mono', monospace; font-size:1.2rem; letter-spacing:3px;">[${gameState.ookCurrent.join(', ')}]</span></div>
                         </div>
-                        <p style="font-size:0.85rem; color:#aaa; line-height:1.4;">* 창을 닫은 뒤 아래 원래 조작 화면에서 T1, T2, T3 스위치를 설정하고 [신호 광학 송출]을 누르세요.</p>
+                        <p style="font-size:0.85rem; color:#aaa; line-height:1.4;">* 창을 닫은 뒤 T1·T2·T3 버튼으로 맞추고 [신호 송출]을 누르세요.</p>
                     `;
                 } else if (type === "Morse") {
                     title = "📟 한글 자모음 모스 부호화 크게 보기";
@@ -3725,8 +4014,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     leftColContent = `
                         <p style="margin-bottom:10px; font-size:1rem; color:#b3a7ef;">부품 결합 및 동조 회로 공명 실습입니다.</p>
                         <div style="background: rgba(255,255,255,0.03); border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0;">
-                            <div style="font-size:0.95rem; color:var(--accent-pink); font-weight:bold; margin-bottom:6px;">🔧 결합 목표 부품: ${gameState.phoneTargetPart}</div>
-                            <div style="font-size:0.9rem; color:#fff; line-height:1.4; font-style:italic;">"${gameState.phonePartDesc}"</div>
+                            <div style="font-size:0.95rem; color:#ff6fb1; font-weight:bold; margin-bottom:6px;">🔧 이 설명에 맞는 부품은?</div>
+                            <div style="font-size:1rem; color:#fff; line-height:1.5;">"${gameState.phonePartDesc}"</div>
+                            <div style="font-size:0.9rem; color:#cfc4ff; margin-top:6px;">보기: ${gameState.phoneOptions.join(' · ')}</div>
                         </div>
                         <div style="font-size:1.1rem; color:var(--accent-cyan); font-weight:bold; text-align:center; background:rgba(0,255,255,0.05); border:1px solid rgba(0,255,255,0.2); padding:8px; border-radius:6px;">
                             🎯 목표 공진 주파수: ${gameState.currentTuningTarget} MHz
@@ -3773,7 +4063,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <p style="font-size:0.85rem; color:#aaa; line-height:1.4;">* 교과 내용을 바탕으로 신중히 생각한 뒤, 창을 닫고 알맞은 정답 단추를 눌러 주십시오.</p>
                 `;
             } else {
-                addLog("🔍 현재 크게 보기(Zoom)할 수 있는 미니게임이나 퀴즈가 비활성화 상태입니다.", "system");
+                addLog("🔍 지금은 크게 볼 퀴즈나 미니게임이 없어요.", "system");
                 return;
             }
 
@@ -3785,9 +4075,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                         ${leftColContent}
                     </div>
                     <!-- Right Column (Textbook Companion Study Guide) -->
-                    <div style="flex: 0.8; min-width: 200px; background: rgba(155, 130, 243, 0.05); border: 1.5px solid rgba(155, 130, 243, 0.35); border-radius: 8px; padding: 12px; box-sizing: border-box; box-shadow: inset 0 0 10px rgba(0,0,0,0.65); max-height: 240px; overflow-y: auto;">
+                    <div style="flex: 0.8; min-width: 220px; background: rgba(155, 130, 243, 0.05); border: 1.5px solid rgba(155, 130, 243, 0.35); border-radius: 8px; padding: 12px; box-sizing: border-box;">
                         <h4 style="color: var(--accent-pink); font-size: 0.9rem; margin-top: 0; margin-bottom: 10px; font-weight: bold; border-bottom: 1px dashed rgba(255, 0, 127, 0.45); padding-bottom: 5px; display: flex; align-items: center; gap: 4px;">📖 교과서 핵심 참조 바인더</h4>
-                        <div style="font-size: 0.8rem; color: #d6ccff; line-height: 1.5; word-break: keep-all;">
+                        <div style="font-size: 0.9rem; color: #d6ccff; line-height: 1.6; word-break: keep-all;">
                             ${textbookNotes}
                         </div>
                     </div>
