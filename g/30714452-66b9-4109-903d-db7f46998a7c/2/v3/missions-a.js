@@ -277,7 +277,8 @@
       const g = w.children[1]; if (g) { g.style.background = '#f6f2e8'; g.style.color = 'var(--sub)'; g.style.borderColor = 'var(--line)'; }
       w.querySelectorAll('strong').forEach(x => { if (x.style.color) x.style.color = '#9a5a17'; });
       w.querySelectorAll('span[style*="0e1720"]').forEach(x => { x.style.background = '#fff8ea'; x.style.borderColor = '#e8cfa6'; x.style.color = '#9a5a17'; });
-      const fb = w.querySelector('[data-k=feedback]'); if (fb) new MutationObserver(() => { if (fb.style.color === 'rgb(107, 227, 155)' || fb.style.color === '#6be39b') { fb.style.color = '#4d8a3a'; if (!fb.dataset.v3) { fb.dataset.v3 = 1; fb.insertAdjacentHTML('beforeend', '<br><span style="color:#3f7fa8">■ 파랑: 누르는 힘(압축)</span> · <span style="color:#e0802a">■ 주황: 당기는 힘(인장)</span>'); } } else if (fb.style.color) { fb.dataset.v3 = ''; } }).observe(fb, { attributes: true, childList: true });
+      // 시험 통과 문구가 나오면 힘 색 설명을 한 번만 덧붙인다 (글자 변화만 지켜봐서 무한 반복을 막는다)
+      const fb = w.querySelector('[data-k=feedback]'); if (fb) new MutationObserver(() => { if (fb.textContent.includes('통과') && !fb.querySelector('.v3-legend')) { fb.style.color = '#4d8a3a'; fb.insertAdjacentHTML('beforeend', '<br><span class="v3-legend"><span style="color:#3f7fa8">■ 파랑: 누르는 힘(압축)</span> · <span style="color:#e0802a">■ 주황: 당기는 힘(인장)</span></span>'); } }).observe(fb, { childList: true });
     });
     go.disabled = true;
   };

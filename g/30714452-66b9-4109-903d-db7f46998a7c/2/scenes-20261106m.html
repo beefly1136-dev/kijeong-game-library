@@ -3236,7 +3236,8 @@ window.LEARNING_CONTENT = [
   const characterSprites=typeof Image!=='undefined'?new Image():null;
   const cleanWalkSprites=typeof Image!=='undefined'?new Image():null;
   const build4Sprites=typeof Image!=='undefined'?new Image():null;
-  const v3Sprites=typeof Image!=='undefined'?new Image():null;if(v3Sprites){v3Sprites.onload=()=>render();v3Sprites.src='assets/v3/characters.webp';}
+  const v3Sprites=typeof Image!=='undefined'?new Image():null;
+  const v3PetMonkey=typeof Image!=='undefined'?new Image():null,v3PetBird=typeof Image!=='undefined'?new Image():null;if(v3PetMonkey){v3PetMonkey.onload=()=>render();v3PetMonkey.src='assets/v3/pet-monkey.webp';v3PetBird.onload=()=>render();v3PetBird.src='assets/v3/pet-bird.webp';}if(v3Sprites){v3Sprites.onload=()=>render();v3Sprites.src='assets/v3/characters.webp';}
   const objectSprites=typeof Image!=='undefined'?new Image():null;
   const cacheBust = "";
   if(typeof Image!=='undefined'){characterSprites.onload=()=>render();characterSprites.src = window.__ASSETS__['assets/portraits-castnchill.png'];cleanWalkSprites.onload=()=>render();cleanWalkSprites.src = window.__ASSETS__['assets/sprites/build10/characters-clean-walk.png'];build4Sprites.onload=()=>render();build4Sprites.src = window.__ASSETS__['assets/characters-build04.png'];objectSprites.onload=()=>render();objectSprites.src = window.__ASSETS__['assets/objects-castnchill.png'];}
@@ -3470,6 +3471,11 @@ window.LEARNING_CONTENT = [
   }
   function drawPlayer(){const x=player.x*tile,y=player.y*tile,walking=player.moving&&dialogEl.hidden&&panelEl.hidden;rect(x-8,y-3,16,4,'#27312c');if(drawCharacterSprite('player',x,y,player.face,walking?player.step:-1))return;const bob=walking&&Math.floor(player.step)%2?1:0;rect(x-4,y-7+bob,8,13,'#91b89b');rect(x-4,y-12+bob,8,7,'#e0bd99');rect(x-5,y-13+bob,10,4,'#d8e7d5');rect(x-3,y+5,3,4,'#3e493f');rect(x+1,y+5,3,4,'#3e493f');const ex=player.face==='left'?-3:player.face==='right'?2:0,ey=player.face==='up'?-11:-8;rect(x+ex,y+ey+bob,2,2,'#29322d');}
   function drawPetMonkey(x,y,face,step,moving){
+    if(v3PetMonkey&&v3PetMonkey.complete&&v3PetMonkey.naturalWidth){
+      const hop=moving?Math.round(Math.abs(Math.sin(step*4))*-3):Math.round(Math.abs(Math.sin(step*1.5))*-1),w=17,h=21;
+      ctx.save();ctx.fillStyle='rgba(0,0,0,0.22)';ctx.beginPath();ctx.ellipse(x,y+2,7,2.5,0,0,Math.PI*2);ctx.fill();
+      ctx.translate(Math.round(x),Math.round(y+2+hop));if(face==='left')ctx.scale(-1,1);ctx.imageSmoothingEnabled=true;ctx.drawImage(v3PetMonkey,-w/2,-h,w,h);ctx.restore();return;
+    }
     const flip=face==='left'?-1:1;
     function pRect(rx,ry,rw,rh,color){rect(x+(flip===-1?-rx-rw:rx),y+ry,rw,rh,color);}
     const bob=moving?Math.round(Math.abs(Math.sin(step*3.5))*-2):Math.round(Math.abs(Math.sin(step*1.5))*-1);
@@ -3506,6 +3512,10 @@ window.LEARNING_CONTENT = [
   }
   function drawPet(){const x=pet.x*tile,y=pet.y*tile;drawPetMonkey(x,y,pet.face,pet.step,pet.moving);}
   function drawPetBird(x,y,face,wingStep,flying){
+    if(v3PetBird&&v3PetBird.complete&&v3PetBird.naturalWidth){
+      const hov=Math.round(Math.sin(wingStep*2.0)*2),flap=flying?1+Math.sin(wingStep*7)*0.12:1,w=14,h=12;
+      ctx.save();ctx.translate(Math.round(x),Math.round(y+hov));if(face!=='left')ctx.scale(-1,1);if(flying)ctx.rotate(-0.12);ctx.scale(1,flap);ctx.imageSmoothingEnabled=true;ctx.drawImage(v3PetBird,-w/2,-h,w,h);ctx.restore();return;
+    }
     const flip=face==='left'?-1:1;
     function bRect(rx,ry,rw,rh,color){rect(x+(flip===-1?-rx-rw:rx),y+ry,rw,rh,color);}
     const flap=Math.sin(wingStep*3.5);
