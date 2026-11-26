@@ -150,7 +150,12 @@
     decorate: { name: '꾸미기', stat: 'charm', amt: 12, extra: { love: 3 }, res: 'decor', resName: '장식', ga: '이', icon: '🎀' },
     pet: { name: '쓰다듬기', stat: 'love', amt: 1, cap: 20, res: null, icon: '💗' }
   };
-  P.RES_FROM = function (res) { return BPF_DATA.games.filter(g => g.reward[res]).map(g => g.short); };
+  P.RES_FROM = function (res) {
+    // 열린 게임을 먼저 알려 준다(잠긴 게임만 알려 주면 학생이 헤맨다)
+    const all = BPF_DATA.games.filter(g => g.reward[res]);
+    const open = all.filter(g => BPF.save.isUnlocked(g.id));
+    return (open.length ? open : all).map(g => g.short);
+  };
   P.interact = function (petId, act) {
     const d = S(), pet = d.pets[petId], A = P.ACTIONS[act];
     const nm = { love: '애정', health: '건강', charm: '매력', know: '지식' };

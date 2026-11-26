@@ -53,11 +53,26 @@
     GAME_IDS.forEach(g => { if ((d.best[g].plays > 0 || d.best[g].clears > 0) && !d.unlockedGames.includes(g)) d.unlockedGames.push(g); });
     const target = UNLOCK_COUNT[d.villageStage] || 10;
     const added = [];
-    const pick = g => { if (d.unlockedGames.length < target && !d.unlockedGames.includes(g)) { d.unlockedGames.push(g); added.push(g); } };
+    const force = g => { if (g && !d.unlockedGames.includes(g)) { d.unlockedGames.push(g); added.push(g); } };
+    const pick = g => { if (d.unlockedGames.length < target) force(g); };
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    // ① 육성 재료 3종(먹이·연구키트·장식)을 얻을 게임이 각각 최소 1개는 열려 있게 한다.
+    //    (처음 3개가 랜덤이라 먹이 게임이 하나도 없으면 건강을 못 올려 1단계 진화·승급이 막히던 문제)
+    const games = (BPF_DATA.games || []);
+    ['food', 'research', 'decor'].forEach(res => {
+      const from = games.filter(G => G.reward && G.reward[res]).map(G => G.id);
+      if (from.length && !from.some(g => d.unlockedGames.includes(g))) force(shuffle(from.slice())[0]);
+    });
+    // ② 입양한 동물의 다음 진화에 필요한 전용 의뢰·엔딩 임무 게임은 바로 연다.
+    PET_IDS.forEach(p => {
+      const pt = d.pets[p], P = (BPF_DATA.pets || {})[p];
+      if (!pt || !pt.adopted || !P) return;
+      if (pt.stage >= 3 && P.mission4) force(P.mission4.game);
+      if (pt.stage >= 4 && P.mission5) force(P.mission5.game);
+    });
+    // ③ 승급한 단계의 의뢰에 필요한 게임 → ④ 나머지는 랜덤
     if (d.villageStage > 1) for (let s = 2; s <= d.villageStage; s++) stageNeeds(s).forEach(pick);
-    const rest = GAME_IDS.filter(g => !d.unlockedGames.includes(g));
-    for (let i = rest.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [rest[i], rest[j]] = [rest[j], rest[i]]; }
-    rest.forEach(pick);
+    shuffle(GAME_IDS.filter(g => !d.unlockedGames.includes(g))).forEach(pick);
     return added;
   }
   // 깊은 병합(누락된 키 보충)
