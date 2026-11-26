@@ -302,7 +302,7 @@
         .turn-banner.mine { color: #fff; background: #2f9e55; }
         .turn-banner.enemy { color: #fff; background: #c92a3a; animation: turn-blink 0.9s ease-in-out infinite alternate; }
         @keyframes turn-blink { from { opacity: 1; } to { opacity: 0.7; } }
-        .skill-btn { grid-column: span 2; border-color: #8fcbd6 !important; background-color: #dfeaea !important; gap: 8px; }
+        .skill-btn { grid-column: 1 / -1; border-color: #8fcbd6 !important; background-color: #dfeaea !important; gap: 8px; }
         .skill-name { color: var(--accent-cyan); }
 
         /* 시작·끝 화면 */
@@ -406,9 +406,50 @@
             .zoom-head, #zoom-body, .zoom-foot { padding-left: 12px; padding-right: 12px; }
             #zoom-body { font-size: 1rem; }
         }
+        /* 휴대폰 세로: 조작판을 로그보다 위로, 좁은 칸 정리 */
+        @media (max-width: 600px) {
+            .terminal-container { order: 6; height: 140px; }
+            .game-header .subtitle { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .game-header .title-area { min-width: 0; }
+            .header-btn { min-height: 36px; white-space: nowrap; }
+            #html-combat-hud { display: none !important; }
+            .act-btn { min-height: 44px; }
+        }
+        @media (max-width: 480px) {
+            .explore-grid { grid-template-columns: 1fr; }
+            .explore-grid > .act-btn { min-height: 84px !important; }
+            .explore-grid > div { flex-direction: row !important; }
+            .explore-grid > div > .act-btn { flex: 1; justify-content: center; text-align: center; }
+            .grid-2col.shop-grid { grid-template-columns: 1fr; }
+        }
         @media (max-width: 400px) {
             html { font-size: 15px; }
             .tab-btn { font-size: 0.8rem; }
+        }
+
+        /* 휴대폰 가로: 그림과 조작판을 나란히 */
+        @media (orientation: landscape) and (max-height: 520px) and (min-width: 640px) {
+            body { padding: 4px; align-items: flex-start; }
+            .console-container { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto 1fr; padding: 6px; gap: 6px; max-width: 100%; }
+            .game-header { grid-column: 1 / -1; padding: 5px 10px; }
+            .game-header h1 { font-size: 1rem; }
+            .col-left, .col-right { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+            .col-left .screen-area { order: 1; }
+            .col-left .terminal-container { height: auto; flex: 1 1 0; min-height: 70px; order: 2; }
+            .col-right .grid-2col:not(.quiz-answers) { grid-template-columns: 1fr; }
+            .col-right .explore-grid > div { flex-direction: row !important; }
+            .col-right .explore-grid > .act-btn { min-height: 70px !important; }
+            .tab-btn { white-space: nowrap; }
+            .col-right { max-height: calc(100dvh - 60px); overflow-y: auto; }
+            .status-pane { padding: 6px 10px; }
+            .stat-card { padding: 2px; }
+            .control-panel { padding: 6px 8px; }
+            .tab-btn { flex-direction: row; padding: 6px 4px; gap: 4px; font-size: 0.82rem; }
+            .main-tabs { margin-bottom: 6px; }
+            #html-combat-hud { display: none !important; }
+            .start-screen { flex-direction: row; flex-wrap: wrap; }
+            .start-screen .start-cover { max-width: 46%; }
+            .start-screen .start-steps { max-width: 46%; grid-template-columns: repeat(2, 1fr); }
         }
 
         /* 노트북·PC: 2단 배치 (왼쪽 그림·로그 / 오른쪽 상태·조작) */
@@ -2073,7 +2114,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                                 <span>🛡️ 노이즈 필터링</span>
                                 <span class="badge">피해 50%↓</span>
                             </button>
-                            <button class="act-btn" style="grid-column: span 2; border-color:var(--accent-cyan); background-color:#dfeaea; gap:8px;" onclick="battleAction('skill')" ${myTurn && !lackTp ? '' : 'disabled'}>
+                            <button class="act-btn" style="grid-column: 1 / -1; border-color:var(--accent-cyan); background-color:#dfeaea; gap:8px;" onclick="battleAction('skill')" ${myTurn && !lackTp ? '' : 'disabled'}>
                                 <div class="item-main">
                                     <span style="color:var(--accent-cyan);">✨ 교과 스킬: ${sk.name}</span>
                                     <span class="item-desc">${sk.concept} <b style="color: var(--ink);">효과: ${sk.effect}</b></span>
@@ -2279,7 +2320,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     <span>🏪 ${ERAS[gameState.era].name} 부품 상점</span>
                     <span>💰 보유 ${gameState.gold} G</span>
                 </div>
-                <div class="grid-2col">
+                <div class="grid-2col shop-grid">
             `;
             shopItems.forEach(itemId => {
                 const item = ITEMS[itemId];
@@ -2297,7 +2338,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 `;
             });
             html += `
-                <button class="act-btn" onclick="closeEraShop()" style="grid-column: span 2; justify-content:center; background:#eedde2; border-color:#b0306a;">
+                <button class="act-btn" onclick="closeEraShop()" style="grid-column: 1 / -1; justify-content:center; background:#eedde2; border-color:#b0306a;">
                     <span style="font-weight:bold; color:#b0306a;">⬅️ 상점 나가기</span>
                 </button>
             </div>`;
