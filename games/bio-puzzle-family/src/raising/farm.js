@@ -99,6 +99,9 @@
       if (e.to === 5) {
         ui.alert(`${pet.name}의 엔딩`, D.ending + '\n\n(도서관에서 엔딩 앨범을 다시 볼 수 있어요)', () => BPF.go('album', { back: 'farm', pet: e.id, ending: true }));
       } else BPF.toast(`${pet.name}이(가) ${e.to}단계 「${D.stages[e.to - 1]}」(으)로 성장했어요!`, '#c2185b');
+      // 다음 진화에 필요한 전용 의뢰 게임이 잠겨 있으면 바로 열어 준다
+      const opened = BPF.save.ensureUnlocks();
+      if (opened.length) setTimeout(() => BPF.toast('🔓 새 미니게임이 열렸어요: ' + opened.map(g => BPF_DATA.games.find(G => G.id === g).short).join(', '), '#2e7d32'), 1800);
     },
     draw(ctx) {
       const d = BPF.save.data, id = this.cur; if (!id) return;
