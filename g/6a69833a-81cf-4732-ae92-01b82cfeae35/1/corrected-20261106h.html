@@ -450,6 +450,74 @@
             .start-screen { flex-direction: row; flex-wrap: wrap; }
             .start-screen .start-cover { max-width: 46%; }
             .start-screen .start-steps { max-width: 46%; grid-template-columns: repeat(2, 1fr); }
+            html, body { height: 100%; overflow: hidden; }
+            body { padding: 0; display: block; min-height: 0; }
+            .console-container { height: 100vh; height: 100dvh; grid-template-rows: auto minmax(0, 1fr); border-radius: 0; border: 0; }
+            .col-left, .col-right { min-height: 0; }
+            .col-right { max-height: none; overflow-y: auto; overscroll-behavior: contain; }
+            .game-header .title-area { display: flex; align-items: baseline; gap: 8px; }
+            .game-header .subtitle { margin: 0; font-size: 0.8rem; }
+            .header-btn { padding: 2px 8px; font-size: 0.78rem; min-height: 30px; }
+            html.play-focus .status-pane .stat-cards { display: none !important; }
+            .overlay-screen { overflow-y: auto; }
+        }
+
+        /* 휴대폰 세로: 스크롤 없이 한 화면에 (조작판 안에서만 넘김) */
+        @media (max-width: 600px) and (orientation: portrait) {
+            html, body { height: 100%; overflow: hidden; }
+            body { padding: 0; display: block; min-height: 0; }
+            .console-container { height: 100vh; height: 100dvh; max-width: none; border-radius: 0; border: 0; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); gap: 5px; }
+            .console-container > *, .col-left > *, .col-right > * { flex-shrink: 0; }
+            .game-header { padding: 4px 8px; gap: 6px; }
+            .game-header .title-area { display: flex; align-items: baseline; gap: 6px; flex: 1; }
+            .game-header h1 { font-size: 0.95rem; white-space: nowrap; }
+            .game-header .subtitle { font-size: 0.74rem; margin: 0; }
+            .header-right { gap: 4px; }
+            .header-btn { min-height: 30px; padding: 2px 6px; font-size: 0.7rem; }
+            .terminal-container { order: 2; height: 44px; padding: 3px 9px; }
+            .terminal-log { font-size: 0.84rem; line-height: 1.4; gap: 2px; }
+            .status-pane { order: 3; padding: 5px 8px; gap: 5px; }
+            .status-pane > .status-column:first-child { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 6px; }
+            .status-pane .stat-row { display: contents; }
+            .status-pane .stat-label { font-size: 0.78rem; order: 1; }
+            .status-pane .bar-outer { order: 2; height: 9px; margin: 0; }
+            .status-pane #hp-text { order: 3; font-size: 0.82rem; }
+            .status-pane #player-level-box { order: 4; font-size: 0.82rem; padding-left: 6px; border-left: 1px solid var(--line); }
+            .status-pane .stat-row + .bar-outer + .stat-row .stat-label { display: none; }
+            .stat-cards { padding-top: 4px; gap: 4px; }
+            .stat-card { padding: 1px 2px; border-radius: 7px; }
+            .stat-card-label { font-size: 0.64rem; margin: 0; line-height: 1.3; }
+            .stat-card-val { font-size: 0.82rem; line-height: 1.25; white-space: nowrap; }
+            #enemy-status-pane { order: 4; padding: 5px 10px; gap: 3px; }
+            .enemy-pane-name, .enemy-pane-hp { font-size: 0.86rem; }
+            .enemy-pane-stats { font-size: 0.76rem; gap: 2px 10px; }
+            .control-panel { order: 5; flex: 1 1 0; flex-shrink: 1; min-height: 0; display: flex; flex-direction: column; padding: 6px; }
+            .main-tabs { gap: 4px; margin-bottom: 6px; flex-shrink: 0; }
+            .tab-btn { gap: 0; padding: 3px 1px; font-size: 0.7rem; white-space: nowrap; line-height: 1.25; border-radius: 8px; }
+            .tab-btn .tab-icon { font-size: 0.95rem; }
+            .actions-box { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 7px; gap: 6px; }
+            .explore-grid { gap: 6px !important; }
+            .explore-grid > .act-btn { min-height: 58px !important; padding-top: 6px; padding-bottom: 6px; }
+            .mission-card { padding: 6px 10px; gap: 0; }
+            .mission-card .era-map, .mission-card .mission-title { display: none; }
+            .mission-list li:not(.now) { display: none; }
+            .mission-list li { font-size: 0.84rem; }
+            .overlay-screen { overflow-y: auto; }
+            html.play-busy .screen-area { aspect-ratio: 16 / 6; }
+            html.play-busy #explore-progress-box { top: 3px; right: 3px; padding: 2px 6px 3px; }
+            .enemy-pane-stats { display: none; }
+            html.play-focus .status-pane .stat-cards { display: none !important; }
+            html.play-busy .terminal-container { height: 40px; }
+            .panel-head, .minigame-title-bar { flex-wrap: nowrap !important; gap: 6px; }
+            .panel-head > span:first-child > span, .minigame-reward { font-size: 0.72rem !important; }
+            .zoom-btn { padding: 2px 7px; font-size: 0.74rem; }
+            html.play-focus .terminal-container { display: none; }
+            .minigame-title-bar { font-size: 0.92rem; padding-bottom: 4px; }
+            .minigame-view .tuning-btn { min-height: 42px; }
+            .quiz-title { font-size: 1rem; line-height: 1.45; }
+            .quiz-hint { font-size: 0.82rem; padding: 4px 8px; line-height: 1.4; }
+            .grid-2col.quiz-answers { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .quiz-answers .act-btn { min-height: 46px; padding: 6px 8px; font-size: 0.9rem; }
         }
 
         /* 노트북·PC: 2단 배치 (왼쪽 그림·로그 / 오른쪽 상태·조작) */
@@ -1908,7 +1976,17 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
         }
 
         /* HIGHLY INTERACTIVE MINIGAMES PER ERA */
+        function syncBusyLayout() {
+            // 퀴즈·미니게임·전투·상점 중에는 휴대폰 세로에서 그림을 낮게 잘라 조작 칸을 넓힘
+            const busy = !!(gameState.activeQuiz || gameState.minigameActive || gameState.inBattle || gameState.shopOpen);
+            document.documentElement.classList.toggle('play-busy', busy);
+            document.documentElement.classList.toggle('play-focus', !!((gameState.activeQuiz || gameState.minigameActive) && !gameState.inBattle));
+            const svg = document.getElementById('visual-viewport');
+            if (svg) svg.setAttribute('preserveAspectRatio', busy ? 'xMidYMid slice' : 'none');
+        }
+
         function renderContextActions() {
+            syncBusyLayout();
             const box = document.getElementById('actions-box');
             const prevView = box.dataset.view || "";
             let view = gameState.activeTab;
