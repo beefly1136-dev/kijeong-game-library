@@ -211,6 +211,27 @@
         .act-btn .badge { font-size: 0.82rem; color: #7a4f00; font-weight: 700; border: 1px solid #ecc86a; padding: 2px 7px; border-radius: 6px; background-color: #f1e4c2; white-space: nowrap; }
         .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
         .mg-tip { font-size: 0.92rem; color: var(--ink-2); background: var(--brand-soft); border-radius: 8px; padding: 7px 10px; line-height: 1.5; word-break: keep-all; }
+        .explore-grid { flex: 0 0 auto; }
+        .explore-grid > div > .act-btn { min-height: 52px; }
+        .mission-card { background: var(--panel-bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+        .era-map { display: flex; align-items: center; }
+        .era-node { display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; }
+        .era-dot { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; background: var(--panel-2); border: 2px solid var(--line-strong); color: var(--ink-3); }
+        .era-node.now .era-dot { border-color: var(--brand); background: var(--brand-soft); box-shadow: 0 0 0 3px rgba(90, 79, 168, 0.18); }
+        .era-node.done .era-dot { border-color: var(--accent-green); background: #dcebd9; color: var(--accent-green); font-weight: 900; }
+        .era-name { font-size: 0.78rem; font-weight: 700; color: var(--ink-3); }
+        .era-node.now .era-name { color: var(--brand-dark); }
+        .era-line { flex: 1; height: 3px; background: var(--line-strong); margin: 0 4px 16px; border-radius: 2px; }
+        .mission-title { font-weight: 800; color: var(--ink); font-size: 0.95rem; }
+        .mission-list { list-style: none; display: flex; flex-direction: column; gap: 5px; margin: 0; padding: 0; }
+        .mission-list li { display: flex; align-items: center; gap: 8px; font-size: 0.93rem; color: var(--ink-3); }
+        .mission-list li > span:last-child { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 1; }
+        .mission-list li.now { color: var(--ink); font-weight: 700; }
+        .mission-list li.ok { color: var(--accent-green); }
+        .m-check { width: 20px; text-align: center; flex-shrink: 0; }
+        .m-bar { flex: 1; min-width: 60px; max-width: 180px; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+        .m-bar > span { display: block; height: 100%; background: linear-gradient(90deg, #f5b301, #f08c00); }
+        .m-pct { font-size: 0.85rem; color: #7a4f00; }
         .empty-action-text { color: var(--ink-2); text-align: center; margin: auto; font-size: 0.98rem; padding: 15px 0; line-height: 1.6; }
         .act-btn:disabled, .tuning-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
         .act-btn:disabled:hover { background-color: var(--panel-bg); border-color: var(--line-strong); color: var(--ink); }
@@ -1809,6 +1830,31 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             return gameState.minigameFeedback ? `<div class="mg-feedback">${gameState.minigameFeedback}</div>` : "";
         }
 
+        /* 이번 시대 목표 + 시대 지도 카드 */
+        function eraMissionHtml() {
+            const era = gameState.era;
+            const prog = gameState.explorationProgress;
+            const bossDone = gameState.collectedParts.includes(era);
+            const icons = { 1: '🔥', 2: '📟', 3: '📻', 4: '💡' };
+            const map = [1, 2, 3, 4].map(e => {
+                const cls = e < era || (e === era && bossDone) ? 'done' : (e === era ? 'now' : '');
+                return `<div class="era-node ${cls}"><span class="era-dot">${cls === 'done' ? '✔' : icons[e]}</span><span class="era-name">${ERAS[e].name.replace(' 시대', '')}</span></div>`;
+            }).join('<div class="era-line"></div>');
+            const step = (ok, now, text, extra = '') =>
+                `<li class="${ok ? 'ok' : (now ? 'now' : '')}"><span class="m-check">${ok ? '✔' : (now ? '▶' : '○')}</span><span>${text}${extra}</span></li>`;
+            const leapText = era < 4 ? '[시대 도약]으로 다음 시대 가기' : '엔딩 보기';
+            return `
+                <div class="mission-card">
+                    <div class="era-map">${map}</div>
+                    <div class="mission-title">🎯 이번 시대 목표</div>
+                    <ol class="mission-list">
+                        ${step(prog >= 100, prog < 100, '수리 진행률 100% 채우기', `<span class="m-bar"><span style="width:${prog}%"></span></span><b class="m-pct">${prog}%</b>`)}
+                        ${step(bossDone, prog >= 100 && !bossDone, `보스 <b>${BOSSES[era].name}</b> 물리치기`)}
+                        ${step(false, bossDone, leapText)}
+                    </ol>
+                </div>`;
+        }
+
         function minigameHead(title, reward) {
             return `
                 <div class="minigame-title-bar">
@@ -1981,7 +2027,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     const done = gameState.collectedParts.includes(gameState.era);
                     box.innerHTML = `
                         ${resultCardHtml()}
-                        <div class="grid-2col" style="flex:1;">
+                        <div class="grid-2col explore-grid">
                             <button class="act-btn" onclick="exploreRoute()" style="min-height: 110px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:4px; ${done ? '' : 'border:2px solid var(--accent-yellow);'}">
                                 <span style="font-size:1.6rem;">🚜</span>
                                 <span>수리 탐색 진행</span>
@@ -1994,10 +2040,10 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                                 </button>
                                 <button class="act-btn" onclick="readEduConcept()" style="flex:1;">
                                     <span>📚 교과서 정리 보기</span>
-                                    
                                 </button>
                             </div>
                         </div>
+                        ${eraMissionHtml()}
                     `;
                 }
             }
