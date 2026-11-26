@@ -3237,7 +3237,8 @@ window.LEARNING_CONTENT = [
   const cleanWalkSprites=typeof Image!=='undefined'?new Image():null;
   const build4Sprites=typeof Image!=='undefined'?new Image():null;
   const v3Sprites=typeof Image!=='undefined'?new Image():null;
-  const v3PetMonkey=typeof Image!=='undefined'?new Image():null,v3PetBird=typeof Image!=='undefined'?new Image():null;if(v3PetMonkey){v3PetMonkey.onload=()=>render();v3PetMonkey.src='assets/v3/pet-monkey.webp';v3PetBird.onload=()=>render();v3PetBird.src='assets/v3/pet-bird.webp';}if(v3Sprites){v3Sprites.onload=()=>render();v3Sprites.src='assets/v3/characters.webp';}
+  const v3PetMonkey=typeof Image!=='undefined'?new Image():null,v3PetBird=typeof Image!=='undefined'?new Image():null;if(v3PetMonkey){v3PetMonkey.onload=()=>render();v3PetMonkey.src='assets/v3/pet-monkey.webp';v3PetBird.onload=()=>render();v3PetBird.src='assets/v3/pet-bird.webp';}
+  const v3Props=typeof Image!=='undefined'?new Image():null,v3BirdFly=typeof Image!=='undefined'?new Image():null,V3_PROP_INDEX={signal:0,safetyLog:1,restoreLog:2,historyRecord:3,bridgeDesign:4,approvalTrail:5,homePlan:6,routePlan:7,shelterPlan:8,materialsLog:9,equipmentLog:10,processLog:11,floodMark:12,inspectionGap:13,evacuationMap:14,powerPlan:15,waterPlan:16,greenPlan:17,planningBoard:18};if(v3Props){v3Props.onload=()=>render();v3Props.src='assets/v3/props.webp';v3BirdFly.onload=()=>render();v3BirdFly.src='assets/v3/pet-bird-fly.webp';}if(v3Sprites){v3Sprites.onload=()=>render();v3Sprites.src='assets/v3/characters.webp';}
   const objectSprites=typeof Image!=='undefined'?new Image():null;
   const cacheBust = "";
   if(typeof Image!=='undefined'){characterSprites.onload=()=>render();characterSprites.src = window.__ASSETS__['assets/portraits-castnchill.png'];cleanWalkSprites.onload=()=>render();cleanWalkSprites.src = window.__ASSETS__['assets/sprites/build10/characters-clean-walk.png'];build4Sprites.onload=()=>render();build4Sprites.src = window.__ASSETS__['assets/characters-build04.png'];objectSprites.onload=()=>render();objectSprites.src = window.__ASSETS__['assets/objects-castnchill.png'];}
@@ -3331,7 +3332,7 @@ window.LEARNING_CONTENT = [
   function saveSnapshot(){return {version:1,profile,currentMap,player:{x:player.x,y:player.y,face:player.face},missions:Object.fromEntries(Object.entries(missions).map(([id,state])=>[id,{status:state.status,records:[...state.records]}])),inventory:[...inventory],storyClues:[...storyClues],unlockedRegions:[...unlockedRegions],visitedRegions:[...visitedRegions],learnedConcepts:[...learnedConcepts],bridgeIntroSeen,experience,planChoices,ending,mgStats,adminUsed,rebuildOutcome,report:reportDraft(),savedAt:Date.now()};}
   function saveGame(){if(!saveEnabled||!gameStarted)return false;try{const storage=window.localStorage;if(!storage){setSaveStatus('저장 기능을 사용할 수 없음');return false;}storage.setItem(saveKeyFor(profile),JSON.stringify(saveSnapshot()));setSaveStatus('저장 완료');return true;}catch(error){setSaveStatus('저장 실패');toastMessage('저장 공간에 접근할 수 없습니다. 브라우저 설정을 확인하세요.');return false;}}
   function loadGame(){try{const storage=window.localStorage,raw=storage?.getItem(saveKeyFor(profile));if(!raw)return false;const data=JSON.parse(raw);if(data.version!==1||!maps[data.currentMap]||!data.missions||!data.player)throw new Error('unsupported save');
-    currentMap=data.currentMap;player.x=clamp(Number(data.player.x)||7.5,1.5,cols-1.5);player.y=clamp(Number(data.player.y)||16.5,1.5,rows-1.5);player.face=['up','down','left','right'].includes(data.player.face)?data.player.face:'down';
+    currentMap=data.currentMap;player.x=clamp(Number(data.player.x)||7.5,1.5,cols-1.5);player.y=clamp(Number(data.player.y)||16.5,1.5,rows-1.5);if(currentMap!=='bridge'&&player.y<17.2)player.y=GROUND_Y;player.face=['up','down','left','right'].includes(data.player.face)?data.player.face:'down';
     pet.x=player.x+(player.face==='right'?-1.1:1.1);pet.y=player.y;pet.face=player.face;pet.moving=false;birdPet.x=player.x+(player.face==='right'?-0.6:0.6);birdPet.y=player.y-3.4;birdPet.face=player.face;birdPet.flying=false;
     for(const [id,state] of Object.entries(data.missions)){if(!missions[id]||!['locked','offered','active','available','complete'].includes(state.status))continue;missions[id].status=state.status;missions[id].records=new Set(Array.isArray(state.records)?state.records.filter(record=>content.missions[id].recordIds.includes(record)):[]);}
     inventory.clear();for(const [name,count] of Array.isArray(data.inventory)?data.inventory:[])if(typeof name==='string'&&Number(count)>0)inventory.set(name,Number(count));
@@ -3512,6 +3513,12 @@ window.LEARNING_CONTENT = [
   }
   function drawPet(){const x=pet.x*tile,y=pet.y*tile;drawPetMonkey(x,y,pet.face,pet.step,pet.moving);}
   function drawPetBird(x,y,face,wingStep,flying){
+    if(v3BirdFly&&v3BirdFly.complete&&v3BirdFly.naturalWidth){
+      // 날갯짓 4장면을 돌려 그린다 (움직일 때 빠르게, 제자리에서는 천천히)
+      const fr=Math.floor(wingStep)%4,hov=Math.round(Math.sin(wingStep*0.9)*1.5),w=17,h=13.6,fw=v3BirdFly.naturalWidth/4;
+      ctx.save();ctx.fillStyle='rgba(0,0,0,0.12)';ctx.beginPath();ctx.ellipse(x,Math.round(player.y*tile+2),5,1.6,0,0,Math.PI*2);ctx.fill();
+      ctx.translate(Math.round(x),Math.round(y+hov));if(face!=='left')ctx.scale(-1,1);if(flying)ctx.rotate(-0.08);ctx.imageSmoothingEnabled=true;ctx.drawImage(v3BirdFly,fr*fw,0,fw,v3BirdFly.naturalHeight,-w/2,-h,w,h);ctx.restore();return;
+    }
     if(v3PetBird&&v3PetBird.complete&&v3PetBird.naturalWidth){
       const hov=Math.round(Math.sin(wingStep*2.0)*2),flap=flying?1+Math.sin(wingStep*7)*0.12:1,w=14,h=12;
       ctx.save();ctx.translate(Math.round(x),Math.round(y+hov));if(face!=='left')ctx.scale(-1,1);if(flying)ctx.rotate(-0.12);ctx.scale(1,flap);ctx.imageSmoothingEnabled=true;ctx.drawImage(v3PetBird,-w/2,-h,w,h);ctx.restore();return;
@@ -3561,7 +3568,13 @@ window.LEARNING_CONTENT = [
   function drawInvestigationObject(object,collected=false){
     const x=object.x*tile,y=object.y*tile,index=maps[currentMap].objects.indexOf(object);
     const mapCol={hub:0,lab:1,home:3,site:4,safe:5,eco:6,final:7}[currentMap]??0;
-    if(objectSprites?.complete&&objectSprites.naturalWidth){
+    const propIndex=V3_PROP_INDEX[object.id];
+    if(propIndex!==undefined&&v3Props?.complete&&v3Props.naturalWidth){
+      const cw=v3Props.naturalWidth/19,ch=v3Props.naturalHeight;
+      ctx.save();if(collected)ctx.globalAlpha=0.72;ctx.imageSmoothingEnabled=true;
+      ctx.drawImage(v3Props,propIndex*cw,0,cw,ch,Math.round(x-22),Math.round(y-30),44,40);
+      ctx.restore();
+    }else if(objectSprites?.complete&&objectSprites.naturalWidth){
       const sx=((mapCol+index)%8)*64,sy=(index%3)*64;
       ctx.save();if(collected)ctx.globalAlpha=0.72;ctx.imageSmoothingEnabled=false;
       ctx.drawImage(objectSprites,sx,sy,64,64,Math.round(x-20),Math.round(y-26),40,36);
@@ -3650,8 +3663,8 @@ window.LEARNING_CONTENT = [
       if(missions.bridge.status!=='complete'&&x>=22&&x<=35) return true;
       return false;
     }
-    const minY = isTestHarness ? 8 : 15;
-    if(x<1 || y<=minY || x>=cols-1 || y>=22) return true;
+    const minY = isTestHarness ? 8 : 16; // 칸 단위 판정이라 y가 17.2보다 위(벽·건물 앞)로는 못 올라간다
+    if(x<1 || y<=minY || x>=cols-1 || y>=(isTestHarness ? 22 : 20)) return true;
     const map=maps[currentMap];
     if(map?.walls){
       const solidWalls=map.walls;
@@ -4172,13 +4185,13 @@ window.LEARNING_CONTENT = [
     const dx=targetX-birdPet.x,dy=targetY-birdPet.y;
     const dist=Math.hypot(dx,dy);
     if(dist>0.12){
-      birdPet.flying=true;birdPet.wingStep+=dt*11;
+      birdPet.flying=true;birdPet.wingStep+=dt*13;
       const speed=(dist>3.0?6.0:4.2)*dt;
       const move=Math.min(dist,speed);
       birdPet.x+=(dx/dist)*move;birdPet.y+=(dy/dist)*move;
       if(Math.abs(dx)>0.05)birdPet.face=dx>0?'right':'left';
     }else{
-      birdPet.flying=false;birdPet.wingStep+=dt*4;
+      birdPet.flying=false;birdPet.wingStep+=dt*6;
       if(player.face==='right'||player.face==='left')birdPet.face=player.face;
     }
   }
@@ -4186,7 +4199,7 @@ window.LEARNING_CONTENT = [
     updatePet(dt);
     updateBirdPet(dt);
     if(!dialogEl.hidden||!panelEl.hidden)autoMove=null;
-    if(!dialogEl.hidden||!panelEl.hidden||(!keys.size&&!autoMove)){player.moving=false;if(pet.moving||birdPet.flying)render();return;}
+    if(!dialogEl.hidden||!panelEl.hidden||(!keys.size&&!autoMove)){player.moving=false;render();return;}
     let dx=0,dy=0;
     if(keys.size){autoMove=null;const [key]=[...keys.entries()].sort((a,b)=>b[1]-a[1])[0];
     if(key==='arrowup'||key==='w'){dy=-1;player.face='up';}else if(key==='arrowdown'||key==='s'){dy=1;player.face='down';}else if(key==='arrowleft'||key==='a'){dx=-1;player.face='left';}else{dx=1;player.face='right';}}
