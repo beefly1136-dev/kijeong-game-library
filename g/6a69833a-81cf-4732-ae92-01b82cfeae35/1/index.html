@@ -1842,7 +1842,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             }).join('<div class="era-line"></div>');
             const step = (ok, now, text, extra = '') =>
                 `<li class="${ok ? 'ok' : (now ? 'now' : '')}"><span class="m-check">${ok ? '✔' : (now ? '▶' : '○')}</span><span>${text}${extra}</span></li>`;
-            const leapText = era < 4 ? '[시대 도약]으로 다음 시대 가기' : '엔딩 보기';
+            const leapText = era < 4 ? '다음 시대로 이동 (자동)' : '엔딩 보기 (자동)';
             return `
                 <div class="mission-card">
                     <div class="era-map">${map}</div>
@@ -3003,7 +3003,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             if (enemy.isBoss) {
                 gameState.collectedParts.push(gameState.era);
                 addLog(`🎉 핵심 부품 [${ERAS[gameState.era].corePart}]을(를) 얻었어요!`, "info");
-                addLog(`👉 [시대 도약] 탭을 눌러 다음 시대로 이동하세요.`, "system");
+                addLog(gameState.era < 4 ? `🚀 잠시 후 다음 시대로 이동해요!` : `✨ 잠시 후 엔딩이 열려요!`, "system");
                 gameState.explorationProgress = 100;
             } else {
                 if (Math.random() < 0.45) {
@@ -3021,7 +3021,13 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             }
 
             if (enemy.isBoss) {
-                setResult(true, `🏆 보스 격파! 핵심 부품 [${ERAS[gameState.era].corePart}] 획득`, gameState.era < 4 ? "👉 [시대 도약] 탭을 눌러 다음 시대로 이동하세요." : "👉 [시대 도약] 탭에서 엔딩을 볼 수 있어요.");
+                setResult(true, `🏆 보스 격파! 핵심 부품 [${ERAS[gameState.era].corePart}] 획득`, gameState.era < 4 ? "🚀 잠시 후 다음 시대로 자동 이동해요." : "✨ 잠시 후 엔딩이 열려요.");
+                // 보스를 이기면 승리 배너를 보여 준 뒤 자동으로 다음 시대로 이동
+                const clearedEra = gameState.era;
+                setTimeout(() => {
+                    if (gameState.era !== clearedEra || gameState.inBattle) return;
+                    if (clearedEra < 4) executeEraJump(); else showTrueVictory();
+                }, 3000);
             }
             gameState.activeTab = "explore";
             updateSceneGraphics();
@@ -3072,9 +3078,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
             gameState.activeTab = "explore";
             gameState.lastResult = null;
             gameState.shopOpen = false;
-            setTimeout(() => showBanner(`🚀 ERA ${gameState.era}`, `${ERAS[gameState.era].name} · ${ERAS[gameState.era].subtitle}`, "var(--accent-cyan)"), 500);
+            setTimeout(() => showBanner(`🚀 ${gameState.era}시대`, `${ERAS[gameState.era].name} · ${ERAS[gameState.era].subtitle}`, "var(--accent-cyan)"), 500);
 
-            addLog(`🚀 ${ERAS[gameState.era].name}(으)로 이동했어요! 다시 [수리 탐색 진행]으로 이 시대를 수리하세요.`, "system");
+            addLog(`🚀 ${ERAS[gameState.era].name}(으)로 이동했어요! [수리 탐색 진행]으로 이 시대를 고치세요.`, "system");
 
             updateSceneGraphics();
             renderUI();
@@ -3082,9 +3088,9 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
 
         function showTrueVictory() {
             playVictorySound();
-            document.getElementById('end-title').innerText = "✨ 시간 네트워크 동축 수복 완수 ✨";
-            document.getElementById('end-desc').innerText = `경하드립니다! 시간의 전령이여. 고대 아날로그 봉수 및 물리 파발로부터, 전선을 통과한 모스 직렬 전신, 공간을 점령한 고주파 라디오 전파, 그리고 우주의 레이저 광섬유 전반사 백본 및 양자 무결 암호화 네트워크까지 단절된 모든 세대를 영구 접속 동조 완료했습니다! 단절되었던 문명의 역사가 하나의 깨끗한 주파수 안에서 노래하기 시작합니다.`;
-            document.getElementById('end-btn').innerText = "처음부터 다시 복습하기";
+            document.getElementById('end-title').innerText = "✨ 모든 통신망 복구 완료! ✨";
+            document.getElementById('end-desc').innerText = `봉수와 파발에서 전신, 전파, 광섬유까지 네 시대의 통신망을 모두 다시 이었어요. 수고했어요, 시간의 전령!`;
+            document.getElementById('end-btn').innerText = "처음부터 다시 하기";
             document.getElementById('end-btn').onclick = () => {
                 location.reload();
             };
