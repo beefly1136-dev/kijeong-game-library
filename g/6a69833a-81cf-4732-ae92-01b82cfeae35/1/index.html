@@ -8,17 +8,17 @@
         /* ═══════════ 시간의 전령 · 밝은 테마 (v47) ═══════════ */
         :root {
             /* 바탕·글자 */
-            --bg-color: #e7ebf3;
-            --panel-bg: #ffffff;
-            --panel-2: #f5f6fb;
-            --ink: #1f2440;
-            --ink-2: #444b6b;
-            --ink-3: #6a7190;
-            --line: #d3d8e8;
-            --line-strong: #b9c0db;
-            --brand: #5546c2;
-            --brand-dark: #3f31a3;
-            --brand-soft: #eeebfc;
+            --bg-color: #d5d0c2;
+            --panel-bg: #eee9dc;
+            --panel-2: #e4dece;
+            --ink: #2a2833;
+            --ink-2: #4a4652;
+            --ink-3: #6b6672;
+            --line: #d2cab6;
+            --line-strong: #b8ae95;
+            --brand: #5a4fa8;
+            --brand-dark: #443a8a;
+            --brand-soft: #e2ddee;
             /* 기존 이름 유지 (글자에 써도 잘 보이는 진한 색) */
             --text-color: var(--ink);
             --border-color: var(--line-strong);
@@ -28,10 +28,10 @@
             --accent-cyan: #0b7285;
             --accent-red: #c92a3a;
             --accent-pink: #b0306a;
-            --terminal-bg: #fbfbf7;
-            --btn-bg: #f3f4fa;
-            --btn-hover: #e9e6fb;
-            --glow-color: rgba(60, 70, 140, 0.12);
+            --terminal-bg: #f1ecdf;
+            --btn-bg: #e7e1d2;
+            --btn-hover: #e0dbea;
+            --glow-color: rgba(70, 55, 30, 0.14);
             --font-ui: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
             --font-num: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
             --font-code: 'Share Tech Mono', 'Consolas', monospace;
@@ -44,7 +44,7 @@
             color: var(--ink);
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; padding: 15px;
-            background-image: radial-gradient(rgba(85, 70, 194, 0.08) 1px, transparent 0);
+            background-image: radial-gradient(rgba(90, 75, 40, 0.10) 1px, transparent 0);
             background-size: 22px 22px;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
@@ -54,7 +54,7 @@
         /* 전체 틀 */
         .console-container {
             position: relative; width: 100%; max-width: 680px;
-            background: #f8f9fd;
+            background: #e9e4d6;
             border: 1px solid var(--line-strong);
             border-radius: 18px;
             box-shadow: 0 10px 30px rgba(40, 50, 110, 0.12);
@@ -103,7 +103,7 @@
         #html-combat-hud { display: none; position: absolute; inset: 0; pointer-events: none; z-index: 4; }
         .hud-box {
             position: absolute; width: 210px;
-            background: rgba(255, 255, 255, 0.93);
+            background: rgba(238, 233, 220, 0.94);
             border-radius: 10px; padding: 7px 9px;
             box-shadow: 0 2px 8px rgba(20, 25, 60, 0.25);
             z-index: 5;
@@ -112,7 +112,7 @@
         #hud-enemy-box { top: 10px; right: 10px; border: 2.5px solid var(--accent-red); }
         .hud-box .hud-header { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; color: var(--ink); }
         .hud-enemy-name { color: var(--accent-red) !important; line-height: 1.3; word-break: keep-all; }
-        .hud-box .hud-bar-container { width: 100%; height: 11px; border-radius: 6px; overflow: hidden; margin-bottom: 3px; background: #e5e8f2; border: 1px solid #c9cfe2; }
+        .hud-box .hud-bar-container { width: 100%; height: 11px; border-radius: 6px; overflow: hidden; margin-bottom: 3px; background: #d9d3c3; border: 1px solid #c9cfe2; }
         .hud-box .hud-bar-fill { width: 100%; height: 100%; transition: width 0.3s ease; }
         #hud-player-hp-bar { background-color: #2fae5a; }
         #hud-enemy-hp-bar { background-color: #e0434f; }
@@ -122,16 +122,16 @@
         #damage-popup-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
         #explore-progress-box {
             position: absolute; top: 8px; right: 8px; z-index: 5;
-            background: rgba(255, 255, 255, 0.93); border: 2px solid #e0a400; border-radius: 9px;
+            background: rgba(238, 233, 220, 0.94); border: 2px solid #e0a400; border-radius: 9px;
             padding: 5px 10px 7px; min-width: 170px; box-shadow: 0 2px 8px rgba(20, 25, 60, 0.2);
         }
         .progress-label { font-size: 0.88rem; color: #7a4f00; font-weight: 700; white-space: nowrap; }
-        .progress-track { height: 8px; background: #eceef5; border-radius: 4px; overflow: hidden; margin-top: 3px; }
+        .progress-track { height: 8px; background: #ddd7c8; border-radius: 4px; overflow: hidden; margin-top: 3px; }
         #explore-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #f5b301, #f08c00); transition: width 0.5s ease; }
         #center-banner {
             position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.85);
             z-index: 6; pointer-events: none; opacity: 0; text-align: center;
-            background: rgba(255, 255, 255, 0.96); border: 3px solid var(--brand); border-radius: 14px;
+            background: rgba(238, 233, 220, 0.96); border: 3px solid var(--brand); border-radius: 14px;
             padding: 12px 26px; transition: opacity 0.3s, transform 0.3s; max-width: 90%;
             box-shadow: 0 6px 20px rgba(20, 25, 60, 0.3);
         }
@@ -145,29 +145,29 @@
         .stat-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
         .stat-label { color: var(--ink-2); font-size: 0.92rem; font-weight: 700; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
         .stat-val { font-weight: 700; font-size: 1rem; text-align: right; font-variant-numeric: tabular-nums; }
-        .bar-outer { width: 100%; height: 14px; background-color: #e9ecf4; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; position: relative; margin-top: 2px; }
+        .bar-outer { width: 100%; height: 14px; background-color: #ddd7c8; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; position: relative; margin-top: 2px; }
         .bar-inner { height: 100%; width: 100%; background-color: #2fae5a; transition: width 0.3s cubic-bezier(0.1, 0.8, 0.1, 1), background-color 0.3s ease; }
         .stat-cards { border-left: 1px solid var(--line); padding-left: 14px; display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px; }
         .stat-card { border-radius: 9px; padding: 6px; text-align: center; display: flex; flex-direction: column; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
         .stat-card-label { font-size: 0.82rem; font-weight: 700; margin-bottom: 1px; color: var(--ink-2); white-space: nowrap; }
         .stat-card-val { font-size: 1.2rem; font-weight: 900; font-variant-numeric: tabular-nums; }
         .stat-card-sub { font-size: 0.72rem; color: var(--ink-3); margin-top: 1px; }
-        .card-atk { background: #e6f4f6; border: 1.5px solid #8fcbd6; }
+        .card-atk { background: #d9e7e6; border: 1.5px solid #8fcbd6; }
         .card-atk .stat-card-val { color: var(--accent-cyan); }
-        .card-spd { background: #fbeaf2; border: 1.5px solid #e6a5c4; }
+        .card-spd { background: #eedde2; border: 1.5px solid #e6a5c4; }
         .card-spd .stat-card-val { color: var(--accent-pink); }
-        .card-gold { background: #fff6dd; border: 1.5px solid #ecc86a; }
+        .card-gold { background: #f1e4c2; border: 1.5px solid #ecc86a; }
         .card-gold .stat-card-val { color: var(--accent-yellow); }
         .card-tp { background: var(--brand-soft); border: 1.5px solid #b9b0ef; }
         .card-tp .stat-card-val { color: var(--brand-dark); }
         .bump { animation: bump 0.7s ease-out; }
         @keyframes bump { 0% { transform: scale(1); } 30% { transform: scale(1.08); box-shadow: 0 0 0 4px rgba(85, 70, 194, 0.25); } 100% { transform: scale(1); } }
 
-        #enemy-status-pane { background: #fff5f5; border: 1.5px solid #eba3aa; border-radius: 12px; padding: 9px 14px; display: flex; flex-direction: column; gap: 5px; }
+        #enemy-status-pane { background: #f0dfdc; border: 1.5px solid #eba3aa; border-radius: 12px; padding: 9px 14px; display: flex; flex-direction: column; gap: 5px; }
         .enemy-pane-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
         .enemy-pane-name { color: var(--accent-red); font-weight: 700; font-size: 1rem; word-break: keep-all; }
         .enemy-pane-hp { color: #9b1c28; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
-        .enemy-bar { border-color: #eba3aa !important; background-color: #fbe4e6 !important; height: 11px; }
+        .enemy-bar { border-color: #eba3aa !important; background-color: #ecd6d4 !important; height: 11px; }
         #enemy-hp-bar-fill { background-color: #e0434f; }
         .enemy-pane-stats { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.9rem; color: var(--ink-2); }
         .enemy-pane-stats b { color: var(--ink); }
@@ -183,7 +183,7 @@
         .log-combat-e { color: var(--accent-red); font-weight: 700; }
         .log-story { color: var(--ink); }
         .log-info { color: #7a4f00; font-weight: 500; }
-        .log-edu { color: #1f3a66; background: #eaf2fd; border-left: 4px solid #3b82c4; padding: 5px 10px; margin: 2px 0; border-radius: 0 6px 6px 0; }
+        .log-edu { color: #1f3a66; background: #dfe3ea; border-left: 4px solid #3b82c4; padding: 5px 10px; margin: 2px 0; border-radius: 0 6px 6px 0; }
         .log-line:last-child { background-image: linear-gradient(90deg, rgba(245, 179, 1, 0.14), transparent 70%); border-radius: 4px; }
 
         /* 조작판 */
@@ -195,29 +195,29 @@
             transition: all 0.15s ease-in-out; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
         }
         .tab-btn:hover { border-color: var(--brand); background-color: var(--btn-hover); color: var(--brand-dark); }
-        .tab-btn.active { border: 2px solid #e0a400; background-color: #fff4d1; color: #6b4600; box-shadow: 0 2px 0 #e0a400; }
+        .tab-btn.active { border: 2px solid #e0a400; background-color: #f1e2b8; color: #6b4600; box-shadow: 0 2px 0 #e0a400; }
         .tab-btn.locked { opacity: 0.4; }
         .tab-btn.locked:hover { border-color: var(--line-strong); background-color: var(--btn-bg); color: var(--ink); }
         .tab-icon { font-size: 1.2rem; }
 
         .actions-box { background-color: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; min-height: 150px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
         .act-btn {
-            background-color: #ffffff; border: 1.5px solid var(--line-strong); color: var(--ink);
+            background-color: var(--panel-bg); border: 1.5px solid var(--line-strong); color: var(--ink);
             padding: 9px 12px; font-size: 1rem; text-align: left; cursor: pointer; border-radius: 10px; width: 100%;
             transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; font-weight: 700; min-height: 46px;
             box-shadow: 0 1px 0 rgba(40, 50, 110, 0.08);
         }
         .act-btn:hover { background-color: var(--brand-soft); border-color: var(--brand); color: var(--brand-dark); }
-        .act-btn .badge { font-size: 0.82rem; color: #7a4f00; font-weight: 700; border: 1px solid #ecc86a; padding: 2px 7px; border-radius: 6px; background-color: #fff6dd; white-space: nowrap; }
+        .act-btn .badge { font-size: 0.82rem; color: #7a4f00; font-weight: 700; border: 1px solid #ecc86a; padding: 2px 7px; border-radius: 6px; background-color: #f1e4c2; white-space: nowrap; }
         .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
         .empty-action-text { color: var(--ink-2); text-align: center; margin: auto; font-size: 0.98rem; padding: 15px 0; line-height: 1.6; }
         .act-btn:disabled, .tuning-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
-        .act-btn:disabled:hover { background-color: #fff; border-color: var(--line-strong); color: var(--ink); }
-        .act-btn.equipped { border: 2px solid #e0a400; background: #fffaf0; }
+        .act-btn:disabled:hover { background-color: var(--panel-bg); border-color: var(--line-strong); color: var(--ink); }
+        .act-btn.equipped { border: 2px solid #e0a400; background: #f3e5c4; }
         .act-btn.equipped .item-name { color: #6b4600; }
         .badge.eq { background: #e0a400 !important; color: #fff !important; border-color: #e0a400 !important; }
         .act-btn.cant-afford { opacity: 0.55; }
-        .act-btn.primary { border: 2px solid #e0a400; background: #fffaf0; }
+        .act-btn.primary { border: 2px solid #e0a400; background: #f3e5c4; }
         .item-main { display: flex; flex-direction: column; min-width: 0; }
         .item-name { display: flex; align-items: center; gap: 6px; }
         .item-icon { font-size: 1.2rem; }
@@ -229,35 +229,35 @@
 
         /* 버튼 공통 */
         .tuning-btn {
-            background-color: #ffffff; color: var(--ink); border: 1.5px solid var(--line-strong); border-radius: 9px;
+            background-color: var(--panel-bg); color: var(--ink); border: 1.5px solid var(--line-strong); border-radius: 9px;
             padding: 8px 10px; min-height: 44px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.15s; line-height: 1.2;
         }
         .tuning-btn:hover { border-color: var(--brand); background: var(--brand-soft); }
         .tuning-btn.selected { background: var(--brand); color: #fff; border-color: var(--brand-dark); }
         .tuning-btn.go { background: #2f9e55; color: #fff; border-color: #1c7c3c; }
         .tuning-btn.go:hover { background: #268a49; }
-        .tuning-btn.danger { background: #fdecee; color: var(--accent-red); border-color: #eba3aa; }
-        .zoom-btn { background: #e6f4f6; border: 1.5px solid #8fcbd6; color: var(--accent-cyan); border-radius: 7px; padding: 4px 10px; font-size: 0.88rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+        .tuning-btn.danger { background: #f0d9d8; color: var(--accent-red); border-color: #eba3aa; }
+        .zoom-btn { background: #d9e7e6; border: 1.5px solid #8fcbd6; color: var(--accent-cyan); border-radius: 7px; padding: 4px 10px; font-size: 0.88rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
         .zoom-btn:hover { background: #d4edf1; }
         .act-btn, .tab-btn, .tuning-btn, .zoom-btn, .bongsu-toggle-btn { -webkit-tap-highlight-color: transparent; }
         .act-btn:active, .tab-btn:active, .tuning-btn:active, .bongsu-toggle-btn:active { transform: translateY(1px); }
         button:focus-visible { outline: 3px solid #f5b301; outline-offset: 2px; }
 
         /* 미니게임 */
-        .minigame-container { background-color: #ffffff; border: 1.5px solid #8fcbd6; border-radius: 10px; padding: 11px; display: flex; flex-direction: column; gap: 9px; }
+        .minigame-container { background-color: var(--panel-bg); border: 1.5px solid #8fcbd6; border-radius: 10px; padding: 11px; display: flex; flex-direction: column; gap: 9px; }
         .minigame-title-bar { font-size: 1rem; color: var(--accent-cyan); font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap; border-bottom: 1px dashed #b5dbe2; padding-bottom: 6px; }
         .minigame-instruction { font-size: 0.98rem; color: var(--ink); line-height: 1.6; word-break: keep-all; }
         .minigame-reward { color: #7a4f00; font-size: 0.88rem; white-space: nowrap; font-weight: 700; }
-        .mg-feedback { font-size: 0.95rem; font-weight: 700; color: #9b1c28; background: #fdecee; border: 1px solid #eba3aa; border-radius: 7px; padding: 6px 10px; word-break: keep-all; }
+        .mg-feedback { font-size: 0.95rem; font-weight: 700; color: #9b1c28; background: #f0d9d8; border: 1px solid #eba3aa; border-radius: 7px; padding: 6px 10px; word-break: keep-all; }
         .mg-step { font-size: 0.9rem; color: var(--ink-2); font-weight: 700; }
         .bongsu-toggles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 2px 0; }
-        .bongsu-toggle-btn { background-color: #f1f2f8; border: 2px solid var(--line-strong); color: var(--ink-3); padding: 8px; font-weight: 700; font-size: 1rem; border-radius: 9px; cursor: pointer; text-align: center; transition: all 0.2s; min-height: 46px; }
-        .bongsu-toggle-btn.on { border-color: #f08c00; color: #8a3b00; background-color: #fff1d6; box-shadow: 0 0 0 3px rgba(240, 140, 0, 0.2); }
+        .bongsu-toggle-btn { background-color: #e4dece; border: 2px solid var(--line-strong); color: var(--ink-3); padding: 8px; font-weight: 700; font-size: 1rem; border-radius: 9px; cursor: pointer; text-align: center; transition: all 0.2s; min-height: 46px; }
+        .bongsu-toggle-btn.on { border-color: #f08c00; color: #8a3b00; background-color: #f2dfbb; box-shadow: 0 0 0 3px rgba(240, 140, 0, 0.2); }
         .morse-button-row { display: flex; gap: 6px; flex-wrap: wrap; }
         .morse-button-row .tuning-btn { flex: 1 1 18%; white-space: nowrap; }
-        .morse-input-disp { background-color: #f7f8fc; border: 1.5px solid var(--line-strong); color: var(--ink); padding: 6px; font-family: var(--font-code); font-size: 1.35rem; letter-spacing: 3px; min-height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .morse-input-disp { background-color: #e9e4d6; border: 1.5px solid var(--line-strong); color: var(--ink); padding: 6px; font-family: var(--font-code); font-size: 1.35rem; letter-spacing: 3px; min-height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
         .code-text { font-family: var(--font-code); letter-spacing: 2px; }
-        .tuning-bar-display { background-color: #f1f2f8; height: 30px; border-radius: 6px; border: 1px solid var(--line-strong); position: relative; overflow: hidden; flex-grow: 1; }
+        .tuning-bar-display { background-color: #e4dece; height: 30px; border-radius: 6px; border: 1px solid var(--line-strong); position: relative; overflow: hidden; flex-grow: 1; }
 
         /* 퀴즈 */
         .quiz-title { font-weight: 700; color: var(--ink); font-size: 1.08rem; line-height: 1.55; word-break: keep-all; }
@@ -266,8 +266,8 @@
 
         /* 결과 카드 */
         .result-card { border-radius: 10px; padding: 9px 12px; font-size: 0.96rem; line-height: 1.55; word-break: keep-all; animation: result-in 0.35s ease-out; }
-        .result-card.ok { background: #eaf7ee; border: 1.5px solid #86c99b; }
-        .result-card.bad { background: #fdecee; border: 1.5px solid #eba3aa; }
+        .result-card.ok { background: #dcebd9; border: 1.5px solid #86c99b; }
+        .result-card.bad { background: #f0d9d8; border: 1.5px solid #eba3aa; }
         .result-card .rc-title { font-weight: 700; font-size: 1.02rem; margin-bottom: 2px; }
         .result-card.ok .rc-title { color: var(--accent-green); }
         .result-card.bad .rc-title { color: var(--accent-red); }
@@ -279,12 +279,12 @@
         .turn-banner.mine { color: #fff; background: #2f9e55; }
         .turn-banner.enemy { color: #fff; background: #c92a3a; animation: turn-blink 0.9s ease-in-out infinite alternate; }
         @keyframes turn-blink { from { opacity: 1; } to { opacity: 0.7; } }
-        .skill-btn { grid-column: span 2; border-color: #8fcbd6 !important; background-color: #f0f9fa !important; gap: 8px; }
+        .skill-btn { grid-column: span 2; border-color: #8fcbd6 !important; background-color: #dfeaea !important; gap: 8px; }
         .skill-name { color: var(--accent-cyan); }
 
         /* 시작·끝 화면 */
         .overlay-screen {
-            position: absolute; inset: 0; background-color: rgba(240, 243, 250, 0.98); z-index: 100;
+            position: absolute; inset: 0; background-color: rgba(226, 220, 205, 0.98); z-index: 100;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             padding: 25px; text-align: center; overflow-y: auto; border-radius: inherit;
         }
@@ -292,10 +292,10 @@
         .overlay-screen p { font-size: 1rem; line-height: 1.6; color: var(--ink-2); margin-bottom: 15px; max-width: 560px; word-break: keep-all; }
         .overlay-sub { color: #7a4f00 !important; font-size: 1.05rem !important; font-weight: 700; margin-bottom: 8px !important; }
         .start-steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; max-width: 600px; margin: 4px 0 12px; }
-        .start-steps li { background: #fff; border: 1.5px solid var(--line-strong); border-radius: 10px; padding: 7px 4px; display: flex; flex-direction: column; gap: 2px; font-size: 0.95rem; box-shadow: 0 1px 3px rgba(40, 50, 110, 0.06); }
+        .start-steps li { background: var(--panel-bg); border: 1.5px solid var(--line-strong); border-radius: 10px; padding: 7px 4px; display: flex; flex-direction: column; gap: 2px; font-size: 0.95rem; box-shadow: 0 1px 3px rgba(40, 50, 110, 0.06); }
         .start-steps li b { color: var(--brand-dark); }
         .start-steps li span { color: var(--ink-2); font-size: 0.85rem; word-break: keep-all; }
-        .tutorial-hub { width: 100%; max-width: 600px; background-color: #ffffff; border: 1px solid var(--line-strong); border-radius: 12px; padding: 12px; margin-bottom: 15px; text-align: left; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 3px rgba(40, 50, 110, 0.06); }
+        .tutorial-hub { width: 100%; max-width: 600px; background-color: var(--panel-bg); border: 1px solid var(--line-strong); border-radius: 12px; padding: 12px; margin-bottom: 15px; text-align: left; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 3px rgba(40, 50, 110, 0.06); }
         .tutorial-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line); padding-bottom: 8px; flex-wrap: wrap; }
         .tut-tab-btn { background-color: var(--btn-bg); border: 1.5px solid var(--line-strong); color: var(--ink-2); padding: 6px 10px; font-size: 0.92rem; font-weight: 700; border-radius: 8px; cursor: pointer; }
         .tut-tab-btn.active { background-color: var(--brand); color: #fff; border-color: var(--brand-dark); }
@@ -311,17 +311,17 @@
 
         /* 크게 보기 창 */
         #zoom-overlay { display: none; position: fixed; inset: 0; background: rgba(30, 35, 65, 0.45); z-index: 2000; justify-content: center; align-items: center; padding: 16px; }
-        .zoom-card { background: #fff; border: 1px solid var(--line-strong); border-radius: 16px; width: 100%; max-width: 840px; max-height: calc(100dvh - 32px); display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(20, 25, 60, 0.35); }
+        .zoom-card { background: var(--panel-bg); border: 1px solid var(--line-strong); border-radius: 16px; width: 100%; max-width: 840px; max-height: calc(100dvh - 32px); display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(20, 25, 60, 0.35); }
         .zoom-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 18px 10px; border-bottom: 1px solid var(--line); }
         #zoom-title { font-size: 1.2rem; color: var(--ink); font-weight: 700; word-break: keep-all; }
-        .zoom-close { background: #fff; border: 1.5px solid var(--line-strong); color: var(--ink-2); border-radius: 9px; width: 42px; height: 42px; font-size: 1.2rem; font-weight: 700; cursor: pointer; flex-shrink: 0; }
+        .zoom-close { background: var(--panel-bg); border: 1.5px solid var(--line-strong); color: var(--ink-2); border-radius: 9px; width: 42px; height: 42px; font-size: 1.2rem; font-weight: 700; cursor: pointer; flex-shrink: 0; }
         .zoom-close:hover { border-color: var(--accent-red); color: var(--accent-red); }
         #zoom-body { padding: 14px 18px; overflow-y: auto; flex: 1; font-size: 1.05rem; line-height: 1.65; color: var(--ink); word-break: keep-all; }
         .zoom-foot { padding: 10px 18px 14px; text-align: right; border-top: 1px solid var(--line); }
         .zoom-ok { background: var(--brand); color: #fff; border-color: var(--brand-dark); padding: 8px 24px; }
         .zoom-ok:hover { background: #6253d6; }
         .zoom-box { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 8px 0; }
-        .zoom-notes { flex: 0.8; min-width: 220px; background: #f6f4ff; border: 1px solid #cfc8f3; border-radius: 10px; padding: 12px; font-size: 0.95rem; line-height: 1.65; color: var(--ink-2); }
+        .zoom-notes { flex: 0.8; min-width: 220px; background: #e6e1ef; border: 1px solid #cfc8f3; border-radius: 10px; padding: 12px; font-size: 0.95rem; line-height: 1.65; color: var(--ink-2); }
         .zoom-notes h4 { color: var(--brand-dark); font-size: 1rem; margin-bottom: 8px; border-bottom: 1px dashed #cfc8f3; padding-bottom: 5px; }
 
         /* 스크롤바 */
@@ -861,12 +861,12 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     btn.innerText = "🔇 BGM OFF";
                     btn.style.borderColor = "var(--accent-red)";
                     btn.style.color = "var(--accent-red)";
-                    btn.style.backgroundColor = "#fdecee";
+                    btn.style.backgroundColor = "#f0d9d8";
                 } else {
                     btn.innerText = "🔊 BGM ON";
                     btn.style.borderColor = "var(--accent-cyan)";
                     btn.style.color = "var(--accent-yellow)";
-                    btn.style.backgroundColor = "#f3f4fa";
+                    btn.style.backgroundColor = "#e4dece";
                     initAudio();
                     if (audioCtx && audioCtx.state === 'suspended') {
                         audioCtx.resume();
@@ -1546,26 +1546,26 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
         /* MULTI-TAB START TUTORIAL SCREEN SCRIPT */
                 const TUTORIAL_DATA = {
             lore: `<b>📡 전령의 시공 통신망 복구 브리핑:</b><br>
-                  <svg width="100%" height="70" viewBox="0 0 400 70" style="background:#f4f5fb; border:1px solid #c9cfe6; border-radius:4px; margin:8px 0;">
+                  <svg width="100%" height="70" viewBox="0 0 400 70" style="background:#e4dece; border:1px solid #c9cfe6; border-radius:4px; margin:8px 0;">
                       <line x1="40" y1="30" x2="360" y2="30" stroke="#c9cfe6" stroke-dasharray="4 4" stroke-width="2" />
                       <line x1="40" y1="30" x2="120" y2="30" stroke="#0b7285" stroke-width="2" />
-                      <circle cx="40" cy="30" r="13" fill="#fff1e6" stroke="#e8590c" stroke-width="2" />
+                      <circle cx="40" cy="30" r="13" fill="#f1dfcf" stroke="#e8590c" stroke-width="2" />
                       <text x="40" y="34" fill="#b35a00" font-size="10" text-anchor="middle" font-weight="bold">🔥</text>
                       <text x="40" y="55" fill="#b35a00" font-size="10" text-anchor="middle">고대 봉수</text>
                       
-                      <circle cx="120" cy="30" r="13" fill="#e6f4f6" stroke="#0b7285" stroke-width="2" />
+                      <circle cx="120" cy="30" r="13" fill="#d9e7e6" stroke="#0b7285" stroke-width="2" />
                       <text x="120" y="33" fill="#0b7285" font-size="9" text-anchor="middle" font-weight="bold">••—</text>
                       <text x="120" y="55" fill="#0b7285" font-size="10" text-anchor="middle">근대 전신</text>
                       
-                      <circle cx="200" cy="30" r="13" fill="#fbeaf2" stroke="#b0306a" stroke-width="2" />
+                      <circle cx="200" cy="30" r="13" fill="#eedde2" stroke="#b0306a" stroke-width="2" />
                       <text x="200" y="34" fill="#b0306a" font-size="10" text-anchor="middle" font-weight="bold">📻</text>
                       <text x="200" y="55" fill="#b0306a" font-size="10" text-anchor="middle">현대 전파</text>
                       
-                      <circle cx="280" cy="30" r="13" fill="#eaf7ee" stroke="#1c7c3c" stroke-width="2" />
+                      <circle cx="280" cy="30" r="13" fill="#dcebd9" stroke="#1c7c3c" stroke-width="2" />
                       <text x="280" y="34" fill="#1c7c3c" font-size="10" text-anchor="middle" font-weight="bold">🔑</text>
                       <text x="280" y="55" fill="#1c7c3c" font-size="10" text-anchor="middle">미래 양자</text>
                       
-                      <circle cx="360" cy="30" r="13" fill="#fff6dd" stroke="#8f5d00" stroke-width="2" />
+                      <circle cx="360" cy="30" r="13" fill="#f1e4c2" stroke="#8f5d00" stroke-width="2" />
                       <text x="360" y="34" fill="#8f5d00" font-size="10" text-anchor="middle" font-weight="bold">🛰️</text>
                       <text x="360" y="55" fill="#8f5d00" font-size="10" text-anchor="middle">초연결</text>
                   </svg>
@@ -1573,7 +1573,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                   시간의 유랑에 견디며 인프라를 복원할 수 있는 능력자는 오직 <b>'시간의 전령(Player)'</b>뿐입니다. 각 역사적 문명을 수색해 통신로를 재개척하고, 최종 양자 시대로 돌파하십시오! 본 게임은 중학교 기술·가정② 교과서 6단원 [세상과 소통하는 기술] 내용을 기반으로 제작되었습니다.`,
                   
             rules: `<b>🕹️ 핵심 조작 및 모험 매뉴얼:</b><br>
-                  <svg width="100%" height="75" viewBox="0 0 400 75" style="background:#f4f5fb; border:1px solid #c9cfe6; border-radius:4px; margin:8px 0;">
+                  <svg width="100%" height="75" viewBox="0 0 400 75" style="background:#e4dece; border:1px solid #c9cfe6; border-radius:4px; margin:8px 0;">
                       <path d="M 80,30 L 105,30" stroke="#7a6ad6" stroke-width="2" marker-end="url(#arrow)" />
                       <path d="M 180,30 L 205,30" stroke="#7a6ad6" stroke-width="2" marker-end="url(#arrow)" />
                       <path d="M 280,30 L 305,30" stroke="#7a6ad6" stroke-width="2" marker-end="url(#arrow)" />
@@ -1582,19 +1582,19 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                               <path d="M 0 0 L 10 5 L 0 10 z" fill="#7a6ad6" />
                           </marker>
                       </defs>
-                      <rect x="10" y="12" width="70" height="36" fill="#ffffff" stroke="var(--accent-cyan)" stroke-width="1.5" rx="4" />
+                      <rect x="10" y="12" width="70" height="36" fill="#f4efe3" stroke="var(--accent-cyan)" stroke-width="1.5" rx="4" />
                       <text x="45" y="26" fill="var(--accent-cyan)" font-size="10" text-anchor="middle" font-weight="bold">🔍 1. 탐색</text>
                       <text x="45" y="40" fill="#1f2440" font-size="10" text-anchor="middle">진행도 채우기</text>
                       
-                      <rect x="110" y="12" width="70" height="36" fill="#ffffff" stroke="var(--accent-red)" stroke-width="1.5" rx="4" />
+                      <rect x="110" y="12" width="70" height="36" fill="#f4efe3" stroke="var(--accent-red)" stroke-width="1.5" rx="4" />
                       <text x="145" y="26" fill="var(--accent-red)" font-size="10" text-anchor="middle" font-weight="bold">⚡ 2. 전투</text>
                       <text x="145" y="40" fill="#1f2440" font-size="10" text-anchor="middle">노이즈 격퇴</text>
                       
-                      <rect x="210" y="12" width="70" height="36" fill="#ffffff" stroke="var(--accent-green)" stroke-width="1.5" rx="4" />
+                      <rect x="210" y="12" width="70" height="36" fill="#f4efe3" stroke="var(--accent-green)" stroke-width="1.5" rx="4" />
                       <text x="245" y="26" fill="var(--accent-green)" font-size="10" text-anchor="middle" font-weight="bold">🔋 3. 관리</text>
                       <text x="245" y="40" fill="#1f2440" font-size="10" text-anchor="middle">상점 파츠 보강</text>
                       
-                      <rect x="310" y="12" width="70" height="36" fill="#ffffff" stroke="var(--accent-yellow)" stroke-width="1.5" rx="4" />
+                      <rect x="310" y="12" width="70" height="36" fill="#f4efe3" stroke="var(--accent-yellow)" stroke-width="1.5" rx="4" />
                       <text x="345" y="26" fill="var(--accent-yellow)" font-size="10" text-anchor="middle" font-weight="bold">🚀 4. 도약</text>
                       <text x="345" y="40" fill="#1f2440" font-size="10" text-anchor="middle">시대 주파수 이동</text>
                   </svg>
@@ -1604,32 +1604,32 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                    4. <b>[시대 도약]</b> 탭에서 수집된 시공 파트를 가동해 다음 시대로 안전 공조 전송을 가동합니다.`,
                    
             minigame: `<b>🎮 교과서 연계 5대 하드웨어 미니게임:</b><br>
-                  <svg width="100%" height="95" viewBox="0 0 400 95" style="background:#f4f5fb; border:1px solid #c9cfe6; border-radius:4px; margin:8px 0;">
-                      <rect x="8" y="10" width="70" height="75" fill="#ffffff" stroke="#c9cfe6" stroke-width="1" rx="4" />
+                  <svg width="100%" height="95" viewBox="0 0 400 95" style="background:#e4dece; border:1px solid #c9cfe6; border-radius:4px; margin:8px 0;">
+                      <rect x="8" y="10" width="70" height="75" fill="#f4efe3" stroke="#c9cfe6" stroke-width="1" rx="4" />
                       <text x="43" y="32" font-size="14" text-anchor="middle">🔥</text>
                       <text x="43" y="52" fill="var(--accent-yellow)" font-size="10" text-anchor="middle" font-weight="bold">봉수 OOK</text>
                       <text x="43" y="65" fill="#5f6684" font-size="9" text-anchor="middle">101 광학신호</text>
                       <text x="43" y="75" fill="#5f6684" font-size="9" text-anchor="middle">[180쪽]</text>
                       
-                      <rect x="86" y="10" width="70" height="75" fill="#ffffff" stroke="#c9cfe6" stroke-width="1" rx="4" />
+                      <rect x="86" y="10" width="70" height="75" fill="#f4efe3" stroke="#c9cfe6" stroke-width="1" rx="4" />
                       <text x="121" y="32" font-size="14" text-anchor="middle">⌨️</text>
                       <text x="121" y="52" fill="var(--accent-cyan)" font-size="10" text-anchor="middle" font-weight="bold">한글 모스</text>
                       <text x="121" y="65" fill="#5f6684" font-size="9" text-anchor="middle">자모 타건</text>
                       <text x="121" y="75" fill="#5f6684" font-size="9" text-anchor="middle">[183쪽]</text>
                       
-                      <rect x="164" y="10" width="70" height="75" fill="#ffffff" stroke="#c9cfe6" stroke-width="1" rx="4" />
+                      <rect x="164" y="10" width="70" height="75" fill="#f4efe3" stroke="#c9cfe6" stroke-width="1" rx="4" />
                       <text x="199" y="32" font-size="14" text-anchor="middle">📱</text>
                       <text x="199" y="52" fill="var(--accent-pink)" font-size="10" text-anchor="middle" font-weight="bold">스마트폰</text>
                       <text x="199" y="65" fill="#5f6684" font-size="9" text-anchor="middle">CPU/NFC 결합</text>
                       <text x="199" y="75" fill="#5f6684" font-size="9" text-anchor="middle">[191쪽]</text>
                       
-                      <rect x="242" y="10" width="70" height="75" fill="#ffffff" stroke="#c9cfe6" stroke-width="1" rx="4" />
+                      <rect x="242" y="10" width="70" height="75" fill="#f4efe3" stroke="#c9cfe6" stroke-width="1" rx="4" />
                       <text x="277" y="32" font-size="14" text-anchor="middle">⚙️</text>
                       <text x="277" y="52" fill="var(--accent-green)" font-size="10" text-anchor="middle" font-weight="bold">정보기술4</text>
                       <text x="277" y="65" fill="#5f6684" font-size="9" text-anchor="middle">투입-과정-산출</text>
                       <text x="277" y="75" fill="#5f6684" font-size="9" text-anchor="middle">[175쪽]</text>
                       
-                      <rect x="320" y="10" width="72" height="75" fill="#ffffff" stroke="#c9cfe6" stroke-width="1" rx="4" />
+                      <rect x="320" y="10" width="72" height="75" fill="#f4efe3" stroke="#c9cfe6" stroke-width="1" rx="4" />
                       <text x="356" y="32" font-size="14" text-anchor="middle">🛡️</text>
                       <text x="356" y="52" fill="#1f2440" font-size="10" text-anchor="middle" font-weight="bold">패리티 검사</text>
                       <text x="356" y="65" fill="#5f6684" font-size="9" text-anchor="middle">오류제어 1비트</text>
@@ -1819,17 +1819,17 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 sysBadge.innerText = "📶 신호 우수";
                 sysBadge.style.color = "var(--accent-green)";
                 sysBadge.style.borderColor = "var(--accent-green)";
-                sysBadge.style.backgroundColor = "#eaf7ee";
+                sysBadge.style.backgroundColor = "#dcebd9";
             } else if (hpRatio > 0.25) {
                 sysBadge.innerText = "📶 신호 약함";
                 sysBadge.style.color = "var(--accent-yellow)";
                 sysBadge.style.borderColor = "var(--accent-yellow)";
-                sysBadge.style.backgroundColor = "#fff6dd";
+                sysBadge.style.backgroundColor = "#f1e4c2";
             } else {
                 sysBadge.innerText = "📶 끊김 위험!";
                 sysBadge.style.color = "var(--accent-red)";
                 sysBadge.style.borderColor = "var(--accent-red)";
-                sysBadge.style.backgroundColor = "#fdecee";
+                sysBadge.style.backgroundColor = "#f0d9d8";
             }
 
             // Health bar fill
@@ -2154,7 +2154,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                                 <span>🛡️ 노이즈 필터링</span>
                                 <span class="badge">피해 50%↓</span>
                             </button>
-                            <button class="act-btn" style="grid-column: span 2; border-color:var(--accent-cyan); background-color:#f0f9fa; gap:8px;" onclick="battleAction('skill')" ${myTurn && !lackTp ? '' : 'disabled'}>
+                            <button class="act-btn" style="grid-column: span 2; border-color:var(--accent-cyan); background-color:#dfeaea; gap:8px;" onclick="battleAction('skill')" ${myTurn && !lackTp ? '' : 'disabled'}>
                                 <div class="item-main">
                                     <span style="color:var(--accent-cyan);">✨ 교과 스킬: ${sk.name}</span>
                                     <span class="item-desc">${sk.concept} <b style="color: var(--ink);">효과: ${sk.effect}</b></span>
@@ -2379,7 +2379,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                 `;
             });
             html += `
-                <button class="act-btn" onclick="closeEraShop()" style="grid-column: span 2; justify-content:center; background:#fbe9f2; border-color:#b0306a;">
+                <button class="act-btn" onclick="closeEraShop()" style="grid-column: span 2; justify-content:center; background:#eedde2; border-color:#b0306a;">
                     <span style="font-weight:bold; color:#b0306a;">⬅️ 상점 나가기</span>
                 </button>
             </div>`;
@@ -3287,7 +3287,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     title = "📟 고대 봉수 광학 진폭 변조 (OOK) 크게 보기";
                     leftColContent = `
                         <p style="margin-bottom:12px; font-size:1rem; color:#444b6b;">비트 <b>1</b>은 불꽃 점화, <b>0</b>은 소화를 뜻합니다. 3비트 전송 규약에 맞춰 불꽃 상태를 일치시키십시오.</p>
-                        <div style="background: #f5f6fb; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0; text-align:center;">
+                        <div style="background: #e4dece; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0; text-align:center;">
                             <div style="font-size:1.1rem; color:var(--accent-yellow); font-weight:bold; margin-bottom:8px;">🎯 목표 비트열: <span style="font-family:'Share Tech Mono', monospace; font-size:1.4rem; letter-spacing:3px; color:var(--accent-yellow);">[${gameState.ookTarget.join(', ')}]</span></div>
                             <div style="font-size:1rem; color: var(--ink);">현재 설정 상태: <span style="font-family:'Share Tech Mono', monospace; font-size:1.2rem; letter-spacing:3px;">[${gameState.ookCurrent.join(', ')}]</span></div>
                         </div>
@@ -3297,7 +3297,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     title = "📟 한글 자모음 모스 부호화 크게 보기";
                     leftColContent = `
                         <p style="margin-bottom:10px; font-size:1rem; color:#444b6b;">제시된 자모음 단어의 한글 모스 부호 규약을 입력 전송하십시오.</p>
-                        <div style="background: #f5f6fb; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0; text-align:center;">
+                        <div style="background: #e4dece; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0; text-align:center;">
                             <div style="font-size:1.1rem; color:var(--accent-yellow); font-weight:bold; margin-bottom:6px;">단어: "${gameState.morseTargetWord}"</div>
                             <div style="font-size:1.15rem; color:var(--accent-cyan); font-family:'Share Tech Mono', monospace; font-weight:bold; letter-spacing:1px;">목표 모스 코드: ${gameState.morseTargetCode}</div>
                         </div>
@@ -3307,12 +3307,12 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     title = "📟 스마트폰 핵심 구조 & 공진 튜닝 크게 보기";
                     leftColContent = `
                         <p style="margin-bottom:10px; font-size:1rem; color:#444b6b;">부품 결합 및 동조 회로 공명 실습입니다.</p>
-                        <div style="background: #f5f6fb; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0;">
+                        <div style="background: #e4dece; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0;">
                             <div style="font-size:0.95rem; color:#b0306a; font-weight:bold; margin-bottom:6px;">🔧 이 설명에 맞는 부품은?</div>
                             <div style="font-size:1rem; color: var(--ink); line-height:1.5;">"${gameState.phonePartDesc}"</div>
                             <div style="font-size:0.9rem; color:#444b6b; margin-top:6px;">보기: ${gameState.phoneOptions.join(' · ')}</div>
                         </div>
-                        <div style="font-size:1.1rem; color:var(--accent-cyan); font-weight:bold; text-align:center; background:#f0f9fa; border:1px solid #8fcbd6; padding:8px; border-radius:6px;">
+                        <div style="font-size:1.1rem; color:var(--accent-cyan); font-weight:bold; text-align:center; background:#dfeaea; border:1px solid #8fcbd6; padding:8px; border-radius:6px;">
                             🎯 목표 공진 주파수: ${gameState.currentTuningTarget} MHz
                         </div>
                         <p style="font-size:0.85rem; color:#5f6684; margin-top:5px;">* 알맞은 부품을 선택하고 다이얼 튜닝 버튼을 조작하여 목표값과 일치시킨 후 결합 버튼을 누르십시오.</p>
@@ -3321,7 +3321,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     title = "📟 정보 기술 시스템 4단계 분석 크게 보기";
                     leftColContent = `
                         <p style="margin-bottom:10px; font-size:1rem; color:#444b6b;">PAPS 체력검사 정보시스템 상황 단계 판독입니다.</p>
-                        <div style="background: #f5f6fb; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0;">
+                        <div style="background: #e4dece; border:1.5px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0;">
                             <div style="font-size:0.95rem; color:var(--accent-yellow); font-weight:bold; margin-bottom:6px;">📋 시스템 시나리오 상황:</div>
                             <div style="font-size:0.9rem; color: var(--ink); line-height:1.4;">"${gameState.systemScenario}"</div>
                         </div>
@@ -3331,7 +3331,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                     title = "📟 패리티 비트 인코딩 검증 크게 보기";
                     leftColContent = `
                         <p style="margin-bottom:10px; font-size:1rem; color:#444b6b;">비트 전송 오류를 사전에 감지하는 무결성 실습입니다.</p>
-                        <div style="background: #f5f6fb; border:1px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0; text-align:center;">
+                        <div style="background: #e4dece; border:1px solid var(--border-color); border-radius:6px; padding:12px; margin: 10px 0; text-align:center;">
                             <div style="font-size:1.1rem; color:var(--accent-cyan); font-weight:bold; margin-bottom:6px;">수송 7비트 데이터: <span style="font-family:'Share Tech Mono', monospace; letter-spacing:2px; font-size:1.3rem; color:var(--accent-cyan);">${gameState.parityDataStr}</span></div>
                             <div style="font-size:1.1rem; color:var(--accent-pink); font-weight:bold;">검증 규칙: <b>${gameState.parityType} 패리티</b></div>
                         </div>
@@ -3350,7 +3350,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
 
                 leftColContent = `
                     <div style="font-size:1.05rem; color:var(--accent-yellow); font-weight:bold; margin-bottom:10px; line-height:1.45;">${quiz.q}</div>
-                    <div style="background: #f5f6fb; border:1px solid var(--border-color); border-radius:8px; padding:12px; margin-bottom:10px;">
+                    <div style="background: #e4dece; border:1px solid var(--border-color); border-radius:8px; padding:12px; margin-bottom:10px;">
                         <h4 style="color:var(--accent-cyan); margin-bottom:8px; font-size:0.95rem; font-weight:bold;">📝 사지선다형 보기:</h4>
                         ${answersHtml}
                     </div>
@@ -3369,7 +3369,7 @@ html.gc-fullscreen #interaction-panel{max-height:55dvh;overflow-y:auto}
                         ${leftColContent}
                     </div>
                     <!-- Right Column (Textbook Companion Study Guide) -->
-                    <div style="flex: 0.8; min-width: 220px; background: #f6f4ff; border: 1.5px solid #cfc8f3; border-radius: 8px; padding: 12px; box-sizing: border-box;">
+                    <div style="flex: 0.8; min-width: 220px; background: #e6e1ef; border: 1.5px solid #cfc8f3; border-radius: 8px; padding: 12px; box-sizing: border-box;">
                         <h4 style="color: var(--accent-pink); font-size: 0.9rem; margin-top: 0; margin-bottom: 10px; font-weight: bold; border-bottom: 1px dashed #e6a5c4; padding-bottom: 5px; display: flex; align-items: center; gap: 4px;">📖 교과서 핵심 참조 바인더</h4>
                         <div style="font-size: 0.9rem; color: #2f3552; line-height: 1.6; word-break: keep-all;">
                             ${textbookNotes}
