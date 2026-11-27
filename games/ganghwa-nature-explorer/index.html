@@ -143,7 +143,26 @@ h4{font-family:var(--display);font-weight:400;font-size:1.15rem;margin:18px 0 8p
   .form{grid-template-columns:1fr}
   .detail{grid-template-columns:1fr}
 }
-@media (prefers-reduced-motion:reduce){.toast{animation:none}}
+#cut{position:fixed;inset:0;z-index:40;overflow:hidden;background:#1d3327;color:#fff;display:flex;align-items:flex-end;animation:cutIn .9s ease-out}
+#cut .cut-img{position:absolute;inset:-4%;background-size:cover;background-position:center;animation:kb 14s ease-out forwards}
+#cut::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(10,20,14,.78) 100%);pointer-events:none}
+#cut .cut-fx{position:absolute;inset:0;pointer-events:none;z-index:1}
+#cut .cut-fx i{position:absolute;top:-6%;font-style:normal;font-family:var(--emoji);animation:fall linear infinite;opacity:.9}
+#cut .cut-text{position:relative;z-index:2;width:100%;padding:24px max(24px,env(safe-area-inset-left,0px)) max(28px,env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px;align-items:flex-start;max-width:980px;margin:0 auto}
+#cut h2{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,7vw,4.2rem);margin:0;line-height:1.05;text-shadow:0 3px 12px rgba(0,0,0,.45);animation:rise .9s .3s both}
+#cut .cut-day{font-family:var(--display);font-size:1.1rem;opacity:.9;animation:rise .9s .15s both}
+#cut p{margin:0;font-size:1.05rem;max-width:56ch;line-height:1.6;text-shadow:0 2px 8px rgba(0,0,0,.5);animation:rise .9s .5s both}
+#cut .cut-list{display:flex;flex-wrap:wrap;gap:8px;animation:rise .9s .7s both}
+#cut .cut-list span{display:inline-flex;align-items:center;gap:6px;background:rgba(251,252,246,.92);color:var(--ink);border-radius:999px;padding:3px 12px 3px 4px;font-size:.88rem}
+#cut .cut-list span img,#cut .cut-list span .em{width:30px;height:30px;object-fit:contain;font-family:var(--emoji);font-size:1.3rem;text-align:center;line-height:30px}
+#cut .cut-list span.unk img,#cut .cut-list span.unk .em{filter:brightness(0) opacity(.45)}
+#cut .btn{animation:rise .9s .9s both}
+#cut.s0{background:linear-gradient(160deg,#f6c6d8,#9fd18a)}#cut.s1{background:linear-gradient(160deg,#5cc0e6,#3f8f3c)}#cut.s2{background:linear-gradient(160deg,#f3b45a,#a8532a)}#cut.s3{background:linear-gradient(160deg,#dfe9f5,#6f86a6)}
+@keyframes kb{from{transform:scale(1.12) translate(1.5%,1%)}to{transform:scale(1) translate(0,0)}}
+@keyframes cutIn{from{opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+@keyframes fall{to{transform:translate(var(--dx),112vh) rotate(var(--r))}}
+@media (prefers-reduced-motion:reduce){.toast{animation:none}#cut,#cut *{animation:none!important}}
 </style>
 
 <div id="app">
@@ -175,6 +194,11 @@ h4{font-family:var(--display);font-weight:400;font-size:1.15rem;margin:18px 0 8p
     <header><h2 id="sheetTitle"></h2><button class="x" id="sheetClose">닫기</button></header>
     <div class="body" id="sheetBody"></div>
   </section>
+</div>
+<div id="cut" hidden role="dialog" aria-modal="true" aria-labelledby="cutTitle">
+  <div class="cut-img" id="cutImg"></div><div class="cut-fx" id="cutFx" aria-hidden="true"></div>
+  <div class="cut-text"><div class="cut-day" id="cutDay"></div><h2 id="cutTitle"></h2><p id="cutLine"></p>
+    <div class="cut-list" id="cutList"></div><button class="btn gold" id="cutGo">탐험 계속하기 ▶</button></div>
 </div>
 <div class="overlay enc" id="enc" hidden>
   <section class="card" role="dialog" aria-modal="true"><div class="body" id="encBody"></div></section>
@@ -266,6 +290,14 @@ const BASE_SPECIES=[
  ['sonamu','소나무','🌲','식물','forest path','MDEN',1,'photo',null,'','사계절 푸른 바늘잎나무. 강화산성 산자락에 많아요.','','',['황금소나무','GOLD','잎이 금빛으로 물드는 아주 드문 소나무예요.']],
  ['eunhaeng','은행나무','🌳','식물','path field','MDEN',1,'photo',null,'hue-rotate(-35deg) saturate(1.3)','공룡 시대부터 살아온 살아 있는 화석. 가을에 노랗게 물들어요.','','',['천년 은행나무','GOLD','오래된 은행나무는 천 년 넘게 살기도 해요.',{big:1}]],
  ['beot','벚나무','🌸','식물','path field','MDE',2,'photo',null,'','봄에 학교 길을 분홍빛으로 물들여요.','봄','',['겹벚나무','PINK','꽃잎이 여러 겹인 벚나무예요.']],
+ ['sudal','수달','🦦','포유류','pond paddy','EN',4,'photo',null,'','물갈퀴 달린 발과 굵은 꼬리로 헤엄치는 물가의 사냥꾼. 깨끗한 하천에만 살아서 물이 건강한지 알려 주는 동물이에요.','','멸종위기 Ⅰ급·천연기념물',['흰 수달','WHITE','털 색소가 적은 백색 수달은 세계적으로도 손꼽힐 만큼 드물어요.']],
+ ['keungoni','큰고니','🦢','새','paddy pond tidal','MDE',4,'photo',null,'','노란 부리를 가진 커다란 흰 새. 겨울에 시베리아에서 날아와 강화 갯벌과 논에서 겨울을 나요.','겨','멸종위기 Ⅱ급·천연기념물',['혹고니','','주황 부리 위에 검은 혹이 있는 고니. 우리나라에는 아주 드물게 찾아와요.',{c:'#ffb070'}]],
+ ['hwangsae','황새','🦩','새','paddy pond','MDE',4,'photo',null,'','흰 몸에 검은 날개깃, 붉은 다리를 가진 큰 새. 한때 우리나라에서 사라졌다가 복원 사업으로 다시 날아오르고 있어요.','','멸종위기 Ⅰ급·천연기념물',['먹황새','DARK','온몸이 검고 부리와 다리만 붉은 황새의 사촌. 매우 드문 나그네새예요.',{c:'#3a4a5a'}]],
+ ['mae','매','🦅','새','tidal field','MD',4,'photo',null,'','하늘에서 시속 300km 넘게 내리꽂으며 사냥하는, 세상에서 가장 빠른 새예요. 강화 해안 절벽 근처에서 볼 수 있어요.','','멸종위기 Ⅰ급·천연기념물',['흰 매','WHITE','북쪽 나라에 사는 흰 매는 옛날 왕들이 가장 귀하게 여긴 사냥매였어요.']],
+ ['namsaeng','남생이','🐢','양서·파충','pond paddy','MD',4,'net',null,'','등딱지에 세 줄 돌기가 있는 우리 토종 거북. 연못가 돌 위에서 햇볕을 쬐요.','봄여가','멸종위기 Ⅱ급·천연기념물',['황금 남생이','GOLD','등딱지가 금빛으로 빛나는 아주 드문 개체예요.']],
+ ['suwoncheong','수원청개구리','🐸','양서·파충','paddy','EN',4,'net','boost','','우리나라에만 사는 청개구리. 청개구리보다 울음이 느리고 낮으며, 모내기 한 논의 벼 줄기에 붙어 울어요.','봄여','멸종위기 Ⅰ급',['파란 청개구리','BLUE','노란 색소가 빠지면 초록 개구리가 하늘색으로 보여요. 수만 마리 중 한 마리 정도로 드물어요.']],
+ ['huinbal','흰발농게','🦀','기타 무척추','tidal','MD',4,'net',null,'','수컷의 큰 집게발이 하얘서 붙은 이름. 집게를 흔들어 짝을 부르는 모습이 춤추는 것 같아요.','봄여가','멸종위기 Ⅱ급',['황금 집게 흰발농게','GOLD','큰 집게발이 금빛으로 빛나는 특별한 개체예요.']],
+ ['maehwa','매화마름','🌼','식물','paddy','MD',4,'photo',null,'','물에 잠긴 논에서 매화를 닮은 흰 꽃을 피우는 물풀. 강화 길상면 논은 우리나라 첫 민간 람사르 습지가 된 매화마름 군락지예요.','봄','멸종위기 Ⅱ급',['분홍 매화마름','PINK','꽃잎 끝이 분홍빛으로 물든 아주 드문 개체예요.']],
  ['insam','강화인삼','🥕','식물','paddy','MD',3,'photo',null,'sepia(1) brightness(1.2)','강화의 특산물. 여름에 빨간 열매가 맺혀요.','','',['백년 산삼','GOLD','산에서 오래 자란 산삼은 아주 귀해요.']],
 ];
 const TREE_IDS=new Set(['sonamu','eunhaeng','beot']);
@@ -283,7 +315,9 @@ const SIZES={
  bongseon:[40,60,'cm','키'],sunmu:[6,15,'cm','뿌리 지름'],chilmyeon:[15,50,'cm','키'],ssuk:[30,100,'cm','키'],jilgyeong:[10,50,'cm','키'],
  gaemang:[30,100,'cm','키'],dalgae:[15,50,'cm','키'],jebi:[5,20,'cm','키'],naengi:[10,50,'cm','키'],cosmos:[100,200,'cm','키'],
  napal:[1,3,'m','덩굴 길이'],budeul:[1,1.5,'m','키'],suryeon:[5,12,'cm','꽃 지름'],gomari:[30,100,'cm','키'],sonamu:[5,25,'m','키'],
- eunhaeng:[10,40,'m','키'],beot:[5,15,'m','키'],insam:[8,30,'cm','뿌리 길이']
+ eunhaeng:[10,40,'m','키'],beot:[5,15,'m','키'],insam:[8,30,'cm','뿌리 길이'],
+ sudal:[63,80,'cm','몸길이(꼬리 제외)'],keungoni:[140,165,'cm','몸길이'],hwangsae:[100,115,'cm','몸길이'],mae:[38,50,'cm','몸길이'],namsaeng:[15,30,'cm','등딱지 길이'],
+ suwoncheong:[2.5,4,'cm','몸길이'],huinbal:[12,20,'mm','등딱지 너비'],maehwa:[20,50,'cm','줄기 길이']
 };
 function sizeInfo(sp){const z=SIZES[sp.id];if(z)return z;if(sp.cat==='새')return[10,40,'cm','몸길이'];if(sp.cat==='식물')return[10,80,'cm','키'];if(sp.cat==='포유류')return[10,60,'cm','몸길이'];if(['곤충','기타 무척추'].includes(sp.cat))return[5,40,'mm','몸길이'];return[3,20,'cm','몸길이'];}
 function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
@@ -344,11 +378,12 @@ for(const [k,n] of Object.entries(OBJ_VARS))for(let i=1;i<=n;i++)art(`obj_${k}${
 art('bld_school','bld/school.png');art('bld_kitchen','bld/kitchen.png');
 art('player','char/player.png');art('logo','ui/logo.png');
 Object.keys(ZONES).forEach(z=>art('bg_'+z,`bg/${z}.png`));
+['spring','summer','autumn','winter'].forEach(k=>art('cut_'+k,`cut/${k}.jpg`));
 BASE.forEach(s=>{art('cr_'+s.id,`creatures/${s.id}.png`);art('crs_'+s.id,`creatures/${s.id}_special.png`);});
 let artTimer=null;
 function loadArt(have){
   for(const [k,p] of ART_LIST){if(!have.has(p))continue;const im=new Image();
-    im.onload=()=>{ART[k]=im;if(!/^(tex_|bg_)/.test(k))ARTT[k]=trimImg(im);clearTimeout(artTimer);artTimer=setTimeout(onArt,150)};im.src='assets/'+p;}
+    im.onload=()=>{ART[k]=im;if(!/^(tex_|bg_|cut_)/.test(k))ARTT[k]=trimImg(im);clearTimeout(artTimer);artTimer=setTimeout(onArt,150)};im.src='assets/'+p;}
 }
 function onArt(){paintBase();buildSprites();if(sheetKind)renderSheet();
   if(ART.logo){const b=$('#brand');if(!b.querySelector('img')){const im=document.createElement('img');let src=ART.logo.src;try{if(ARTT.logo&&ARTT.logo.toDataURL)src=ARTT.logo.toDataURL()}catch(e){}im.src=src;im.alt='';b.prepend(im);}}}
@@ -655,7 +690,7 @@ function rollVariant(sp){
 }
 // 등장 균형: 구역을 먼저 고르면 종이 적은 구역(갯벌 등)의 흔한 종만 쏟아지므로,
 // 플레이어 근처에서 나올 수 있는 '종'을 먼저 고른다. 최근에 자주 나온 종은 덜, 아직 못 만난 종은 조금 더 나온다.
-const SPAWN_W=[0,10,8,5,2.5];   // 등급별 기본 비율(흔함·보통·희귀·전설)
+const SPAWN_W=[0,10,8,5,2];   // 등급별 기본 비율(흔함·보통·희귀·전설)
 const recent={};
 function nearHosts(list){const out=[];if(!list)return out;for(const h of list){if(h.spot)continue;const d=Math.hypot(h.x-player.x,h.y-player.y)/T;if(d>3&&d<17)out.push(h);}return out;}
 function spawnWeight(sp){
@@ -718,8 +753,8 @@ function inView(x,y,m){return x>view.cx-m&&x<view.cx+view.w/view.s+m&&y>view.cy-
 function update(dt,now){
   S.clock+=dt*1.5;
   if(S.clock>=960){const ps=season();S.clock=0;S.day++;rollWeather();S.missions=makeMissions();spots.forEach(dropSpot);spots=[];
-    if(season()!==ps)toast(`${seasonInfo().ico} ${seasonInfo().n}이 왔어요! 이 계절에만 만날 수 있는 생물이 있어요.`,'gold');
-    toast(`🌅 ${S.day}일차 아침이에요. 오늘 날씨: ${WEATHER[S.weather]}`);updateDots();saveSoon();}
+    toast(`🌅 ${S.day}일차 아침이에요. 오늘 날씨: ${WEATHER[S.weather]}`);updateDots();saveSoon();
+    if(season()!==ps){showSeasonCut(ps,season());return;}}
   let dx=(keys['arrowright']||keys['d']?1:0)-(keys['arrowleft']||keys['a']?1:0);
   let dy=(keys['arrowdown']||keys['s']?1:0)-(keys['arrowup']||keys['w']?1:0);
   const running=player.run||keys['shift'];
@@ -1307,6 +1342,33 @@ async function initCloud(){
   db.collection('reports').onSnapshot(q=>{reportDocs=q.docs.map(d=>({owner:d.id,items:Array.isArray(d.data().items)?d.data().items:[]}));rebuildReported();if(sheetKind==='report'||sheetKind==='dex')renderSheet();},e=>console.warn('reports',e));
   db.collection('scores').onSnapshot(q=>{scores=q.docs.map(d=>Object.assign({id:d.id},d.data()));if(sheetKind==='rank')renderSheet();},e=>console.warn('scores',e));
   updateDots();
+}
+
+/* ================= 계절 컷신 ================= */
+const CUT={0:{k:'spring',fx:['🌸','🌸','💮'],line:'얼었던 땅이 녹고 논에 물이 차요. 겨울 철새는 북쪽으로 떠나고, 꽃과 곤충, 개구리가 깨어나요.'},
+ 1:{k:'summer',fx:['🍃','✨'],line:'매미가 울고 비가 자주 와요. 비 오는 밤에는 맹꽁이 소리를 따라가 보세요.'},
+ 2:{k:'autumn',fx:['🍂','🍁','🍂'],line:'벼가 누렇게 익고 은행잎이 물들어요. 풀숲에서는 귀뚜라미가 울어요.'},
+ 3:{k:'winter',fx:['❄️','❄','·'],line:'논과 갯벌에 두루미·큰고니·기러기 같은 겨울 철새가 찾아와요. 곤충과 꽃은 대부분 잠들었어요.'}};
+function seasonChange(from,to){const fc=SEASONS[from].c,tc=SEASONS[to].c,has=(s,c)=>!s.seasons||s.seasons.includes(c);
+  return{come:ALL.filter(s=>has(s,tc)&&!has(s,fc)),gone:ALL.filter(s=>has(s,fc)&&!has(s,tc))};}
+function showSeasonCut(from,to){
+  const c=CUT[to],si=SEASONS[to],ch=seasonChange(from,to),cut=$('#cut');
+  mode='cut';player.target=null;player.pending=null;for(const k in keys)keys[k]=false;
+  cut.className='s'+to;
+  const im=ART['cut_'+c.k];$('#cutImg').style.backgroundImage=im?`url("${im.src}")`:'';
+  $('#cutDay').textContent=`${S.day}일차 아침`;
+  $('#cutTitle').textContent=`${si.ico} ${si.n}이 왔어요`;
+  $('#cutLine').textContent=c.line+(ch.gone.length?` (${ch.gone.length}종은 다음 계절까지 볼 수 없어요)`:'');
+  const chip=s=>{const k=S.dex[s.id]?.n,a=crArt(s);return `<span class="${k?'':'unk'}">${a?`<img alt="" src="${a.src}">`:`<span class="em">${esc(s.emoji||'❔')}</span>`}${k?esc(s.name):'???'}${s.tier>=4?' ✨':''}</span>`;};
+  $('#cutList').innerHTML=ch.come.length?`<b style="width:100%;font-family:var(--display);font-weight:400;font-size:1.1rem">새로 나타나는 생물 ${ch.come.length}종</b>`+ch.come.slice(0,12).map(chip).join(''):'';
+  const fx=$('#cutFx');fx.innerHTML='';
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)for(let i=0;i<26;i++){const e=document.createElement('i');e.textContent=pick(c.fx);
+    e.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*18}px;animation-duration:${6+Math.random()*7}s;animation-delay:${-Math.random()*10}s;--dx:${(Math.random()-.5)*160}px;--r:${(Math.random()-.5)*720}deg`;fx.appendChild(e);}
+  cut.hidden=false;
+  const close=()=>{if(cut.hidden)return;cut.hidden=true;fx.innerHTML='';mode='map';last=performance.now();removeEventListener('keydown',kd,true);
+    toast(`${si.ico} ${si.n}에만 만날 수 있는 생물을 찾아보세요!`,'gold');};
+  const kd=e=>{if(e.key==='Enter'||e.key===' '||e.key==='Escape'||e.key==='e'||e.key==='E'){e.preventDefault();e.stopPropagation();close();}};
+  $('#cutGo').onclick=close;setTimeout(()=>{if(!cut.hidden){addEventListener('keydown',kd,true);$('#cutGo').focus();}},900);
 }
 
 /* ================= 시작 ================= */
