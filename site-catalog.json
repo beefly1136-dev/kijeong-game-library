@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-23T07:59:17.453Z",
+  "updated_at": "2026-11-27T01:10:48.602Z",
   "site_name": "기정T의 기술가정 놀이터",
   "popularity_note": "이전 당시 누적 플레이 횟수 기준",
   "categories": [
@@ -58,6 +58,24 @@
     }
   ],
   "games": [
+    {
+      "number": 28,
+      "title": "강화중 자연 탐험대",
+      "description": "강화중학교 주변 숲길·연못·논·갯벌을 탐험하며 생물 63종과 종마다 하나뿐인 특별 개체를 찾아 도감을 채워요.",
+      "how_to": "방향키·WASD 또는 화면을 눌러 이동해요. 흔들리는 풀숲에 천천히 다가가 E·Space(또는 살펴보기 버튼)로 관찰해요. 곤충은 포충망 타이밍, 새·동물·식물은 사진 초점 미니게임이에요. 뛰면 생물이 놀라 도망가요. 실수 없이 연속 관찰(체인)을 이어 황금 팥중이 같은 특별 개체를 찾아보세요.",
+      "tags": "생명기술,생태,생물 관찰,강화도",
+      "category_id": 22,
+      "category_name": "생명 기술",
+      "game_type": "기타",
+      "duration": "long",
+      "people": "solo",
+      "play_count": 0,
+      "thumbnail_url": "covers/ganghwa-nature-explorer-1c240730b75c61e2986c0099.webp",
+      "play_url": "games/ganghwa-nature-explorer/index.html",
+      "is_published": 1,
+      "is_featured": 0,
+      "sort_order": 0
+    },
     {
       "number": 26,
       "kind": "channel",
