@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-27T01:26:32.024Z",
+  "updated_at": "2026-11-27T01:32:43.969Z",
   "site_name": "기정T의 기술가정 놀이터",
   "popularity_note": "이전 당시 누적 플레이 횟수 기준",
   "categories": [
@@ -108,7 +108,7 @@
       "duration": "long",
       "people": "solo",
       "play_count": 0,
-      "thumbnail_url": "covers/wild-survival-build-3d-ec2096364e6e4ee2cf840343.webp",
+      "thumbnail_url": "covers/wild-survival-build-3d-de867160fef8879419117047.webp",
       "play_url": "games/wild-survival-build-3d/index.html",
       "is_published": 1,
       "is_featured": 0,
