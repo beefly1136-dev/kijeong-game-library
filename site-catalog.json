@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-27T01:10:48.602Z",
+  "updated_at": "2026-11-27T01:26:32.024Z",
   "site_name": "기정T의 기술가정 놀이터",
   "popularity_note": "이전 당시 누적 플레이 횟수 기준",
   "categories": [
@@ -70,7 +70,7 @@
       "duration": "long",
       "people": "solo",
       "play_count": 0,
-      "thumbnail_url": "covers/ganghwa-nature-explorer-1c240730b75c61e2986c0099.webp",
+      "thumbnail_url": "covers/ganghwa-nature-explorer-3e54772a9f11692e2061b4da.webp",
       "play_url": "games/ganghwa-nature-explorer/index.html",
       "is_published": 1,
       "is_featured": 0,
