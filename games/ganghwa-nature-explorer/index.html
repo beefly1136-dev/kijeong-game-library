@@ -71,9 +71,9 @@ button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-vis
 .vb i{width:9px;height:9px;border-radius:50%;border:1px solid rgba(0,0,0,.25)}
 .vb .giant{background:#7aa35a}.vb .special{background:var(--gold);box-shadow:0 0 6px var(--gold)}
 .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.75rem;border:1px solid currentColor;letter-spacing:.03em}
-.detail{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start}
+.detail{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:start}
 .detail .big{font-family:var(--emoji);font-size:80px;text-align:center;line-height:1}
-.detail .big img{width:110px;height:110px;object-fit:contain}
+.detail .big{font-size:130px}.detail .big img{width:190px;height:190px;object-fit:contain}
 .detail h3{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0 0 6px}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.92rem;margin:10px 0}
 .kv dt{color:var(--ink2)}.kv dd{margin:0}
@@ -109,10 +109,14 @@ h4{font-family:var(--display);font-weight:400;font-size:1.15rem;margin:18px 0 8p
 .vtag.white{background:#fff;border:1px solid var(--ink)}
 .vtag.giant{background:#7aa35a;color:#fff}
 .vtag.special{color:var(--ink);border:1px solid var(--ink)}
-.spline{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--gold-2);border:1px dashed var(--gold)}
+.spline{width:100%;font:inherit;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--gold-2);border:1px dashed var(--gold)}
 .spline .ic{font-family:var(--emoji);font-size:1.6rem;width:40px;text-align:center}
 .spline .ic img{width:36px;height:36px;object-fit:contain}
 .prot{color:var(--danger)}
+.dexbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:-4px 0 12px;font-size:.9rem}
+.dexbar label{display:inline-flex;gap:6px;align-items:center}
+.dexbar select{font:inherit;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:8px;padding:3px 6px}
+.linkbtn{border:0;background:none;padding:0;color:var(--leaf);text-decoration:underline;font:inherit;cursor:pointer}
 .titlebox{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding-block:8px}
 .savecard{width:min(100%,420px);border:2px solid var(--line);border-radius:14px;background:var(--paper);padding:12px 14px;display:flex;flex-direction:column;gap:8px}
 .savecard.warn{border-color:var(--danger);background:#fbeeea}
@@ -128,6 +132,8 @@ h4{font-family:var(--display);font-weight:400;font-size:1.15rem;margin:18px 0 8p
 .result .big img{width:120px;height:120px;object-fit:contain}
 .result.glow .big{filter:drop-shadow(0 0 18px rgba(240,180,20,.9))}
 .new{font-family:var(--display);color:#fff;background:var(--danger);padding:2px 10px;border-radius:999px}
+.sizebox{font-variant-numeric:tabular-nums;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center}
+.sizebox b{font-family:var(--display);font-weight:400;font-size:1.35rem}
 .pts{font-family:var(--display);font-size:1.4rem;color:var(--leaf);font-variant-numeric:tabular-nums}
 .fact{background:var(--paper);border-radius:12px;padding:10px 14px;text-align:left;line-height:1.6;max-width:60ch}
 @media (max-width:560px){
@@ -209,7 +215,7 @@ const BASE_SPECIES=[
  ['maemi','매미','svg:cicada','곤충','forest','MD',2,'net',null,'','참매미 등. 땅속에서 여러 해를 애벌레로 지내다 나와요.','여','',['하얀 매미','WHITE','허물을 갓 벗은 매미는 몇 시간 동안 하얗고 말랑해요.']],
  ['jangsu','장수풍뎅이','🪲','곤충','forest','N',3,'net',null,'sepia(1) brightness(.55)','수컷 머리에 긴 뿔이 있어요. 밤에 참나무 수액에 모여요.','여','',['황금 장수풍뎅이','GOLD','껍질이 금빛으로 반짝이는 아주 드문 개체예요.']],
  ['saseum','사슴벌레','🪲','곤충','forest','EN',3,'net',null,'brightness(.35)','수컷의 큰턱이 사슴뿔처럼 생겼어요. 애벌레는 썩은 참나무 속에서 자라요.','여','',['푸른 사슴벌레','sepia(1) saturate(4) hue-rotate(170deg) brightness(.55)','껍질이 푸른빛으로 반짝이는 드문 개체예요.',{c:'#5fc4ff'}]],
- ['gaemi','개미','🐜','곤충','path field kitchen','MDE',1,'net',null,'','일본왕개미 등. 일개미들이 먹이 찾기, 집 짓기를 나눠 맡아요.','봄여가','',['여왕개미','PURPLE','날개 달린 여왕개미는 결혼 비행 뒤 날개를 떼고 새 개미집을 만들어요.',{big:1}]],
+ ['gaemi','개미','🐜','곤충','path field kitchen','MDE',1,'net',null,'','일본왕개미 등. 일개미들이 먹이 찾기, 집 짓기를 나눠 맡아요.','봄여가','',['여왕개미','ORANGE','날개 달린 여왕개미는 결혼 비행 뒤 날개를 떼고 새 개미집을 만들어요.',{big:1}]],
  ['beol','벌','🐝','곤충','flower','MD',1,'net',null,'','꿀벌·호박벌 등. 꽃가루를 옮겨 열매 맺기를 도와요.','봄여가','',['여왕벌','sepia(1) saturate(3) hue-rotate(-20deg)','벌집에 단 한 마리뿐인 여왕벌은 하루에 알을 천 개 넘게 낳기도 해요.',{big:1,c:'#ffb340'}]],
  ['jwi','쥐며느리','svg:isopod0','기타 무척추','path kitchen forest flower','MDEN',1,'net',null,'','쥐며느리·공벌레 등. 곤충이 아니라 새우·게와 같은 갑각류예요. 공벌레는 건드리면 공처럼 몸을 말아요.','','',['주황 쥐며느리','ORANGE','몸 색소 변이로 주황빛을 띠는 개체가 드물게 있어요.']],
  ['dalpaeng','달팽이','🐌','기타 무척추','path flower forest paddy','MDEN',1,'net','boost','','명주달팽이 등. 몸이 마르지 않게 점액을 내며 기어가요.','봄여가','',['왼돌이 달팽이','sepia(.3) saturate(1.4)','대부분 달팽이 껍데기는 오른쪽으로 감기지만, 아주 드물게 왼쪽으로 감긴 개체가 있어요.',{flip:1,c:'#bfffe6'}]],
@@ -263,6 +269,34 @@ const BASE_SPECIES=[
  ['insam','강화인삼','🥕','식물','paddy','MD',3,'photo',null,'sepia(1) brightness(1.2)','강화의 특산물. 여름에 빨간 열매가 맺혀요.','','',['백년 산삼','GOLD','산에서 오래 자란 산삼은 아주 귀해요.']],
 ];
 const TREE_IDS=new Set(['sonamu','eunhaeng','beot']);
+// 개체 크기: [최소, 최대, 단위, 재는 곳] — 실제 우리나라 개체의 대략적인 범위
+const SIZES={
+ pat:[30,45,'mm','몸길이'],metu:[25,75,'mm','몸길이'],gwi:[17,26,'mm','몸길이'],mudang:[5,8.6,'mm','몸길이'],nabi:[45,110,'mm','날개 편 길이'],
+ jamjari:[35,55,'mm','몸길이'],sogeum:[11,16,'mm','몸길이'],samagwi:[68,95,'mm','몸길이'],maemi:[30,40,'mm','몸길이'],jangsu:[30,85,'mm','뿔 포함 몸길이'],
+ saseum:[22,70,'mm','큰턱 포함 몸길이'],gaemi:[7,13,'mm','몸길이'],beol:[10,22,'mm','몸길이'],jwi:[6,12,'mm','몸길이'],dalpaeng:[12,25,'mm','껍데기 지름'],
+ jireong:[6,20,'cm','몸길이'],geomi:[8,30,'mm','몸길이'],ge:[15,40,'mm','등딱지 너비'],mangdung:[6,12,'cm','몸길이'],gaeguri:[2.5,9,'cm','몸길이'],
+ maengkkong:[4,5.5,'cm','몸길이'],domabaem:[12,25,'cm','꼬리 포함 길이'],chamsae:[13,15.5,'cm','몸길이'],kkachi:[43,50,'cm','몸길이'],jikbak:[26,29.5,'cm','몸길이'],
+ bidul:[30,35,'cm','몸길이'],baksae:[13,15.5,'cm','몸길이'],baekro:[55,95,'cm','몸길이'],waegari:[85,102,'cm','몸길이'],mulchong:[15,17.5,'cm','몸길이'],
+ kkoekkori:[25,27.5,'cm','몸길이'],gireogi:[64,90,'cm','몸길이'],bueongi:[18,72,'cm','몸길이'],multteo:[40,46,'cm','몸길이'],jeoeo:[73,81,'cm','몸길이'],
+ durumi:[130,150,'cm','키'],goyang:[40,55,'cm','몸길이(꼬리 제외)'],cheongseol:[20,28,'cm','몸길이(꼬리 제외)'],bakjwi:[18,25,'cm','날개 편 길이'],gorani:[77,100,'cm','몸길이'],
+ neoguri:[50,68,'cm','몸길이'],sak:[45,65,'cm','몸길이'],mindeul:[5,30,'cm','키'],tokki:[10,30,'cm','키'],gangaji:[20,70,'cm','키'],
+ bongseon:[40,60,'cm','키'],sunmu:[6,15,'cm','뿌리 지름'],chilmyeon:[15,50,'cm','키'],ssuk:[30,100,'cm','키'],jilgyeong:[10,50,'cm','키'],
+ gaemang:[30,100,'cm','키'],dalgae:[15,50,'cm','키'],jebi:[5,20,'cm','키'],naengi:[10,50,'cm','키'],cosmos:[100,200,'cm','키'],
+ napal:[1,3,'m','덩굴 길이'],budeul:[1,1.5,'m','키'],suryeon:[5,12,'cm','꽃 지름'],gomari:[30,100,'cm','키'],sonamu:[5,25,'m','키'],
+ eunhaeng:[10,40,'m','키'],beot:[5,15,'m','키'],insam:[8,30,'cm','뿌리 길이']
+};
+function sizeInfo(sp){const z=SIZES[sp.id];if(z)return z;if(sp.cat==='새')return[10,40,'cm','몸길이'];if(sp.cat==='식물')return[10,80,'cm','키'];if(sp.cat==='포유류')return[10,60,'cm','몸길이'];if(['곤충','기타 무척추'].includes(sp.cat))return[5,40,'mm','몸길이'];return[3,20,'cm','몸길이'];}
+function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function erf(x){const t=1/(1+.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return x>=0?y:-y;}
+// 범위 안에서 정규분포(가운데가 흔하고 양 끝이 드묾), 거대 개체는 최대보다 5~30% 더 큼
+function rollSize(sp,v){const [a,b]=sizeInfo(sp),m=(a+b)/2,sd=(b-a)/5;
+  let x=v==='giant'?b*(1.05+Math.random()*.25):clamp(m+gauss()*sd,a,b);
+  const dec=x<10?2:x<100?1:0;return +x.toFixed(dec);}
+// 같은 종 안에서 이 크기보다 작은 개체의 비율(0~1). 학생들이 서로 다른 종끼리도 비교할 수 있게 씀
+function sizePct(sp,x){const [a,b]=sizeInfo(sp);if(x>b)return Math.min(.9999,.995+(x-b)/(b*.3)*.0049);const m=(a+b)/2,sd=(b-a)/5;return clamp(.5*(1+erf((x-m)/(sd*Math.SQRT2))),.0001,.995);}
+function fmtSize(sp,x){const u=sizeInfo(sp)[2];return (+x).toLocaleString(undefined,{maximumFractionDigits:2})+u;}
+function pctText(p){const top=(1-p)*100;return top<1?`상위 ${top.toFixed(1)}%`:`상위 ${Math.max(1,Math.round(top))}%`;}
+function sizeGrade(p){return p>=.995?'초거대':p>=.95?'아주 큼':p>=.75?'큼':p>=.25?'보통':p>=.05?'작음':'아주 작음';}
 const FXC={GOLD:'#ffd54a',WHITE:'#ffffff',PINK:'#ff9ccf',BLUE:'#7fd4ff',DARK:'#e0453a',ORANGE:'#ffa040',RAINBOW:'#cc66ff',SILVER:'#e0e8f0',PURPLE:'#d6b3ff',YELLOW:'#ffe066'};
 function makeSpecies(a){
   const [id,name,icon,cat,zones,periods,tier,method,rain,tint,fact,seasons,prot,spc]=a;
@@ -323,7 +357,7 @@ const crArt=sp=>ART['cr_'+sp.id];
 function iconHTML(sp,v,size){
   const spc=v==='special'?sp.special:null;
   const st=`filter:${filterFor(sp,v)||'none'};${spc&&spc.flip?'transform:scaleX(-1);':(v==='giant'||spc&&spc.big)?'transform:scale(1.15);':''}`;
-  const sa=spc&&ART['crs_'+sp.id];if(sa)return `<img alt="" src="${sa.src}">`;
+  const sa=spc&&ART['crs_'+sp.id];if(sa)return `<img alt="" src="${sa.src}" style="${spc.big?'transform:scale(1.15)':''}">`;
   if(spc&&spc.emoji)return `<span style="font-family:var(--emoji)">${spc.emoji}</span>`;
   const a=crArt(sp);if(a)return `<img alt="" src="${a.src}" style="${st}">`;
   return sp.src?`<img alt="" src="${sp.src}" style="${st}${size?`width:${size}px;height:${size}px`:''}">`:`<span style="${st}">${esc(sp.emoji)}</span>`;
@@ -619,16 +653,32 @@ function rollVariant(sp){
   if(r<ps+VARIANTS.giant.p*luck)return'giant';
   return null;
 }
+// 등장 균형: 구역을 먼저 고르면 종이 적은 구역(갯벌 등)의 흔한 종만 쏟아지므로,
+// 플레이어 근처에서 나올 수 있는 '종'을 먼저 고른다. 최근에 자주 나온 종은 덜, 아직 못 만난 종은 조금 더 나온다.
+const SPAWN_W=[0,10,8,5,2.5];   // 등급별 기본 비율(흔함·보통·희귀·전설)
+const recent={};
+function nearHosts(list){const out=[];if(!list)return out;for(const h of list){if(h.spot)continue;const d=Math.hypot(h.x-player.x,h.y-player.y)/T;if(d>3&&d<17)out.push(h);}return out;}
+function spawnWeight(sp){
+  let w=SPAWN_W[sp.tier]||4;
+  if(sp.rain==='boost')w*=S.weather==='rain'?2:.7;
+  w/=1+(recent[sp.id]||0)*2;                    // 방금 많이 나온 종은 쉬게
+  if(!S.dex[sp.id]?.n)w*=1.6;                     // 아직 못 만난 종은 조금 더
+  const on=spots.filter(t=>t.state==='idle'&&t.sp===sp).length;
+  return on>=2?0:w*(on?.3:1);                     // 같은 종이 지도에 몰리지 않게
+}
 function spawn(){
-  const zs=Object.keys(ZONES).filter(z=>HOSTS[z]&&eligible(z).length);if(!zs.length)return;
-  const z=pick(zs);
-  const sp=weighted(eligible(z),s=>TIERS[s.tier].w*(s.rain==='boost'?(S.weather==='rain'?2.5:.6):1));if(!sp)return;
-  const hs=(isTree(sp)?TREEHOSTS[z]:HOSTS[z])||[];if(!hs.length)return;
-  let host=null;
-  for(let i=0;i<30;i++){const h=pick(hs);if(h.spot)continue;const d=Math.hypot(h.x-player.x,h.y-player.y)/T;if(d>3&&d<17){host=h;break}}
-  if(!host)return;
+  const opts=[];
+  for(const z of Object.keys(ZONES)){if(!HOSTS[z]&&!TREEHOSTS[z])continue;const el=eligible(z);if(!el.length)continue;
+    const nh=nearHosts(HOSTS[z]),nt=nearHosts(TREEHOSTS[z]);
+    for(const sp of el){const hs=isTree(sp)?nt:nh;if(hs.length)opts.push({sp,z,hs});}}
+  if(!opts.length)return;
+  // 한 종이 여러 구역에 살아도 종 단위로 한 번만 뽑히도록 구역 수로 나눔
+  const zc={};for(const o of opts)zc[o.sp.id]=(zc[o.sp.id]||0)+1;
+  const o=weighted(opts,o=>spawnWeight(o.sp)/zc[o.sp.id]);if(!o)return;
+  const sp=o.sp,z=o.z,host=pick(o.hs);
+  for(const k in recent)recent[k]*=.93;recent[sp.id]=(recent[sp.id]||0)+1;
   const v=rollVariant(sp);
-  const s={host,x:host.x,y:host.y-8,sp,v,z,age:0,life:rnd(60,95),state:'idle',ft:0,rt:rnd(.5,2),ph:Math.random()*6};
+  const s={host,x:host.x,y:host.y-8,sp,v,z,size:rollSize(sp,v),age:0,life:rnd(60,95),state:'idle',ft:0,rt:rnd(.5,2),ph:Math.random()*6};
   host.spot=s;spots.push(s);
   if(v==='special')toast('✨ 근처 어딘가에서 특별한 기운이 반짝여요!','gold');
 }
@@ -709,12 +759,15 @@ function update(dt,now){
   for(const c of clouds){c.x+=c.vx*dt;if(c.x-c.r>W*T){c.x=-c.r;c.y=rnd(0,H*T)}}
   S.px=player.x;S.py=player.y;
 }
+const SIL=new WeakMap();
+function silhouette(c){let s=SIL.get(c);if(s)return s;s=document.createElement('canvas');s.width=c.width;s.height=c.height;const q=s.getContext('2d');q.drawImage(c,0,0);q.globalCompositeOperation='source-in';q.fillStyle='#000';q.fillRect(0,0,s.width,s.height);SIL.set(c,s);return s;}
 function drawIcon(g,sp,v,x,y,size,extra){
-  g.save();let f=filterFor(sp,v);if(extra)f=(f?f+' ':'')+extra;g.filter=f||'none';
   const spc=v==='special'?sp.special:null;
+  const sa=spc&&ARTT['crs_'+sp.id];let a=sa||ARTT['cr_'+sp.id];
+  const sil=extra==='brightness(0)'&&a;if(sil){a=silhouette(a);extra='';}
+  g.save();let f=sa?'':filterFor(sp,v);if(extra)f=(f?f+' ':'')+extra;g.filter=f||'none';
   if(spc&&spc.big)size*=1.35;
-  if(spc&&spc.flip){g.translate(x,0);g.scale(-1,1);g.translate(-x,0);}
-  const sa=spc&&ARTT['crs_'+sp.id],a=sa||ARTT['cr_'+sp.id];
+  if(spc&&spc.flip&&!sa){g.translate(x,0);g.scale(-1,1);g.translate(-x,0);}
   if(spc&&spc.emoji&&!sa){g.font=`${size}px ${EMOJI_FONT}`;g.textAlign='center';g.textBaseline='middle';g.fillText(spc.emoji,x,y);}
   else if(a){const k=size*1.45/Math.max(a.width,a.height);g.drawImage(a,x-a.width*k/2,y-a.height*k/2,a.width*k,a.height*k);}
   else if(sp.img){if(sp.img.complete)g.drawImage(sp.img,x-size/2,y-size/2,size,size);}
@@ -842,7 +895,7 @@ let enc=null;
 function startEncounter(spot){
   mode='enc';spot.state='busy';
   const sp=spot.sp,v=spot.v,tier=Math.min(5,sp.tier+(v==='special'?1:0));
-  enc={spot,sp,v,tier,method:sp.method};
+  enc={spot,sp,v,tier,method:sp.method,k:spot.size!=null&&v!=='giant'?.82+.36*sizePct(sp,spot.size):1};
   const vt=v==='special'?`<span class="vtag special" style="background:${sp.special.c}">✨ 특별 개체!</span>`:v==='giant'?'<span class="vtag giant">거대 개체!</span>':'';
   $('#encBody').innerHTML=`
     <div class="muted">${esc(ZONES[spot.z])} · ${TIERS[sp.tier].name}</div>
@@ -883,7 +936,7 @@ function netGame(){
     g.strokeStyle='#d99a12';g.beginPath();g.arc(cx,cy,R,rad(tc-arcW/6),rad(tc+arcW/6));g.stroke();
     g.strokeStyle='#1d3327';g.lineWidth=5;g.lineCap='round';g.beginPath();g.moveTo(cx+Math.cos(rad(a))*(R-34),cy+Math.sin(rad(a))*(R-34));g.lineTo(cx+Math.cos(rad(a))*(R+16),cy+Math.sin(rad(a))*(R+16));g.stroke();
     const sx=shake?rnd(-8,8):Math.sin(now/180)*4,sy=Math.cos(now/230)*4;
-    drawIcon(g,enc.sp,enc.v,cx+sx,cy+sy,enc.v==='giant'?110:84);
+    drawIcon(g,enc.sp,enc.v,cx+sx,cy+sy,(enc.v==='giant'?110:84)*enc.k);
     requestAnimationFrame(loop)};
   enc.loop=loop;requestAnimationFrame(loop);
 }
@@ -910,7 +963,7 @@ function photoGame(){
     flash=Math.max(0,flash-dt);
     if(bg)g.drawImage(bg,0,0,340,230);else{g.fillStyle=enc.sp.cat==='새'?'#dbe9ef':plant?'#e3efd5':'#e9ecdf';g.fillRect(0,0,340,230);g.fillStyle='rgba(63,122,74,.25)';for(let i=0;i<9;i++){g.beginPath();g.arc(i*42+10,232,30,Math.PI,0);g.fill()}}
     // 초점 밖은 흐리게
-    const blur=Math.round((100-focus)/25);g.save();g.filter=blur?`blur(${blur}px)`:'none';drawIcon(g,enc.sp,enc.v,tx,ty,enc.v==='giant'?72:54);g.restore();
+    const blur=Math.round((100-focus)/25);g.save();g.filter=blur?`blur(${blur}px)`:'none';drawIcon(g,enc.sp,enc.v,tx,ty,(enc.v==='giant'?72:54)*enc.k);g.restore();
     const ok=Math.hypot(mx-tx,my-ty)<R;g.strokeStyle=ok?'#3f7a4a':'#1d3327';g.lineWidth=2.5;
     g.beginPath();g.arc(mx,my,R,0,7);g.stroke();g.beginPath();g.moveTo(mx-R-8,my);g.lineTo(mx-R+8,my);g.moveTo(mx+R-8,my);g.lineTo(mx+R+8,my);g.moveTo(mx,my-R-8);g.lineTo(mx,my-R+8);g.moveTo(mx,my+R-8);g.lineTo(mx,my+R+8);g.stroke();
     g.fillStyle='rgba(251,252,246,.8)';g.fillRect(6,6,328,20);g.fillStyle='rgba(29,51,39,.15)';g.fillRect(10,10,200,12);g.fillStyle='#d99a12';g.fillRect(10,10,2*focus,12);
@@ -931,9 +984,18 @@ function endEncounter(ok,quiet,info){
   chain++;S.bestChain=Math.max(S.bestChain,chain);
   const rec=S.dex[e.sp.id]||(S.dex[e.sp.id]={n:0,v:{},first:Date.now()});
   const isNew=rec.n===0,newVar=e.v&&!rec.v[e.v];rec.n++;if(e.v)rec.v[e.v]=(rec.v[e.v]||0)+1;
+  rec.last=Date.now();
+  // 크기 기록
+  const size=spot.size??rollSize(e.sp,e.v),pct=sizePct(e.sp,size);
+  const bigRec=!(rec.max>=size),smallRec=rec.n>1&&!(rec.min<=size);
+  if(bigRec){rec.max=size;rec.maxV=e.v||'';rec.maxAt=Date.now();}
+  if(!(rec.min<=size))rec.min=size;
+  if(e.v==='special'&&!(rec.smax>=size))rec.smax=size;
+  info=Object.assign({},info,{size,pct,bigRec:bigRec&&rec.n>1,smallRec});
   if(e.v==='special')S.gold++;
   const base=TIERS[e.sp.tier].pts,mult=e.v?VARIANTS[e.v].mult:1,cm=1+Math.min(chain-1,10)*.1;
-  const pts=Math.round(base*mult*cm)+(isNew?50:0)+(newVar?30:0)+(info?.perfect?info.perfect*5:0);
+  const sb=pct>=.995?60:pct>=.95?30:pct>=.9?15:0;info.sizeBonus=sb;
+  const pts=Math.round(base*mult*cm)+(isNew?50:0)+(newVar?30:0)+(info?.perfect?info.perfect*5:0)+sb;
   S.points+=pts;S.total+=pts;
   missionEvent({sp:e.sp,zone:spot.z,period:period(),isNew,v:e.v});
   saveSoon();
@@ -949,6 +1011,7 @@ function showResult(sp,v,pts,isNew,newVar,cm,info){
     <div class="big">${iconHTML(sp,v,110)}</div>
     <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center">${isNew?'<span class="new">NEW</span>':''}${vb}<span class="tag" style="color:${TIERS[sp.tier].col}">${TIERS[sp.tier].name}</span>${sp.prot?`<span class="tag prot">${esc(sp.prot)}</span>`:''}</div>
     <div class="enc-name">${esc(varName(sp,v))}</div>${rep}
+    ${info?.size!=null?`<div class="sizebox"><span class="muted">${esc(sizeInfo(sp)[3])}</span> <b>${fmtSize(sp,info.size)}</b> <span class="vtag ${info.pct>=.95?'gold':'white'}">${sizeGrade(info.pct)} · ${pctText(info.pct)}</span>${info.bigRec?' <span class="new">최대 기록!</span>':''}${info.smallRec?' <span class="tag">최소 기록</span>':''}${info.sizeBonus?`<div class="muted" style="font-size:.85rem">큰 개체 보너스 +${info.sizeBonus}점</div>`:''}</div>`:''}
     <div class="pts">+${pts.toLocaleString()}점 <span class="muted" style="font-size:.9rem">(체인 ×${cm.toFixed(1)})</span></div>
     <div class="fact">${fact}</div>
     <button class="btn" id="encOk">도감에 기록하기</button></div>`;
@@ -1004,35 +1067,78 @@ function newGame(){
   updateDots();saveNow();
 }
 function rankTitle(t){const R=[[10000,'전설의 탐험가'],[5000,'생태 박사'],[2500,'숲길 연구원'],[1000,'연못 탐사대'],[300,'풀숲 관찰자'],[0,'새싹 탐험가']];return R.find(r=>t>=r[0])[1];}
+let dexFound=false,dexSort='no';
+const DEX_SORTS={no:'도감 순서',name:'이름순',count:'많이 만난 순',size:'큰 개체 기록순',tier:'희귀한 순',recent:'최근 발견순'};
+function dexList(spMode){
+  let list=ALL.filter(s=>dexTab==='전체'||(dexTab==='학생 제보'?s.reporter:spMode?true:s.cat===dexTab));
+  const got=s=>spMode?S.dex[s.id]?.v?.special:S.dex[s.id]?.n;
+  if(dexFound)list=list.filter(got);
+  const r=s=>S.dex[s.id]||{};
+  const key={
+    name:s=>spMode?s.special.name:s.name,
+    count:s=>-(spMode?(r(s).v?.special||0):(r(s).n||0)),
+    size:s=>{const x=spMode?r(s).smax:r(s).max;return x==null?2:-sizePct(s,x);},
+    tier:s=>-s.tier,
+    recent:s=>-(r(s).last||r(s).first||0)}[dexSort];
+  if(key){const idx=new Map(ALL.map((s,i)=>[s,i]));list=list.slice().sort((a,b)=>{
+    const ga=got(a)?0:1,gb=got(b)?0:1;if(ga!==gb)return ga-gb;   // 발견한 것이 항상 앞
+    const ka=key(a),kb=key(b);return (typeof ka==='string'?ka.localeCompare(kb,'ko'):ka-kb)||idx.get(a)-idx.get(b);});}
+  return list;
+}
 function renderDex(b){
   const found=ALL.filter(s=>S.dex[s.id]?.n).length,spFound=ALL.filter(s=>S.dex[s.id]?.v?.special).length;
   const tabs=['전체',...CATS,'특별 개체',...(REPORTED.length?['학생 제보']:[])];
-  const list=ALL.filter(s=>dexTab==='전체'||(dexTab==='학생 제보'?s.reporter:dexTab==='특별 개체'?true:s.cat===dexTab));
   const spMode=dexTab==='특별 개체';
+  const list=dexList(spMode);
   b.innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px"><span><b style="font-family:var(--display);font-size:1.2rem">${found}</b> / ${ALL.length}종 발견</span><span class="muted">✨ 특별 개체 ${spFound} / ${ALL.length} · 최고 체인 ${S.bestChain}</span></div>
     <div class="prog" style="margin-bottom:12px"><i style="width:${ALL.length?found/ALL.length*100:0}%"></i></div>
     <div class="tabs" role="tablist">${tabs.map(t=>`<button role="tab" aria-selected="${t===dexTab}" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+    <div class="dexbar"><label><input type="checkbox" id="dFound" ${dexFound?'checked':''}> 발견한 것만 보기</label>
+      <label>정렬 <select id="dSort">${Object.entries(DEX_SORTS).map(([k,v])=>`<option value="${k}" ${k===dexSort?'selected':''}>${v}</option>`).join('')}</select></label>
+      <span class="muted">${list.length}개</span></div>
+    ${list.length?'':`<p class="muted">${dexFound?'아직 발견한 생물이 없어요. 풀숲을 살펴보세요!':'이 분류에는 생물이 없어요.'}</p>`}
     <div class="dex">${list.map(s=>{const r=S.dex[s.id];
-      if(spMode){const k=r?.v?.special;return `<button class="cell ${k?'':'unk'}" data-id="${esc(s.id)}"><span class="ic" style="${k?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,'special',40)}</span><span class="nm">${k?esc(s.special.name):'???'}</span><span class="ct">${k?`${k}회 만남`:esc(r?.n?s.name:'???')}</span><span class="vb"></span></button>`;}
+      if(spMode){const k=r?.v?.special;return `<button class="cell ${k?'':'unk'}" data-id="${esc(s.id)}" data-sp="1"><span class="ic" style="${k?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,'special',40)}</span><span class="nm">${k?esc(s.special.name):'???'}</span><span class="ct">${k?`${k}회 만남${r.smax!=null?' · '+fmtSize(s,r.smax):''}`:esc(r?.n?s.name:'???')}</span><span class="vb"></span></button>`;}
       const k=r?.n;
-      return `<button class="cell ${k?'':'unk'}" data-id="${esc(s.id)}"><span class="ic" style="${k?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,null,40)}</span><span class="nm">${k?esc(s.name):'???'}</span><span class="ct">${k?`${k}회 관찰`:esc(ZONES[s.zones[0]])}</span><span class="vb">${['giant','special'].filter(v=>r?.v?.[v]).map(v=>`<i class="${v}" title="${v==='special'?esc(s.special.name):'거대'}"></i>`).join('')}</span></button>`}).join('')}</div>`;
+      return `<button class="cell ${k?'':'unk'}" data-id="${esc(s.id)}"><span class="ic" style="${k?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,null,40)}</span><span class="nm">${k?esc(s.name):'???'}</span><span class="ct">${k?`${k}회 관찰`:esc(ZONES[s.zones[0]])}</span>${k&&r.max!=null?`<span class="ct">최대 ${fmtSize(s,r.max)}</span>`:''}<span class="vb">${['giant','special'].filter(v=>r?.v?.[v]).map(v=>`<i class="${v}" title="${v==='special'?esc(s.special.name):'거대'}"></i>`).join('')}</span></button>`}).join('')}</div>`;
   b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{dexTab=x.dataset.t;renderDex(b)});
-  b.querySelectorAll('[data-id]').forEach(x=>x.onclick=()=>renderDetail(b,byId(x.dataset.id)));
+  $('#dFound').onchange=e=>{dexFound=e.target.checked;renderDex(b)};
+  $('#dSort').onchange=e=>{dexSort=e.target.value;renderDex(b)};
+  b.querySelectorAll('[data-id]').forEach(x=>x.onclick=()=>renderDetail(b,byId(x.dataset.id),x.dataset.sp?'special':null));
 }
-function renderDetail(b,s){
+function sizeRows(s,r,special){
+  const [a,bb,u,what]=sizeInfo(s);const mx=special?r?.smax:r?.max;
+  return `<dt>크기</dt><dd>${esc(what)} 보통 ${a}~${bb}${u}</dd>${mx!=null?`<dt>내 최대 기록</dt><dd><b>${fmtSize(s,mx)}</b> · ${sizeGrade(sizePct(s,mx))} (${pctText(sizePct(s,mx))})</dd>`:''}${!special&&r?.min!=null&&r.n>1?`<dt>내 최소 기록</dt><dd>${fmtSize(s,r.min)}</dd>`:''}`;
+}
+function renderDetail(b,s,mode){
   const r=S.dex[s.id],k=r?.n,sk=r?.v?.special;
+  const back=()=>{renderDex(b);};
+  if(mode==='special'){
+    b.innerHTML=`<button class="x" id="back" style="margin-bottom:12px">← 도감으로</button>
+    <div class="detail"><div class="big" style="${sk?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,'special',100)}</div>
+    <div style="min-width:0"><h3>${sk?esc(s.special.name):'아직 만나지 못한 특별 개체'}</h3>
+    <span class="vtag special" style="background:${s.special.c}">✨ 특별 개체</span> <span class="tag" style="color:${TIERS[s.tier].col}">${TIERS[s.tier].name}</span> <span class="tag muted">${esc(s.cat)}</span>
+    <dl class="kv"><dt>원래 생물</dt><dd>${k?`<button class="linkbtn" id="toBase">${esc(s.name)}</button>`:'???'}</dd><dt>만나는 곳</dt><dd>${s.zones.map(z=>esc(ZONES[z])).join(', ')}</dd>
+    ${sk?`<dt>만난 횟수</dt><dd>${sk}회</dd>`:''}${sk?sizeRows(s,r,true):''}</dl>
+    <div class="fact">${sk?esc(s.special.fact):`${k?esc(s.name)+'의 ':''}특별 개체예요. 아주 드물게 나타나요. 실수 없이 체인을 이어 가면 만날 확률이 올라가요.`}</div>
+    </div></div>`;
+    $('#back').onclick=back;const tb=$('#toBase');if(tb)tb.onclick=()=>renderDetail(b,s);
+    return;
+  }
   b.innerHTML=`<button class="x" id="back" style="margin-bottom:12px">← 도감으로</button>
   <div class="detail"><div class="big" style="${k?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,null,100)}</div>
   <div style="min-width:0"><h3>${k?esc(s.name):'아직 만나지 못한 생물'}</h3>
   <span class="tag" style="color:${TIERS[s.tier].col}">${TIERS[s.tier].name}</span> <span class="tag muted">${esc(s.cat)}</span>${s.prot?` <span class="tag prot">${esc(s.prot)}</span>`:''}${s.reporter?' <span class="tag" style="color:var(--gold)">학생 제보</span>':''}
   <dl class="kv"><dt>만나는 곳</dt><dd>${s.zones.map(z=>esc(ZONES[z])).join(', ')}${isTree(s)?' (나무)':''}</dd><dt>시간대</dt><dd>${s.periods.map(p=>PERIODS[p]).join('·')}${s.rain==='only'?' (비 오는 날만)':s.rain==='boost'?' (비 오면 자주)':''}</dd><dt>계절</dt><dd>${seasonText(s)}</dd><dt>관찰 방법</dt><dd>${s.method==='net'?'채집망으로 잡았다 놓아주기':'사진으로 관찰하기'}</dd>
   ${k?`<dt>관찰 횟수</dt><dd>${k}회${r.v?.giant?` · 거대 ${r.v.giant}회`:''}</dd>`:''}
+  ${k?sizeRows(s,r,false):''}
   ${s.reporter?`<dt>제보자</dt><dd id="dRep">…</dd>`:''}</dl>
   <div class="fact">${k?esc(s.fact):'힌트: 위의 장소와 시간대에 풀숲을 천천히 살펴보세요.'}</div>
-  ${s.special?`<div class="spline"><span class="ic" style="${sk?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,'special',36)}</span><div><b>✨ 특별 개체: ${sk?esc(s.special.name):'???'}</b><div class="muted" style="font-size:.86rem">${sk?`${esc(s.special.fact)} (${sk}회 만남)`:'아주 드물게 나타나요. 체인을 이어 가면 만날 확률이 올라가요.'}</div></div></div>`:''}
+  ${s.special?`<button class="spline" id="toSp"><span class="ic" style="${sk?'':'filter:brightness(0) opacity(.35)'}">${iconHTML(s,'special',36)}</span><div style="text-align:left"><b>✨ 특별 개체: ${sk?esc(s.special.name):'???'}</b><div class="muted" style="font-size:.86rem">${sk?`${sk}회 만남 · 눌러서 크게 보기`:'아주 드물게 나타나요. 체인을 이어 가면 만날 확률이 올라가요.'}</div></div></button>`:''}
   </div></div>`;
   if(s.reporter)nameOf(s.reporter).then(n=>{const el=$('#dRep');if(el)el.textContent=n});
-  $('#back').onclick=()=>renderDex(b);
+  $('#back').onclick=back;
+  const ts=$('#toSp');if(ts)ts.onclick=()=>renderDetail(b,s,'special');
 }
 function renderMissions(b){
   b.innerHTML=`<p class="muted" style="margin-top:0">${S.day}일차 · ${seasonInfo().ico} ${seasonInfo().n} · ${WEATHER[S.weather]} · 미션은 매일 아침(23시가 지나면) 바뀌어요.</p>
@@ -1053,6 +1159,7 @@ function renderIntro(b){
    <div class="row"><b>🌿 풀숲 관찰</b><span class="grow">생물이 숨은 풀숲은 가끔 혼자 흔들리고 잎이 튀어 올라요. 가까이 가면 풀 위로 실루엣이 보여요.</span></div>
    <div class="row"><b>🐾 살금살금</b><span class="grow">뛰면 빠르지만 주변 생물이 놀라 도망가요.</span></div>
    <div class="row"><b>🥅 채집 · 📷 사진</b><span class="grow">곤충은 포충망 타이밍 게임, 새·동물·식물은 사진 초점 게임으로 관찰해요. 잡은 생물은 기록 후 놓아줘요.</span></div>
+   <div class="row"><b>📏 크기 겨루기</b><span class="grow">같은 종이라도 개체마다 크기가 달라요. 관찰하면 크기와 '상위 몇 %'가 기록되고, 아주 큰 개체는 보너스 점수를 받아요. 랭킹의 <b>큰 개체 기록</b>에서 친구들과 비교해 보세요.</span></div>
    <div class="row"><b>✨ 특별 개체</b><span class="grow">생물마다 하나뿐인 특별 개체가 있어요. <b>황금 팥중이</b>, 흰 까치, 왼돌이 달팽이, 네잎 토끼풀… 색색으로 빛나는 풀숲을 놓치지 마세요! 체인이 길수록 확률이 올라가요.</span></div>
    <div class="row"><b>🕐 시간 · 계절</b><span class="grow">아침·낮·저녁·밤, 비 오는 날, 그리고 3일마다 바뀌는 봄·여름·가을·겨울에 따라 나오는 생물이 달라요. 두루미는 겨울에만 와요.</span></div>
    <div class="row"><b>🗺️ 강화의 자연</b><span class="grow">학교 동쪽의 논·개천과 갯벌 탐사 구역에서는 저어새·두루미 같은 강화의 귀한 생물을 만날 수 있어요.</span></div>
@@ -1136,13 +1243,37 @@ async function nameOf(id){if(!cloud.user||id==='local')return '나';try{const p=
 async function fillReporterNames(b){const els=[...b.querySelectorAll('[data-who]')];if(!els.length||!cloud.user)return;const ids=[...new Set(els.map(e=>e.dataset.who))];const ps=await cloud.user.profiles(ids);els.forEach(e=>{e.textContent=ps[e.dataset.who]?.name||'학생'});}
 
 /* ================= 랭킹 ================= */
+let rankTab='points';
+function myRec(){const o={};for(const s of ALL){const r=S.dex[s.id];if(r?.max!=null)o[s.id]=r.max;}return o;}
 async function renderRank(b){
-  const found=ALL.filter(s=>S.dex[s.id]?.n).length;
-  let rows=scores.slice();
-  if(!cloud.db)rows=[{id:'local',total:S.total,species:found,gold:S.gold}];
-  b.innerHTML=`<p class="muted" style="margin-top:0">누적 탐험 점수 순위예요. ${cloud.db?'같은 페이지를 연 친구들과 실시간으로 비교돼요.':'미리보기에서는 내 기록만 보여요.'}</p>
-  <div class="list rank">${rows.length?rows.map((r,i)=>`<div class="row ${r.id===(cloud.uid||'local')?'me':''}"><span class="n">${i+1}</span><div class="grow"><div class="ttl" data-n="${esc(r.id)}">${r.id===(cloud.uid||'local')?'나':'탐험가'}</div><div class="muted" style="font-size:.85rem">${rankTitle(+r.total||0)} · ${+r.species||0}종 · 황금 ${+r.gold||0}</div></div><b style="font-family:var(--display);font-size:1.2rem">${(+r.total||0).toLocaleString()}</b></div>`).join(''):'<div class="muted">아직 기록이 없어요. 첫 관찰을 해 보세요!</div>'}</div>`;
-  if(cloud.user&&rows.length){const ps=await cloud.user.profiles(rows.map(r=>r.id));b.querySelectorAll('[data-n]').forEach(e=>{const p=ps[e.dataset.n];if(p)e.textContent=(p.isMe?'나 · ':'')+(p.name||'탐험가')});}
+  const found=ALL.filter(s=>S.dex[s.id]?.n).length,me=cloud.uid||'local';
+  let rows=cloud.db?scores.slice():[{id:'local',total:S.total,species:found,gold:S.gold,rec:myRec()}];
+  if(cloud.db&&!rows.some(r=>r.id===me))rows.push({id:me,total:S.total,species:found,gold:S.gold,rec:myRec()});
+  const head=`<div class="tabs" role="tablist">${[['points','탐험 점수'],['size','큰 개체 기록'],['kings','최대 기록 보유']].map(([k,t])=>`<button role="tab" aria-selected="${k===rankTab}" data-r="${k}">${t}</button>`).join('')}</div>`;
+  let html='';
+  if(rankTab==='points'){
+    rows.sort((a,b)=>(+b.total||0)-(+a.total||0));
+    html=`<p class="muted" style="margin-top:0">누적 탐험 점수 순위예요. ${cloud.db?'같은 페이지를 연 친구들과 실시간으로 비교돼요.':'이 게임 사이트에서는 내 기록만 보여요. 친구와 화면을 보여 주며 비교해 보세요.'}</p>
+    <div class="list rank">${rows.slice(0,30).map((r,i)=>`<div class="row ${r.id===me?'me':''}"><span class="n">${i+1}</span><div class="grow"><div class="ttl" data-n="${esc(r.id)}">${r.id===me?'나':'탐험가'}</div><div class="muted" style="font-size:.85rem">${rankTitle(+r.total||0)} · ${+r.species||0}종 · 특별 ${+r.gold||0}</div></div><b style="font-family:var(--display);font-size:1.2rem">${(+r.total||0).toLocaleString()}</b></div>`).join('')}</div>`;
+  }else{
+    // 종마다 가장 큰 기록을 가진 사람
+    const best={};
+    for(const r of rows){const rec=r.rec&&typeof r.rec==='object'?r.rec:{};for(const [id,x] of Object.entries(rec)){const sp=byId(id);if(!sp||!(+x>0))continue;if(!best[id]||+x>best[id].x)best[id]={x:+x,who:r.id};}}
+    if(rankTab==='size'){
+      const list=ALL.filter(s=>best[s.id]).sort((a,b)=>sizePct(b,best[b.id].x)-sizePct(a,best[a.id].x));
+      html=`<p class="muted" style="margin-top:0">종마다 지금까지 가장 큰 개체예요. 서로 다른 종도 <b>같은 종 안에서 얼마나 큰지(상위 %)</b>로 줄을 세워 비교해요.${cloud.db?'':' 이 사이트에서는 내 기록만 보여요.'}</p>
+      ${list.length?`<div class="list rank">${list.map((s,i)=>{const bst=best[s.id],my=S.dex[s.id]?.max,p=sizePct(s,bst.x);return `<div class="row ${bst.who===me?'me':''}"><span class="n">${i+1}</span><span class="cell" style="border:0;background:none;padding:0;width:44px"><span class="ic" style="height:40px">${iconHTML(s,null,36)}</span></span><div class="grow"><div class="ttl">${esc(s.name)} <b>${fmtSize(s,bst.x)}</b></div><div class="muted" style="font-size:.85rem">${sizeGrade(p)} · ${pctText(p)} · <span data-n="${esc(bst.who)}">${bst.who===me?'나':'탐험가'}</span>${my!=null&&bst.who!==me?` · 내 기록 ${fmtSize(s,my)}`:''}</div></div></div>`}).join('')}</div>`:'<div class="muted">아직 기록이 없어요. 생물을 관찰하면 크기가 기록돼요!</div>'}`;
+    }else{
+      const cnt={};for(const v of Object.values(best))cnt[v.who]=(cnt[v.who]||0)+1;
+      const list=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+      html=`<p class="muted" style="margin-top:0">가장 큰 개체 기록을 몇 종이나 갖고 있는지 겨뤄요. 같은 종을 더 크게 찾으면 기록을 빼앗을 수 있어요!</p>
+      ${list.length?`<div class="list rank">${list.map(([who,n],i)=>`<div class="row ${who===me?'me':''}"><span class="n">${i+1}</span><div class="grow"><div class="ttl" data-n="${esc(who)}">${who===me?'나':'탐험가'}</div></div><b style="font-family:var(--display);font-size:1.2rem">👑 ${n}종</b></div>`).join('')}</div>`:'<div class="muted">아직 기록이 없어요.</div>'}`;
+    }
+  }
+  b.innerHTML=head+html;
+  b.querySelectorAll('[data-r]').forEach(x=>x.onclick=()=>{rankTab=x.dataset.r;renderRank(b)});
+  const ids=[...new Set([...b.querySelectorAll('[data-n]')].map(e=>e.dataset.n))];
+  if(cloud.user&&ids.length){try{const ps=await cloud.user.profiles(ids);b.querySelectorAll('[data-n]').forEach(e=>{const p=ps[e.dataset.n];if(p)e.textContent=(p.isMe?'나 · ':'')+(p.name||'탐험가')});}catch(e){}}
 }
 
 /* ================= 저장 ================= */
@@ -1152,7 +1283,7 @@ function saveNow(){
   S.px=player.x;S.py=player.y;
   try{localStorage.setItem(SAVE_KEY,JSON.stringify(S))}catch(e){}
   if(cloud.db&&cloud.uid){const snap=JSON.parse(JSON.stringify(S)),found=ALL.filter(s=>S.dex[s.id]?.n).length;
-    writeChain=writeChain.then(()=>cloud.db.doc(`data/users/${cloud.uid}/save`).set(snap)).then(()=>cloud.db.doc('scores/'+cloud.uid).set({total:S.total,species:found,gold:S.gold,at:Date.now()})).catch(e=>console.warn('save',e));}
+    writeChain=writeChain.then(()=>cloud.db.doc(`data/users/${cloud.uid}/save`).set(snap)).then(()=>cloud.db.doc('scores/'+cloud.uid).set({total:S.total,species:found,gold:S.gold,rec:myRec(),at:Date.now()})).catch(e=>console.warn('save',e));}
 }
 addEventListener('pagehide',saveNow);
 function updateDots(){
@@ -1174,7 +1305,7 @@ async function initCloud(){
       if(S.px&&!blocked(S.px,S.py)){player.x=S.px;player.y=S.py;}if(sheetKind==='title')renderSheet();}}
   }catch(e){}
   db.collection('reports').onSnapshot(q=>{reportDocs=q.docs.map(d=>({owner:d.id,items:Array.isArray(d.data().items)?d.data().items:[]}));rebuildReported();if(sheetKind==='report'||sheetKind==='dex')renderSheet();},e=>console.warn('reports',e));
-  db.collection('scores').orderBy('total','desc').limit(20).onSnapshot(q=>{scores=q.docs.map(d=>Object.assign({id:d.id},d.data()));if(sheetKind==='rank')renderSheet();},e=>console.warn('scores',e));
+  db.collection('scores').onSnapshot(q=>{scores=q.docs.map(d=>Object.assign({id:d.id},d.data()));if(sheetKind==='rank')renderSheet();},e=>console.warn('scores',e));
   updateDots();
 }
 
